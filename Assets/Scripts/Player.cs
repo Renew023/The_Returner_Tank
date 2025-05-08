@@ -5,10 +5,24 @@ using UnityEngine;
 
 public class Player : Character
 {
-    [SerializeField] private Camera camera; 
+    [SerializeField] private Camera camera;
+    [SerializeField] private WeaponController weaponController;
+
+    [SerializeField] private Vector2 mousePosition;
+    [SerializeField] private Vector2 worldPos;
+
+    [SerializeField] private Vector2 lookDirection;
 
     void Update()
     {
+		mousePosition = Input.mousePosition;
+		worldPos = camera.ScreenToWorldPoint(mousePosition);
+        lookDirection = (worldPos - (Vector2)transform.position);
+
+		if (Input.GetMouseButton(0))
+        {
+            weaponController.Attack(lookDirection, 5);
+        }
         Move();
         Rotate();
     }
@@ -24,9 +38,6 @@ public class Player : Character
 
     override protected void Rotate()
     {
-        Vector2 mousePosition = Input.mousePosition;
-        Vector2 worldPos = camera.ScreenToWorldPoint(mousePosition);
-
         rot = worldPos.x < transform.position.x ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
 
         transform.localScale = rot;
