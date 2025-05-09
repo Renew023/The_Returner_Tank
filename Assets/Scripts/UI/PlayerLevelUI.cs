@@ -1,11 +1,7 @@
 public class PlayerLevelUI : BaseBattleUI
 {
-    private void Start()
-    {
-        
-    }
 
-    private void Update()
+    public override void UpdateValue(float current, float max)
     {
         
     }

@@ -5,7 +5,7 @@ public class PlayerHPUI : BaseBattleUI
 {
     [SerializeField] private Image hpBarFill;
 
-    public void UpdateHP(float current, float max)
+    public override void UpdateValue(float current, float max)
     {
         hpBarFill.fillAmount = current / max;
     }
