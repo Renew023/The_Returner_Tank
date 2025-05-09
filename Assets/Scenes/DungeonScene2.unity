@@ -9638,9 +9638,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bef084f305d4f4fb3fdc338f6adaeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponController: {fileID: 2136885274}
+  maxHp: 100
+  curHp: 0
+  moveSpeed: 0
+  arrowValue: 0
+  arrowSpeed: 0
+  arrowDamage: 0
+  attackDelay: 1
   rb: {fileID: 673138483}
   camera: {fileID: 1452474431}
-  weaponController: {fileID: 2136885274}
   mousePosition: {x: 0, y: 0}
   worldPos: {x: 0, y: 0}
 --- !u!61 &673138481
@@ -12282,10 +12289,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemies:
-  - {fileID: 703311310969127023, guid: 3cda604eda6c2ee45be16b07b8a59e9f, type: 3}
-  - {fileID: 1007530495870139828, guid: a79dc4248a5e6534cb2d405fcd0d08d5, type: 3}
-  - {fileID: 3781102574069900118, guid: 19811ed44e9f2d34396f66f95351ece7, type: 3}
-  - {fileID: 4977254763647939699, guid: fd7013218e69f174e9bd52ec54e39ac8, type: 3}
+  - {fileID: 640466009090307805, guid: 3cda604eda6c2ee45be16b07b8a59e9f, type: 3}
+  - {fileID: 689909068667736831, guid: a79dc4248a5e6534cb2d405fcd0d08d5, type: 3}
+  - {fileID: 7098139492246235967, guid: 19811ed44e9f2d34396f66f95351ece7, type: 3}
+  - {fileID: 7344293607410825155, guid: fd7013218e69f174e9bd52ec54e39ac8, type: 3}
 --- !u!4 &1748942352
 Transform:
   m_ObjectHideFlags: 0
