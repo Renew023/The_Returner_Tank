@@ -2,38 +2,41 @@ using UnityEngine;
 
 public abstract class BaseBattleUI : MonoBehaviour
 {
-    public virtual void UpdatePlayerLevel(int level)
+    private int playerLevel;
+    protected int PlayerLevel => playerLevel;
+    public void SetPlayerLevel(int _playerLevel)
     {
-
+        playerLevel = _playerLevel;
     }
 
-    public virtual void UpdatePlayerEXP(float current, float max)
+    private float playerCurrentEXP;
+    protected float PlayerCurrentEXP => playerCurrentEXP;
+    public void SetPlayerCurrentEXP(float _playerCurrentEXP)
     {
-
+        playerCurrentEXP = _playerCurrentEXP;
     }
 
-    public virtual void UpdatePlayerHP(float current, float max)
+    private float playerMaxEXP;
+    protected float PlayerMaxEXP => playerMaxEXP;
+    public void SetPlayerMaxEXP(float _playerMaxEXP)
     {
-
+        playerMaxEXP = _playerMaxEXP;
     }
 
-    public virtual void ShowDamageToPlayer(float damage)
+    private float playerCurrentHP;
+    protected float PlayerCurrentHP => playerCurrentHP;
+    public void SetPlayerCurrentHP(float _playerCurrentHP)
     {
-
+        playerCurrentHP = _playerCurrentHP;
     }
 
-    public virtual void ShowDamageToMonster(float damage)
+    private float playerMaxHP;
+    protected float PlayerMaxHP => playerMaxHP;
+    public void SetPlayerMaxHP(float _playerMaxHP)
     {
-
+        playerMaxHP = _playerMaxHP;
     }
 
-    public virtual void UpdateNormalMonsterHP(float current, float max)
-    {
-
-    }
-
-    public virtual void TogglePauseMenu(bool isActive)
-    {
-
-    }
+    // 사망했을 때 실행될 함수
+    // ESC키 눌렀을 때 실행될 함수
 }
