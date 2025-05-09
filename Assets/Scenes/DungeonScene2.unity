@@ -9545,7 +9545,7 @@ MonoBehaviour:
   allDifficultyData: []
   waveSpawnData:
   - wave: 1
-    enemyIndices: 0200000003000000
+    enemyIndices: 0200000001000000
     minStageIndex: 0
     maxStageIndex: 0
   - wave: 2
