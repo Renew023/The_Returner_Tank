@@ -8,4 +8,5 @@ public abstract class BaseBattleUI : MonoBehaviour
     {
         currentValue = _currentValue;
     }
+    public abstract void UpdateValue(float current, float max);
 }

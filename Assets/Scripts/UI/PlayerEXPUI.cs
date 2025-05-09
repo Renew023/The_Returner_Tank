@@ -1,19 +1,12 @@
+using UnityEngine;
+using UnityEngine.UI;
+
 public class PlayerEXPUI : BaseBattleUI
 {
-    private float maxValue;
-    protected float MaxValue => maxValue;
-    public void SetMaxValue(float _maxValue)
-    {
-        maxValue = _maxValue;
-    }
+    [SerializeField] private Image expBarFill;
 
-    private void Start()
+    public void UpdateEXP(float current, float max)
     {
-
-    }
-
-    private void Update()
-    {
-        
+        expBarFill.fillAmount = current / max;
     }
 }
