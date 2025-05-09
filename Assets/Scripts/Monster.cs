@@ -5,7 +5,6 @@ using UnityEngine;
 public class Monster : Character
 {
 	[SerializeField] private Player target;
-	[SerializeField] private WeaponController weaponController;
 
 	void Update()
 	{
@@ -14,7 +13,7 @@ public class Monster : Character
 		lookDirection = (target.transform.position - transform.position);
 		if (timer > attackDelay)
 		{
-			weaponController.Attack(lookDirection, 5);
+			weaponController.Attack(arrowValue, lookDirection, arrowSpeed, arrowDamage);
 			timer = 0f;
 		}
 		else
@@ -30,9 +29,9 @@ public class Monster : Character
 
 	override protected void Rotate()
 	{
-		rot = target.transform.position.x < transform.position.x ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
+		isLeft = target.transform.position.x < transform.position.x ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
 
-		transform.localScale = rot;
+		transform.localScale = isLeft;
 	}
 
 	public void OnTriggerEnter2D(Collider2D collision)

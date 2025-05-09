@@ -13,16 +13,18 @@ public class WeaponController : MonoBehaviour
     {
         Bomb = weapon;
     }
-    public void Attack(Vector2 roz, float damage)
+    public void Attack(int value, Vector2 dir, float speed, float damage)
     {
+        Vector2 rozLine = dir.normalized + (new Vector2(0, 3) * (value - 1));
+
         if (objectPoolCount == 0)
         {
             objectPoolArrow.Add(Instantiate(Bomb, transform.position, Quaternion.identity));
             objectPoolArrow[curCount].countReturn = this;
             objectPoolArrow[curCount].owner = transform.parent.gameObject;
+
             objectPoolArrow[curCount].transform.position = transform.position;
-            objectPoolArrow[curCount].direction = roz.normalized;
-			objectPoolArrow[curCount].speed = 5;
+            objectPoolArrow[curCount].direction = dir.normalized * speed;
 			objectPoolArrow[curCount].damage = damage;
 			curCount++;
         }
@@ -33,11 +35,9 @@ public class WeaponController : MonoBehaviour
                 curCount -= objectPoolArrow.Count;
             }
             objectPoolArrow[curCount].gameObject.SetActive(true);
-			objectPoolArrow[curCount].countReturn = this;
-			objectPoolArrow[curCount].owner = transform.parent.gameObject;
+
 			objectPoolArrow[curCount].transform.position = transform.position;
-			objectPoolArrow[curCount].direction = roz.normalized;
-			objectPoolArrow[curCount].speed = 5;
+            objectPoolArrow[curCount].direction = dir.normalized * speed;
 			objectPoolArrow[curCount].damage = damage;
 			curCount++;
 			objectPoolCount -= 1;

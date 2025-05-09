@@ -8493,8 +8493,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef1d169b4aeb2a64593272a49a5171e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1913451376}
   weaponController: {fileID: 1001036537}
+  maxHp: 100
+  curHp: 100
+  moveSpeed: 5
+  arrowValue: 10
+  arrowSpeed: 10
+  arrowDamage: 10
+  attackDelay: 0.2
+  target: {fileID: 1913451376}
 --- !u!1 &1913451372
 GameObject:
   m_ObjectHideFlags: 0
@@ -8616,9 +8623,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bef084f305d4f4fb3fdc338f6adaeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponController: {fileID: 6030353580603372525}
+  maxHp: 100
+  curHp: 0
+  moveSpeed: 0
+  arrowValue: 0
+  arrowSpeed: 0
+  arrowDamage: 0
+  attackDelay: 1
   rb: {fileID: 1913451375}
   camera: {fileID: 519420031}
-  weaponController: {fileID: 6030353580603372525}
   mousePosition: {x: 0, y: 0}
   worldPos: {x: 0, y: 0}
 --- !u!61 &1913451377
