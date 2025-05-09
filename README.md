@@ -10,4 +10,5 @@
 
 ### 플레이어 이동
 Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다. 또한 Mouse의 X좌표와 플레이어의 X좌표를 비교하여 플레이어의 방향이 바뀌도록 만들었습니다.
-![image](https://github.com/user-attachments/assets/02e8948d-7e40-41d8-becd-8e2e59e49407)
+
+![Movie_004](https://github.com/user-attachments/assets/2c5fb0fd-a71b-4fb4-bd7b-bdb92561f98d)
