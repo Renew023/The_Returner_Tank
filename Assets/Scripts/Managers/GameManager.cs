@@ -1,42 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    // 싱글톤 인스턴스
+    public static GameManager Instance { get; private set; }
 
-    //  현재 진행 중인 스테이지 인덱스
+    [Header("Map Entry Flag")]
+    [SerializeField]
+    private bool firstMapEntry = true;
+    public bool FirstMapEntry => firstMapEntry;
+
+    [Header("Stage Info")]
+    // 현재 플레이어가 위치한 스테이지 인덱스 (0부터 시작)
     public int currentStageIndex;
-
-    //  현재 스테이지 타입 (일반 / 보스)
+    // 현재 스테이지 타입 (Enemy / Heal / Boss)
     public StageType currentStage;
 
     private void Awake()
     {
-        if(instance != null)
+        // 이미 인스턴스가 있으면 중복 파괴
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
+            return;
         }
 
-        else
-        {
-            instance = this;
-
-            //  씬 전환해도 유지할 수 있도록 DDOL로 구현
-            DontDestroyOnLoad(gameObject);
-        }
+        // 최초 인스턴스로 등록하고 씬 전환 시 파괴되지 않도록 설정
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
