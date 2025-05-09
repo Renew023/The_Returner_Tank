@@ -1,4 +1,4 @@
-
+// Assets/Scripts/MapManager.cs
 using UnityEngine;
 using UnityEngine.UI;
 using System;
@@ -6,143 +6,143 @@ using System.Collections.Generic;
 
 public class MapManager : MonoBehaviour
 {
-    [Header("Prefabs & Icons")]
-    public NodeController nodePrefab;
-    public Image dotPrefab;
+    [Header("Prefab & Icon 설정")]
+    public GameObject nodePrefab;      // NodeController 가 붙어 있는 Prefab
     public Sprite enemyIcon, healIcon, bossIcon;
     public GameObject playerIndicatorPrefab;
 
-    [Header("레이아웃")]
-    public float baseYOffset = -50f;
-    public RectTransform stageContainer;
-    public int totalRows = 4;
+    [Header("Layout 설정")]
+    public RectTransform stageContainer; // Canvas 내 빈 GameObject
+    public int totalRows = 4;            // 0~2 일반/힐, 3 보스
     public int choicesPerRow = 3;
     public float xSpacing = 100f, ySpacing = -100f;
-    public byte defaultAlpha = 160, activeAlpha = 255;
-    public int dotSegments = 8;
+    public byte defaultAlpha = 160;     // (0~255)
 
-    
-    static bool initialized = false;
-    static List<List<NodeType>> mapData;
-    List<List<NodeController>> mapNodes;
-    List<Image> dotLines;
-    int currentRow = 0, currentCol = 0;
+    // 내부 데이터
+    private static bool mapInitialized = false;
+    private static List<List<NodeType>> mapData;
+    private List<List<NodeController>> mapNodes;
+    private GameObject playerIndicator;
+    private int currentRow = 0, currentCol = 0;
 
     void Start()
     {
-        if (!initialized)
+        if (!mapInitialized)
         {
-            GenerateMapData();
-            initialized = true;
+            GenerateMapData();              // 최초 한 번만
+            mapInitialized = true;
+            GameManager.IsFirstMapEntry = false;
         }
-        RenderMap();
+        RenderMap();                         // 매번 “그리기”는 호출
     }
 
-    void GenerateMapData()
+    // 1) 난수로 mapData 채우기 (8:2 비율, 마지막 행은 Boss)
+    private void GenerateMapData()
     {
         mapData = new List<List<NodeType>>();
         var rnd = new System.Random();
 
-        for (int r = 0; r < totalRows - 1; r++)
+        // 일반/힐 스테이지
+        for (int row = 0; row < totalRows - 1; row++)
         {
-            var rowList = new List<NodeType>();
+            var list = new List<NodeType>();
             for (int i = 0; i < choicesPerRow; i++)
-                rowList.Add(rnd.Next(10) < 8 ? NodeType.Enemy : NodeType.Heal);
-            mapData.Add(rowList);
+            {
+                list.Add(rnd.Next(10) < 8 ? NodeType.Enemy : NodeType.Heal);
+            }
+            mapData.Add(list);
         }
+
+        // 보스 스테이지 (마지막 행)
         mapData.Add(new List<NodeType> { NodeType.Boss });
     }
 
-    void RenderMap()
+    // 2) mapData → 씬에 노드로 변환 & 배치
+    private void RenderMap()
     {
-        // 기존 노드/점선 제거
-        if (mapNodes != null) foreach (var row in mapNodes) foreach (var n in row) Destroy(n.gameObject);
-        if (dotLines != null) foreach (var d in dotLines) Destroy(d.gameObject);
+        // 이전에 만들어둔 노드들 전부 삭제
+        if (mapNodes != null)
+        {
+            foreach (var row in mapNodes)
+                foreach (var node in row)
+                    Destroy(node.gameObject);
+            if (playerIndicator != null) Destroy(playerIndicator);
+        }
 
         mapNodes = new List<List<NodeController>>();
-        dotLines = new List<Image>();
 
-        // 1) 노드 생성
-        for (int r = 0; r < mapData.Count; r++)
+        for (int row = 0; row < mapData.Count; row++)
         {
+            int count = mapData[row].Count;
             var rowList = new List<NodeController>();
-            int count = mapData[r].Count;
-            for (int c = 0; c < count; c++)
+
+            for (int col = 0; col < count; col++)
             {
-                var nc = Instantiate(nodePrefab, stageContainer);
-                Sprite icon = mapData[r][c] == NodeType.Enemy ? enemyIcon
-                             : mapData[r][c] == NodeType.Heal ? healIcon
-                                                               : bossIcon;
-                nc.Init(r, c, mapData[r][c], this, icon, defaultAlpha);
+                // Instantiate & 초기화
+                var go = Instantiate(nodePrefab, stageContainer);
+                var ctrl = go.GetComponent<NodeController>();
+                ctrl.Init(row, col, mapData[row][col], this);
 
-                var rt = nc.GetComponent<RectTransform>();
-                float y = r * ySpacing + baseYOffset;
-                float x = (c - (count - 1) / 2f) * xSpacing;
-                rt.anchoredPosition = new Vector2(x, y);
+                // 아이콘 교체
+                var img = go.GetComponent<Image>();
+                img.sprite = mapData[row][col] == NodeType.Enemy
+                             ? enemyIcon
+                             : mapData[row][col] == NodeType.Heal
+                               ? healIcon
+                               : bossIcon;
+                // 기본 투명도
+                var c = img.color; c.a = defaultAlpha / 255f; img.color = c;
 
+                // 위치 계산
+                float x = (col - (count - 1) / 2f) * xSpacing;
+                float y = row * ySpacing;
+                go.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
 
-                rowList.Add(nc);
+                rowList.Add(ctrl);
             }
+
             mapNodes.Add(rowList);
         }
 
-        // 2) 점선 연결
-        for (int r = 0; r < mapNodes.Count - 1; r++)
-        {
-            var curr = mapNodes[r];
-            var next = mapNodes[r + 1];
-            for (int i = 0; i < curr.Count && i < next.Count; i++)
-                DrawDots(curr[i], next[i]);
-        }
-        var bossCtrl = mapNodes[mapNodes.Count - 1][0];
-        foreach (var prev in mapNodes[mapNodes.Count - 2])
-            DrawDots(prev, bossCtrl);
-
-
-        // 3) 플레이어 표시
-        var pi = Instantiate(playerIndicatorPrefab, stageContainer);
-        pi.GetComponent<RectTransform>().anchoredPosition =
-            mapNodes[0][0].GetComponent<RectTransform>().anchoredPosition;
-
-        // 4) 활성 행 투명도
-        UpdateAlphas();
+        // PlayerIndicator 띄우기
+        playerIndicator = Instantiate(playerIndicatorPrefab, stageContainer);
+        UpdatePlayerIndicator();
+        UpdateSelectable();  // 현재 row 의 노드만 투명도 해제
     }
 
-    void DrawDots(NodeController a, NodeController b)
-    {
-        var pa = a.GetComponent<RectTransform>().anchoredPosition;
-        var pb = b.GetComponent<RectTransform>().anchoredPosition;
-        for (int i = 1; i < dotSegments; i++)
-        {
-            float t = i / (float)dotSegments;
-            var pos = Vector2.Lerp(pa, pb, t);
-            var dot = Instantiate(dotPrefab, stageContainer);
-            dot.rectTransform.anchoredPosition = pos;
-            dotLines.Add(dot);
-        }
-    }
-
-    void UpdateAlphas()
+    // 선택 가능한 노드만 불투명으로
+    private void UpdateSelectable()
     {
         for (int r = 0; r < mapNodes.Count; r++)
+        {
             for (int c = 0; c < mapNodes[r].Count; c++)
-                mapNodes[r][c].SetAlpha((r == currentRow) ? activeAlpha : defaultAlpha);
+            {
+                var img = mapNodes[r][c].GetComponent<Image>();
+                var col = img.color;
+                bool selectable = (r == currentRow);
+                col.a = selectable ? 1f : defaultAlpha / 255f;
+                img.color = col;
+            }
+        }
     }
 
-    // 클릭 시 호출
-    public void OnNodeClicked(int r, int c, NodeType t)
+    // 플레이어 위치 표시
+    private void UpdatePlayerIndicator()
     {
-        currentRow = r; currentCol = c;
-        mapNodes[r][c].SetAlpha(activeAlpha);
+        var target = mapNodes[currentRow][currentCol].GetComponent<RectTransform>().anchoredPosition;
+        playerIndicator.GetComponent<RectTransform>().anchoredPosition = target;
+    }
 
-        
-        var pi = stageContainer
-                 .GetComponentInChildren<Image>(true); 
-        pi.GetComponent<RectTransform>().anchoredPosition =
-            mapNodes[r][c].GetComponent<RectTransform>().anchoredPosition;
+    // NodeController 에서 호출: 노드 클릭 시
+    public void OnNodeClicked(int row, int col, NodeType type)
+    {
+        currentRow = row;
+        currentCol = col;
 
-        // 씬 전환
-        if (t == NodeType.Enemy || t == NodeType.Boss) SceneController.ToBattle();
-        else SceneController.ToHeal();
+        // 다음 씬 진입 직전까지 mapData 와 mapInitialized 유지
+        if (type == NodeType.Enemy || type == NodeType.Boss)
+            SceneController.GoToBattle();
+        else
+            SceneController.GoToHeal();
     }
 }
