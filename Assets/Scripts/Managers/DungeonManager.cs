@@ -63,7 +63,7 @@ public class DungeonManager : MonoBehaviour
 
         Debug.Log($"[DungeonManager] 현재 웨이브: {currentWave}");
 
-        Spawner.instance.SpawnFixedWave(currentWave);
+        Spawner.instance.SpawnFixedWave();
     }
 
     private void Update()
