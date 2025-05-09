@@ -556,6 +556,14 @@ MonoBehaviour:
   - {fileID: 966935886}
   - {fileID: 410377380}
   - {fileID: 1917999812}
+  spawnDelay: 1
+  waveSpawnData:
+  - wave: 0
+    enemyIndices: 0000000001000000
+  - wave: 1
+    enemyIndices: 000000000200000003000000
+  - wave: 2
+    enemyIndices: 00000000010000000200000003000000
 --- !u!4 &767040096
 Transform:
   m_ObjectHideFlags: 0
@@ -619,6 +627,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed092cfee3067284d85ee77e03fe6c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentWave: 1
+  maxWave: 5
+  enemiesPerWave: 5
   pools: {fileID: 615560224}
   player: {fileID: 1148878492}
 --- !u!1 &869221945
