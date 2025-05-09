@@ -25,7 +25,7 @@ public class Arrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = direction * .5f;
+        rb.velocity = direction * 5f;
 	}
 
     IEnumerator Shoot()

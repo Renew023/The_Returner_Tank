@@ -19,9 +19,14 @@ public class Player : Character
 		worldPos = camera.ScreenToWorldPoint(mousePosition);
         lookDirection = (worldPos - (Vector2)transform.position);
 
-		if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && timer > attackDelay)
         {
             weaponController.Attack(lookDirection, 5);
+            timer = 0f;
+        }
+        else
+        {
+            timer += Time.deltaTime;
         }
         Move();
         Rotate();
