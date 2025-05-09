@@ -1,4 +1,4 @@
-public class NormalBattleUI : BaseBattleUI
+public class PlayerLevelUI : BaseBattleUI
 {
     private void Start()
     {
