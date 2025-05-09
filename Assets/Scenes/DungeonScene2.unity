@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 27770251}
   - component: {fileID: 27770250}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Grid - Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8080,7 +8080,7 @@ GameObject:
   - component: {fileID: 260564868}
   - component: {fileID: 260564867}
   - component: {fileID: 260564866}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tilemap - Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9541,6 +9541,21 @@ MonoBehaviour:
   - {fileID: 174962981}
   - {fileID: 564203994}
   - {fileID: 1014109848}
+  spawnDelay: 1
+  allDifficultyData: []
+  waveSpawnData:
+  - wave: 1
+    enemyIndices: 0200000001000000
+    minStageIndex: 0
+    maxStageIndex: 0
+  - wave: 2
+    enemyIndices: 000000000200000003000000
+    minStageIndex: 0
+    maxStageIndex: 0
+  - wave: 3
+    enemyIndices: 00000000010000000200000003000000
+    minStageIndex: 1
+    maxStageIndex: 3
 --- !u!4 &440357913
 Transform:
   m_ObjectHideFlags: 0
@@ -9941,7 +9956,7 @@ GameObject:
   - component: {fileID: 1190702843}
   - component: {fileID: 1190702842}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: DungeonManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9959,8 +9974,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed092cfee3067284d85ee77e03fe6c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentWave: 1
   pools: {fileID: 1748942351}
-  player: {fileID: 0}
 --- !u!4 &1190702843
 Transform:
   m_ObjectHideFlags: 0
@@ -9986,7 +10001,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1435271776}
   - component: {fileID: 1435271775}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Grid - Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10142,7 +10157,7 @@ GameObject:
   - component: {fileID: 1470473718}
   - component: {fileID: 1470473717}
   - component: {fileID: 1470473719}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tilemap - Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12440,6 +12455,6 @@ SceneRoots:
   - {fileID: 673138484}
   - {fileID: 1878933543}
   - {fileID: 1190702843}
+  - {fileID: 1748942352}
   - {fileID: 440357913}
   - {fileID: 1899715459}
-  - {fileID: 1748942352}
