@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-	[SerializeField] protected Rigidbody2D rb;
-
-    protected float Hp;
+    protected float maxHp = 100;
+    protected float curHp;
 
 	protected int arrowValue;
     protected float moveSpeed;
@@ -17,12 +16,18 @@ public class Character : MonoBehaviour
     protected float arrowSpeed;
 
     protected Vector2 movementDirection;
-    protected Vector2 LookDirection;
+    protected Vector2 lookDirection;
 	protected Vector2 rot;
-    protected virtual void Init() { }
+    protected virtual void Init() 
+    {
+        curHp = maxHp;
+    }
 
 	protected virtual void Move() { }
     protected virtual void Rotate() { }
 
-	protected virtual void Attack() { }
+	protected virtual void Hit(ref float curHp, float damage) 
+    {
+        curHp -= damage;
+    }
 }

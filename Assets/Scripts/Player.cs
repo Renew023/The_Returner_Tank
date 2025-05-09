@@ -5,16 +5,22 @@ using UnityEngine;
 
 public class Player : Character
 {
-    [SerializeField] private Camera camera;
+	[SerializeField] protected Rigidbody2D rb;
+
+	[SerializeField] private Camera camera;
     [SerializeField] private WeaponController weaponController;
 
     [SerializeField] private Vector2 mousePosition;
     [SerializeField] private Vector2 worldPos;
 
-    [SerializeField] private Vector2 lookDirection;
+    void Awake()
+    {
+        Init();
+    }
 
     void Update()
     {
+
 		mousePosition = Input.mousePosition;
 		worldPos = camera.ScreenToWorldPoint(mousePosition);
         lookDirection = (worldPos - (Vector2)transform.position);
@@ -32,6 +38,8 @@ public class Player : Character
         Rotate();
     }
 
+    
+
     override protected void Move()
     {
         float x = Input.GetAxisRaw("Horizontal");
@@ -47,4 +55,29 @@ public class Player : Character
 
         transform.localScale = rot;
     }
+
+    void LevelUp()
+    {
+        if (curHp + maxHp * .1f < maxHp)
+        {
+            curHp += maxHp * .1f;
+        }
+        else
+        {
+            curHp = maxHp;
+        }
+    }
+
+	public void OnTriggerEnter2D(Collider2D collision)
+	{
+        if (collision.gameObject.CompareTag("Arrow"))
+        {
+            Arrow arrow = collision.gameObject.GetComponent<Arrow>();
+            if (arrow.owner == this.gameObject)
+                return;
+
+            Hit(ref curHp, arrow.damage);
+            collision.gameObject.SetActive(false);
+        }
+	}
 }

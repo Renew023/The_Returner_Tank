@@ -18,9 +18,12 @@ public class WeaponController : MonoBehaviour
         if (objectPoolCount == 0)
         {
             objectPoolArrow.Add(Instantiate(Bomb, transform.position, Quaternion.identity));
+            objectPoolArrow[curCount].countReturn = this;
+            objectPoolArrow[curCount].owner = transform.parent.gameObject;
             objectPoolArrow[curCount].transform.position = transform.position;
             objectPoolArrow[curCount].direction = roz.normalized;
 			objectPoolArrow[curCount].speed = 5;
+			objectPoolArrow[curCount].damage = damage;
 			curCount++;
         }
         else
@@ -30,10 +33,13 @@ public class WeaponController : MonoBehaviour
                 curCount -= objectPoolArrow.Count;
             }
             objectPoolArrow[curCount].gameObject.SetActive(true);
+			objectPoolArrow[curCount].countReturn = this;
+			objectPoolArrow[curCount].owner = transform.parent.gameObject;
 			objectPoolArrow[curCount].transform.position = transform.position;
 			objectPoolArrow[curCount].direction = roz.normalized;
 			objectPoolArrow[curCount].speed = 5;
-            curCount++;
+			objectPoolArrow[curCount].damage = damage;
+			curCount++;
 			objectPoolCount -= 1;
         }
     }

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    [SerializeField] private WeaponController countReturn;
+    public GameObject owner;
+
+    public WeaponController countReturn;
     [SerializeField] private Rigidbody2D rb;
     public float damage;
     public float speed;
@@ -14,16 +16,20 @@ public class Arrow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        countReturn = GameObject.Find("Weapon").GetComponent<WeaponController>();
     }
 
     void OnEnable()
     {
 		StartCoroutine("Shoot");
 	}
+	void OnDisable()
+	{
+		StopCoroutine("Shoot");
+		countReturn.pooling();
+	}
 
-    // Update is called once per frame
-    void Update()
+	// Update is called once per frame
+	void Update()
     {
         rb.velocity = direction * 5f;
 	}
@@ -31,7 +37,6 @@ public class Arrow : MonoBehaviour
     IEnumerator Shoot()
     {
         yield return new WaitForSeconds(time);
-        countReturn.pooling();
         gameObject.SetActive(false);
     }
 
