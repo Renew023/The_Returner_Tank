@@ -9,7 +9,6 @@ public class Arrow : MonoBehaviour
     public WeaponController countReturn;
     [SerializeField] private Rigidbody2D rb;
     public float damage;
-    public float speed;
     public Vector2 direction;
     public float time = 3f;
 
@@ -31,7 +30,7 @@ public class Arrow : MonoBehaviour
 	// Update is called once per frame
 	void Update()
     {
-        rb.velocity = direction * 5f;
+        rb.velocity = direction;
 	}
 
     IEnumerator Shoot()
