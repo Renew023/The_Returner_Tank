@@ -39,7 +39,7 @@ public class Spawner : MonoBehaviour
         WaveSpawnData data = waveSpawnData.FirstOrDefault(w => w.wave == wave);
 
         //  GameManager → 현재 스테이지 번호를 불러온다.
-        int stageIndex = GameManager.instance.currentStageIndex;
+        //int stageIndex = GameManager.instance.currentStageIndex;
 
         //  현재 스테이지에 맞는 난이도 데이터 찾기
         //WaveSpawnData data = allDifficultyData.FirstOrDefault(d => stageIndex >= d.minStageIndex && stageIndex <= d.maxStageIndex);

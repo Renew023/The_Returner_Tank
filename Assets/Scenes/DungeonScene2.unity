@@ -9554,8 +9554,8 @@ MonoBehaviour:
     maxStageIndex: 0
   - wave: 3
     enemyIndices: 00000000010000000200000003000000
-    minStageIndex: 0
-    maxStageIndex: 0
+    minStageIndex: 1
+    maxStageIndex: 3
 --- !u!4 &440357913
 Transform:
   m_ObjectHideFlags: 0
