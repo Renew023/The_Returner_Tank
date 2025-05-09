@@ -13,17 +13,22 @@ public class Spawner : MonoBehaviour
     [Header ("Wave Spawn 설정")]
     public WaveSpawnData[] waveSpawnData;      //  유니티 에디터 상에서 wave 설정
 
-    private void Awake()
-    {
-        spawnPoint = GetComponentsInChildren<Transform>();
-    }
+    //private void Awake()
+    //{
+    //    spawnPoint = GetComponentsInChildren<Transform>()
+    //                 .Where(t => t != this.transform).ToArray();
 
-        else
-        {
-            //  제거한다
-            Destroy(gameObject);
-        }
-    }
+    //    if (instance == null)
+    //    {
+    //        instance = this;
+    //    }
+
+    //    else
+    //    {
+    //        //  제거한다
+    //        Destroy(gameObject);
+    //    }
+    //}
 
     //  현재 웨이브에 맞는 몬스터들을 무작위로 스폰하는 메서드
     public void SpawnFixedWave(int wave)
@@ -47,7 +52,22 @@ public class Spawner : MonoBehaviour
     //  몬스터들 스폰 기능
     void SpawnEnemis()
     {
-        GameObject enemy = DungeonManager.instance.pools.CreateEnemies(Random.Range(0, 4));
+        spawnPoint = GetComponentsInChildren<Transform>()
+                     .Where(t => t != this.transform).ToArray();
+
+        if (instance == null)
+        {
+            instance = this;
+        }
+
+        else
+        {
+            //  제거한다
+            Destroy(gameObject);
+        }
+
+        SpawnFixedWave(DungeonManager.instance.currentWave);
+    }
 
     private void Update()
     {
