@@ -8,7 +8,6 @@ public class Player : Character
 	[SerializeField] protected Rigidbody2D rb;
 
 	[SerializeField] private Camera camera;
-    [SerializeField] private WeaponController weaponController;
 
     [SerializeField] private Vector2 mousePosition;
     [SerializeField] private Vector2 worldPos;
@@ -27,7 +26,7 @@ public class Player : Character
 
         if (Input.GetMouseButton(0) && timer > attackDelay)
         {
-            weaponController.Attack(lookDirection, 5);
+            weaponController.Attack(arrowValue, lookDirection, arrowSpeed, arrowDamage);
             timer = 0f;
         }
         else
@@ -37,8 +36,6 @@ public class Player : Character
         Move();
         Rotate();
     }
-
-    
 
     override protected void Move()
     {
@@ -51,9 +48,9 @@ public class Player : Character
 
     override protected void Rotate()
     {
-        rot = worldPos.x < transform.position.x ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
+        isLeft = worldPos.x < transform.position.x ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
 
-        transform.localScale = rot;
+        transform.localScale = isLeft;
     }
 
     void LevelUp()
