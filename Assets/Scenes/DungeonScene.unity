@@ -537,6 +537,14 @@ MonoBehaviour:
   - {fileID: 966935886}
   - {fileID: 410377380}
   - {fileID: 1917999812}
+  spawnDelay: 1
+  waveSpawnData:
+  - wave: 0
+    enemyIndices: 0000000001000000
+  - wave: 1
+    enemyIndices: 000000000200000003000000
+  - wave: 2
+    enemyIndices: 00000000010000000200000003000000
 --- !u!4 &767040096
 Transform:
   m_ObjectHideFlags: 0
@@ -600,6 +608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed092cfee3067284d85ee77e03fe6c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentWave: 1
   pools: {fileID: 615560224}
   player: {fileID: 0}
 --- !u!1 &869221945
@@ -4568,7 +4577,7 @@ GameObject:
   - component: {fileID: 996045355}
   - component: {fileID: 996045354}
   - component: {fileID: 996045353}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Grid - Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4653,7 +4662,7 @@ GameObject:
   - component: {fileID: 1008930804}
   - component: {fileID: 1008930803}
   - component: {fileID: 1008930802}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tilemap - Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6077,7 +6086,7 @@ GameObject:
   - component: {fileID: 1403158998}
   - component: {fileID: 1403158997}
   - component: {fileID: 1403158996}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tilemap - Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7095,7 +7104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2068364636}
   - component: {fileID: 2068364635}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Grid - Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

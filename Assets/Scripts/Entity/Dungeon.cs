@@ -24,19 +24,25 @@ public class Dungeon : MonoBehaviour
         }
     }
 
+    //  오브젝트 풀링을 활용한 몬스터 생성 메서드
     public GameObject CreateEnemies(int index)
     {
+        //  예외 처리
+        if(index < 0 || index >= Enemies.Length)
+        {
+            Debug.LogError($"[CreateEnemies] 잘못된 인덱스 접근: {index}");
+            return null;
+        }
+
         GameObject selectObject = null;
 
-        //  TODO: 선택한 풀의 놀고 있는 적(비활성화 된) 오브젝트에 접근한다.
-
         //  만약 발견했다면, select 오브젝트에 할당한다.
-        foreach(GameObject item in pools[index])
+        foreach(GameObject obj in pools[index])
         {
             //  비활성화된 적 오브젝트가 있다면?
-            if(!item.activeSelf)
+            if(!obj.activeSelf)
             {
-                selectObject = item;
+                selectObject = obj;
                 selectObject.SetActive(true);
                 break;
             }
@@ -45,10 +51,10 @@ public class Dungeon : MonoBehaviour
         //  만약 놀고 있는 적 오브젝트가 없다면, 새롭게 생성한 후에 select 오브젝트에 할당한다.
         if(!selectObject)
         {
+            Debug.Log(index);
             selectObject = Instantiate(Enemies[index], transform);
             pools[index].Add(selectObject);
         }
-
 
         return selectObject;
     }
