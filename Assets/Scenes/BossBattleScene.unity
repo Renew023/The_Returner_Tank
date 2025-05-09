@@ -189,15 +189,7 @@ MonoBehaviour:
   - {fileID: 1264741613}
   - {fileID: 33125285}
   spawnDelay: 1
-  spawnData:
-  - spriteType: 0
-    spawnTime: 0.7
-    health: 10
-    speed: 1.5
-  - spriteType: 1
-    spawnTime: 0.2
-    health: 15
-    speed: 2.4
+  waveSpawnData: []
 --- !u!4 &117317151
 Transform:
   m_ObjectHideFlags: 0
@@ -380,7 +372,7 @@ GameObject:
   - component: {fileID: 592356979}
   - component: {fileID: 592356978}
   - component: {fileID: 592356977}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tilemap - Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1816,7 +1808,7 @@ GameObject:
   m_Component:
   - component: {fileID: 697492136}
   - component: {fileID: 697492135}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Grid - Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8250,7 +8242,7 @@ GameObject:
   - component: {fileID: 1564112908}
   - component: {fileID: 1564112907}
   - component: {fileID: 1564112906}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tilemap - Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9977,7 +9969,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1849421900}
   - component: {fileID: 1849421899}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Grid - Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10072,9 +10064,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed092cfee3067284d85ee77e03fe6c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wave: 0
-  maxWave: 3
-  enemiesPerWave: 5
+  currentWave: 1
   pools: {fileID: 2081940347}
   player: {fileID: 0}
 --- !u!4 &1909743401
@@ -10149,9 +10139,9 @@ SceneRoots:
   - {fileID: 1823636039}
   - {fileID: 697492136}
   - {fileID: 1849421900}
-  - {fileID: 2081940348}
   - {fileID: 608890388}
-  - {fileID: 117317151}
+  - {fileID: 2081940348}
   - {fileID: 1909743401}
+  - {fileID: 117317151}
   - {fileID: 1793328826}
   - {fileID: 590936309}
