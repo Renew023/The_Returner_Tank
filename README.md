@@ -1,9 +1,11 @@
+<div align="center" markdown>
 # The_Returner_Tank
 [내배캠] 궁수의 전설 모작 팀프로젝트
-
+</div>
+---
 # 제목
 <div align="center" markdown>
-  <h6> 탱크로 다시 태어난 나는 미궁을 방랑한다. </h6>
+  <h3> 탱크로 다시 태어난 나는 미궁을 방랑한다. </h3>
 </div>
 
 <div align="center" markdown>
