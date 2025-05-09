@@ -16,8 +16,7 @@ public class DungeonManager : MonoBehaviour
     //  웨이브가 진행 중인지 추적하기 위한 변수
     private bool isWaveInProgress = false;
 
-    public Dungeon pools;
-    public Player player;
+    public Dungeon pools;           //  오브젝트 풀링 매니저
 
     private void Awake()
     {
@@ -32,7 +31,7 @@ public class DungeonManager : MonoBehaviour
         }
     }
 
-    //  웨이브의 몬스터 수를 초기화하는 메서드 (스폰될 때마다 호출)
+    //  현재 웨이브 시작 시 몬스터 수 설정 메서드
     public void StartWave(int count)
     {
         aliveEnemies = count;
@@ -40,10 +39,6 @@ public class DungeonManager : MonoBehaviour
         Debug.Log($"[웨이브 {currentWave}] 몬스터 {count} 마리 소환!");
     }
 
-    public void OnEnemySpawned()
-    {
-        aliveEnemies++;
-    }
 
     //  몬스터가 죽었을 때 호출되는 메서드
     public void OnEnemyDeath()
@@ -51,7 +46,7 @@ public class DungeonManager : MonoBehaviour
         //  남은 몬스터 수 감소
         aliveEnemies--;
 
-        //  웨이브 내 모든 몬스터가 죽었다면, 웨이브 종료 및 다음 웨이브 생성
+        //  웨이브 내 모든 몬스터가 죽었다면, 현재 웨이브 종료 및 다음 웨이브 스폰
         if(isWaveInProgress && aliveEnemies <= 0)
         {
             isWaveInProgress = false;

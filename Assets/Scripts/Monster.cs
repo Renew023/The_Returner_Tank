@@ -47,4 +47,22 @@ public class Monster : Character
 			collision.gameObject.SetActive(false);
 		}
 	}
+
+	public void TakeDamage(int damage)
+	{
+		curHp -= damage;
+
+		if(curHp <= 0)
+		{
+            Death();
+		}
+	}
+
+	void Death()
+	{
+		gameObject.SetActive(false);
+
+		//	해당 몬스터가 속해있는 몬스터 수 감소.
+		DungeonManager.instance.OnEnemyDeath();
+	}
 }

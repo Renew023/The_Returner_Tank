@@ -9542,13 +9542,20 @@ MonoBehaviour:
   - {fileID: 564203994}
   - {fileID: 1014109848}
   spawnDelay: 1
+  allDifficultyData: []
   waveSpawnData:
   - wave: 1
     enemyIndices: 0200000001000000
+    minStageIndex: 0
+    maxStageIndex: 0
   - wave: 2
     enemyIndices: 000000000200000003000000
+    minStageIndex: 0
+    maxStageIndex: 0
   - wave: 3
     enemyIndices: 00000000010000000200000003000000
+    minStageIndex: 0
+    maxStageIndex: 0
 --- !u!4 &440357913
 Transform:
   m_ObjectHideFlags: 0
@@ -9949,7 +9956,7 @@ GameObject:
   - component: {fileID: 1190702843}
   - component: {fileID: 1190702842}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: DungeonManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9969,7 +9976,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentWave: 1
   pools: {fileID: 1748942351}
-  player: {fileID: 0}
 --- !u!4 &1190702843
 Transform:
   m_ObjectHideFlags: 0
