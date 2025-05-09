@@ -29,6 +29,7 @@ public class Spawner : MonoBehaviour
 
         else
         {
+            //  제거한다
             Destroy(gameObject);
         }
     }
