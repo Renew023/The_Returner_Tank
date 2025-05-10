@@ -7,17 +7,11 @@ public class PlayerLevel : CharacterUI
 
     protected override void Start()
     {
-        UIManager.Instance.playerLevel = this;
         //UpdateValue(플레이어의 레벨);
     }
 
     public override void UpdateValue(int current)
     {
         LevelUI.text = "Lv. " + current.ToString();
-    }
-
-    public override void Show(bool show)
-    {
-        LevelUI.gameObject.SetActive(show);
     }
 }
