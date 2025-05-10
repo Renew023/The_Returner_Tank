@@ -194,6 +194,7 @@ MonoBehaviour:
   bossIcon: {fileID: -525390460, guid: 12203856eed85b644ba073857c0a3843, type: 3}
   playerIndicatorPrefab: {fileID: 6748271703798662429, guid: d9579ae4a8957614383b59627b0ea105, type: 3}
   baseYOffset: -250
+  extraYOffset: 50
   stageContainer: {fileID: 130093605}
   totalRows: 5
   choicesPerRow: 3
@@ -437,6 +438,7 @@ GameObject:
   - component: {fileID: 1579385039}
   - component: {fileID: 1579385038}
   - component: {fileID: 1579385037}
+  - component: {fileID: 1579385040}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -518,6 +520,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1579385040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579385036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 108c94b31e0780f4892b7bcbeb7082a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIndicator: {fileID: 0}
+  panHeight: 300
+  panDuration: 2
+  followSpeed: 2
 --- !u!1 &1929474777
 GameObject:
   m_ObjectHideFlags: 0
