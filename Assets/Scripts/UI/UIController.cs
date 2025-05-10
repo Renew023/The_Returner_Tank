@@ -8,8 +8,8 @@ public class UIController : MonoBehaviour
     [SerializeField] public PlayerLevel playerLevel;
     [SerializeField] public DeathUI deathUI;
     [SerializeField] public PauseUI pauseUI;
-    //[SerializeField] private StageSelectUI stageSelectUI;
-    //[SerializeField] private SkillSelectUI skillSelectUI;
+    [SerializeField] public StageSelectUI stageSelectUI;
+    [SerializeField] public SkillSelectUI skillSelectUI;
 
     private void Start()
     {
@@ -35,5 +35,15 @@ public class UIController : MonoBehaviour
     public void ShowPauseUI(bool show)
     {
         deathUI.gameObject.SetActive(show);
+    }
+
+    public void ShowStageSelectUI(bool show)
+    {
+        stageSelectUI.gameObject.SetActive(show);
+    }
+
+    public void ShowSkillSelectUI(bool show)
+    {
+        skillSelectUI.gameObject.SetActive(show);
     }
 }

@@ -13,7 +13,7 @@ public class PauseUI : MonoBehaviour
         }
         else
         {
-            Time.timeScale = 0;
+            Time.timeScale = 0f;
             PauseMenu.SetActive(true);
         }
     }

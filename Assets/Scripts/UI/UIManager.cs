@@ -4,7 +4,7 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
-    [SerializeField] GameObject uiCanvas;
+    [SerializeField] private GameObject uiCanvas;
     public UIController uiController;
 
     private void Awake()
