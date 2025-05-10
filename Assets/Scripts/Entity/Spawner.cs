@@ -35,20 +35,19 @@ public class Spawner : MonoBehaviour
     //}
 
     //  현재 웨이브에 맞는 몬스터들을 무작위로 스폰하는 메서드
-    public void SpawnFixedWave(int wave)
+    public void SpawnFixedWave()
     {
-        WaveSpawnData data = waveSpawnData.FirstOrDefault(w => w.wave == wave);
+        int wave = DungeonManager.instance.currentWave;
 
-        //  GameManager → 현재 스테이지 번호를 불러온다.
-        //int stageIndex = GameManager.instance.currentStageIndex;
+        //  현재 설정된 던전 레벨 가져오기
+        int dungeonLevel = GameManager.instance.dungeonLevel;
 
-        //  현재 스테이지에 맞는 난이도 데이터 찾기
-        //WaveSpawnData data = allDifficultyData.FirstOrDefault(d => stageIndex >= d.minStageIndex && stageIndex <= d.maxStageIndex);
+        //  난이도 정보 가져오기
+        WaveSpawnData data = waveSpawnData.FirstOrDefault(d => dungeonLevel >= d.minStageIndex && dungeonLevel <= d.maxStageIndex);
 
         if (data == null)
         {
-            Debug.LogWarning($"[Spawner] Wave {wave} 설정 없음");
-            //Debug.LogWarning($"[Spawner] 해당 스테이지 ({stageIndex})의 난이도 데이터가 존재하지 않습니다");
+            Debug.LogWarning($"[Spawner] 던전 레벨 ({dungeonLevel})에 맞는 난이도 정보가 없습니다");
             return;
         }
 
@@ -89,7 +88,7 @@ public class Spawner : MonoBehaviour
             Destroy(gameObject);
         }
 
-        SpawnFixedWave(DungeonManager.instance.currentWave);
+        SpawnFixedWave();
     }
 
     private void Update()
