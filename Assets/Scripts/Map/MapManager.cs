@@ -6,6 +6,8 @@ using System.Collections.Generic;
 
 public class MapManager : MonoBehaviour
 {
+    private RectTransform playerIndicatorRt;
+
     [Header("Prefabs & Icons")]
     public NodeController nodePrefab;
     public Image dotPrefab;
@@ -14,6 +16,7 @@ public class MapManager : MonoBehaviour
 
     [Header("레이아웃")]
     public float baseYOffset = -50f;
+    public float extraYOffset = 50f;
     public RectTransform stageContainer;
     public int totalRows = 4;
     public int choicesPerRow = 3;
@@ -101,6 +104,7 @@ public class MapManager : MonoBehaviour
 
         // 3) 플레이어 표시
         var pi = Instantiate(playerIndicatorPrefab, stageContainer);
+        playerIndicatorRt = pi.GetComponent<RectTransform>();
         pi.GetComponent<RectTransform>().anchoredPosition =
             mapNodes[0][0].GetComponent<RectTransform>().anchoredPosition;
 
@@ -135,11 +139,14 @@ public class MapManager : MonoBehaviour
         currentRow = r; currentCol = c;
         mapNodes[r][c].SetAlpha(activeAlpha);
 
-        
         var pi = stageContainer
                  .GetComponentInChildren<Image>(true); 
         pi.GetComponent<RectTransform>().anchoredPosition =
             mapNodes[r][c].GetComponent<RectTransform>().anchoredPosition;
+
+        if (playerIndicatorRt != null)
+            playerIndicatorRt.anchoredPosition =
+                mapNodes[r][c].GetComponent<RectTransform>().anchoredPosition;
 
         // 씬 전환
         if (t == NodeType.Enemy || t == NodeType.Boss) SceneController.ToBattle();
