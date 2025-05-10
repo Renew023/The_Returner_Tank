@@ -47,12 +47,13 @@ public class Monster : Character
 			if (arrow.owner == this.gameObject)
 				return;
 
-			Hit(ref curHp, arrow.damage);
+			//Hit(ref curHp, arrow.damage);
+			TakeDamage(arrow.damage);
 			collision.gameObject.SetActive(false);
 		}
 	}
 
-	public void TakeDamage(int damage)
+	public void TakeDamage(float damage)
 	{
 		curHp -= damage;
 
@@ -65,8 +66,6 @@ public class Monster : Character
 	void Death()
 	{
 		gameObject.SetActive(false);
-
-		Destroy(this.gameObject);
 
 		//	해당 몬스터가 속해있는 몬스터 수 감소.
 		DungeonManager.instance.OnEnemyDeath();

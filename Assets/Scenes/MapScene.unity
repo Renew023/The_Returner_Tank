@@ -548,8 +548,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstMapEntry: 1
+  stageIndex: 0
   currentStageIndex: 0
-  currentStage: 0
+  currentStageType: 0
+  dungeonLevel: 1
 --- !u!4 &1929474779
 Transform:
   m_ObjectHideFlags: 0

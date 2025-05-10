@@ -9,6 +9,7 @@ public class DungeonManager : MonoBehaviour
 
     //  현재 웨이브 변수값
     public int currentWave = 1;
+    public int maxWave = 3;
 
     //  웨이브 내 현재 살아있는 몬스터의 수 변수값
     private int aliveEnemies = 0;
@@ -31,6 +32,14 @@ public class DungeonManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        //  DungeonManager에서 스폰 웨이브를 관리한다!!
+        currentWave = 1;
+
+        Spawner.instance.SpawnFixedWave();
+    }
+
     //  현재 웨이브 시작 시 몬스터 수 설정 메서드
     public void StartWave(int count)
     {
@@ -50,8 +59,27 @@ public class DungeonManager : MonoBehaviour
         if(isWaveInProgress && aliveEnemies <= 0)
         {
             isWaveInProgress = false;
-            Debug.Log($"[웨이브 {currentWave}] 완료!");
-            NextWave();
+            Debug.Log($"웨이브 {currentWave}] 완료!");
+
+            if(currentWave >= maxWave)
+            {
+                Debug.Log($"[DungeonManager] 모든 웨이브 종료!");
+                ClearDungeon();
+            }
+
+            else
+            {
+                Debug.Log($"[DungeonManager] 다음 웨이브 {currentWave}] 시작!");
+                //NextWave();
+
+                //  웨이브 증가
+                currentWave++;
+
+                Debug.Log($"[DungeonManager] 현재 웨이브: {currentWave}");
+
+                Spawner.instance.SpawnFixedWave();
+            }
+
         }
     }
 
@@ -65,12 +93,21 @@ public class DungeonManager : MonoBehaviour
 
         Spawner.instance.SpawnFixedWave();
     }
-
-    private void Update()
+    
+    void ClearDungeon()
     {
-        //  웨이브 증가
-        //currentWave++;
+        Debug.Log($"[DungeonManager] 던전 클리어!");
 
-        //Debug.Log($"[DungeonManager] 현재 웨이브: {currentWave}");
+        //  던전 난이도 증가
+        GameManager.Instance.IncreaseDungeonLevel();
+
+        //  현재 스테이지 인덱스 증가 (다음 스테이지 진행용)
+        GameManager.Instance.currentStageIndex++;
+
+        //  다음 던전을 위한 초기화
+        currentWave = 1; 
+
+        //  스테이지 선택 화면으로 복귀
+        SceneController.ToMap();
     }
 }

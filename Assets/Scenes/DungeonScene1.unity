@@ -538,21 +538,84 @@ MonoBehaviour:
   - {fileID: 410377380}
   - {fileID: 1917999812}
   spawnDelay: 1
-  waveSpawnData:
+  waveSpawnEntries:
   - wave: 1
-    enemyIndices: 0000000001000000
-    minStageIndex: 1
-    maxStageIndex: 2
+    dungeonLevel: 1
+    data:
+      enemyIndices: 0000000001000000
+      baseEnemyCount: 2
+  - wave: 1
+    dungeonLevel: 2
+    data:
+      enemyIndices: 0000000001000000
+      baseEnemyCount: 2
+  - wave: 1
+    dungeonLevel: 3
+    data:
+      enemyIndices: 000000000100000002000000
+      baseEnemyCount: 2
+  - wave: 1
+    dungeonLevel: 4
+    data:
+      enemyIndices: 000000000100000002000000
+      baseEnemyCount: 3
+  - wave: 1
+    dungeonLevel: 5
+    data:
+      enemyIndices: 00000000010000000200000003000000
+      baseEnemyCount: 3
   - wave: 2
-    enemyIndices: 000000000100000002000000
-    minStageIndex: 1
-    maxStageIndex: 2
+    dungeonLevel: 1
+    data:
+      enemyIndices: 0100000002000000
+      baseEnemyCount: 2
+  - wave: 2
+    dungeonLevel: 2
+    data:
+      enemyIndices: 0100000002000000
+      baseEnemyCount: 3
+  - wave: 2
+    dungeonLevel: 3
+    data:
+      enemyIndices: 010000000200000003000000
+      baseEnemyCount: 3
+  - wave: 2
+    dungeonLevel: 4
+    data:
+      enemyIndices: 010000000200000003000000
+      baseEnemyCount: 3
+  - wave: 2
+    dungeonLevel: 5
+    data:
+      enemyIndices: 00000000010000000200000003000000
+      baseEnemyCount: 4
   - wave: 3
-    enemyIndices: 00000000010000000200000003000000
-    minStageIndex: 1
-    maxStageIndex: 3
+    dungeonLevel: 1
+    data:
+      enemyIndices: 0000000002000000
+      baseEnemyCount: 4
+  - wave: 3
+    dungeonLevel: 2
+    data:
+      enemyIndices: 0000000002000000
+      baseEnemyCount: 4
+  - wave: 3
+    dungeonLevel: 3
+    data:
+      enemyIndices: 000000000100000002000000
+      baseEnemyCount: 4
+  - wave: 3
+    dungeonLevel: 4
+    data:
+      enemyIndices: 00000000010000000200000003000000
+      baseEnemyCount: 4
+  - wave: 3
+    dungeonLevel: 5
+    data:
+      enemyIndices: 00000000010000000200000003000000
+      baseEnemyCount: 4
   testWave: 2
-  useTestWave: 1
+  useTestWave: 0
 --- !u!4 &767040096
 Transform:
   m_ObjectHideFlags: 0
@@ -616,7 +679,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed092cfee3067284d85ee77e03fe6c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWave: 2
+  currentWave: 1
+  maxWave: 3
   pools: {fileID: 615560224}
 --- !u!1 &869221945
 GameObject:
@@ -4589,7 +4653,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &988670567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4603,6 +4667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstMapEntry: 1
+  stageIndex: 0
   currentStageIndex: 1
   currentStageType: 0
   dungeonLevel: 1

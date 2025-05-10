@@ -155,16 +155,14 @@ MonoBehaviour:
   spawnPoint:
   - {fileID: 1860486201}
   spawnDelay: 1
-  allDifficultyData:
+  waveSpawnEntries:
   - wave: 1
-    enemyIndices: 00000000
-    minStageIndex: 1
-    maxStageIndex: 2
-  waveSpawnData:
-  - wave: 1
-    enemyIndices: 00000000
-    minStageIndex: 1
-    maxStageIndex: 1
+    dungeonLevel: 5
+    data:
+      enemyIndices: 00000000
+      baseEnemyCount: 1
+  testWave: 1
+  useTestWave: 0
 --- !u!4 &117317151
 Transform:
   m_ObjectHideFlags: 0
@@ -211,9 +209,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstMapEntry: 1
+  stageIndex: 0
   currentStageIndex: 0
   currentStageType: 0
-  dungeonLevel: 1
+  dungeonLevel: 5
 --- !u!4 &384846119
 Transform:
   m_ObjectHideFlags: 0
@@ -10213,6 +10212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentWave: 1
+  maxWave: 1
   pools: {fileID: 2081940347}
 --- !u!4 &1909743401
 Transform:

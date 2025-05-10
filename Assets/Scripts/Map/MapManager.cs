@@ -144,9 +144,11 @@ public class MapManager : MonoBehaviour
         // 씬 전환
         if (t == NodeType.Enemy || t == NodeType.Boss)
         {
-            SceneController.ToBattle();
+            //  던전 정보 설정
+            GameManager.Instance.SetStageInfo(r, StageType.NormalBattle, GameManager.Instance.dungeonLevel);
 
-            GameManager.Instance.SetStageInfo(1, StageType.NormalBattle, 2);
+            //  전투 씬으로 이동
+            SceneController.ToBattle();
         }
 
         else SceneController.ToHeal();
