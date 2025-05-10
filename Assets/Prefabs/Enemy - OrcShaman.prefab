@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5859914076021799916}
-  - component: {fileID: 1702186203935786634}
   - component: {fileID: 4537576501953601953}
   - component: {fileID: 4042485342645231747}
   - component: {fileID: -3075213299583301790}
+  - component: {fileID: 7333622925269278928}
   m_Layer: 0
   m_Name: Enemy - OrcShaman
   m_TagString: Untagged
@@ -36,19 +36,6 @@ Transform:
   - {fileID: 3920041748552774135}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1702186203935786634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7344293607410825155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e049486be972f148b17a67a2867413b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 10
 --- !u!114 &4537576501953601953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +128,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7333622925269278928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7344293607410825155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef1d169b4aeb2a64593272a49a5171e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponController: {fileID: 0}
+  maxHp: 100
+  curHp: 0
+  moveSpeed: 0
+  arrowValue: 0
+  arrowSpeed: 0
+  arrowDamage: 0
+  attackDelay: 1
+  target: {fileID: 0}
 --- !u!1 &8711069707040160702
 GameObject:
   m_ObjectHideFlags: 0

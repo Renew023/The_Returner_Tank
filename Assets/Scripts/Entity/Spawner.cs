@@ -67,8 +67,6 @@ public class Spawner : MonoBehaviour
             if(enemy != null)
             {
                 enemy.transform.position = spawnPoint[i].position;
-
-                enemy.GetComponent<Enemy>().Initialize();
             }
         }
 

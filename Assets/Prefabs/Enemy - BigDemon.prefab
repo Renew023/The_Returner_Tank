@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1554510631455394211}
-  - component: {fileID: 8116816183890232647}
   - component: {fileID: 261443935845838489}
   - component: {fileID: 4451196080641098333}
   - component: {fileID: 8286296014628455464}
+  - component: {fileID: -6055681174098925999}
   m_Layer: 0
   m_Name: Enemy - BigDemon
   m_TagString: Untagged
@@ -36,19 +36,6 @@ Transform:
   - {fileID: 6191788147004390145}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8116816183890232647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 640466009090307805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e049486be972f148b17a67a2867413b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 10
 --- !u!114 &261443935845838489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +128,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-6055681174098925999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640466009090307805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef1d169b4aeb2a64593272a49a5171e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponController: {fileID: 0}
+  maxHp: 100
+  curHp: 0
+  moveSpeed: 0
+  arrowValue: 0
+  arrowSpeed: 0
+  arrowDamage: 0
+  attackDelay: 1
+  target: {fileID: 0}
 --- !u!1 &684022026975223677
 GameObject:
   m_ObjectHideFlags: 0

@@ -551,7 +551,7 @@ MonoBehaviour:
     enemyIndices: 00000000010000000200000003000000
     minStageIndex: 1
     maxStageIndex: 3
-  testWave: 3
+  testWave: 2
   useTestWave: 1
 --- !u!4 &767040096
 Transform:
@@ -616,7 +616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed092cfee3067284d85ee77e03fe6c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWave: 1
+  currentWave: 2
   pools: {fileID: 615560224}
 --- !u!1 &869221945
 GameObject:
@@ -4589,7 +4589,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &988670567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4603,9 +4603,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstMapEntry: 1
-  currentStageIndex: 3
+  currentStageIndex: 1
   currentStageType: 0
-  dungeonLevel: 2
+  dungeonLevel: 1
 --- !u!4 &988670568
 Transform:
   m_ObjectHideFlags: 0
@@ -7209,7 +7209,7 @@ GameObject:
   - component: {fileID: 2085888311}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -6,7 +6,12 @@ public class Monster : Character
 {
 	[SerializeField] private Player target;
 
-	void Update()
+    protected override void Init()
+    {
+        base.Init();
+    }
+
+    void Update()
 	{
 		Move();
 		Rotate();
@@ -60,6 +65,8 @@ public class Monster : Character
 	void Death()
 	{
 		gameObject.SetActive(false);
+
+		Destroy(this.gameObject);
 
 		//	해당 몬스터가 속해있는 몬스터 수 감소.
 		DungeonManager.instance.OnEnemyDeath();

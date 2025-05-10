@@ -39,5 +39,4 @@ public class GameManager : MonoBehaviour
         currentStageType = stageType;
         dungeonLevel = level;
     }
-
 }
