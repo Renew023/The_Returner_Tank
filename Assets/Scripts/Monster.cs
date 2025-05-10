@@ -6,7 +6,12 @@ public class Monster : Character
 {
 	[SerializeField] private Player target;
 
-	void Update()
+    protected override void Init()
+    {
+        base.Init();
+    }
+
+    void Update()
 	{
 		Move();
 		Rotate();
@@ -42,12 +47,13 @@ public class Monster : Character
 			if (arrow.owner == this.gameObject)
 				return;
 
-			Hit(ref curHp, arrow.damage);
+			//Hit(ref curHp, arrow.damage);
+			TakeDamage(arrow.damage);
 			collision.gameObject.SetActive(false);
 		}
 	}
 
-	public void TakeDamage(int damage)
+	public void TakeDamage(float damage)
 	{
 		curHp -= damage;
 
