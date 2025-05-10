@@ -19,7 +19,6 @@ public class PlayerEXP : CharacterUI
 
     public override void Show(bool show)
     {
-        //throw new System.NotImplementedException();
         expBarFill.gameObject.SetActive(show);
     }
 }

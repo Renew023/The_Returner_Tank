@@ -19,7 +19,6 @@ public class PlayerHP : CharacterUI
 
     public override void Show(bool show)
     {
-        //throw new System.NotImplementedException();
         hpBarFill.gameObject.SetActive(show);
     }
 }

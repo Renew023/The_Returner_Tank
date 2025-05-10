@@ -18,7 +18,6 @@ public class PlayerLevel : CharacterUI
 
     public override void Show(bool show)
     {
-        //throw new System.NotImplementedException();
         LevelUI.gameObject.SetActive(show);
     }
 }

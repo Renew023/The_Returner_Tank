@@ -4,6 +4,11 @@ public class PauseUI : MonoBehaviour
 {
     [SerializeField] private GameObject PauseMenu;
 
+    private void Start()
+    {
+        UIManager.Instance.pauseUI = this;
+    }
+
     public void PauseMenuToggle()
     {
         if (PauseMenu.activeSelf)

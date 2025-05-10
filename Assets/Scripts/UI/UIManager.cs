@@ -8,8 +8,8 @@ public class UIManager : MonoBehaviour
     public PlayerEXP playerEXP;
     public PlayerHP playerHP;
     public PlayerLevel playerLevel;
-    //public  pauseUI;
-    //public  deathUI;
+    public PauseUI pauseUI;
+    public DeathUI deathUI;
     //public  stageSelectUI;
     //public  skillSelectUI;
 
