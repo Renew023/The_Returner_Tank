@@ -6,6 +6,8 @@ using UnityEngine;
 public class Player : Character
 {
 	[SerializeField] protected Rigidbody2D rb;
+    [SerializeField] protected Arrow example_arrow;
+    [SerializeField] private AttackTarget attackTarget;
 
 	[SerializeField] private Camera camera;
 
@@ -19,22 +21,43 @@ public class Player : Character
 
     void Update()
     {
-
 		mousePosition = Input.mousePosition;
 		worldPos = camera.ScreenToWorldPoint(mousePosition);
-        lookDirection = (worldPos - (Vector2)transform.position);
+        lookDirection = attackTarget.Searching() - (Vector2)transform.position;
+        //lookDirection 은 가장 가까운 몬스터를 타겟팅 해야함.
+		//lookDirection = (worldPos - (Vector2)transform.position);
 
-        if (Input.GetMouseButton(0) && timer > attackDelay)
+		/*if (Input.GetMouseButton(0) && (timer > attackDelay))
         {
-            weaponController.Attack(arrowValue, lookDirection, arrowSpeed, arrowDamage);
+            weaponController.Attack(lookDirection);
             timer = 0f;
         }
         else
         {
             timer += Time.deltaTime;
+        }*/
+		if ((timer > attackDelay))
+		{
+			weaponController.Attack(lookDirection);
+			timer = 0f;
+		}
+		else
+		{
+			timer += Time.deltaTime;
+		}
+
+		if (Input.GetKeyDown(KeyCode.R))
+        {
+            
         }
+
         Move();
         Rotate();
+    }
+
+    void WeaponAdd()
+    {
+
     }
 
     override protected void Move()

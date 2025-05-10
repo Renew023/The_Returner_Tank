@@ -11,15 +11,17 @@ public class Monster : Character
 		Move();
 		Rotate();
 		lookDirection = (target.transform.position - transform.position);
-		if (timer > attackDelay)
+
+		if ((timer > attackDelay))
 		{
-			weaponController.Attack(arrowValue, lookDirection, arrowSpeed, arrowDamage);
+			weaponController.Attack(lookDirection);
 			timer = 0f;
 		}
 		else
 		{
 			timer += Time.deltaTime;
 		}
+		Move();
 	}
 
 	override protected void Move()

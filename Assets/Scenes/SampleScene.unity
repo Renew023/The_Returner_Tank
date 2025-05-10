@@ -8289,10 +8289,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 994f8c0fff656a64b825090d951353da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bomb: {fileID: 5882816111724978116, guid: b8c04cbab875d7c4dab7e9e4980bd3fe, type: 3}
+  arrowValue: 1
+  arrowSpeed: 5
+  arrowDamage: 5
+  itemLevel: 1
+  arrow: {fileID: 5882816111724978116, guid: b8c04cbab875d7c4dab7e9e4980bd3fe, type: 3}
   objectPoolArrow: []
   objectPoolCount: 0
   curCount: 0
+  targetDirect: {x: 0, y: 0}
 --- !u!4 &1001036538
 Transform:
   m_ObjectHideFlags: 0
@@ -8367,7 +8372,7 @@ GameObject:
   - component: {fileID: 1847822709}
   - component: {fileID: 1847822708}
   - component: {fileID: 1847822712}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8497,10 +8502,7 @@ MonoBehaviour:
   maxHp: 100
   curHp: 100
   moveSpeed: 5
-  arrowValue: 10
-  arrowSpeed: 10
-  arrowDamage: 10
-  attackDelay: 0.2
+  attackDelay: 1
   target: {fileID: 1913451376}
 --- !u!1 &1913451372
 GameObject:
@@ -8515,6 +8517,7 @@ GameObject:
   - component: {fileID: 1913451374}
   - component: {fileID: 1913451377}
   - component: {fileID: 1913451376}
+  - component: {fileID: 1913451378}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -8627,11 +8630,10 @@ MonoBehaviour:
   maxHp: 100
   curHp: 0
   moveSpeed: 0
-  arrowValue: 0
-  arrowSpeed: 0
-  arrowDamage: 0
   attackDelay: 1
   rb: {fileID: 1913451375}
+  example_arrow: {fileID: 0}
+  attackTarget: {fileID: 1913451378}
   camera: {fileID: 519420031}
   mousePosition: {x: 0, y: 0}
   worldPos: {x: 0, y: 0}
@@ -8680,6 +8682,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.2}
   m_EdgeRadius: 0
+--- !u!114 &1913451378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913451372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d9f35778de493644958f0cacf989ddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 3
+  layer:
+    serializedVersion: 2
+    m_Bits: 128
+  colliders: []
+  short_enemy: {fileID: 0}
 --- !u!1 &2046504469
 GameObject:
   m_ObjectHideFlags: 0
@@ -9733,10 +9753,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 994f8c0fff656a64b825090d951353da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bomb: {fileID: 5882816111724978116, guid: b8c04cbab875d7c4dab7e9e4980bd3fe, type: 3}
+  arrowValue: 1
+  arrowSpeed: 5
+  arrowDamage: 5
+  itemLevel: 5
+  arrow: {fileID: 5882816111724978116, guid: b8c04cbab875d7c4dab7e9e4980bd3fe, type: 3}
   objectPoolArrow: []
   objectPoolCount: 0
   curCount: 0
+  targetDirect: {x: 0, y: 0}
 --- !u!212 &7970158276631502289
 SpriteRenderer:
   m_ObjectHideFlags: 0

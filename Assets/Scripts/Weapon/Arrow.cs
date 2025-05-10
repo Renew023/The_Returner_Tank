@@ -10,9 +10,8 @@ public class Arrow : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     public float damage;
     public Vector2 direction;
-    public float time = 3f;
+    public float time;
 
-    // Start is called before the first frame update
     void Start()
     {
     }
@@ -23,7 +22,7 @@ public class Arrow : MonoBehaviour
 	}
 	void OnDisable()
 	{
-		StopCoroutine("Shoot");
+        StopAllCoroutines();
 		countReturn.pooling();
 	}
 
@@ -38,13 +37,4 @@ public class Arrow : MonoBehaviour
         yield return new WaitForSeconds(time);
         gameObject.SetActive(false);
     }
-
-	public void OnCollisionEnter2D(Collision2D collision)
-	{
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            //collision.gameObject.GetComponent<
-        }
-        //배틀 스크립트 필요 : damage -> Monster(damage);
-	}
 }
