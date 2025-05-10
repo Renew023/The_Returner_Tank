@@ -142,7 +142,13 @@ public class MapManager : MonoBehaviour
             mapNodes[r][c].GetComponent<RectTransform>().anchoredPosition;
 
         // ¾À ÀüÈ¯
-        if (t == NodeType.Enemy || t == NodeType.Boss) SceneController.ToBattle();
+        if (t == NodeType.Enemy || t == NodeType.Boss)
+        {
+            SceneController.ToBattle();
+
+            GameManager.Instance.SetStageInfo(1, StageType.NormalBattle, 2);
+        }
+
         else SceneController.ToHeal();
     }
 }

@@ -9542,20 +9542,21 @@ MonoBehaviour:
   - {fileID: 564203994}
   - {fileID: 1014109848}
   spawnDelay: 1
-  allDifficultyData: []
   waveSpawnData:
   - wave: 1
     enemyIndices: 0200000001000000
-    minStageIndex: 0
-    maxStageIndex: 0
+    minStageIndex: 1
+    maxStageIndex: 1
   - wave: 2
     enemyIndices: 000000000200000003000000
-    minStageIndex: 0
-    maxStageIndex: 0
+    minStageIndex: 1
+    maxStageIndex: 1
   - wave: 3
     enemyIndices: 00000000010000000200000003000000
     minStageIndex: 1
     maxStageIndex: 3
+  testWave: 2
+  useTestWave: 1
 --- !u!4 &440357913
 Transform:
   m_ObjectHideFlags: 0
@@ -9606,6 +9607,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 440357913}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &666163219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 666163221}
+  - component: {fileID: 666163220}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &666163220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666163219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0fab7ae87c894247a3ea397a4ab9438, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstMapEntry: 1
+  currentStageIndex: 1
+  currentStageType: 0
+  dungeonLevel: 2
+--- !u!4 &666163221
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666163219}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.13109013, y: 9.371801, z: -10.038498}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &673138479
 GameObject:
   m_ObjectHideFlags: 0
@@ -9619,7 +9668,7 @@ GameObject:
   - component: {fileID: 673138482}
   - component: {fileID: 673138481}
   - component: {fileID: 673138480}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9795,7 +9844,7 @@ GameObject:
   - component: {fileID: 777221700}
   - component: {fileID: 777221702}
   - component: {fileID: 777221701}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WeaponSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12185,7 +12234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1577518710}
   - component: {fileID: 1577518711}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12411,7 +12460,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2136885273}
   - component: {fileID: 2136885274}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12465,3 +12514,4 @@ SceneRoots:
   - {fileID: 1748942352}
   - {fileID: 440357913}
   - {fileID: 1899715459}
+  - {fileID: 666163221}

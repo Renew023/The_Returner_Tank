@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 257530970335126137}
   - component: {fileID: 331975949901727000}
   - component: {fileID: 226282144924495646}
+  - component: {fileID: 7858944621982309334}
+  - component: {fileID: 1606860307443525566}
   m_Layer: 0
   m_Name: Enemy - BigZombie
   m_TagString: Untagged
@@ -59,14 +61,86 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe54dc2472ae174bac29deb622536f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseableRange: 5
-  attackableRange: 1.5
   moveSpeed: 2
-  repathInterval: 0.5
-  obstacleLayer:
+  attackableRange: 1.5
+  obstacleMask:
     serializedVersion: 2
     m_Bits: 64
-  player: {fileID: 0}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 256
+--- !u!61 &7858944621982309334
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689909068667736831}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0043725967, y: -0.3366835}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.2361164, y: 1.673367}
+  m_EdgeRadius: 0
+--- !u!50 &1606860307443525566
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689909068667736831}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &3218581412146055029
 GameObject:
   m_ObjectHideFlags: 0
