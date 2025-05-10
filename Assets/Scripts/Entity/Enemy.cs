@@ -1,9 +1,30 @@
-ï»¿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-internal class Enemy
+public class Enemy : MonoBehaviour
 {
-    internal void Initialize()
+    public int hp = 10;
+
+    public void Initialize()
     {
-        throw new NotImplementedException();
+        
+    }
+
+    public void TakeDamage(int dmg)
+    {
+        hp -= dmg;
+
+        if(hp <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        //  Ç®¸µ ½Ã½ºÅÛ¿ë
+        gameObject.SetActive(false);
+        DungeonManager.instance.OnEnemyDeath();
     }
 }

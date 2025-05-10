@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public bool FirstMapEntry => firstMapEntry;
 
     [Header("Stage Info")]
-    // 현재 플레이어가 위치한 스테이지 인덱스 (0부터 시작)
+    // 현재 플레이어가 위치한 스테이지 인덱스 
     public int currentStageIndex;
     // 현재 스테이지 타입 (Enemy / Heal / Boss)
     public StageType currentStage;
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        // 최초 인스턴스로 등록하고 씬 전환 시 파괴되지 않도록 설정
+        
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
