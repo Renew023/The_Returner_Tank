@@ -22,16 +22,4 @@ public class UIManager : MonoBehaviour
         }
         else Destroy(gameObject);
     }
-
-    //public void PauseGame()
-    //{
-    //    Time.timeScale = 0;
-    //    pauseUI.SetActive(true);
-    //}
-
-    //public void ResumeGame()
-    //{
-    //    Time.timeScale = 1;
-    //    pauseUI.SetActive(false);
-    //}
 }
