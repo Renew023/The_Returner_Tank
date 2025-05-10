@@ -1,32 +1,24 @@
-using System.Collections.Generic;
+// Assets/Scripts/Map/HealEventManager.cs
 using UnityEngine;
 
 public class HealEventManager : MonoBehaviour
 {
-    [Header("Heal Prefab & Points")]
-    public GameObject healPrefab;             // 힐 아이콘/이펙트 프리팹
-    public List<Transform> spawnPoints;       // DungeonManager의 enemySpawnPoints 그대로 재사용
+    public static HealEventManager Instance { get; private set; }
 
-    [Header("Camera")]
-    public FollowCamera followCamera;         // 카메라 스크립트
-
-    private void Start()
+    void Awake()
     {
-        SpawnHeals();
-
-        // 카메라 초기 팬 동작이 이미 FollowCamera에 있다면 안 건드려도 됩니다.
-        if (followCamera != null)
-            followCamera.BeginPan();
+        // 싱글톤 패턴으로 인스턴스 보관
+        if (Instance == null) Instance = this;
+        else if (Instance != this) Destroy(gameObject);
     }
 
-    private void SpawnHeals()
+    /// 플레이어가 힐 아이템을 먹었을 때 호출
+    public void OnHealCollected(GameObject healObject)
     {
-        // 기존 DungeonManager에서 몬스터를 spawn 하던 루프만 힐로 교체
-        foreach (var pt in spawnPoints)
-        {
-            Instantiate(healPrefab, pt.position, Quaternion.identity);
-        }
-    }
+        // 1) 힐 아이템 사라지기
+        Destroy(healObject);
 
-    // 필요하다면 Update() 나 종료 로직 등 복사 붙여넣기…
+        // 2) 로그나 이펙트 재생 (나중에 HP 회복 로직 추가)
+
+    }
 }
