@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public class MapManager : MonoBehaviour
 {
+    private HashSet<string> connections = new HashSet<string>();
     public static MapManager Instance { get; private set; }
 
     [Header("Prefabs & Icons")]
@@ -34,6 +35,11 @@ public class MapManager : MonoBehaviour
 
     RectTransform playerIndicatorRt;
 
+    private bool IsNodeReachable(int r, int c)
+    {
+        string key = $"{currentRow},{currentCol}-{r},{c}";
+        return connections.Contains(key);
+    }
     void Awake()
     {
         // 싱글톤 & DDOL
@@ -104,11 +110,10 @@ public class MapManager : MonoBehaviour
         mapData.Add(new List<NodeType> { NodeType.Boss });
     }
 
-    /// <summary>
-    /// mapData를 기반으로 UI 노드 & 점선 생성(매번 새로)
-    /// </summary>
+
     void RenderMap()
     {
+        connections.Clear();
         // 기존 노드/점선 삭제
         if (mapNodes != null)
         {
@@ -132,10 +137,10 @@ public class MapManager : MonoBehaviour
 
 
 
-            mapNodes = new List<List<NodeController>>();
+        mapNodes = new List<List<NodeController>>();
         dotLines = new List<Image>();
 
-        // 1) 노드 배치
+        // 노드 배치
         for (int r = 0; r < mapData.Count; r++)
         {
             var rowList = new List<NodeController>();
@@ -163,7 +168,7 @@ public class MapManager : MonoBehaviour
             mapNodes.Add(rowList);
         }
 
-        // 2) 점선 연결
+        // 점선 연결
         for (int r = 0; r < mapNodes.Count - 1; r++)
         {
             var curr = mapNodes[r];
@@ -176,11 +181,37 @@ public class MapManager : MonoBehaviour
         foreach (var prev in mapNodes[^2])
             DrawDots(prev, bossCtrl);
 
-        // 3) 플레이어 인디케이터 생성 (매번 새 인스턴스)
+        // 대각선 연결
+        var rnd = new System.Random();
+        int branchCount = rnd.Next(2, mapNodes.Count);  // 2개 이상
+        var diagSet = new HashSet<string>();
+
+        while (diagSet.Count < branchCount)
+        {
+            int r = rnd.Next(0, mapNodes.Count - 1);
+            int cnt = mapNodes[r].Count;
+            int c = rnd.Next(0, cnt);
+
+            // 다음 행에서 대각선 상대 열 결정
+            int destC = (c == 0)
+                        ? 1
+                        : (c == cnt - 1)
+                            ? cnt - 2
+                            : (rnd.Next(2) == 0 ? c - 1 : c + 1);
+
+            string key = $"{r},{c}-{r + 1},{destC}";
+            if (diagSet.Add(key))
+                DrawDots(mapNodes[r][c], mapNodes[r + 1][destC]);
+        }
+
+        // 플레이어 인디케이터 생성 위치 설정
         var pi = Instantiate(playerIndicatorPrefab, stageContainer);
         playerIndicatorRt = pi.GetComponent<RectTransform>();
+        playerIndicatorRt.anchoredPosition =
+            mapNodes[currentRow][currentCol]
+                .GetComponent<RectTransform>().anchoredPosition;
 
-        // 4) 알파 값 초기화
+        // 알파 값 초기화
         UpdateAlphas();
     }
 
@@ -196,6 +227,10 @@ public class MapManager : MonoBehaviour
             dot.rectTransform.anchoredPosition = pos;
             dotLines.Add(dot);
         }
+        string key1 = $"{a.Row},{a.Col}-{b.Row},{b.Col}";
+        string key2 = $"{b.Row},{b.Col}-{a.Row},{a.Col}";
+        connections.Add(key1);
+        connections.Add(key2);
     }
 
     void UpdateAlphas()
@@ -211,8 +246,14 @@ public class MapManager : MonoBehaviour
     /// </summary>
     public void OnNodeClicked(int r, int c, NodeType t)
     {
+        // 이동 가능 여부 파악
+        if (!IsNodeReachable(r, c))
+        {
+            Debug.Log("이동 불가한 노드");
+            return;
+        }
         // 1) 상태 저장
-        currentRow = r;
+            currentRow = r;
         currentCol = c;
 
         // 2) 알파 업데이트

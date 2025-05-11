@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
+
 /// 각 노드(UI Image + Button)에 붙여서 클릭을 MapManager에 전달.
-/// </summary>
+
 [RequireComponent(typeof(Button))]
 public class NodeController : MonoBehaviour
 {
@@ -12,9 +12,11 @@ public class NodeController : MonoBehaviour
     private MapManager mapMgr;
     private Image img;
 
-    /// <summary>
+    public int Row => row;
+    public int Col => col;
+
     /// 맵매니저가 생성 직후 초기화
-    /// </summary>
+
     public void Init(int r, int c, NodeType t, MapManager mgr, Sprite icon, byte alpha)
     {
         row = r;
@@ -38,7 +40,7 @@ public class NodeController : MonoBehaviour
         mapMgr.OnNodeClicked(row, col, type);
     }
 
-    /// <summary>외부에서 투명도만 바꿀 때</summary>
+    /// 외부에서 투명도만 바꿀 때
     public void SetAlpha(byte alpha)
     {
         var c = img.color;
@@ -46,7 +48,7 @@ public class NodeController : MonoBehaviour
         img.color = c;
     }
 
-    /// <summary>외부에서 현재 선택 위치 표시용</summary>
+    /// 외부에서 현재 선택 위치 표시용
     public void SetHighlight(bool on)
     {
         img.color = on

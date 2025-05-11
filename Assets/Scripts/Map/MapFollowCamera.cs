@@ -2,37 +2,30 @@ using UnityEngine;
 
 public class MapFollowCamera : MonoBehaviour
 {
-    [Header("References")]
-    public RectTransform playerIndicator;
-
-    [Header("Follow Settings")]
-    public float followSpeed = 2f;
-    public float yOffset = 1f;
-    public float minY = -3f;
-    public float maxY = 5f;
+    public RectTransform playerIndicator;   // MapManager가 할당해 줍니다
+    public float followSpeed = 2f;          // 따라오는 속도
+    public float yOffset = 0f;              // 인디케이터 대비 Y 오프셋
+    public float minY = -3f, maxY = 3f;     // 이동 범위 클램프
 
     private Vector3 basePos;
 
     void Start()
     {
-        // 초기 카메라 위치 저장
-        basePos = transform.position;
+        basePos = transform.position;       // 맵씬 카메라 초기 위치 저장
     }
 
     void LateUpdate()
     {
         if (playerIndicator == null) return;
 
-        // 플레이어 위치 기반 목표 Y 계산 및 클램프
+        // 목표 Y 계산 & 범위 제한
         float targetY = Mathf.Clamp(
             playerIndicator.anchoredPosition.y + yOffset,
             minY, maxY
         );
 
-        // X,Z 는 고정, Y만 따라가기
+        // X,Z 고정, Y만 보간
         Vector3 desired = new Vector3(basePos.x, targetY, basePos.z);
-
-        // 부드럽게 보간
         transform.position = Vector3.Lerp(
             transform.position,
             desired,
