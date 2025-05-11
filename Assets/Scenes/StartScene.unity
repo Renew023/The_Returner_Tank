@@ -583,8 +583,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 340064656}
+  - component: {fileID: 340064657}
   m_Layer: 5
-  m_Name: WaeponSelectUI
+  m_Name: WeaponSelectUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -617,6 +618,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &340064657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340064655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c929d9376f42da409ed22fafe5567f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startUI: {fileID: 879072786}
+  weaponImage: {fileID: 271461831}
+  arrowImage: {fileID: 689255139}
+  ItemName: {fileID: 899244428}
+  prevButton: {fileID: 1501084943}
+  nextButton: {fileID: 292140087}
+  exitButton: {fileID: 661509443}
 --- !u!1 &630704264
 GameObject:
   m_ObjectHideFlags: 0
@@ -905,6 +925,106 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 689255137}
   m_CullTransparentMesh: 1
+--- !u!1 &869953337
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 869953339}
+  - component: {fileID: 869953338}
+  m_Layer: 0
+  m_Name: DataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &869953338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869953337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c755e3be4dad3f4b9fe60b15cd7e29c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  skillList:
+  - player: {fileID: 0}
+    levelSkills:
+    - skillName: "[\uAC15\uD654] \uD3ED\uD0C4 1"
+      skillExplain: "\uD65C \uACF5\uACA9\uB825 \uC99D\uAC00"
+      upgradeType: 3
+      value: 5
+    - skillName: "[\uAC15\uD654] \uD3ED\uD0C4 2"
+      skillExplain: "\uD65C \uACF5\uC18D \uC99D\uAC00"
+      upgradeType: 0
+      value: 1
+    - skillName: "[\uAC15\uD654] \uD3ED\uD0C4 3"
+      skillExplain: "\uD65C \uD654\uC0B4 \uAC1C\uC218 \uC99D\uAC00"
+      upgradeType: 4
+      value: 3
+    level: 0
+    weaponCon: {fileID: 6955153868353512977, guid: 7700fb7bfccad134a8b857c9b6c58936, type: 3}
+  - player: {fileID: 0}
+    levelSkills:
+    - skillName: "[\uAC15\uD654] \uC544\uC774\uC2A4\uBCFC\uD2B8 1"
+      skillExplain: "\uD65C \uACF5\uACA9\uB825 \uC99D\uAC00"
+      upgradeType: 3
+      value: 5
+    - skillName: "[\uAC15\uD654] \uC544\uC774\uC2A4\uBCFC\uD2B8 2"
+      skillExplain: "\uD65C \uACF5\uC18D \uC99D\uAC00"
+      upgradeType: 0
+      value: 1
+    - skillName: "[\uAC15\uD654] \uC544\uC774\uC2A4\uBCFC\uD2B8 3"
+      skillExplain: "\uD65C \uD654\uC0B4 \uAC1C\uC218 \uC99D\uAC00"
+      upgradeType: 4
+      value: 3
+    level: 0
+    weaponCon: {fileID: 6955153868353512977, guid: 48a790f4f65a06243822563d7d255c62, type: 3}
+  - player: {fileID: 0}
+    levelSkills:
+    - skillName: "[\uAC15\uD654] \uD30C\uC774\uC5B4\uBCFC\uD2B8 1"
+      skillExplain: "\uD65C \uACF5\uACA9\uB825 \uC99D\uAC00"
+      upgradeType: 3
+      value: 5
+    - skillName: "[\uAC15\uD654] \uD30C\uC774\uC5B4\uBCFC\uD2B8 2"
+      skillExplain: "\uD65C \uACF5\uC18D \uC99D\uAC00"
+      upgradeType: 0
+      value: 1
+    - skillName: "[\uAC15\uD654] \uD30C\uC774\uC5B4\uBCFC\uD2B8 3"
+      skillExplain: "\uD65C \uD654\uC0B4 \uAC1C\uC218 \uC99D\uAC00"
+      upgradeType: 4
+      value: 3
+    level: 0
+    weaponCon: {fileID: 6955153868353512977, guid: 8641956f68c0431459f3b3b21e82dd8d, type: 3}
+  skill:
+    player: {fileID: 0}
+    levelSkills: []
+    level: 0
+    weaponCon: {fileID: 0}
+  skillValue: 0
+--- !u!4 &869953339
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869953337}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &879072781
 GameObject:
   m_ObjectHideFlags: 0
@@ -917,6 +1037,7 @@ GameObject:
   - component: {fileID: 879072784}
   - component: {fileID: 879072783}
   - component: {fileID: 879072782}
+  - component: {fileID: 879072786}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1008,6 +1129,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &879072786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879072781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03e038146a6fc314aa403f452fe8a2ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainUI: {fileID: 2043725446}
+  weaponSelectUI: {fileID: 340064657}
 --- !u!1 &899244426
 GameObject:
   m_ObjectHideFlags: 0
@@ -1020,7 +1155,7 @@ GameObject:
   - component: {fileID: 899244429}
   - component: {fileID: 899244428}
   m_Layer: 5
-  m_Name: Item
+  m_Name: ItemName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2448,6 +2583,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2043725445}
+  - component: {fileID: 2043725446}
   m_Layer: 5
   m_Name: MainUI
   m_TagString: Untagged
@@ -2477,6 +2613,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2043725446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043725444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61e84763a5c0d904f99c126adc999890, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startUI: {fileID: 879072786}
+  startButton: {fileID: 1785343146}
+  settingButton: {fileID: 33289836}
+  selectWeaponButton: {fileID: 991160807}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2484,3 +2636,4 @@ SceneRoots:
   - {fileID: 630704267}
   - {fileID: 879072785}
   - {fileID: 1145296303}
+  - {fileID: 869953339}

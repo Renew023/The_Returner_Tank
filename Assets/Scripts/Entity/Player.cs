@@ -17,14 +17,15 @@ public class Player : Character
     [SerializeField] private float Exp;
     [SerializeField] private float Level;
 
-	[SerializeField] public List<Skill> skillList = new List<Skill>(10);
+	//[SerializeField] public List<Skill> skillList = new List<Skill>(10);
 	[SerializeField] public List<Skill> playerSkill = new List<Skill>(5);
     [SerializeField] public GameObject skillSelectUI;
 
     void Awake()
     {
+        DataManager.instance.Pick();
         Init();
-        LevelUp();
+        //LevelUp();
     }
 
     void Update()

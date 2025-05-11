@@ -16,7 +16,7 @@ public class SkillSelectUI : MonoBehaviour
 		while (skills.Count < 3)
 		{
             bool isNotEqual = true;
-			int rand = Random.Range(0, player.skillList.Count); // 0~9 사이
+			int rand = Random.Range(0, DataManager.instance.skillList.Count); // 0~9 사이
 
             for (int j = 0; j < value.Count; j++)
             {
@@ -30,7 +30,7 @@ public class SkillSelectUI : MonoBehaviour
             if (isNotEqual == true)
             {
                 value.Add(rand);
-                skills.Add(player.skillList[rand]);
+                skills.Add(DataManager.instance.skillList[rand]);
             }
             
 		}

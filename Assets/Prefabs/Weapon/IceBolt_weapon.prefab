@@ -131,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponSprite: {fileID: 671199913142728821}
   weapon:
-    Name: IceBolt
+    name: "\uC544\uC774\uC2A4\uBCFC\uD2B8"
     arrowValue: 1
     arrowSpeed: 5
     arrowDamage: 5
