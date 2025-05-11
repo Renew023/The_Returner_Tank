@@ -201,7 +201,7 @@ MonoBehaviour:
   baseYOffset: -250
   defaultAlpha: 160
   activeAlpha: 255
-  dotSegments: 5
+  dotSegments: 6
 --- !u!4 &332361335
 Transform:
   m_ObjectHideFlags: 0
@@ -531,7 +531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 108c94b31e0780f4892b7bcbeb7082a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIndicator: {fileID: 0}
+  playerIndicator: {fileID: 4793431215741669813, guid: d9579ae4a8957614383b59627b0ea105, type: 3}
   followSpeed: 2
   yOffset: 1
   minY: -3

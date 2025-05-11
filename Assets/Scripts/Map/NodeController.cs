@@ -5,8 +5,16 @@ using UnityEngine.UI;
 /// 각 노드(UI Image + Button)에 붙여서 클릭을 MapManager에 전달.
 
 [RequireComponent(typeof(Button))]
+
 public class NodeController : MonoBehaviour
 {
+    [Header("노드별 크기 (Size Delta)")]
+    public Vector2 enemySize = new Vector2(64, 64);
+    public Vector2 healSize = new Vector2(80, 80);
+    public Vector2 bossSize = new Vector2(120, 120);
+
+    private Vector3 originalScale;
+
     private int row, col;
     private NodeType type;
     private MapManager mapMgr;
@@ -14,6 +22,8 @@ public class NodeController : MonoBehaviour
 
     public int Row => row;
     public int Col => col;
+
+
 
     /// 맵매니저가 생성 직후 초기화
 
@@ -33,6 +43,22 @@ public class NodeController : MonoBehaviour
 
         // 클릭 콜백
         GetComponent<Button>().onClick.AddListener(OnClick);
+
+        var rt = GetComponent<RectTransform>();
+        switch (t)
+        {
+            case NodeType.Enemy:
+                rt.sizeDelta = enemySize;
+                break;
+            case NodeType.Heal:
+                rt.sizeDelta = healSize;
+                break;
+            case NodeType.Boss:
+                rt.sizeDelta = bossSize;
+                break;
+        }
+
+        originalScale = rt.localScale;
     }
 
     private void OnClick()
