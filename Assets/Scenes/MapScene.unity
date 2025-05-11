@@ -193,13 +193,12 @@ MonoBehaviour:
   healIcon: {fileID: 1688997406, guid: 12203856eed85b644ba073857c0a3843, type: 3}
   bossIcon: {fileID: -525390460, guid: 12203856eed85b644ba073857c0a3843, type: 3}
   playerIndicatorPrefab: {fileID: 6748271703798662429, guid: d9579ae4a8957614383b59627b0ea105, type: 3}
-  baseYOffset: -250
-  extraYOffset: 50
   stageContainer: {fileID: 130093605}
   totalRows: 5
   choicesPerRow: 3
   xSpacing: 400
   ySpacing: 300
+  baseYOffset: -250
   defaultAlpha: 160
   activeAlpha: 255
   dotSegments: 5
@@ -409,7 +408,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5f3ea9822a1a5134dbfdae336270d3bc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bfbaba837d0baf24bae9bc0e260ce596, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

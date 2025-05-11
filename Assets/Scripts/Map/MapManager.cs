@@ -1,12 +1,12 @@
-
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System;
 using System.Collections.Generic;
 
 public class MapManager : MonoBehaviour
 {
-    private RectTransform playerIndicatorRt;
+    public static MapManager Instance { get; private set; }
 
     [Header("Prefabs & Icons")]
     public NodeController nodePrefab;
@@ -14,24 +14,69 @@ public class MapManager : MonoBehaviour
     public Sprite enemyIcon, healIcon, bossIcon;
     public GameObject playerIndicatorPrefab;
 
-    [Header("레이아웃")]
-    public float baseYOffset = -50f;
-    public float extraYOffset = 50f;
+    [Header("Layout")]
     public RectTransform stageContainer;
     public int totalRows = 4;
     public int choicesPerRow = 3;
-    public float xSpacing = 100f, ySpacing = -100f;
-    public byte defaultAlpha = 160, activeAlpha = 255;
+    public float xSpacing = 100f;
+    public float ySpacing = -100f;
+    public float baseYOffset = -50f;
+    public byte defaultAlpha = 160;
+    public byte activeAlpha = 255;
     public int dotSegments = 8;
 
-    
+    // 저장된 맵 데이터와 상태
     static bool initialized = false;
     static List<List<NodeType>> mapData;
     List<List<NodeController>> mapNodes;
     List<Image> dotLines;
     int currentRow = 0, currentCol = 0;
 
+    RectTransform playerIndicatorRt;
+
+    void Awake()
+    {
+        // 싱글톤 & DDOL
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+
+            // 씬 로드 콜백 등록
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
     void Start()
+    {
+        // 만약 Start가 MapScene에서 호출된다면 바로 렌더
+        if (SceneManager.GetActiveScene().name == "MapScene")
+            InitializeOrRestoreMap();
+    }
+
+    // 씬이 완전히 로드된 직후 호출됩니다.
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "MapScene")
+        {
+            
+            var go = GameObject.Find("Canvas/StageContainer");
+            if (go != null)
+                stageContainer = go.GetComponent<RectTransform>();
+            else
+                Debug.LogError("MapManager: 'Canvas/StageContainer'를 찾을 수 없습니다.");
+
+            
+            InitializeOrRestoreMap();
+        }
+    }
+
+    void InitializeOrRestoreMap()
     {
         if (!initialized)
         {
@@ -39,7 +84,9 @@ public class MapManager : MonoBehaviour
             initialized = true;
         }
         RenderMap();
+        RestoreMap();
     }
+
 
     void GenerateMapData()
     {
@@ -53,19 +100,42 @@ public class MapManager : MonoBehaviour
                 rowList.Add(rnd.Next(10) < 8 ? NodeType.Enemy : NodeType.Heal);
             mapData.Add(rowList);
         }
+        // 마지막 줄은 보스 한 마리
         mapData.Add(new List<NodeType> { NodeType.Boss });
     }
 
+    /// <summary>
+    /// mapData를 기반으로 UI 노드 & 점선 생성(매번 새로)
+    /// </summary>
     void RenderMap()
     {
-        // 기존 노드/점선 제거
-        if (mapNodes != null) foreach (var row in mapNodes) foreach (var n in row) Destroy(n.gameObject);
-        if (dotLines != null) foreach (var d in dotLines) Destroy(d.gameObject);
+        // 기존 노드/점선 삭제
+        if (mapNodes != null)
+        {
+            foreach (var row in mapNodes)
+            {
+                foreach (var n in row)
+                {
+                    if (n != null && n.gameObject != null)
+                        Destroy(n.gameObject);
+                }    
+            }    
+        }
+        if (dotLines != null)
+        {
+            foreach (var d in dotLines)
+            {
+                if (d != null && d.gameObject != null)
+                    Destroy(d.gameObject);
+            }
+        }
 
-        mapNodes = new List<List<NodeController>>();
+
+
+            mapNodes = new List<List<NodeController>>();
         dotLines = new List<Image>();
 
-        // 1) 노드 생성
+        // 1) 노드 배치
         for (int r = 0; r < mapData.Count; r++)
         {
             var rowList = new List<NodeController>();
@@ -73,16 +143,20 @@ public class MapManager : MonoBehaviour
             for (int c = 0; c < count; c++)
             {
                 var nc = Instantiate(nodePrefab, stageContainer);
-                Sprite icon = mapData[r][c] == NodeType.Enemy ? enemyIcon
-                             : mapData[r][c] == NodeType.Heal ? healIcon
-                                                               : bossIcon;
+                // 아이콘 선택
+                Sprite icon = mapData[r][c] switch
+                {
+                    NodeType.Enemy => enemyIcon,
+                    NodeType.Heal => healIcon,
+                    _ => bossIcon
+                };
                 nc.Init(r, c, mapData[r][c], this, icon, defaultAlpha);
 
-                var rt = nc.GetComponent<RectTransform>();
+                // 위치 계산
                 float y = r * ySpacing + baseYOffset;
                 float x = (c - (count - 1) / 2f) * xSpacing;
-                rt.anchoredPosition = new Vector2(x, y);
-
+                nc.GetComponent<RectTransform>()
+                  .anchoredPosition = new Vector2(x, y);
 
                 rowList.Add(nc);
             }
@@ -97,18 +171,16 @@ public class MapManager : MonoBehaviour
             for (int i = 0; i < curr.Count && i < next.Count; i++)
                 DrawDots(curr[i], next[i]);
         }
-        var bossCtrl = mapNodes[mapNodes.Count - 1][0];
-        foreach (var prev in mapNodes[mapNodes.Count - 2])
+        // 보스와 직전 행 연결
+        var bossCtrl = mapNodes[^1][0];
+        foreach (var prev in mapNodes[^2])
             DrawDots(prev, bossCtrl);
 
-
-        // 3) 플레이어 표시
+        // 3) 플레이어 인디케이터 생성 (매번 새 인스턴스)
         var pi = Instantiate(playerIndicatorPrefab, stageContainer);
         playerIndicatorRt = pi.GetComponent<RectTransform>();
-        pi.GetComponent<RectTransform>().anchoredPosition =
-            mapNodes[0][0].GetComponent<RectTransform>().anchoredPosition;
 
-        // 4) 활성 행 투명도
+        // 4) 알파 값 초기화
         UpdateAlphas();
     }
 
@@ -130,26 +202,52 @@ public class MapManager : MonoBehaviour
     {
         for (int r = 0; r < mapNodes.Count; r++)
             for (int c = 0; c < mapNodes[r].Count; c++)
-                mapNodes[r][c].SetAlpha((r == currentRow) ? activeAlpha : defaultAlpha);
+                mapNodes[r][c]
+                    .SetAlpha((r == currentRow) ? activeAlpha : defaultAlpha);
     }
 
-    // 클릭 시 호출
+    /// <summary>
+    /// 노드 클릭 시 Scene 전환 전 호출됩니다.
+    /// </summary>
     public void OnNodeClicked(int r, int c, NodeType t)
     {
-        currentRow = r; currentCol = c;
-        mapNodes[r][c].SetAlpha(activeAlpha);
+        // 1) 상태 저장
+        currentRow = r;
+        currentCol = c;
 
-        var pi = stageContainer
-                 .GetComponentInChildren<Image>(true); 
-        pi.GetComponent<RectTransform>().anchoredPosition =
-            mapNodes[r][c].GetComponent<RectTransform>().anchoredPosition;
+        // 2) 알파 업데이트
+        UpdateAlphas();
 
-        if (playerIndicatorRt != null)
+        // 3) 인디케이터 위치 갱신
+        playerIndicatorRt.anchoredPosition =
+            mapNodes[r][c]
+                .GetComponent<RectTransform>().anchoredPosition;
+
+        // 4) 씬 전환
+        if (t == NodeType.Enemy || t == NodeType.Boss)
+            SceneController.ToBattle();
+        else
+            SceneController.ToHeal();
+    }
+
+    public void RestoreMap()
+    {
+        // 1) 알파 재설정
+        UpdateAlphas();
+
+        // 2) 인디케이터 이미 생성된 경우 위치만 재배치
+        if (playerIndicatorRt != null && mapNodes != null)
+        {
             playerIndicatorRt.anchoredPosition =
-                mapNodes[r][c].GetComponent<RectTransform>().anchoredPosition;
+                mapNodes[currentRow][currentCol]
+                    .GetComponent<RectTransform>().anchoredPosition;
+        }
+    }
 
-        // 씬 전환
-        if (t == NodeType.Enemy || t == NodeType.Boss) SceneController.ToBattle();
-        else SceneController.ToHeal();
+    void OnDestroy()
+    {
+        // Editor 또는 플레이어 종료 시 콜백 해제
+        if (Instance == this)
+            SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }
