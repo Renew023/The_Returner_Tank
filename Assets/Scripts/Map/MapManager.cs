@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class MapManager : MonoBehaviour
 {
@@ -37,6 +38,8 @@ public class MapManager : MonoBehaviour
 
     private bool IsNodeReachable(int r, int c)
     {
+        if (r <= currentRow) return false;
+
         string key = $"{currentRow},{currentCol}-{r},{c}";
         return connections.Contains(key);
     }
@@ -84,10 +87,11 @@ public class MapManager : MonoBehaviour
 
     void InitializeOrRestoreMap()
     {
-        if (!initialized)
+        if (!initialized && GameManager.Instance.FirstMapEntry)
         {
             GenerateMapData();
             initialized = true;
+            GameManager.Instance.DisableFirstMapEntry();
         }
         RenderMap();
         RestoreMap();
@@ -183,7 +187,11 @@ public class MapManager : MonoBehaviour
 
         // 대각선 연결
         var rnd = new System.Random();
-        int branchCount = rnd.Next(2, mapNodes.Count);  // 2개 이상
+        int maxStart = 0;
+        for (int rr = 0; rr < mapNodes.Count - 1; rr++)
+            maxStart += mapNodes[rr].Count;
+
+        int branchCount = Mathf.Min(rnd.Next(3, 7), maxStart);
         var diagSet = new HashSet<string>();
 
         while (diagSet.Count < branchCount)
@@ -192,16 +200,22 @@ public class MapManager : MonoBehaviour
             int cnt = mapNodes[r].Count;
             int c = rnd.Next(0, cnt);
 
-            // 다음 행에서 대각선 상대 열 결정
-            int destC = (c == 0)
-                        ? 1
-                        : (c == cnt - 1)
-                            ? cnt - 2
-                            : (rnd.Next(2) == 0 ? c - 1 : c + 1);
+            int nextCnt = mapNodes[r + 1].Count;
+            var candidates = new List<int>
+            {
+                Mathf.Clamp(c, 0, nextCnt - 1)
+            };
+            if (c > 0 && c - 1 < nextCnt) candidates.Add(c - 1);
+            if (c + 1 < nextCnt) candidates.Add(c + 1);
+
+            candidates = candidates.Distinct().ToList();
+            int destC = candidates[rnd.Next(candidates.Count)];
 
             string key = $"{r},{c}-{r + 1},{destC}";
             if (diagSet.Add(key))
+            {
                 DrawDots(mapNodes[r][c], mapNodes[r + 1][destC]);
+            }
         }
 
         // 플레이어 인디케이터 생성 위치 설정
@@ -253,7 +267,7 @@ public class MapManager : MonoBehaviour
             return;
         }
         // 1) 상태 저장
-            currentRow = r;
+        currentRow = r;
         currentCol = c;
 
         // 2) 알파 업데이트
