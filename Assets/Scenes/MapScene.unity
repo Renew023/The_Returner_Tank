@@ -196,9 +196,9 @@ MonoBehaviour:
   stageContainer: {fileID: 130093605}
   totalRows: 5
   choicesPerRow: 3
-  xSpacing: 400
-  ySpacing: 300
-  baseYOffset: -250
+  xSpacing: 500
+  ySpacing: 350
+  baseYOffset: -350
   defaultAlpha: 160
   activeAlpha: 255
   dotSegments: 6
