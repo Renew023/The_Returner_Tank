@@ -2,16 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponController : Weapon
+public class WeaponController : MonoBehaviour
 {
+	public SpriteRenderer weaponSprite;
+	public Weapon weapon;
 	[SerializeField] private List<Arrow> objectPoolArrow;
 	[SerializeField] private int objectPoolCount = 0;
 	[SerializeField] private int curCount = 0;
-    [SerializeField] private Vector2 targetDirect;
+    [SerializeField] public Vector2 targetDirect;
+	public Arrow arrow;
 
-    void LateUpdate()
+	void Awake()
     {
     }
+
+	void LateUpdate()
+    {
+		if ((weapon.timer > weapon.attackDelay))
+		{
+			Attack(targetDirect);
+			weapon.timer = 0f;
+		}
+		else
+		{
+			weapon.timer += Time.deltaTime;
+		}
+	}
 
     public void SetArrow(Arrow weapon)
     {
@@ -21,8 +37,6 @@ public class WeaponController : Weapon
         curCount = 0;
     }
 
-
-
     public void Attack(Vector2 dir)
     {
         Vector2 rozLine = dir.normalized;
@@ -31,14 +45,17 @@ public class WeaponController : Weapon
             {
 			    arrow.countReturn = this;
 			    arrow.owner = transform.parent.gameObject;
+			    arrow.transform.position = transform.position;
+			    arrow.direction = rozLine * weapon.arrowSpeed;
+			    arrow.damage = weapon.arrowDamage;
 
-			    objectPoolArrow.Add(Instantiate(arrow, transform.position, Quaternion.identity));
-
-                objectPoolArrow[curCount].transform.position = transform.position;
-                objectPoolArrow[curCount].direction = rozLine * arrowSpeed;
-                objectPoolArrow[curCount].damage = arrowDamage;
-			    objectPoolArrow[curCount].gameObject.SetActive(true);
-			curCount++;
+			objectPoolArrow.Add(Instantiate(arrow, transform.position, Quaternion.identity));
+			    //objectPoolArrow[curCount].gameObject.SetActive(false);
+			    //objectPoolArrow[curCount].transform.position = transform.position;
+                //objectPoolArrow[curCount].direction = rozLine * arrowSpeed;
+                //objectPoolArrow[curCount].damage = arrowDamage;
+			    //objectPoolArrow[curCount].gameObject.SetActive(true);
+			    curCount++;
 			    if (curCount >= objectPoolArrow.Count)
 			    {
 				    curCount -= objectPoolArrow.Count;
@@ -47,8 +64,8 @@ public class WeaponController : Weapon
             else
             {
                 objectPoolArrow[curCount].transform.position = transform.position;
-                objectPoolArrow[curCount].direction = rozLine * arrowSpeed;
-                objectPoolArrow[curCount].damage = arrowDamage;
+                objectPoolArrow[curCount].direction = rozLine * weapon.arrowSpeed;
+                objectPoolArrow[curCount].damage = weapon.arrowDamage;
                 objectPoolArrow[curCount].gameObject.SetActive(true);
                 objectPoolCount -= 1;
                 curCount++;
@@ -58,6 +75,20 @@ public class WeaponController : Weapon
 			    }
 		}
     }
+
+    public void SpeedUp(float value=1)
+    {
+		weapon.arrowSpeed += value;
+    }
+    public void DamageUp(float value = 1)
+    {
+		weapon.arrowDamage += value;
+	}
+
+    public void ValueUp(int value = 1)
+    {
+		weapon.arrowValue += value;
+	}
 
     public void pooling()
     {

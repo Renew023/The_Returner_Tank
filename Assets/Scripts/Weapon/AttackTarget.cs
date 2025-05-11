@@ -5,7 +5,6 @@ using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using static UnityEngine.GraphicsBuffer;
 
-[ExecuteInEditMode]
 public class AttackTarget : MonoBehaviour
 {
 	public float radius = 3.0f;
@@ -13,7 +12,7 @@ public class AttackTarget : MonoBehaviour
 	public Collider2D[] colliders;
 	public Collider2D short_enemy;
 
-	public Vector2 Searching()
+	public Vector2 Searching(Vector2 look, Vector2 user)
 	{
 		//Collider[] colliders;
 		//Collider short_enemy;
@@ -32,9 +31,9 @@ public class AttackTarget : MonoBehaviour
 					short_enemy = col;
 				}
 			}
-			return short_enemy.transform.position;
+			return short_enemy.transform.position - (Vector3)user;
 		}
-		return Vector2.zero;
+		return look;
 	}
 	
 	private void OnDrawGizmos()

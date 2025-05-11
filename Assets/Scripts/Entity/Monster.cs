@@ -5,22 +5,23 @@ using UnityEngine;
 public class Monster : Character
 {
 	[SerializeField] private Player target;
+	[SerializeField] private WeaponController weaponController;
 
 	void Update()
 	{
 		Move();
 		Rotate();
 		lookDirection = (target.transform.position - transform.position);
-
-		if ((timer > attackDelay))
-		{
-			weaponController.Attack(lookDirection);
-			timer = 0f;
-		}
-		else
-		{
-			timer += Time.deltaTime;
-		}
+		weaponController.targetDirect = lookDirection;
+		//if ((timer > attackDelay))
+		//{
+		//	weaponController.Attack(lookDirection);
+		//	timer = 0f;
+		//}
+		//else
+		//{
+		//	timer += Time.deltaTime;
+		//}
 		Move();
 	}
 

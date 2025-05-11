@@ -10,7 +10,6 @@ public class Character : MonoBehaviour
      * 발사체가 가지고 있어야하는 값 : 데미지, 
      * 
      */
-	[SerializeField] protected WeaponController weaponController;
 
 	[SerializeField] protected float maxHp = 100;
 	[SerializeField] protected float curHp;
@@ -32,7 +31,7 @@ public class Character : MonoBehaviour
 		moveSpeed = 10;
 		isLeft = Vector3.zero;
 
-		lookDirection = Vector3.zero;
+		lookDirection = Vector3.up;
     }
 
 	protected virtual void Move() { }

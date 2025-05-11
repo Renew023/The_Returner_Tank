@@ -10,16 +10,16 @@ enum UpgradeAbility
 }
 
 [System.Serializable]
-public class Weapon : MonoBehaviour
+public class Weapon
 {
-	[SerializeField] protected int arrowValue;
-	[SerializeField] protected float arrowSpeed;
-	[SerializeField] protected float arrowDamage;
-	[SerializeField] protected int itemLevel; 
-	[SerializeField] protected const int MaxLevel = 3;
-	//[SerializeField] protected Dictionary<int, (string, int)> levelEvent = new Dictionary<int, (string, int)>();
+	public string name;
+	public int arrowValue;
+	public float arrowSpeed;
+	public float arrowDamage;
+	public float attackDelay = 1.0f;
+	public float timer = 0.0f;
 
-	public Arrow arrow ;
+	//[SerializeField] protected Dictionary<int, (string, int)> levelEvent = new Dictionary<int, (string, int)>();
 
 	//[SerializeField] protected float attackDelay = 1.0f;
 	//protected float timer = 0.0f;
