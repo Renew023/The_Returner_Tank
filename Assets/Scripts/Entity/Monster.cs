@@ -7,6 +7,11 @@ public class Monster : Character
 	[SerializeField] private Player target;
 	[SerializeField] private WeaponController weaponController;
 
+	void Awake()
+	{
+		target = GameObject.FindObjectOfType<Player>();
+	}
+
     protected override void Init()
     {
         base.Init();
