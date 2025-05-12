@@ -6,7 +6,7 @@ using UnityEngine;
 public class DungeonManager : MonoBehaviour
 {
 
-    private GameObject warpZone;
+    [SerializeField] private GameObject warpZone;
     public static DungeonManager instance;
 
     //  현재 웨이브 변수값

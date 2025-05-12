@@ -77,9 +77,13 @@ public class Monster : Character
 		animator.SetBool("IsDamage", true);
 
 		//	일정 시간이 지난 후, Damage 애니메이션 플래그 초기화
-		StartCoroutine(ResetDamageAnim());
 
-		if (curHp <= 0)
+		if(this.gameObject.activeSelf)
+		{
+            StartCoroutine(ResetDamageAnim());
+        }
+
+        if (curHp <= 0)
 		{
 			Death();
 		}
