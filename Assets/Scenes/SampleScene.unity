@@ -309,6 +309,13 @@ MonoBehaviour:
   objectPoolCount: 0
   curCount: 0
   targetDirect: {x: 0, y: 0}
+  playerWeaponStat:
+    name: 
+    arrowValue: 0
+    arrowSpeed: 0
+    arrowDamage: 0
+    attackDelay: 0
+    timer: 0
   arrow: {fileID: 5882816111724978116, guid: b8c04cbab875d7c4dab7e9e4980bd3fe, type: 3}
 --- !u!4 &285731693
 Transform:
@@ -9796,6 +9803,14 @@ PrefabInstance:
       propertyPath: skillSelectUI
       value: 
       objectReference: {fileID: 1487191658}
+    - target: {fileID: 1069348182414491526, guid: 6523050c8de5f8e4b8ecf4c7f0dacc4a, type: 3}
+      propertyPath: playerWeaponStat.attackDelay
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2059820060375317080, guid: 6523050c8de5f8e4b8ecf4c7f0dacc4a, type: 3}
+      propertyPath: layer.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     - target: {fileID: 2571286652575843919, guid: 6523050c8de5f8e4b8ecf4c7f0dacc4a, type: 3}
       propertyPath: m_Name
       value: Player

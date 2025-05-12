@@ -20,12 +20,28 @@ public class Player : Character
 	//[SerializeField] public List<Skill> skillList = new List<Skill>(10);
 	[SerializeField] public List<Skill> playerSkill = new List<Skill>(5);
     [SerializeField] public GameObject skillSelectUI;
+    public Weapon playerWeaponStat;
+
+    protected Animator animator;
 
     void Awake()
     {
         DataManager.instance.Pick();
         Init();
+        animator = GetComponentInChildren<Animator>();
+
         //LevelUp();
+    }
+
+    private void Start()
+    {
+        if(DataManager.instance.savedPlayerMaxHp > 0)
+        {
+            maxHp = DataManager.instance.savedPlayerMaxHp;
+            curHp = DataManager.instance.savedPlayerHp;
+        }
+
+        base.Start();
     }
 
     void Update()
@@ -36,6 +52,7 @@ public class Player : Character
         for (int i = 0; i < weapons.Count; i++)
         {
             weapons[i].targetDirect = lookDirection;
+            weapons[i].playerWeaponStat = playerWeaponStat;
         }
 		//lookDirection 은 가장 가까운 몬스터를 타겟팅 해야함.
 		//lookDirection = (worldPos - (Vector2)transform.position);
@@ -57,7 +74,6 @@ public class Player : Character
             LevelUp();
         }
     }
-
 
     override protected void Move()
     {
@@ -113,8 +129,32 @@ public class Player : Character
             if (arrow.owner == this.gameObject)
                 return;
 
-            Hit(ref curHp, arrow.damage);
+            //Hit(ref curHp, arrow.damage);
+            TakeDamage(arrow.damage);
+
             collision.gameObject.SetActive(false);
         }
 	}
+
+    public void TakeDamage(float damage)
+    {
+        curHp -= damage;
+
+        //animator.SetBool("IsDamage", true);
+
+        //	일정 시간이 지난 후, Damage 애니메이션 플래그 초기화
+        //StartCoroutine(ResetDamageAnim());
+
+        if (curHp <= 0)
+        {
+            //Death();
+        }
+    }
+
+
+    private IEnumerator ResetDamageAnim()
+    {
+        yield return new WaitForSeconds(0.2f);
+        animator.SetBool("IsDamage", false);
+    }
 }
