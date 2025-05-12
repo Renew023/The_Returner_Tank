@@ -249,10 +249,14 @@ public class MapManager : MonoBehaviour
 
     void UpdateAlphas()
     {
+        if (mapNodes == null) return;
         for (int r = 0; r < mapNodes.Count; r++)
-            for (int c = 0; c < mapNodes[r].Count; c++)
-                mapNodes[r][c]
-                    .SetAlpha((r == currentRow) ? activeAlpha : defaultAlpha);
+        {
+            var row = mapNodes[r];
+            if (row == null) continue;
+            for (int c = 0; c < row.Count; c++)
+                row[c]?.SetAlpha((r == currentRow) ? activeAlpha : defaultAlpha);
+        }
     }
 
     /// <summary>
@@ -279,24 +283,35 @@ public class MapManager : MonoBehaviour
                 .GetComponent<RectTransform>().anchoredPosition;
 
         // 4) 씬 전환
-        if (t == NodeType.Enemy || t == NodeType.Boss)
+        if (t == NodeType.Enemy)
+        {
+            //  던전 정보 설정
+            GameManager.Instance.SetStageInfo(r, StageType.NormalBattle, GameManager.Instance.dungeonLevel);
+            //  전투 씬으로 이동
             SceneController.ToBattle();
+        }
+        else if (t == NodeType.Boss)
+        {
+            GameManager.Instance.SetStageInfo(r, StageType.NormalBattle, GameManager.Instance.dungeonLevel);
+            SceneController.ToBoss();
+        }
         else
             SceneController.ToHeal();
     }
 
     public void RestoreMap()
     {
-        // 1) 알파 재설정
+        if (mapNodes == null || playerIndicatorRt == null)
+            return;
         UpdateAlphas();
 
-        // 2) 인디케이터 이미 생성된 경우 위치만 재배치
-        if (playerIndicatorRt != null && mapNodes != null)
+        var targetNode = mapNodes[currentRow][currentCol];
+        if (targetNode != null)
         {
             playerIndicatorRt.anchoredPosition =
-                mapNodes[currentRow][currentCol]
-                    .GetComponent<RectTransform>().anchoredPosition;
+                targetNode.GetComponent<RectTransform>().anchoredPosition;
         }
+
     }
 
     void OnDestroy()
