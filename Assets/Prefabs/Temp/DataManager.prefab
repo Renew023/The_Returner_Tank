@@ -51,15 +51,15 @@ MonoBehaviour:
     levelSkills:
     - skillName: "[\uAC15\uD654] \uD3ED\uD0C4 1"
       skillExplain: "\uD65C \uACF5\uACA9\uB825 \uC99D\uAC00"
-      upgradeType: 3
+      upgradeType: 6
       value: 5
     - skillName: "[\uAC15\uD654] \uD3ED\uD0C4 2"
       skillExplain: "\uD65C \uACF5\uC18D \uC99D\uAC00"
-      upgradeType: 0
+      upgradeType: 5
       value: 1
     - skillName: "[\uAC15\uD654] \uD3ED\uD0C4 3"
       skillExplain: "\uD65C \uD654\uC0B4 \uAC1C\uC218 \uC99D\uAC00"
-      upgradeType: 4
+      upgradeType: 7
       value: 3
     level: 0
     weaponCon: {fileID: 6955153868353512977, guid: 7700fb7bfccad134a8b857c9b6c58936, type: 3}
@@ -68,15 +68,15 @@ MonoBehaviour:
     levelSkills:
     - skillName: "[\uAC15\uD654] \uC544\uC774\uC2A4\uBCFC\uD2B8 1"
       skillExplain: "\uD65C \uACF5\uACA9\uB825 \uC99D\uAC00"
-      upgradeType: 3
+      upgradeType: 6
       value: 5
     - skillName: "[\uAC15\uD654] \uC544\uC774\uC2A4\uBCFC\uD2B8 2"
       skillExplain: "\uD65C \uACF5\uC18D \uC99D\uAC00"
-      upgradeType: 0
+      upgradeType: 5
       value: 1
     - skillName: "[\uAC15\uD654] \uC544\uC774\uC2A4\uBCFC\uD2B8 3"
       skillExplain: "\uD65C \uD654\uC0B4 \uAC1C\uC218 \uC99D\uAC00"
-      upgradeType: 4
+      upgradeType: 7
       value: 3
     level: 0
     weaponCon: {fileID: 6955153868353512977, guid: 48a790f4f65a06243822563d7d255c62, type: 3}
@@ -153,15 +153,15 @@ MonoBehaviour:
     levelSkills:
     - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uC99D\uAC00"
       skillExplain: 
-      upgradeType: 4
+      upgradeType: 3
       value: 10
     - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uC99D\uAC00"
       skillExplain: 
-      upgradeType: 4
+      upgradeType: 3
       value: 10
     - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uC99D\uAC00"
       skillExplain: 
-      upgradeType: 4
+      upgradeType: 3
       value: 10
     level: 0
     weaponCon: {fileID: 0}
@@ -182,7 +182,6 @@ MonoBehaviour:
       value: 10
     level: 0
     weaponCon: {fileID: 0}
-  weaponSkillList: []
   skill:
     name: 
     player: {fileID: 0}
@@ -192,3 +191,5 @@ MonoBehaviour:
   skillValue: 0
   maxPlayerSkill: 3
   curPlayerSkillMax: 0
+  savedPlayerHp: 0
+  savedPlayerMaxHp: 0
