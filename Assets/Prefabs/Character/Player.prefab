@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2505296766071451828}
   - component: {fileID: 1069348182414491526}
   - component: {fileID: 2059820060375317080}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6620190527142343468}
   - component: {fileID: 5083591125180175280}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
