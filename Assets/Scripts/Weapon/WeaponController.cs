@@ -10,6 +10,8 @@ public class WeaponController : MonoBehaviour
 	[SerializeField] private int objectPoolCount = 0;
 	[SerializeField] private int curCount = 0;
     [SerializeField] public Vector2 targetDirect;
+	public Weapon playerWeaponStat;
+	
 	public Arrow arrow;
 
 	void Awake()
@@ -18,7 +20,7 @@ public class WeaponController : MonoBehaviour
 
 	void LateUpdate()
     {
-		if ((weapon.timer > weapon.attackDelay))
+		if (weapon.timer > (weapon.attackDelay - playerWeaponStat.attackDelay))
 		{
 			Attack(targetDirect);
 			weapon.timer = 0f;
@@ -29,50 +31,49 @@ public class WeaponController : MonoBehaviour
 		}
 	}
 
-    public void SetArrow(Arrow weapon)
-    {
-        arrow = weapon;
-        objectPoolArrow.Clear();
-        objectPoolCount = 0;
-        curCount = 0;
-    }
-
     public void Attack(Vector2 dir)
     {
-        Vector2 rozLine = dir.normalized;
+		int value = (weapon.arrowValue + playerWeaponStat.arrowValue);
+		float minAngle = -(value / 2f) * 10;
 
-            if (objectPoolCount < 5)
-            {
-			    arrow.countReturn = this;
-			    arrow.owner = transform.parent.gameObject;
-			    arrow.transform.position = transform.position;
-			    arrow.direction = rozLine * weapon.arrowSpeed;
-			    arrow.damage = weapon.arrowDamage;
+		for (int i = 0; i < value; i++)
+		{
+			float angle = minAngle + 10 * i;
+			Vector2 rozLine = (Quaternion.Euler(0, 0, angle) * dir).normalized;
 
-			objectPoolArrow.Add(Instantiate(arrow, transform.position, Quaternion.identity));
-			    //objectPoolArrow[curCount].gameObject.SetActive(false);
-			    //objectPoolArrow[curCount].transform.position = transform.position;
-                //objectPoolArrow[curCount].direction = rozLine * arrowSpeed;
-                //objectPoolArrow[curCount].damage = arrowDamage;
-			    //objectPoolArrow[curCount].gameObject.SetActive(true);
-			    curCount++;
-			    if (curCount >= objectPoolArrow.Count)
-			    {
-				    curCount -= objectPoolArrow.Count;
-			    }
-            }
-            else
-            {
-                objectPoolArrow[curCount].transform.position = transform.position;
-                objectPoolArrow[curCount].direction = rozLine * weapon.arrowSpeed;
-                objectPoolArrow[curCount].damage = weapon.arrowDamage;
-                objectPoolArrow[curCount].gameObject.SetActive(true);
-                objectPoolCount -= 1;
-                curCount++;
-			    if (curCount >= objectPoolArrow.Count)
-			    {
-				    curCount -= objectPoolArrow.Count;
-			    }
+			if (objectPoolCount < 5)
+			{
+				arrow.countReturn = this;
+				arrow.owner = transform.parent.gameObject;
+				arrow.transform.position = transform.position;
+				arrow.direction = rozLine * weapon.arrowSpeed;
+				arrow.damage = weapon.arrowDamage;
+
+				objectPoolArrow.Add(Instantiate(arrow, transform.position, Quaternion.identity));
+				//objectPoolArrow[curCount].gameObject.SetActive(false);
+				//objectPoolArrow[curCount].transform.position = transform.position;
+				//objectPoolArrow[curCount].direction = rozLine * arrowSpeed;
+				//objectPoolArrow[curCount].damage = arrowDamage;
+				//objectPoolArrow[curCount].gameObject.SetActive(true);
+				curCount++;
+				if (curCount >= objectPoolArrow.Count)
+				{
+					curCount -= objectPoolArrow.Count;
+				}
+			}
+			else
+			{
+				objectPoolArrow[curCount].transform.position = transform.position;
+				objectPoolArrow[curCount].direction = rozLine * (weapon.arrowSpeed +playerWeaponStat.arrowSpeed);
+				objectPoolArrow[curCount].damage = weapon.arrowDamage + playerWeaponStat.arrowDamage;
+				objectPoolArrow[curCount].gameObject.SetActive(true);
+				objectPoolCount -= 1;
+				curCount++;
+				if (curCount >= objectPoolArrow.Count)
+				{
+					curCount -= objectPoolArrow.Count;
+				}
+			}
 		}
     }
 

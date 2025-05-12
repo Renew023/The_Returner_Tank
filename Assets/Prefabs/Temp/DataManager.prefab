@@ -110,6 +110,22 @@ MonoBehaviour:
       value: 5
     level: 0
     weaponCon: {fileID: 0}
+  - player: {fileID: 0}
+    levelSkills:
+    - skillName: "[\uAC15\uD654] \uD50C\uB808\uC774\uC5B4 \uC18D\uB3C4 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 1
+      value: 10
+    - skillName: "[\uAC15\uD654] \uD50C\uB808\uC774\uC5B4 \uC18D\uB3C4 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 1
+      value: 10
+    - skillName: "[\uAC15\uD654] \uD50C\uB808\uC774\uC5B4 \uC18D\uB3C4 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 1
+      value: 10
+    level: 0
+    weaponCon: {fileID: 0}
   skill:
     player: {fileID: 0}
     levelSkills: []

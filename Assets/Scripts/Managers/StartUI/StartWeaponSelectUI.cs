@@ -26,6 +26,7 @@ public class StartWeaponSelectUI : MonoBehaviour
         ItemName.text = DataManager.instance.skill.weaponCon.weapon.name.ToString();
         weaponImage.sprite = DataManager.instance.skill.weaponCon.weaponSprite.sprite;
         arrowImage.sprite = DataManager.instance.skill.weaponCon.arrow.GetComponentInChildren<SpriteRenderer>().sprite;
+
         prevButton.onClick.AddListener(() => Change(-1));
 		nextButton.onClick.AddListener(() => Change(1));
 		exitButton.onClick.AddListener(() => startUI.ChangeState(StartUIState.Main));
@@ -36,16 +37,16 @@ public class StartWeaponSelectUI : MonoBehaviour
 		int skillValue = DataManager.instance.skillValue;
 
 		skillValue += value;
-		if (skillValue >= DataManager.instance.skillList.Count)
+		if (skillValue >= DataManager.instance.weaponSkillList.Count)
 		{
 			skillValue = 0;
 		}
 		else if (skillValue < 0)
 		{
-			skillValue = DataManager.instance.skillList.Count -1;
+			skillValue = DataManager.instance.weaponSkillList.Count -1;
 		}
 		DataManager.instance.skillValue = skillValue;
-		DataManager.instance.skill = DataManager.instance.skillList[skillValue];
+		DataManager.instance.skill = DataManager.instance.weaponSkillList[skillValue];
 		ShowReset();
 	}
 

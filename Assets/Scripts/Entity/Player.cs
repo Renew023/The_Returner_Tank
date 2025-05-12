@@ -13,15 +13,18 @@ public class Player : Character
 
     [SerializeField] private Vector2 mousePosition;
     [SerializeField] private Vector2 worldPos;
+	[SerializeField] private float arrowDelay;
+	[SerializeField] private float arrowDamage;
 
-    [SerializeField] private float Exp;
+	[SerializeField] private float Exp;
     [SerializeField] private float Level;
 
 	//[SerializeField] public List<Skill> skillList = new List<Skill>(10);
 	[SerializeField] public List<Skill> playerSkill = new List<Skill>(5);
     [SerializeField] public GameObject skillSelectUI;
+	public Weapon playerWeaponStat;
 
-    void Awake()
+	void Awake()
     {
         DataManager.instance.Pick();
         Init();
@@ -36,6 +39,7 @@ public class Player : Character
         for (int i = 0; i < weapons.Count; i++)
         {
             weapons[i].targetDirect = lookDirection;
+            weapons[i].playerWeaponStat = playerWeaponStat;
         }
 		//lookDirection 은 가장 가까운 몬스터를 타겟팅 해야함.
 		//lookDirection = (worldPos - (Vector2)transform.position);

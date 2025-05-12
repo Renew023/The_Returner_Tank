@@ -22,8 +22,12 @@ public class SkillSelectButton : MonoBehaviour
     void OnEnable()
     {
         //ab = skill.weapon.weaponSprite;
-        image.sprite = skill.weaponCon.weaponSprite.sprite;
-        title.text = skill.levelSkills[skill.level].skillName.ToString();
+        if (skill.weaponCon != null)
+            image.sprite = skill.weaponCon.weaponSprite.sprite;
+        else
+            image.sprite = null;
+
+		title.text = skill.levelSkills[skill.level].skillName.ToString();
     }
 
     void OnDisable()
@@ -36,7 +40,7 @@ public class SkillSelectButton : MonoBehaviour
         if (skill.level == 0)
         {
             player.playerSkill.Add(skill);
-            if (player.weapons != null)
+            if (skill.weaponCon != null)
             {
                 player.weapons.Add(Instantiate(skill.weaponCon, player.transform.position + new Vector3(0.6f, 0, 0), Quaternion.identity, player.transform));
             }
@@ -52,6 +56,22 @@ public class SkillSelectButton : MonoBehaviour
             case SkillType.PlayerSpeedUp:
                 player.MoveSpeedUp();
 				break;
+            case SkillType.PlayerArrowSpeedUp:
+                player.playerWeaponStat.arrowSpeed += value;
+                break;
+
+            case SkillType.PlayerArrowDamageUp:
+				player.playerWeaponStat.arrowDamage += value;
+				break;
+
+            case SkillType.PlayerArrowValueUp:
+				player.playerWeaponStat.arrowValue += (int)value;
+				break;
+
+
+
+
+
             case SkillType.ArrowSpeedUp:
 
                 foreach (var weapon in player.weapons)
@@ -90,7 +110,10 @@ public class SkillSelectButton : MonoBehaviour
         }
         Time.timeScale = 1.0f;
         skill.level += 1;
-
+        if (skill.level == 3)
+        {
+            DataManager.instance.curPlayerSkillMax += 1;
+        }
         player.skillSelectUI.SetActive(false);
     }
 }

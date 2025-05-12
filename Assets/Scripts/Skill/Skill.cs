@@ -6,6 +6,9 @@ public enum SkillType
 {
     PlayerHpUp,
     PlayerSpeedUp,
+    PlayerArrowSpeedUp,
+    PlayerArrowDamageUp,
+    PlayerArrowValueUp,
 
     ArrowSpeedUp,
     ArrowDamageUp,
