@@ -59,6 +59,9 @@ public class SkillSelectUI : MonoBehaviour
             }
             
 		}
+        if (showCard == 0)
+            skillSelectButton[0].gameObject.SetActive(true);
+
 
         for (int i = 0; i < showCard; i++)
         {

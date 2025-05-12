@@ -22,7 +22,14 @@ public class SkillSelectButton : MonoBehaviour
     void OnEnable()
     {
         //ab = skill.weapon.weaponSprite;
-        if (skill.weaponCon != null)
+        if (DataManager.instance.curPlayerSkillMax == DataManager.instance.maxPlayerSkill)
+        {
+            title.text = "³ª°¡±â";
+            return;
+        }
+
+
+		if (skill.weaponCon != null)
             image.sprite = skill.weaponCon.weaponSprite.sprite;
         else
             image.sprite = null;
@@ -37,6 +44,15 @@ public class SkillSelectButton : MonoBehaviour
 
     void Pick()
     {
+        if (DataManager.instance.curPlayerSkillMax == DataManager.instance.maxPlayerSkill)
+        {
+            Time.timeScale = 1.0f;
+			player.skillSelectUI.SetActive(false);
+            return;
+		}
+
+
+
         if (skill.level == 0)
         {
             player.playerSkill.Add(skill);
