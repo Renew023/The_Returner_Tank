@@ -12,9 +12,17 @@ public static class SceneController
     public static void ToHeal() => SceneManager.LoadScene("Event_HealScene");
     public static void ToMap()  => SceneManager.LoadScene("MapScene");
 
-    public static void ToBattle() => SceneManager.LoadScene("DungeonScene");
+	public static void ToBattle()
+	{
+		// 1 ~ 4 중 랜덤 숫자 선택
+		int randomIndex = Random.Range(1, 5); // 상한값은 제외되므로 5로 설정해야 4까지 포함됨
+		string sceneName = $"DungeonScene{randomIndex}";
 
-    private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+		Debug.Log($"[SceneController] 로딩할 전투 씬: {sceneName}");
+		SceneManager.LoadScene(sceneName);
+	}
+
+	private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "MapScene" && MapManager.Instance != null)
         {
