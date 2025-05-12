@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5227798690492661144}
   - component: {fileID: 671199913142728821}
-  - component: {fileID: 7133204456493692818}
   m_Layer: 0
   m_Name: WeaponSprite
   m_TagString: Untagged
@@ -74,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 50
-  m_Sprite: {fileID: 21300000, guid: 4c17f95ed34367b4e9e8913ec7b51751, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3da42e52738e1e445baa33ae28db8d53, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,27 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &7133204456493692818
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 342732310780052753}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c75832aee088b0d4295c384bd4678817, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2997021490070835318
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +95,7 @@ GameObject:
   - component: {fileID: 8706481037669991645}
   - component: {fileID: 6955153868353512977}
   m_Layer: 0
-  m_Name: Bomb_weapon
+  m_Name: A_FireBolt_weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponSprite: {fileID: 671199913142728821}
   weapon:
-    name: "\uD3ED\uD0C4"
+    name: "\uD30C\uC774\uC5B4\uBCFC\uD2B8"
     arrowValue: 1
     arrowSpeed: 5
     arrowDamage: 5
@@ -162,12 +140,5 @@ MonoBehaviour:
   objectPoolArrow: []
   objectPoolCount: 0
   curCount: 0
-  targetDirect: {x: 5.660553, y: -0.29487896}
-  playerWeaponStat:
-    name: 
-    arrowValue: 0
-    arrowSpeed: 0
-    arrowDamage: 0
-    attackDelay: 0
-    timer: 0
-  arrow: {fileID: 5882816111724978116, guid: b8c04cbab875d7c4dab7e9e4980bd3fe, type: 3}
+  targetDirect: {x: 0, y: 0}
+  arrow: {fileID: 5882816111724978116, guid: 4edb53261248c2a41b02cab1a5d5b42a, type: 3}

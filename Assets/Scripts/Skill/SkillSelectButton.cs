@@ -51,8 +51,6 @@ public class SkillSelectButton : MonoBehaviour
             return;
 		}
 
-
-
         if (skill.level == 0)
         {
             player.playerSkill.Add(skill);
