@@ -279,8 +279,22 @@ public class MapManager : MonoBehaviour
                 .GetComponent<RectTransform>().anchoredPosition;
 
         // 4) 씬 전환
-        if (t == NodeType.Enemy || t == NodeType.Boss)
+        if (t == NodeType.Enemy)
+        {
+            //  던전 정보 설정
+            GameManager.Instance.SetStageInfo(r, StageType.NormalBattle, GameManager.Instance.dungeonLevel);
+
+            //  전투 씬으로 이동
             SceneController.ToBattle();
+        }
+
+        else if(t == NodeType.Boss)
+        {
+            GameManager.Instance.SetStageInfo(r, StageType.NormalBattle, GameManager.Instance.dungeonLevel);
+
+            SceneController.ToBoss();
+        }
+
         else
             SceneController.ToHeal();
     }

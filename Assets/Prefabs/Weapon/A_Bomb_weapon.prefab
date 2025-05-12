@@ -162,12 +162,5 @@ MonoBehaviour:
   objectPoolArrow: []
   objectPoolCount: 0
   curCount: 0
-  targetDirect: {x: 5.660553, y: -0.29487896}
-  playerWeaponStat:
-    name: 
-    arrowValue: 0
-    arrowSpeed: 0
-    arrowDamage: 0
-    attackDelay: 0
-    timer: 0
+  targetDirect: {x: 0, y: 0}
   arrow: {fileID: 5882816111724978116, guid: b8c04cbab875d7c4dab7e9e4980bd3fe, type: 3}

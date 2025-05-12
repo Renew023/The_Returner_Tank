@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class DataManager : MonoBehaviour
@@ -9,13 +8,14 @@ public class DataManager : MonoBehaviour
 
     public Player player;
 	public List<Skill> skillList = new List<Skill>(10);
-	public List<Skill> weaponSkillList = new List<Skill>();
     public Skill skill;
 	public int skillValue = 0;
-	public int maxPlayerSkill = 3;
-	public int curPlayerSkillMax = 0;
 
-	void Awake()
+    [Header("플레이어 정보")]
+    public float savedPlayerHp;
+    public float savedPlayerMaxHp;
+
+    void Awake()
     {
         if (instance == null)
         {
@@ -26,9 +26,8 @@ public class DataManager : MonoBehaviour
         {
 			Destroy(gameObject);
 		}
-		weaponSkillList = skillList.Where(skill => skill.weaponCon != null).ToList();
-		skill = weaponSkillList[0];
-	}
+		skill = skillList[1];
+    }
 
 	public void Pick()
 	{

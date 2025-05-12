@@ -11,26 +11,12 @@ public class SkillSelectUI : MonoBehaviour
     public List<SkillSelectButton> skillSelectButton;
     public List<Skill> skills;
 
-    public int showCard = 3;
-
     void OnEnable()
     {
-		bool isMax = DataManager.instance.maxPlayerSkill == player.playerSkill.Count ? true : false;
-
-        if (DataManager.instance.curPlayerSkillMax - DataManager.instance.maxPlayerSkill < 3)
-            showCard = DataManager.instance.maxPlayerSkill - DataManager.instance.curPlayerSkillMax;
-
-		while (skills.Count < showCard)
-        {
+		while (skills.Count < 3)
+		{
             bool isNotEqual = true;
-            
-			int rand = Random.Range(0, DataManager.instance.skillList.Count);
-
-			if (isMax)
-            {
-                rand = Random.Range(0, player.playerSkill.Count);
-            }
-
+			int rand = Random.Range(0, DataManager.instance.skillList.Count); // 0~9 »çÀÌ
 
             for (int j = 0; j < value.Count; j++)
             {
@@ -43,27 +29,13 @@ public class SkillSelectUI : MonoBehaviour
 
             if (isNotEqual == true)
             {
-                if (isMax)
-                {
-					if (player.playerSkill[rand].level == 3)
-						continue;
-					skills.Add(player.playerSkill[rand]);
-				}
-                else
-                {
-					if (DataManager.instance.skillList[rand].level == 3)
-						continue;
-					skills.Add(DataManager.instance.skillList[rand]);
-				}
                 value.Add(rand);
+                skills.Add(DataManager.instance.skillList[rand]);
             }
             
 		}
-        if (showCard == 0)
-            skillSelectButton[0].gameObject.SetActive(true);
 
-
-        for (int i = 0; i < showCard; i++)
+        for (int i = 0; i < skillSelectButton.Count; i++)
         {
             skillSelectButton[i].skill = skills[i];
             skillSelectButton[i].gameObject.SetActive(true);
@@ -74,7 +46,7 @@ public class SkillSelectUI : MonoBehaviour
     {
         skills.Clear();
         value.Clear();
-		for (int i = 0; i < showCard; i++)
+		for (int i = 0; i < skillSelectButton.Count; i++)
 		{
 			skillSelectButton[i].gameObject.SetActive(false);
 		}

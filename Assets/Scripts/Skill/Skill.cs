@@ -6,9 +6,6 @@ public enum SkillType
 {
     PlayerHpUp,
     PlayerSpeedUp,
-    PlayerArrowSpeedUp,
-    PlayerArrowDamageUp,
-    PlayerArrowValueUp,
 
     ArrowSpeedUp,
     ArrowDamageUp,
@@ -32,7 +29,7 @@ public class Skill
     public Player player;
     public List<LevelSkill> levelSkills = new List<LevelSkill>();
     public int level = 0;
-    public WeaponController? weaponCon;
+    public WeaponController weaponCon;
 
     public Skill(List<LevelSkill> levelSkills, int level)
     {

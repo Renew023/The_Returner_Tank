@@ -48,7 +48,6 @@ public class DungeonManager : MonoBehaviour
         Debug.Log($"[웨이브 {currentWave}] 몬스터 {count} 마리 소환!");
     }
 
-
     //  몬스터가 죽었을 때 호출되는 메서드
     public void OnEnemyDeath()
     {
@@ -83,20 +82,18 @@ public class DungeonManager : MonoBehaviour
         }
     }
 
-    //  다음 웨이브 호출 메서드
-    void NextWave()
-    {
-        //  웨이브 증가
-        currentWave++;
-
-        Debug.Log($"[DungeonManager] 현재 웨이브: {currentWave}");
-
-        Spawner.instance.SpawnFixedWave();
-    }
-    
     void ClearDungeon()
     {
         Debug.Log($"[DungeonManager] 던전 클리어!");
+
+        //  현재 플레이어 HP 저장
+        Player player = FindObjectOfType<Player>();
+
+        if (player != null)
+        {
+            DataManager.instance.savedPlayerHp = player.CurHP;
+            DataManager.instance.savedPlayerMaxHp = player.MaxHp;
+        }
 
         //  던전 난이도 증가
         GameManager.Instance.IncreaseDungeonLevel();
@@ -105,7 +102,7 @@ public class DungeonManager : MonoBehaviour
         GameManager.Instance.currentStageIndex++;
 
         //  다음 던전을 위한 초기화
-        currentWave = 1; 
+        currentWave = 1;
 
         //  스테이지 선택 화면으로 복귀
         SceneController.ToMap();

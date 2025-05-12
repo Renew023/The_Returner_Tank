@@ -6,18 +6,27 @@ public class Monster : Character
 {
 	[SerializeField] private Player target;
 	[SerializeField] private WeaponController weaponController;
+	protected Animator animator;
 
 	void Awake()
 	{
 		target = GameObject.FindObjectOfType<Player>();
+
+		animator = GetComponentInChildren<Animator>();
 	}
 
-    protected override void Init()
-    {
-        base.Init();
-    }
+	protected override void Init()
+	{
+		base.Init();
+	}
 
-    void Update()
+	protected override void Start()
+	{
+		base.Start();
+	}
+
+
+	void Update()
 	{
 		Move();
 		Rotate();
@@ -37,7 +46,7 @@ public class Monster : Character
 
 	override protected void Move()
 	{
-
+		animator.SetBool("IsMove", true);
 	}
 
 	override protected void Rotate()
@@ -65,9 +74,14 @@ public class Monster : Character
 	{
 		curHp -= damage;
 
-		if(curHp <= 0)
+		animator.SetBool("IsDamage", true);
+
+		//	일정 시간이 지난 후, Damage 애니메이션 플래그 초기화
+		StartCoroutine(ResetDamageAnim());
+
+		if (curHp <= 0)
 		{
-            Death();
+			Death();
 		}
 	}
 
@@ -77,5 +91,11 @@ public class Monster : Character
 
 		//	해당 몬스터가 속해있는 몬스터 수 감소.
 		DungeonManager.instance.OnEnemyDeath();
+	}
+
+	private IEnumerator ResetDamageAnim()
+	{
+		yield return new WaitForSeconds(0.2f);
+		animator.SetBool("IsDamage", false);
 	}
 }

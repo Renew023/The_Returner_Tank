@@ -16,7 +16,7 @@ public class Weapon
 	public int arrowValue;
 	public float arrowSpeed;
 	public float arrowDamage;
-	public float attackDelay;
+	public float attackDelay = 1.0f;
 	public float timer = 0.0f;
 
 	//[SerializeField] protected Dictionary<int, (string, int)> levelEvent = new Dictionary<int, (string, int)>();

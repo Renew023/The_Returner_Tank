@@ -12,6 +12,7 @@ public static class SceneController
     public static void ToHeal() => SceneManager.LoadScene("Event_HealScene");
     public static void ToMap()  => SceneManager.LoadScene("MapScene");
 
+    //  전투 씬 로드
 	public static void ToBattle()
 	{
 		// 1 ~ 4 중 랜덤 숫자 선택
@@ -21,6 +22,14 @@ public static class SceneController
 		Debug.Log($"[SceneController] 로딩할 전투 씬: {sceneName}");
 		SceneManager.LoadScene(sceneName);
 	}
+
+    //  보스 씬 로드
+    public static void ToBoss()
+    {
+        Debug.Log($"[SceneController] 로딩할 전투 씬: 보스 씬");
+
+        SceneManager.LoadScene("BossBattleScene");
+    }
 
 	private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
