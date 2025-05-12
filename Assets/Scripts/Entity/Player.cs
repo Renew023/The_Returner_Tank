@@ -48,6 +48,8 @@ public class Player : Character
         {
             maxHp = DataManager.instance.savedPlayerMaxHp;
             curHp = DataManager.instance.savedPlayerHp;
+            hpBarFill.fillAmount = curHp / maxHp;
+            UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
         }
 
         base.Start();
@@ -122,6 +124,7 @@ public class Player : Character
     {
 		maxHp += value;
 		curHp += value;
+        hpBarFill.fillAmount = curHp / maxHp;
         UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
     }
 
@@ -147,6 +150,8 @@ public class Player : Character
         {
             curHp = maxHp;
         }
+
+        hpBarFill.fillAmount = curHp / maxHp;
 
         UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
     }
@@ -183,11 +188,6 @@ public class Player : Character
         {
             //Death();
         }
-    }
-
-    protected override void Init()
-    {
-        base.Init();
     }
 
     private IEnumerator ResetDamageAnim()
