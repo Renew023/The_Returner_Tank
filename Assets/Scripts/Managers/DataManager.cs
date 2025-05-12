@@ -11,7 +11,11 @@ public class DataManager : MonoBehaviour
     public Skill skill;
 	public int skillValue = 0;
 
-	void Awake()
+    [Header("플레이어 정보")]
+    public float savedPlayerHp;
+    public float savedPlayerMaxHp;
+
+    void Awake()
     {
         if (instance == null)
         {

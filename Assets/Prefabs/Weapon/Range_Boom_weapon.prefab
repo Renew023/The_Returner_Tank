@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 50
-  m_Sprite: {fileID: 21300000, guid: 3da42e52738e1e445baa33ae28db8d53, type: 3}
+  m_Sprite: {fileID: 21300000, guid: acf629326b0645041bb2fe1cf6faadda, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8706481037669991645}
   - component: {fileID: 6955153868353512977}
   m_Layer: 0
-  m_Name: FireBolt_weapon
+  m_Name: Range_Boom_weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponSprite: {fileID: 671199913142728821}
   weapon:
-    name: "\uD30C\uC774\uC5B4\uBCFC\uD2B8"
+    name: "\uC544\uC774\uC2A4\uBCFC\uD2B8"
     arrowValue: 1
     arrowSpeed: 5
     arrowDamage: 5
@@ -141,4 +141,4 @@ MonoBehaviour:
   objectPoolCount: 0
   curCount: 0
   targetDirect: {x: 0, y: 0}
-  arrow: {fileID: 5882816111724978116, guid: 4edb53261248c2a41b02cab1a5d5b42a, type: 3}
+  arrow: {fileID: 5882816111724978116, guid: 6540f72087fd7954689dc0cb01465009, type: 3}

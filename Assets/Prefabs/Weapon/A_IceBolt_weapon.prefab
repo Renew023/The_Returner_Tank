@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8706481037669991645}
   - component: {fileID: 6955153868353512977}
   m_Layer: 0
-  m_Name: IceBolt_weapon
+  m_Name: A_IceBolt_weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

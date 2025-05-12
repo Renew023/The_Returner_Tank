@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public StageType currentStageType;
     //  던전 난이도 (스테이지 별 설정 값)
     public int dungeonLevel = 1;
+    
 
     private void Awake()
     {
