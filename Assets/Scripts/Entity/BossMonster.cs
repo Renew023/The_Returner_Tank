@@ -1,0 +1,123 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BossMonster : Character
+{
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Transform firePoint;
+
+    [SerializeField] private float attackInterval = 2f;
+    private float attackerTimer = 0.0f;
+
+    private Player target;
+
+    protected Animator animator;
+
+    protected override void Start()
+    {
+        base.Start();
+        target = FindObjectOfType<Player>();
+        animator = GetComponentInChildren<Animator>();
+    }
+
+    private void Update()
+    {
+        attackerTimer += Time.deltaTime;
+
+        if(attackerTimer >= attackInterval)
+        {
+            attackerTimer = 0.0f;
+
+            int attackPattern = Random.Range(0, 3);
+
+            switch(attackPattern)
+            {
+                case 0: 
+                    BasicAttack();
+                    break;
+                case 1: ConeAttack();
+                    break;
+                case 2:
+                    GroundSlam();
+                    break;
+            }
+        }
+    }
+
+    void BasicAttack()
+    {
+        Vector2 dir = (target.transform.position - transform.position).normalized;
+        GameObject proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+        proj.GetComponent<Rigidbody2D>().velocity = dir * 10f; // 예시 속도
+    }
+
+    void ConeAttack()
+    {
+        int bulletCount = 5;
+        float angleStep = 15f;
+        float angleStart = -((bulletCount - 1) * angleStep) / 2;
+
+        for (int i = 0; i < bulletCount; i++)
+        {
+            float angle = angleStart + angleStep * i;
+            Vector2 dir = Quaternion.Euler(0, 0, angle) * (target.transform.position - transform.position).normalized;
+
+            GameObject proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+            proj.GetComponent<Rigidbody2D>().velocity = dir * 8f;
+        }
+    }
+
+    void GroundSlam()
+    {
+        // 여기선 단순히 범위 안에 있는 플레이어에게 피해를 주는 것으로 처리
+        float slamRadius = 3.0f;
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, slamRadius);
+
+        foreach (var hit in hits)
+        {
+            if (hit.CompareTag("Player"))
+            {
+                hit.GetComponent<Player>().TakeDamage(20); // 예시 데미지
+            }
+        }
+
+        // 애니메이션이나 이펙트도 여기에서 실행 가능
+        Debug.Log("Boss 사용 - 지면 강타!");
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, 3f);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        curHp -= damage;
+
+        animator.SetBool("IsDamage", true);
+
+        //	일정 시간이 지난 후, Damage 애니메이션 플래그 초기화
+        StartCoroutine(ResetDamageAnim());
+
+        if (curHp <= 0)
+        {
+            Death();
+        }
+    }
+
+    void Death()
+    {
+        gameObject.SetActive(false);
+
+        //	해당 몬스터가 속해있는 몬스터 수 감소.
+        DungeonManager.instance.OnEnemyDeath();
+    }
+
+    private IEnumerator ResetDamageAnim()
+    {
+        yield return new WaitForSeconds(0.2f);
+        animator.SetBool("IsDamage", false);
+    }
+}
