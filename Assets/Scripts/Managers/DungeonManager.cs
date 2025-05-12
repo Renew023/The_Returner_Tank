@@ -98,6 +98,15 @@ public class DungeonManager : MonoBehaviour
     {
         Debug.Log($"[DungeonManager] 던전 클리어!");
 
+        //  현재 플레이어 HP 저장
+        Player player = FindObjectOfType<Player>();
+
+        if (player != null)
+        {
+            DataManager.instance.savedPlayerHp = player.CurHP;
+            DataManager.instance.savedPlayerMaxHp = player.MaxHp;
+        }
+
         //  던전 난이도 증가
         GameManager.Instance.IncreaseDungeonLevel();
 
@@ -105,7 +114,7 @@ public class DungeonManager : MonoBehaviour
         GameManager.Instance.currentStageIndex++;
 
         //  다음 던전을 위한 초기화
-        currentWave = 1; 
+        currentWave = 1;
 
         //  스테이지 선택 화면으로 복귀
         SceneController.ToMap();

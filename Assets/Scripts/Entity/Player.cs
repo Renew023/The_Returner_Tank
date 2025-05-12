@@ -28,6 +28,17 @@ public class Player : Character
         //LevelUp();
     }
 
+    private void Start()
+    {
+        if(DataManager.instance.savedPlayerMaxHp > 0)
+        {
+            maxHp = DataManager.instance.savedPlayerMaxHp;
+            curHp = DataManager.instance.savedPlayerHp;
+        }
+
+        base.Start();
+    }
+
     void Update()
     {
 		mousePosition = Input.mousePosition;

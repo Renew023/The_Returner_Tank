@@ -16,6 +16,17 @@ public class Character : MonoBehaviour
 	[SerializeField] protected float moveSpeed;
 	protected Vector2 isLeft;
 
+	//	외부에서 읽고 쓰기 위한 함수 추가
+	public float CurHP
+	{
+		get => curHp;
+	}
+
+	public float MaxHp
+	{
+		get => maxHp;
+	}
+
 	//[SerializeField] protected int arrowValue;
 	//[SerializeField] protected float arrowSpeed;
 	//[SerializeField] protected float arrowDamage;
