@@ -886,6 +886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed092cfee3067284d85ee77e03fe6c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  warpZone: {fileID: 1300690096}
   currentWave: 1
   maxWave: 3
   pools: {fileID: 1089196625}
@@ -2012,6 +2013,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e3d71d80810b3742a2fae4e8377e146, type: 3}
+--- !u!1 &1300690096 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 34742838832249949, guid: 8e3d71d80810b3742a2fae4e8377e146, type: 3}
+  m_PrefabInstance: {fileID: 1300690095}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1311857427
 GameObject:
   m_ObjectHideFlags: 0
