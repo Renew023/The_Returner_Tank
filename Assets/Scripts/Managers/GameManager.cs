@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     private bool firstMapEntry = true;
     public bool FirstMapEntry => firstMapEntry;
 
+    public void DisableFirstMapEntry() => firstMapEntry = false;
+
     [Header("Stage Info")]
     //  스테이지 인덱스 추가
     public int stageIndex;
