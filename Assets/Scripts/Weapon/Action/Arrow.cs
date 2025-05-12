@@ -6,14 +6,13 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     public GameObject owner;
-
     public WeaponController countReturn;
-    [SerializeField] private Rigidbody2D rb;
+    public Rigidbody2D rb;
     public float damage;
     public Vector2 direction;
     public float time;
 
-    void OnEnable()
+    protected virtual void OnEnable()
     {
 	    rb.velocity = direction;
 
@@ -23,13 +22,24 @@ public class Arrow : MonoBehaviour
 	    
 		StartCoroutine("Shoot");
 	}
-	void OnDisable()
+	protected virtual void OnDisable()
 	{
         StopAllCoroutines();
 		countReturn.pooling();
 	}
+	
+	// Update is called once per frame
+	public virtual void Update()
+    {
+        Action();
+	}
 
-    IEnumerator Shoot()
+    public virtual void Action()
+    {
+		rb.velocity = direction;
+	}
+
+    public virtual IEnumerator Shoot()
     {
         yield return new WaitForSeconds(time);
         gameObject.SetActive(false);

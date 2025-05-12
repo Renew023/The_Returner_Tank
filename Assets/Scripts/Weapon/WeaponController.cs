@@ -33,7 +33,7 @@ public class WeaponController : MonoBehaviour
 
     public void Attack(Vector2 dir)
     {
-		int value = (weapon.arrowValue + playerWeaponStat.arrowValue);
+		int value = weapon.arrowValue + playerWeaponStat.arrowValue;
 		float minAngle = -(value / 2f) * 10;
 
 		for (int i = 0; i < value; i++)
@@ -67,7 +67,7 @@ public class WeaponController : MonoBehaviour
 			else
 			{
 				objectPoolArrow[curCount].transform.position = transform.position;
-				objectPoolArrow[curCount].direction = rozLine * (weapon.arrowSpeed +playerWeaponStat.arrowSpeed);
+				objectPoolArrow[curCount].direction = rozLine * (weapon.arrowSpeed + playerWeaponStat.arrowSpeed);
 				objectPoolArrow[curCount].damage = weapon.arrowDamage + playerWeaponStat.arrowDamage;
 				objectPoolArrow[curCount].gameObject.SetActive(true);
 				objectPoolCount -= 1;

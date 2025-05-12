@@ -10,7 +10,6 @@ public class SkillSelectButton : MonoBehaviour
     public Skill skill;
     public Button skillSelect;
     //public SpriteRenderer ab;
-
     public Image image;
     public TextMeshProUGUI title;
 
@@ -50,8 +49,6 @@ public class SkillSelectButton : MonoBehaviour
 			player.skillSelectUI.SetActive(false);
             return;
 		}
-
-
 
         if (skill.level == 0)
         {

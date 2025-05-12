@@ -10,27 +10,24 @@ public class SkillSelectUI : MonoBehaviour
     public List<int> value;
     public List<SkillSelectButton> skillSelectButton;
     public List<Skill> skills;
-
-    public int showCard = 3;
+    public int ShowCard = 3;
 
     void OnEnable()
     {
-		bool isMax = DataManager.instance.maxPlayerSkill == player.playerSkill.Count ? true : false;
+        if (DataManager.instance.maxPlayerSkill - DataManager.instance.curPlayerSkillMax < 3)
+            ShowCard = DataManager.instance.maxPlayerSkill - DataManager.instance.curPlayerSkillMax;
 
-        if (DataManager.instance.curPlayerSkillMax - DataManager.instance.maxPlayerSkill < 3)
-            showCard = DataManager.instance.maxPlayerSkill - DataManager.instance.curPlayerSkillMax;
-
-		while (skills.Count < showCard)
-        {
+		while (skills.Count < ShowCard)
+		{
+            int rand;
             bool isNotEqual = true;
-            
-			int rand = Random.Range(0, DataManager.instance.skillList.Count);
+            bool isMaxSkill =
+            DataManager.instance.maxPlayerSkill == player.playerSkill.Count ? true : false;
 
-			if (isMax)
-            {
+            if (isMaxSkill)
                 rand = Random.Range(0, player.playerSkill.Count);
-            }
-
+            else
+                rand = Random.Range(0, DataManager.instance.skillList.Count); // 0~9 »çÀÌ
 
             for (int j = 0; j < value.Count; j++)
             {
@@ -43,10 +40,11 @@ public class SkillSelectUI : MonoBehaviour
 
             if (isNotEqual == true)
             {
-                if (isMax)
+                if (isMaxSkill)
                 {
-					if (player.playerSkill[rand].level == 3)
-						continue;
+                    if (player.playerSkill[rand].level == 3)
+                        continue;
+
 					skills.Add(player.playerSkill[rand]);
 				}
                 else
@@ -54,16 +52,16 @@ public class SkillSelectUI : MonoBehaviour
 					if (DataManager.instance.skillList[rand].level == 3)
 						continue;
 					skills.Add(DataManager.instance.skillList[rand]);
-				}
-                value.Add(rand);
-            }
+                }
+				value.Add(rand);
+			}
             
 		}
-        if (showCard == 0)
-            skillSelectButton[0].gameObject.SetActive(true);
 
+        if (ShowCard == 0)
+			skillSelectButton[0].gameObject.SetActive(true);
 
-        for (int i = 0; i < showCard; i++)
+		for (int i = 0; i < ShowCard; i++)
         {
             skillSelectButton[i].skill = skills[i];
             skillSelectButton[i].gameObject.SetActive(true);
@@ -74,15 +72,12 @@ public class SkillSelectUI : MonoBehaviour
     {
         skills.Clear();
         value.Clear();
-		for (int i = 0; i < showCard; i++)
+		if (ShowCard == 0)
+			skillSelectButton[0].gameObject.SetActive(false);
+
+		for (int i = 0; i < ShowCard; i++)
 		{
 			skillSelectButton[i].gameObject.SetActive(false);
 		}
 	}
-
-
-
-    void Pick()
-    {
-    }
 }
