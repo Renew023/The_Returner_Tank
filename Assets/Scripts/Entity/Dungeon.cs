@@ -51,7 +51,6 @@ public class Dungeon : MonoBehaviour
         //  만약 놀고 있는 적 오브젝트가 없다면, 새롭게 생성한 후에 select 오브젝트에 할당한다.
         if(!selectObject)
         {
-            Debug.Log(index);
             selectObject = Instantiate(Enemies[index], transform);
             pools[index].Add(selectObject);
         }

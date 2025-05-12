@@ -13,8 +13,9 @@ TagManager:
   - Water
   - UI
   - Wall
+  - Floor
+  - Player
   - Monster
-  - 
   - 
   - 
   - 

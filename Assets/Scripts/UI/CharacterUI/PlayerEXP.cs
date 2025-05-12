@@ -7,7 +7,6 @@ public class PlayerEXP : CharacterUI
 
     protected override void Start()
     {
-        UIManager.Instance.playerEXP = this;
         // 플레이어의 현재 경험치를 가져와서 반영
         //UpdateValue(현재 경험치, 총 필요 경험치);
     }
@@ -15,11 +14,5 @@ public class PlayerEXP : CharacterUI
     public override void UpdateValue(float current, float max)
     {
         expBarFill.fillAmount = current / max;
-    }
-
-    public override void Show(bool show)
-    {
-        //throw new System.NotImplementedException();
-        expBarFill.gameObject.SetActive(show);
     }
 }

@@ -11,6 +11,16 @@ public class Enemy : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "Bomb")
+        {
+            Debug.Log("트리거 충돌 발생!");
+
+            TakeDamage(10);
+        }
+    }
+
     public void TakeDamage(int dmg)
     {
         hp -= dmg;
