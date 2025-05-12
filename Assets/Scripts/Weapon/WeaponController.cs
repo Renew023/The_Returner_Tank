@@ -38,8 +38,11 @@ public class WeaponController : MonoBehaviour
 
 		for (int i = 0; i < value; i++)
 		{
-			float angle = minAngle + 10 * i;
-			Vector2 rozLine = (Quaternion.Euler(0, 0, angle) * dir).normalized;
+			float angleOffset = minAngle + 10 * i;
+			Vector2 rozLine = (Quaternion.Euler(0, 0, angleOffset) * dir).normalized;
+
+			float rotZ = Mathf.Atan2(rozLine.y, rozLine.x) * Mathf.Rad2Deg;
+			Quaternion arrowRotation = Quaternion.Euler(0, 0, rotZ + 90f);
 
 			if (objectPoolCount < 5)
 			{
