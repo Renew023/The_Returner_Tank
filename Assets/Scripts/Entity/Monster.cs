@@ -6,10 +6,13 @@ public class Monster : Character
 {
 	[SerializeField] private Player target;
 	[SerializeField] private WeaponController weaponController;
+	protected Animator animator;
 
 	void Awake()
 	{
 		target = GameObject.FindObjectOfType<Player>();
+
+		animator = GetComponentInChildren<Animator>();
 	}
 
     protected override void Init()
@@ -37,7 +40,7 @@ public class Monster : Character
 
 	override protected void Move()
 	{
-
+		animator.SetBool("IsMove", true);
 	}
 
 	override protected void Rotate()
@@ -64,6 +67,8 @@ public class Monster : Character
 	public void TakeDamage(float damage)
 	{
 		curHp -= damage;
+
+		animator.SetBool("IsDamage", true);
 
 		if(curHp <= 0)
 		{
