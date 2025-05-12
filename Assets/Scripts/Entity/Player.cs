@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Player : Character
 {
@@ -23,10 +22,9 @@ public class Player : Character
 	[SerializeField] private float Exp;
 
     [SerializeField] private float Level;
-    [SerializeField] private Image hpBarFill;
 
-    //[SerializeField] public List<Skill> skillList = new List<Skill>(10);
-    [SerializeField] public List<Skill> playerSkill = new List<Skill>(5);
+	//[SerializeField] public List<Skill> skillList = new List<Skill>(10);
+	[SerializeField] public List<Skill> playerSkill = new List<Skill>(5);
     [SerializeField] public GameObject skillSelectUI;
     public Weapon playerWeaponStat;
 
@@ -48,8 +46,6 @@ public class Player : Character
         {
             maxHp = DataManager.instance.savedPlayerMaxHp;
             curHp = DataManager.instance.savedPlayerHp;
-            hpBarFill.fillAmount = curHp / maxHp;
-            UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
         }
 
         base.Start();
@@ -86,10 +82,6 @@ public class Player : Character
         {
             LevelUp();
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            UIManager.Instance.uiController.pauseUI.PauseMenuToggle(); //ESC입력시 게임 멈춤.
-        }
     }
 
     override protected void Move()
@@ -124,9 +116,7 @@ public class Player : Character
     {
 		maxHp += value;
 		curHp += value;
-        hpBarFill.fillAmount = curHp / maxHp;
-        UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
-    }
+	}
 
     public void MoveSpeedUp(float value = 1)
     {
@@ -150,10 +140,6 @@ public class Player : Character
         {
             curHp = maxHp;
         }
-
-        hpBarFill.fillAmount = curHp / maxHp;
-
-        UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
     }
 
 	public void OnTriggerEnter2D(Collider2D collision)
@@ -180,15 +166,12 @@ public class Player : Character
         //	일정 시간이 지난 후, Damage 애니메이션 플래그 초기화
         //StartCoroutine(ResetDamageAnim());
 
-        hpBarFill.fillAmount = curHp / maxHp;
-
-        UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
-
         if (curHp <= 0)
         {
             //Death();
         }
     }
+
 
     private IEnumerator ResetDamageAnim()
     {

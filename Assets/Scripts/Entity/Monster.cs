@@ -1,14 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Monster : Character
 {
 	[SerializeField] private Player target;
 	[SerializeField] private WeaponController weaponController;
-    [SerializeField] private Image hpBarFill;
-    protected Animator animator;
+	protected Animator animator;
 
 	void Awake()
 	{
@@ -20,7 +18,7 @@ public class Monster : Character
 	protected override void Init()
 	{
 		base.Init();
-    }
+	}
 
 	protected override void Start()
 	{
@@ -81,9 +79,7 @@ public class Monster : Character
 		//	일정 시간이 지난 후, Damage 애니메이션 플래그 초기화
 		StartCoroutine(ResetDamageAnim());
 
-        hpBarFill.fillAmount = curHp / maxHp;
-
-        if (curHp <= 0)
+		if (curHp <= 0)
 		{
 			Death();
 		}

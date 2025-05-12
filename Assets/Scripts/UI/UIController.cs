@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
-    public BossHP bossHP;
-    public PlayerEXP playerEXP;
-    public PlayerHP playerHP;
-    public PlayerLevel playerLevel;
-    public DeathUI deathUI;
-    public PauseUI pauseUI;
+    [SerializeField] public BossHP bossHP;
+    [SerializeField] public PlayerEXP playerEXP;
+    [SerializeField] public PlayerHP playerHP;
+    [SerializeField] public PlayerLevel playerLevel;
+    [SerializeField] public DeathUI deathUI;
+    [SerializeField] public PauseUI pauseUI;
 
     private void Start()
     {

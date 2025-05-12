@@ -9,17 +9,17 @@ public class DungeonManager : MonoBehaviour
     private GameObject warpZone;
     public static DungeonManager instance;
 
-    //  ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //  ÇöÀç ¿þÀÌºê º¯¼ö°ª
     public int currentWave = 1;
     public int maxWave = 3;
 
-    //  ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //  ¿þÀÌºê ³» ÇöÀç »ì¾ÆÀÖ´Â ¸ó½ºÅÍÀÇ ¼ö º¯¼ö°ª
     private int aliveEnemies = 0;
 
-    //  ï¿½ï¿½ï¿½Ìºê°¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    //  ¿þÀÌºê°¡ ÁøÇà ÁßÀÎÁö ÃßÀûÇÏ±â À§ÇÑ º¯¼ö
     private bool isWaveInProgress = false;
 
-    public Dungeon pools;           //  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® Ç®ï¿½ï¿½ ï¿½Å´ï¿½ï¿½ï¿½
+    public Dungeon pools;           //  ¿ÀºêÁ§Æ® Ç®¸µ ¸Å´ÏÀú
 
     private void Awake()
     {
@@ -39,48 +39,48 @@ public class DungeonManager : MonoBehaviour
 
     private void Start()
     {
-        //  DungeonManagerï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºê¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½!!
+        //  DungeonManager¿¡¼­ ½ºÆù ¿þÀÌºê¸¦ °ü¸®ÇÑ´Ù!!
         currentWave = 1;
 
         Spawner.instance.SpawnFixedWave();
         UIManager.Instance.uiController.SetDungeonUI(true);
     }
 
-    //  ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
+    //  ÇöÀç ¿þÀÌºê ½ÃÀÛ ½Ã ¸ó½ºÅÍ ¼ö ¼³Á¤ ¸Þ¼­µå
     public void StartWave(int count)
     {
         aliveEnemies = count;
         isWaveInProgress = true;
-        Debug.Log($"[ï¿½ï¿½ï¿½Ìºï¿½ {currentWave}] ï¿½ï¿½ï¿½ï¿½ {count} ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯!");
+        Debug.Log($"[¿þÀÌºê {currentWave}] ¸ó½ºÅÍ {count} ¸¶¸® ¼ÒÈ¯!");
     }
 
-    //  ï¿½ï¿½ï¿½Í°ï¿½ ï¿½×¾ï¿½ï¿½ï¿½ ï¿½ï¿½ È£ï¿½ï¿½Ç´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
+    //  ¸ó½ºÅÍ°¡ Á×¾úÀ» ¶§ È£ÃâµÇ´Â ¸Þ¼­µå
     public void OnEnemyDeath()
     {
-        //  ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        //  ³²Àº ¸ó½ºÅÍ ¼ö °¨¼Ò
         aliveEnemies--;
 
-        //  ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í°ï¿½ ï¿½×¾ï¿½ï¿½Ù¸ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
+        //  ¿þÀÌºê ³» ¸ðµç ¸ó½ºÅÍ°¡ Á×¾ú´Ù¸é, ÇöÀç ¿þÀÌºê Á¾·á ¹× ´ÙÀ½ ¿þÀÌºê ½ºÆù
         if(isWaveInProgress && aliveEnemies <= 0)
         {
             isWaveInProgress = false;
-            Debug.Log($"ï¿½ï¿½ï¿½Ìºï¿½ {currentWave}] ï¿½Ï·ï¿½!");
+            Debug.Log($"¿þÀÌºê {currentWave}] ¿Ï·á!");
 
             if(currentWave >= maxWave)
             {
-                Debug.Log($"[DungeonManager] ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½!");
+                Debug.Log($"[DungeonManager] ¸ðµç ¿þÀÌºê Á¾·á!");
                 ClearDungeon();
             }
 
             else
             {
-                Debug.Log($"[DungeonManager] ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ {currentWave}] ï¿½ï¿½ï¿½ï¿½!");
+                Debug.Log($"[DungeonManager] ´ÙÀ½ ¿þÀÌºê {currentWave}] ½ÃÀÛ!");
                 //NextWave();
 
-                //  ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
+                //  ¿þÀÌºê Áõ°¡
                 currentWave++;
 
-                Debug.Log($"[DungeonManager] ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½: {currentWave}");
+                Debug.Log($"[DungeonManager] ÇöÀç ¿þÀÌºê: {currentWave}");
 
                 Spawner.instance.SpawnFixedWave();
             }
@@ -90,9 +90,9 @@ public class DungeonManager : MonoBehaviour
 
     void ClearDungeon()
     {
-        Debug.Log($"[DungeonManager] ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½!");
+        Debug.Log($"[DungeonManager] ´øÀü Å¬¸®¾î!");
 
-        //  ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ HP ï¿½ï¿½ï¿½ï¿½
+        //  ÇöÀç ÇÃ·¹ÀÌ¾î HP ÀúÀå
         Player player = FindObjectOfType<Player>();
 
         if (player != null)
@@ -101,18 +101,16 @@ public class DungeonManager : MonoBehaviour
             DataManager.instance.savedPlayerMaxHp = player.MaxHp;
         }
 
-        //  ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½
+        //  ´øÀü ³­ÀÌµµ Áõ°¡
         GameManager.Instance.IncreaseDungeonLevel();
 
-        //  ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½)
+        //  ÇöÀç ½ºÅ×ÀÌÁö ÀÎµ¦½º Áõ°¡ (´ÙÀ½ ½ºÅ×ÀÌÁö ÁøÇà¿ë)
         GameManager.Instance.currentStageIndex++;
 
-        //  ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
+        //  ´ÙÀ½ ´øÀüÀ» À§ÇÑ ÃÊ±âÈ­
         currentWave = 1;
 
-        UIManager.Instance.uiController.SetDungeonUI(false);
-        
-        //  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        //  ½ºÅ×ÀÌÁö ¼±ÅÃ È­¸éÀ¸·Î º¹±Í¿ë ¿öÇÁ¸Ê »ý¼º
         warpZone.SetActive(true);
     }
 }
