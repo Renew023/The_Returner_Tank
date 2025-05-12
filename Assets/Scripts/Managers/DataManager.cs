@@ -10,8 +10,10 @@ public class DataManager : MonoBehaviour
 	public List<Skill> skillList = new List<Skill>(10);
     public Skill skill;
 	public int skillValue = 0;
+	public int maxPlayerSkill = 3;
+	public int curPlayerSkillMax = 0;
 
-    [Header("플레이어 정보")]
+	[Header("플레이어 정보")]
     public float savedPlayerHp;
     public float savedPlayerMaxHp;
 
@@ -33,7 +35,7 @@ public class DataManager : MonoBehaviour
 	{
 		player = GameObject.FindAnyObjectByType<Player>();
 		player.playerSkill.Add(skill);
-		player.weapons.Add(Instantiate(skill.weaponCon, player.transform.position + new Vector3(0.6f, 0, 0), Quaternion.identity, player.transform));
+		player.weapons.Add(Instantiate(skill.weaponCon, player.transform.position, Quaternion.identity, player.transform));
 
 		float value = skill.levelSkills[skill.level].value;
 
