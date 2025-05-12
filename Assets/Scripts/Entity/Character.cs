@@ -43,6 +43,8 @@ public class Character : MonoBehaviour
 		isLeft = Vector3.zero;
 
 		lookDirection = Vector3.up;
+
+        UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
     }
 
     protected virtual void Start()
@@ -56,5 +58,6 @@ public class Character : MonoBehaviour
 	protected virtual void Hit(ref float curHp, float damage) 
     {
         curHp -= damage;
+        UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
     }
 }

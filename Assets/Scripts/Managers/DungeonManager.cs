@@ -105,6 +105,9 @@ public class DungeonManager : MonoBehaviour
         //  다음 던전을 위한 초기화
         currentWave = 1;
 
+        //  던전UI 끄기
+        UIManager.Instance.uiController.SetDungeonUI(false);
+
         //  스테이지 선택 화면으로 복귀
         SceneController.ToMap();
     }
