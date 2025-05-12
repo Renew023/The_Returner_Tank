@@ -8,42 +8,42 @@ public class UIController : MonoBehaviour
     [SerializeField] public PlayerLevel playerLevel;
     [SerializeField] public DeathUI deathUI;
     [SerializeField] public PauseUI pauseUI;
-    [SerializeField] public StageSelectUI stageSelectUI;
-    [SerializeField] public SkillSelectUI skillSelectUI;
 
     private void Start()
     {
         UIManager.Instance.uiController = this;
     }
 
-    public void ShowBossHP(bool show)
+    private void ShowBossHP(bool show)
     {
         bossHP.gameObject.SetActive(show);
     }
 
-    public void ShowPlayerStatus(bool show)
+    private void ShowPlayerStatus(bool show)
     {
         // EXP, Level도 같은 Object이므로 한 개만 있어도 됨.
         playerHP.gameObject.SetActive(show);
     }
 
-    public void ShowDeathUI(bool show)
+    private void ShowDeathUI(bool show)
     {
         deathUI.gameObject.SetActive(show);
     }
 
-    public void ShowPauseUI(bool show)
+    private void ShowPauseUI(bool show)
     {
-        deathUI.gameObject.SetActive(show);
+        pauseUI.gameObject.SetActive(show);
     }
 
-    public void ShowStageSelectUI(bool show)
+    public void SetDungeonUI(bool show)
     {
-        stageSelectUI.gameObject.SetActive(show);
+        ShowPlayerStatus(show);
+        ShowDeathUI(show);
+        ShowPauseUI(show);
     }
 
-    public void ShowSkillSelectUI(bool show)
+    public void SetBossHP(bool show)
     {
-        skillSelectUI.gameObject.SetActive(show);
+        ShowBossHP(show);
     }
 }

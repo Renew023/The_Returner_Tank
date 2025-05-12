@@ -38,6 +38,7 @@ public class DungeonManager : MonoBehaviour
         currentWave = 1;
 
         Spawner.instance.SpawnFixedWave();
+        UIManager.Instance.uiController.SetDungeonUI(true);
     }
 
     //  현재 웨이브 시작 시 몬스터 수 설정 메서드
