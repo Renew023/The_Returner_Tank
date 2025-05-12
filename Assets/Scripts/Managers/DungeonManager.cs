@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class DungeonManager : MonoBehaviour
 {
+
+    private GameObject warpZone;
     public static DungeonManager instance;
 
     //  현재 웨이브 변수값
@@ -21,7 +23,10 @@ public class DungeonManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (warpZone != null)
+            warpZone.SetActive(false);
+
+        if (instance == null)
         {
             instance = this;
         }
@@ -105,7 +110,7 @@ public class DungeonManager : MonoBehaviour
         //  다음 던전을 위한 초기화
         currentWave = 1;
 
-        //  스테이지 선택 화면으로 복귀
-        SceneController.ToMap();
+        //  스테이지 선택 화면으로 복귀용 워프맵 생성
+        warpZone.SetActive(true);
     }
 }
