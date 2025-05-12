@@ -39,6 +39,8 @@ public class SkillSelectButton : MonoBehaviour
             if (player.weapons != null)
             {
                 player.weapons.Add(Instantiate(skill.weaponCon, player.transform.position + new Vector3(0.6f, 0, 0), Quaternion.identity, player.transform));
+                UIManager.Instance.uiController.pauseUI.skillSlots[UIManager.Instance.uiController.pauseUI.skillsCount].sprite = image.sprite;
+                UIManager.Instance.uiController.pauseUI.SetSkillImages(UIManager.Instance.uiController.pauseUI.skillsCount);
             }
         }
         float value = skill.levelSkills[skill.level].value;

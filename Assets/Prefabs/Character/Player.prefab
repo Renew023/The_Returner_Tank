@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2505296766071451828}
   - component: {fileID: 1069348182414491526}
   - component: {fileID: 2059820060375317080}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ MonoBehaviour:
   radius: 10
   layer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 512
   colliders: []
   short_enemy: {fileID: 0}
 --- !u!1 &4697686774571476180
@@ -209,7 +209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6620190527142343468}
   - component: {fileID: 5083591125180175280}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ Transform:
   m_GameObject: {fileID: 4697686774571476180}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.16, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
