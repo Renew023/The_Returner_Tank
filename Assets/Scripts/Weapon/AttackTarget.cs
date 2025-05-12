@@ -8,31 +8,43 @@ using static UnityEngine.GraphicsBuffer;
 public class AttackTarget : MonoBehaviour
 {
 	public float radius = 3.0f;
-	public LayerMask layer;
+	public LayerMask wallLayer;
+	public LayerMask enemyLayer;
 	public Collider2D[] colliders;
 	public Collider2D short_enemy;
 
 	public Vector2 Searching(Vector2 look, Vector2 user)
 	{
-		//Collider[] colliders;
-		//Collider short_enemy;
-		colliders = Physics2D.OverlapCircleAll(transform.position, radius, layer);
+		colliders = Physics2D.OverlapCircleAll(transform.position, radius, enemyLayer);
 
-		if (colliders.Length > 0)
+		Collider2D closestEnemy = null;
+		float closestDistance = float.MaxValue;
+
+		foreach (Collider2D enemyCol in colliders)
 		{
-			float short_distance = Vector2.Distance(transform.position, colliders[0].transform.position);
-			short_enemy = colliders[0];
-			foreach (Collider2D col in colliders)
+			Vector2 direction = (Vector2)enemyCol.transform.position - (Vector2)transform.position;
+			float distance = direction.magnitude;
+
+			// Raycast: 벽과 적을 모두 포함한 레이어에 대해 검사
+			RaycastHit2D hit = Physics2D.Raycast(transform.position, direction.normalized, distance, wallLayer | enemyLayer);
+
+			// 먼저 맞은 게 벽이면 무시, 적이면 유효 후보
+			if (hit.collider != null && hit.collider.gameObject == enemyCol.gameObject)
 			{
-				float short_distance2 = Vector3.Distance(transform.position, col.transform.position);
-				if (short_distance > short_distance2)
+				if (distance < closestDistance)
 				{
-					short_distance = short_distance2;
-					short_enemy = col;
+					closestDistance = distance;
+					closestEnemy = enemyCol;
 				}
 			}
-			return short_enemy.transform.position - (Vector3)user;
 		}
+
+		if (closestEnemy != null)
+		{
+			short_enemy = closestEnemy;
+			return closestEnemy.transform.position - (Vector3)user;
+		}
+
 		return look;
 	}
 	
