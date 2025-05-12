@@ -15,12 +15,18 @@ public class Monster : Character
 		animator = GetComponentInChildren<Animator>();
 	}
 
-    protected override void Init()
-    {
-        base.Init();
-    }
+	protected override void Init()
+	{
+		base.Init();
+	}
 
-    void Update()
+	protected override void Start()
+	{
+		base.Start();
+	}
+
+
+	void Update()
 	{
 		Move();
 		Rotate();
@@ -70,9 +76,12 @@ public class Monster : Character
 
 		animator.SetBool("IsDamage", true);
 
-		if(curHp <= 0)
+		//	일정 시간이 지난 후, Damage 애니메이션 플래그 초기화
+		StartCoroutine(ResetDamageAnim());
+
+		if (curHp <= 0)
 		{
-            Death();
+			Death();
 		}
 	}
 
@@ -82,5 +91,11 @@ public class Monster : Character
 
 		//	해당 몬스터가 속해있는 몬스터 수 감소.
 		DungeonManager.instance.OnEnemyDeath();
+	}
+
+	private IEnumerator ResetDamageAnim()
+	{
+		yield return new WaitForSeconds(0.2f);
+		animator.SetBool("IsDamage", false);
 	}
 }

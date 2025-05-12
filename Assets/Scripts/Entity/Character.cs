@@ -34,7 +34,12 @@ public class Character : MonoBehaviour
 		lookDirection = Vector3.up;
     }
 
-	protected virtual void Move() { }
+    protected virtual void Start()
+    {
+		Init();
+    }
+
+    protected virtual void Move() { }
     protected virtual void Rotate() { }
 
 	protected virtual void Hit(ref float curHp, float damage) 
