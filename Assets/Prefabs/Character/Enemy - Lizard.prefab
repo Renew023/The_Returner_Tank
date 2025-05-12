@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2665186734211542460}
   - component: {fileID: 7242409704233479120}
   - component: {fileID: 5456509685182369952}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MainSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 2378373203423379200}
   - component: {fileID: 2482804285042924537}
   - component: {fileID: 8027058772704093930}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy - Lizard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,12 +246,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef1d169b4aeb2a64593272a49a5171e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponController: {fileID: 0}
   maxHp: 100
   curHp: 0
   moveSpeed: 0
-  arrowValue: 0
-  arrowSpeed: 0
-  arrowDamage: 0
+  lookDirection: {x: 0, y: 0}
   attackDelay: 1
   target: {fileID: 0}
+  weaponController: {fileID: 6955153868353512977, guid: 7700fb7bfccad134a8b857c9b6c58936, type: 3}

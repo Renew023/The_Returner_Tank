@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Event_HealScene.unity
     guid: 40c60f69b3e65cf438af408ea62b361f
+  - enabled: 1
+    path: Assets/Scenes/DungeonScene2.unity
+    guid: 3e396d1677cbd2b43a0abed7040f38c4
+  - enabled: 1
+    path: Assets/Scenes/DungeonScene3.unity
+    guid: 222e3e73c466f3c4c8d051c6c919a98b
+  - enabled: 1
+    path: Assets/Scenes/DungeonScene4.unity
+    guid: 4fae3811c8a8431458d1c241088fe863
   m_configObjects: {}
