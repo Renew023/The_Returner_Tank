@@ -10,7 +10,6 @@ public class SkillSelectButton : MonoBehaviour
     public Skill skill;
     public Button skillSelect;
     //public SpriteRenderer ab;
-
     public Image image;
     public TextMeshProUGUI title;
 
@@ -56,7 +55,7 @@ public class SkillSelectButton : MonoBehaviour
             player.playerSkill.Add(skill);
             if (skill.weaponCon != null)
             {
-                player.weapons.Add(Instantiate(skill.weaponCon, player.transform.position + new Vector3(0.6f, 0, 0), Quaternion.identity, player.transform));
+                player.weapons.Add(Instantiate(skill.weaponCon, player.transform.position, Quaternion.identity, player.transform));
             }
         }
         float value = skill.levelSkills[skill.level].value;

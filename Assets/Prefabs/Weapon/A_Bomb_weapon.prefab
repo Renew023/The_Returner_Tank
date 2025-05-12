@@ -154,7 +154,7 @@ MonoBehaviour:
   weaponSprite: {fileID: 671199913142728821}
   weapon:
     name: "\uD3ED\uD0C4"
-    arrowValue: 1
+    arrowValue: 3
     arrowSpeed: 5
     arrowDamage: 5
     attackDelay: 1
