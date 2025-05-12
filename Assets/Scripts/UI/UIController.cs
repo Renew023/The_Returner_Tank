@@ -16,23 +16,23 @@ public class UIController : MonoBehaviour
         UIManager.Instance.uiController = this;
     }
 
-    public void ShowBossHP(bool show)
+    private void ShowBossHP(bool show)
     {
         bossHP.gameObject.SetActive(show);
     }
 
-    public void ShowPlayerStatus(bool show)
+    private void ShowPlayerStatus(bool show)
     {
         // EXP, Level도 같은 Object이므로 한 개만 있어도 됨.
         playerHP.gameObject.SetActive(show);
     }
 
-    public void ShowDeathUI(bool show)
+    private void ShowDeathUI(bool show)
     {
         deathUI.gameObject.SetActive(show);
     }
 
-    public void ShowPauseUI(bool show)
+    private void ShowPauseUI(bool show)
     {
         deathUI.gameObject.SetActive(show);
     }
@@ -46,4 +46,22 @@ public class UIController : MonoBehaviour
     //{
     //    skillSelectUI.gameObject.SetActive(show);
     //}
+
+    public void SetDungeonUI(bool show)
+    {
+        ShowPlayerStatus(show);
+        ShowDeathUI(show);
+        ShowPauseUI(show);
+    }
+
+    public void SetHealUI(bool show)
+    {
+        ShowPlayerStatus(show);
+        ShowPauseUI(show);
+    }
+
+    public void SetBossHP(bool show)
+    {
+        ShowBossHP(show);
+    }
 }
