@@ -24,7 +24,7 @@ public class SkillSelectButton : MonoBehaviour
         //ab = skill.weapon.weaponSprite;
         if (DataManager.instance.curPlayerSkillMax == DataManager.instance.maxPlayerSkill)
         {
-            title.text = "³ª°¡±â";
+            title.text = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
             return;
         }
 
@@ -58,7 +58,7 @@ public class SkillSelectButton : MonoBehaviour
             player.playerSkill.Add(skill);
             if (skill.weaponCon != null)
             {
-                player.weapons.Add(Instantiate(skill.weaponCon, player.transform.position + new Vector3(0.6f, 0, 0), Quaternion.identity, player.transform));
+                player.weapons.Add(Instantiate(skill.weaponCon, player.transform.position, Quaternion.identity, player.transform));
             }
         }
         float value = skill.levelSkills[skill.level].value;
