@@ -3,40 +3,61 @@ using UnityEngine.SceneManagement;
 
 public static class SceneController
 {
+    private static string _lastSceneName;
+    private const float MapReturnYOffset = 2f;
+
     static SceneController()
     {
-        // 씬 로드 후 호출될 메서드 연결
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    public static void ToHeal() => SceneManager.LoadScene("Event_HealScene");
-    public static void ToMap()  => SceneManager.LoadScene("MapScene");
+    public static void ToHeal()
+    {
+        _lastSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene("Event_HealScene");
+    }
 
-    //  전투 씬 로드
-	public static void ToBattle()
-	{
-		// 1 ~ 4 중 랜덤 숫자 선택
-		int randomIndex = Random.Range(1, 5); // 상한값은 제외되므로 5로 설정해야 4까지 포함됨
-		string sceneName = $"DungeonScene{randomIndex}";
+    public static void ToBattle()
+    {
+        _lastSceneName = SceneManager.GetActiveScene().name;
 
-		Debug.Log($"[SceneController] 로딩할 전투 씬: {sceneName}");
-		SceneManager.LoadScene(sceneName);
-	}
+        int randomIndex = Random.Range(1, 5);
+        string sceneName = $"DungeonScene{randomIndex}";
+        Debug.Log($"[SceneController] 로딩할 전투 씬: {sceneName}");
+        SceneManager.LoadScene(sceneName);
+    }
 
-    //  보스 씬 로드
+    public static void ToMap()
+    {
+        _lastSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene("MapScene");
+    }
+
     public static void ToBoss()
     {
         Debug.Log($"[SceneController] 로딩할 전투 씬: 보스 씬");
-
         SceneManager.LoadScene("BossBattleScene");
     }
 
-	private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "MapScene" && MapManager.Instance != null)
-        {
-            // 맵씬으로 돌아왔을 때 위치 복원
+        if (scene.name != "MapScene")
+            return;
+
+        if (MapManager.Instance != null)
             MapManager.Instance.RestoreMap();
+
+        if (_lastSceneName.StartsWith("DungeonScene")
+         || _lastSceneName == "Event_HealScene")
+        {
+            var cam = Camera.main;
+            if (cam != null)
+            {
+                var pos = cam.transform.position;
+                pos.y += MapReturnYOffset;
+                cam.transform.position = pos;
+            }
         }
+
     }
 }
