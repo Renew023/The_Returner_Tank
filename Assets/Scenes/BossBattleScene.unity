@@ -8115,6 +8115,37 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1126412497
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1126412498}
+  m_Layer: 0
+  m_Name: ============================  (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1126412498
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126412497}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1165265427
 GameObject:
   m_ObjectHideFlags: 0
@@ -10220,8 +10251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemies:
-  - {fileID: 7344293607410825155, guid: fd7013218e69f174e9bd52ec54e39ac8, type: 3}
-  - {fileID: 7344293607410825155, guid: fd7013218e69f174e9bd52ec54e39ac8, type: 3}
+  - {fileID: 316468670464230502, guid: ced4e440740582041a62be9896e4c50a, type: 3}
 --- !u!4 &2081940348
 Transform:
   m_ObjectHideFlags: 0
@@ -10248,11 +10278,12 @@ SceneRoots:
   - {fileID: 608890388}
   - {fileID: 2081940348}
   - {fileID: 1909743401}
+  - {fileID: 384846119}
+  - {fileID: 1841581937}
   - {fileID: 117317151}
   - {fileID: 1793328826}
   - {fileID: 92840358}
   - {fileID: 942656017}
-  - {fileID: 384846119}
-  - {fileID: 1841581937}
   - {fileID: 921663786}
   - {fileID: 1718805873}
+  - {fileID: 1126412498}
