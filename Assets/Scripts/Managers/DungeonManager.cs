@@ -48,7 +48,6 @@ public class DungeonManager : MonoBehaviour
         Debug.Log($"[웨이브 {currentWave}] 몬스터 {count} 마리 소환!");
     }
 
-
     //  몬스터가 죽었을 때 호출되는 메서드
     public void OnEnemyDeath()
     {
@@ -83,17 +82,6 @@ public class DungeonManager : MonoBehaviour
         }
     }
 
-    //  다음 웨이브 호출 메서드
-    void NextWave()
-    {
-        //  웨이브 증가
-        currentWave++;
-
-        Debug.Log($"[DungeonManager] 현재 웨이브: {currentWave}");
-
-        Spawner.instance.SpawnFixedWave();
-    }
-    
     void ClearDungeon()
     {
         Debug.Log($"[DungeonManager] 던전 클리어!");
