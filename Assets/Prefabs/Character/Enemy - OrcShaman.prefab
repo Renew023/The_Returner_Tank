@@ -235,6 +235,7 @@ MonoBehaviour:
   target: {fileID: 0}
   weaponController: {fileID: 6955153868353512977, guid: 7700fb7bfccad134a8b857c9b6c58936, type: 3}
   hpBarFill: {fileID: 1314804172287370648}
+  monsterTransform: {fileID: 26261639239032209}
 --- !u!114 &3594260524677699088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,10 +355,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8177850861053272928, guid: dd31f2d2171f3a64b8e33aa4e3f47dbe, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3319676158805808085}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd31f2d2171f3a64b8e33aa4e3f47dbe, type: 3}
 --- !u!114 &1314804172287370648 stripped
 MonoBehaviour:
@@ -375,23 +373,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5966664223877803045, guid: dd31f2d2171f3a64b8e33aa4e3f47dbe, type: 3}
   m_PrefabInstance: {fileID: 2177766954152145237}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8017932934988255797 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8177850861053272928, guid: dd31f2d2171f3a64b8e33aa4e3f47dbe, type: 3}
-  m_PrefabInstance: {fileID: 2177766954152145237}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3319676158805808085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8017932934988255797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5f4e2ccdcd38564bbe537f673fcf28d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7760748790591835380
 PrefabInstance:
   m_ObjectHideFlags: 0

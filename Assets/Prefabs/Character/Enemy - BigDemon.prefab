@@ -150,6 +150,7 @@ MonoBehaviour:
   target: {fileID: 0}
   weaponController: {fileID: 6955153868353512977, guid: 7700fb7bfccad134a8b857c9b6c58936, type: 3}
   hpBarFill: {fileID: 809700570773627994}
+  monsterTransform: {fileID: 6191788147004390145}
 --- !u!114 &4470708118024134508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,37 +376,17 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8177850861053272928, guid: dd31f2d2171f3a64b8e33aa4e3f47dbe, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6697538925727353226}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd31f2d2171f3a64b8e33aa4e3f47dbe, type: 3}
 --- !u!114 &809700570773627994 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4211963293299848619, guid: dd31f2d2171f3a64b8e33aa4e3f47dbe, type: 3}
   m_PrefabInstance: {fileID: 3553133594026938865}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4625993044121383569}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &4625993044121383569 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8177850861053272928, guid: dd31f2d2171f3a64b8e33aa4e3f47dbe, type: 3}
-  m_PrefabInstance: {fileID: 3553133594026938865}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6697538925727353226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4625993044121383569}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5f4e2ccdcd38564bbe537f673fcf28d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &7170466532663705044 stripped
@@ -504,6 +485,10 @@ PrefabInstance:
     - target: {fileID: 6821924906519480395, guid: c726ee444c5021449a0acb086a6cfa72, type: 3}
       propertyPath: m_Name
       value: CharacterCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601838826802172234, guid: c726ee444c5021449a0acb086a6cfa72, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
