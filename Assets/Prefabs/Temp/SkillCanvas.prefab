@@ -539,6 +539,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   skill:
+    name: 
     player: {fileID: 0}
     levelSkills: []
     level: 0
@@ -817,6 +818,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   skill:
+    name: 
     player: {fileID: 0}
     levelSkills: []
     level: 0
@@ -961,6 +963,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   skill:
+    name: 
     player: {fileID: 0}
     levelSkills: []
     level: 0
@@ -1099,6 +1102,7 @@ MonoBehaviour:
   - {fileID: 4618163759277086272}
   - {fileID: 2124991747961285855}
   skills: []
+  ShowCard: 3
 --- !u!1 &5572697684302830777
 GameObject:
   m_ObjectHideFlags: 0

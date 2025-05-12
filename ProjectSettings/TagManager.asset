@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Arrow
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,6 @@ TagManager:
   - Floor
   - Player
   - Monster
-  - 
   - 
   - 
   - 
