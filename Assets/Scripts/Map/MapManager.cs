@@ -227,6 +227,7 @@ public class MapManager : MonoBehaviour
 
         // 알파 값 초기화
         UpdateAlphas();
+        FindObjectOfType<MapFollowCamera>().target = playerIndicatorRt;
     }
 
     void DrawDots(NodeController a, NodeController b)
