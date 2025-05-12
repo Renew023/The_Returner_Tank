@@ -14,7 +14,13 @@ public class Player : Character
     [SerializeField] private Vector2 mousePosition;
     [SerializeField] private Vector2 worldPos;
 
-    [SerializeField] private float Exp;
+    [SerializeField] private Transform bodyTransform;
+    [SerializeField] private Transform headTransform;
+    
+	[SerializeField] private float arrowDelay;
+	[SerializeField] private float arrowDamage;
+	[SerializeField] private float Exp;
+
     [SerializeField] private float Level;
 
 	//[SerializeField] public List<Skill> skillList = new List<Skill>(10);
@@ -28,8 +34,9 @@ public class Player : Character
     {
         DataManager.instance.Pick();
         Init();
+        rb.freezeRotation = true;
         animator = GetComponentInChildren<Animator>();
-
+        
         //LevelUp();
     }
 
@@ -49,6 +56,8 @@ public class Player : Character
 		mousePosition = Input.mousePosition;
 		worldPos = camera.ScreenToWorldPoint(mousePosition);
         lookDirection = attackTarget.Searching(lookDirection, transform.position);
+        RotateHead();
+        
         for (int i = 0; i < weapons.Count; i++)
         {
             weapons[i].targetDirect = lookDirection;
@@ -86,9 +95,21 @@ public class Player : Character
 
     override protected void Rotate()
     {
-        isLeft = worldPos.x < transform.position.x ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
-
-        transform.localScale = isLeft;
+        Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        if (moveInput.sqrMagnitude > 0.1f)
+        {
+            float angle = Mathf.Atan2(moveInput.y, moveInput.x) * Mathf.Rad2Deg;
+            bodyTransform.rotation = Quaternion.Euler(0, 0, angle + 90f); // ??? +90 ??
+        }
+    }
+    
+    private void RotateHead()
+    {
+        if (lookDirection != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+            headTransform.rotation = Quaternion.Euler(0, 0, angle - 100f);
+        }
     }
 
     public void HpUp(float value = 1)

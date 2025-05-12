@@ -23,7 +23,7 @@ public class SkillSelectButton : MonoBehaviour
         //ab = skill.weapon.weaponSprite;
         if (DataManager.instance.curPlayerSkillMax == DataManager.instance.maxPlayerSkill)
         {
-            title.text = "³ª°¡±â";
+            title.text = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
             return;
         }
 
