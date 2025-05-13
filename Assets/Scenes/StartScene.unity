@@ -5490,7 +5490,7 @@ MonoBehaviour:
       value: 10
     level: 0
     weaponCon: {fileID: 0}
-  - name: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uB370\uBBF8\uC9C0 \uC99D\uAC00"
+  - name: "\uD50C\uB808\uC774\uC5B4 \uD22C\uC0AC \uB370\uBBF8\uC9C0 \uC99D\uAC00"
     player: {fileID: 0}
     levelSkills:
     - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uB370\uBBF8\uC9C0 \uC99D\uAC00"
