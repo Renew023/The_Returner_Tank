@@ -48,6 +48,8 @@ public class DataManager : MonoBehaviour
 		playerValue.playerSkill.Add(skill);
 		playerWeapon.Add(skill.weaponCon.weapon);
 
+		// 여기서 스킬슬롯 추가
+
 		float value = skill.levelSkills[skill.level].value;
 
 
