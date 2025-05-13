@@ -4,7 +4,7 @@ public class AttackState : IEnemyState
 {
     public void Enter(EnemyAI ai)
     {
-        Debug.Log("[FSM] Entered Attack State");
+        //Debug.Log("[FSM] Entered Attack State");
 
         // 즉시 공격
         ai.PerformAttack();
@@ -20,6 +20,6 @@ public class AttackState : IEnemyState
 
     public void Exit(EnemyAI ai)
     {
-        Debug.Log("[FSM] Exit Attack State");
+        //Debug.Log("[FSM] Exit Attack State");
     }
 }

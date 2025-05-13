@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseUI : MonoBehaviour
@@ -31,8 +32,9 @@ public class PauseUI : MonoBehaviour
 
     public void ReturnMain()
     {
+        UIManager.Instance.uiController.SetDungeonUI(false);
+        GameManager.Instance.SetStageInfo(0, 0, 1);
         Time.timeScale = 1f;
-        //SceneManager.LoadScene("StartScene");
-        Debug.Log("씬을 추가 해주세요.");
+        SceneManager.LoadScene("StartScene");
     }
 }

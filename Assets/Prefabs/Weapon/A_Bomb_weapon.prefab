@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8706481037669991645}
   - component: {fileID: 6955153868353512977}
   m_Layer: 0
-  m_Name: Bomb_weapon
+  m_Name: A_Bomb_weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,10 +133,10 @@ MonoBehaviour:
   weapon:
     name: "\uD3ED\uD0C4"
     arrowValue: 1
-    arrowSpeed: 20
-    arrowDamage: 5
+    arrowSpeed: 10
+    arrowDamage: 20
     attackDelay: 1
-    timer: 0
+    timer: 0.6723556
   objectPoolArrow: []
   objectPoolCount: 0
   curCount: 0

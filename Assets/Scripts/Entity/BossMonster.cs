@@ -1,76 +1,85 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossMonster : Character
 {
-    [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private Transform firePoint;
+	[SerializeField] private Transform expParent;
+	[SerializeField] private int exp;
+	[SerializeField] private GameObject expPrefab;
+	[SerializeField] private Player target;
+	[SerializeField] private List<WeaponController> weaponController;
+	[SerializeField] private Transform monsterTransform;
 
-    [SerializeField] private float attackInterval = 2f;
-    private float attackerTimer = 0.0f;
-
-    private Player target;
-
-    protected Animator animator;
+	protected Animator animator;
 
     protected override void Start()
     {
         base.Start();
         target = FindObjectOfType<Player>();
         animator = GetComponentInChildren<Animator>();
+        UIManager.Instance.uiController.SetBossHP(true);
+        UIManager.Instance.uiController.bossHP.UpdateValue(curHp, maxHp);
     }
 
     private void Update()
     {
-        attackerTimer += Time.deltaTime;
-
-        if(attackerTimer >= attackInterval)
+		Move();
+		Rotate();
+		lookDirection = (target.transform.position - transform.position);
+        for (int i = 0; i < weaponController.Count; i++)
         {
-            attackerTimer = 0.0f;
-
-            int attackPattern = Random.Range(0, 3);
-
-            switch(attackPattern)
-            {
-                case 0: 
-                    BasicAttack();
-                    break;
-                case 1: ConeAttack();
-                    break;
-                case 2:
-                    GroundSlam();
-                    break;
-            }
+            weaponController[i].targetDirect = lookDirection;
         }
-    }
+		//attackerTimer += Time.deltaTime;
 
-    void BasicAttack()
-    {
-        Vector2 dir = (target.transform.position - transform.position).normalized;
-        GameObject proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-        proj.GetComponent<Rigidbody2D>().velocity = dir * 10f; // ¿¹½Ã ¼Óµµ
-    }
+		//if(attackerTimer >= attackInterval)
+		//{
+		//    attackerTimer = 0.0f;
 
-    void ConeAttack()
-    {
-        int bulletCount = 5;
-        float angleStep = 15f;
-        float angleStart = -((bulletCount - 1) * angleStep) / 2;
+		//    int attackPattern = Random.Range(0, 3);
 
-        for (int i = 0; i < bulletCount; i++)
-        {
-            float angle = angleStart + angleStep * i;
-            Vector2 dir = Quaternion.Euler(0, 0, angle) * (target.transform.position - transform.position).normalized;
+		//    switch(attackPattern)
+		//    {
+		//        case 0: 
+		//            BasicAttack();
+		//            break;
+		//        case 1: ConeAttack();
+		//            break;
+		//        case 2:
+		//            GroundSlam();
+		//            break;
+		//    }
+		//}
+	}
 
-            GameObject proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-            proj.GetComponent<Rigidbody2D>().velocity = dir * 8f;
-        }
-    }
+    //void BasicAttack()
+    //{
+    //    Vector2 dir = (target.transform.position - transform.position).normalized;
+    //    GameObject proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+    //    proj.GetComponent<Rigidbody2D>().velocity = dir * 10f; // ì˜ˆì‹œ ì†ë„
+    //}
+
+    //void ConeAttack()
+    //{
+    //    int bulletCount = 5;
+    //    float angleStep = 15f;
+    //    float angleStart = -((bulletCount - 1) * angleStep) / 2;
+
+    //    for (int i = 0; i < bulletCount; i++)
+    //    {
+    //        float angle = angleStart + angleStep * i;
+    //        Vector2 dir = Quaternion.Euler(0, 0, angle) * (target.transform.position - transform.position).normalized;
+
+    //        GameObject proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+    //        proj.GetComponent<Rigidbody2D>().velocity = dir * 8f;
+    //    }
+    //}
 
     void GroundSlam()
     {
-        // ¿©±â¼± ´Ü¼øÈ÷ ¹üÀ§ ¾È¿¡ ÀÖ´Â ÇÃ·¹ÀÌ¾î¿¡°Ô ÇÇÇØ¸¦ ÁÖ´Â °ÍÀ¸·Î Ã³¸®
+        // ì—¬ê¸°ì„  ë‹¨ìˆœíˆ ë²”ìœ„ ì•ˆì— ìˆëŠ” í”Œë ˆì´ì–´ì—ê²Œ í”¼í•´ë¥¼ ì£¼ëŠ” ê²ƒìœ¼ë¡œ ì²˜ë¦¬
         float slamRadius = 3.0f;
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, slamRadius);
 
@@ -78,15 +87,47 @@ public class BossMonster : Character
         {
             if (hit.CompareTag("Player"))
             {
-                hit.GetComponent<Player>().TakeDamage(20); // ¿¹½Ã µ¥¹ÌÁö
+                hit.GetComponent<Player>().TakeDamage(20); // ì˜ˆì‹œ ë°ë¯¸ì§€
             }
         }
 
-        // ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ³ª ÀÌÆåÆ®µµ ¿©±â¿¡¼­ ½ÇÇà °¡´É
-        Debug.Log("Boss »ç¿ë - Áö¸é °­Å¸!");
+        // ì• ë‹ˆë©”ì´ì…˜ì´ë‚˜ ì´í™íŠ¸ë„ ì—¬ê¸°ì—ì„œ ì‹¤í–‰ ê°€ëŠ¥
+        Debug.Log("Boss ì‚¬ìš© - ì§€ë©´ ê°•íƒ€!");
     }
 
-    private void OnDrawGizmosSelected()
+	override protected void Move()
+	{
+		animator.SetBool("IsMove", true);
+	}
+
+	override protected void Rotate()
+	{
+		//isLeft = target.transform.position.x < transform.position.x ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
+
+		//transform.localScale = isLeft;
+		if (target == null) return;
+
+		bool flip = target.transform.position.x < transform.position.x;
+		Vector3 newScale = flip ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
+
+		monsterTransform.localScale = newScale;
+	}
+
+	public void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.gameObject.CompareTag("Arrow"))
+		{
+			Arrow arrow = collision.gameObject.GetComponent<Arrow>();
+			if (arrow.owner == this.gameObject)
+				return;
+
+			//Hit(ref curHp, arrow.damage);
+			TakeDamage(arrow.damage);
+			collision.gameObject.SetActive(false);
+		}
+	}
+
+	private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, 3f);
@@ -98,8 +139,10 @@ public class BossMonster : Character
 
         animator.SetBool("IsDamage", true);
 
-        //	ÀÏÁ¤ ½Ã°£ÀÌ Áö³­ ÈÄ, Damage ¾Ö´Ï¸ŞÀÌ¼Ç ÇÃ·¡±× ÃÊ±âÈ­
+        //	ì¼ì • ì‹œê°„ì´ ì§€ë‚œ í›„, Damage ì• ë‹ˆë©”ì´ì…˜ í”Œë˜ê·¸ ì´ˆê¸°í™”
         StartCoroutine(ResetDamageAnim());
+
+        UIManager.Instance.uiController.bossHP.UpdateValue(curHp, maxHp);
 
         if (curHp <= 0)
         {
@@ -110,8 +153,9 @@ public class BossMonster : Character
     void Death()
     {
         gameObject.SetActive(false);
+        UIManager.Instance.uiController.SetBossHP(false);
 
-        //	ÇØ´ç ¸ó½ºÅÍ°¡ ¼ÓÇØÀÖ´Â ¸ó½ºÅÍ ¼ö °¨¼Ò.
+        //	í•´ë‹¹ ëª¬ìŠ¤í„°ê°€ ì†í•´ìˆëŠ” ëª¬ìŠ¤í„° ìˆ˜ ê°ì†Œ.
         DungeonManager.instance.OnEnemyDeath();
     }
 

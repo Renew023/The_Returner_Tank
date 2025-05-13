@@ -8,11 +8,14 @@ public class DeathUI : MonoBehaviour
     public void Show(bool show)
     {
         DeathMenu.SetActive(show);
+        Time.timeScale = 0f;
     }
 
     public void ReturnMain()
     {
-        //SceneManager.LoadScene("StartScene");
-        Debug.Log("씬을 추가 해주세요.");
+        UIManager.Instance.uiController.SetDungeonUI(false);
+        GameManager.Instance.SetStageInfo(0, 0, 1);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("StartScene");
     }
 }

@@ -22,12 +22,12 @@ public class SkillSelectUI : MonoBehaviour
             int rand;
             bool isNotEqual = true;
             bool isMaxSkill =
-            DataManager.instance.maxPlayerSkill == player.playerSkill.Count ? true : false;
+            DataManager.instance.maxPlayerSkill == player.playerValue.playerSkill.Count ? true : false;
 
             if (isMaxSkill)
-                rand = Random.Range(0, player.playerSkill.Count);
+                rand = Random.Range(0, player.playerValue.playerSkill.Count);
             else
-                rand = Random.Range(0, DataManager.instance.skillList.Count); // 0~9 ªÁ¿Ã
+                rand = Random.Range(0, DataManager.instance.skillList.Count); // 0~9 ÏÇ¨Ïù¥
 
             for (int j = 0; j < value.Count; j++)
             {
@@ -42,14 +42,14 @@ public class SkillSelectUI : MonoBehaviour
             {
                 if (isMaxSkill)
                 {
-                    if (player.playerSkill[rand].level == 3)
+                    if (player.playerValue.playerSkill[rand].level == 2)
                         continue;
 
-					skills.Add(player.playerSkill[rand]);
+					skills.Add(player.playerValue.playerSkill[rand]);
 				}
                 else
                 {
-					if (DataManager.instance.skillList[rand].level == 3)
+					if (DataManager.instance.skillList[rand].level == 2)
 						continue;
 					skills.Add(DataManager.instance.skillList[rand]);
                 }

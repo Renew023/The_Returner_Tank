@@ -1,72 +1,115 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : Character
 {
-	[SerializeField] protected Rigidbody2D rb;
-    public List<WeaponController> weapons = new List<WeaponController>(5); 
+    [SerializeField] protected Rigidbody2D rb;
     [SerializeField] private AttackTarget attackTarget;
 
-	[SerializeField] private Camera camera;
+    [SerializeField] private Camera camera;
 
     [SerializeField] private Vector2 mousePosition;
     [SerializeField] private Vector2 worldPos;
 
     [SerializeField] private Transform bodyTransform;
     [SerializeField] private Transform headTransform;
-    
-	[SerializeField] private float arrowDelay;
-	[SerializeField] private float arrowDamage;
-	[SerializeField] private float Exp;
 
+    public PlayerValue playerValue;
+
+    private float demandExp;
     [SerializeField] private float Level;
+    [SerializeField] private Image hpBarFill;
 
-	//[SerializeField] public List<Skill> skillList = new List<Skill>(10);
-	[SerializeField] public List<Skill> playerSkill = new List<Skill>(5);
+    //[SerializeField] public List<Skill> skillList = new List<Skill>(10);
+    [SerializeField] public List<Skill> playerSkill = new List<Skill>(5);
     [SerializeField] public GameObject skillSelectUI;
-    public Weapon playerWeaponStat;
 
     protected Animator animator;
 
     void Awake()
     {
-        DataManager.instance.Pick();
-        Init();
         rb.freezeRotation = true;
         animator = GetComponentInChildren<Animator>();
-        
-        //LevelUp();
     }
 
-    private void Start()
+    void OnEnable()
     {
-        if(DataManager.instance.savedPlayerMaxHp > 0)
+        DataManager.instance.Pick();
+
+        for (int i = 0; i < DataManager.instance.playerValue.playerSkill.Count; i++)
+        {
+            playerValue.playerSkill.Add(DataManager.instance.playerValue.playerSkill[i]);
+
+            if (playerValue.playerSkill[i].weaponCon != null)
+            {
+                playerValue.weapons.Add(Instantiate(DataManager.instance.playerValue.playerSkill[i].weaponCon, transform.position, Quaternion.identity, transform));
+            }
+        }
+
+        for (int j = 0; j < playerValue.weapons.Count; j++)
+        {
+            playerValue.weapons[j].weapon = DataManager.instance.playerWeapon[j];
+        }
+        playerValue.playerWeaponStat = DataManager.instance.playerValue.playerWeaponStat;
+        playerValue.Exp = DataManager.instance.playerValue.Exp;
+        playerValue.Level = DataManager.instance.playerValue.Level;
+
+        DataManager.instance.Pick();
+        //DataManager.instance.player = gameObject.transform.GetComponent<Player>();
+
+        SetDemandExp(playerValue.Level);
+    }
+
+    void OnDisable()
+    {
+        DataManager.instance.playerValue = playerValue;
+
+        for (int i = 0; i < DataManager.instance.playerWeapon.Count; i++)
+        {
+            DataManager.instance.playerWeapon[i] = playerValue.weapons[i].weapon;
+        }
+
+        for (int j = DataManager.instance.playerWeapon.Count; j < playerValue.weapons.Count; j++)
+        {
+            DataManager.instance.playerWeapon.Add(playerValue.weapons[j].weapon);
+        }
+    }
+
+    private new void Start()
+    {
+        base.Start();
+
+        if (DataManager.instance.savedPlayerMaxHp > 0)
         {
             maxHp = DataManager.instance.savedPlayerMaxHp;
             curHp = DataManager.instance.savedPlayerHp;
+            hpBarFill.fillAmount = curHp / maxHp;
+            UIManager.Instance.uiController.playerLevel.UpdateValue((int)playerValue.Level + 1);
+            UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
+            UIManager.Instance.uiController.playerEXP.UpdateValue(playerValue.Exp, demandExp);
         }
-
-        base.Start();
     }
 
     void Update()
     {
-		mousePosition = Input.mousePosition;
-		worldPos = camera.ScreenToWorldPoint(mousePosition);
+        mousePosition = Input.mousePosition;
+        worldPos = camera.ScreenToWorldPoint(mousePosition);
         lookDirection = attackTarget.Searching(lookDirection, transform.position);
         RotateHead();
-        
-        for (int i = 0; i < weapons.Count; i++)
-        {
-            weapons[i].targetDirect = lookDirection;
-            weapons[i].playerWeaponStat = playerWeaponStat;
-        }
-		//lookDirection Àº °¡Àå °¡±î¿î ¸ó½ºÅÍ¸¦ Å¸°ÙÆÃ ÇØ¾ßÇÔ.
-		//lookDirection = (worldPos - (Vector2)transform.position);
 
-		/*if (Input.GetMouseButton(0) && (timer > attackDelay))
+        for (int i = 0; i < playerValue.weapons.Count; i++)
+        {
+            playerValue.weapons[i].targetDirect = lookDirection;
+            playerValue.weapons[i].playerWeaponStat = playerValue.playerWeaponStat;
+        }
+        //lookDirection ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½ï¿½.
+        //lookDirection = (worldPos - (Vector2)transform.position);
+
+        /*if (Input.GetMouseButton(0) && (timer > attackDelay))
         {
             weaponController.Attack(lookDirection);
             timer = 0f;
@@ -76,11 +119,22 @@ public class Player : Character
             timer += Time.deltaTime;
         }*/
 
+
         Move();
         Rotate();
+
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             LevelUp();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            UIManager.Instance.uiController.pauseUI.PauseMenuToggle(); //ESCï¿½Ô·Â½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            UIManager.Instance.uiController.clearUI.Show(true);
         }
     }
 
@@ -90,7 +144,7 @@ public class Player : Character
         float y = Input.GetAxisRaw("Vertical");
 
         Vector2 move = new Vector2(x, y).normalized;
-        rb.velocity = move * 10f;
+        rb.velocity = move * moveSpeed;
     }
 
     override protected void Rotate()
@@ -102,7 +156,7 @@ public class Player : Character
             bodyTransform.rotation = Quaternion.Euler(0, 0, angle + 90f); // ??? +90 ??
         }
     }
-    
+
     private void RotateHead()
     {
         if (lookDirection != Vector2.zero)
@@ -114,9 +168,11 @@ public class Player : Character
 
     public void HpUp(float value = 1)
     {
-		maxHp += value;
-		curHp += value;
-	}
+        maxHp += value;
+        curHp += value;
+        hpBarFill.fillAmount = curHp / maxHp;
+        UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
+    }
 
     public void MoveSpeedUp(float value = 1)
     {
@@ -124,13 +180,14 @@ public class Player : Character
     }
 
 
-	private void LevelUp()
+    private void LevelUp()
     {
+        playerValue.Level += 1f;
+        SetDemandExp(playerValue.Level);
+
         HpUp(50);
         Time.timeScale = 0.0f;
         skillSelectUI.gameObject.SetActive(true);
-        //¹èÆ²¸Å´ÏÀú¿¡¼­ °ÔÀÓ ¸ØÃè´ÂÁö °ü¸®
-        //·¹º§¾÷ ¼±ÅÃÃ¢ UI
 
         if (curHp + maxHp * .1f < maxHp)
         {
@@ -140,10 +197,15 @@ public class Player : Character
         {
             curHp = maxHp;
         }
+
+        hpBarFill.fillAmount = curHp / maxHp;
+
+        UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
+        UIManager.Instance.uiController.playerLevel.UpdateValue((int)playerValue.Level + 1);
     }
 
-	public void OnTriggerEnter2D(Collider2D collision)
-	{
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
         if (collision.gameObject.CompareTag("Arrow"))
         {
             Arrow arrow = collision.gameObject.GetComponent<Arrow>();
@@ -155,7 +217,7 @@ public class Player : Character
 
             collision.gameObject.SetActive(false);
         }
-	}
+    }
 
     public void TakeDamage(float damage)
     {
@@ -163,19 +225,53 @@ public class Player : Character
 
         //animator.SetBool("IsDamage", true);
 
-        //	ÀÏÁ¤ ½Ã°£ÀÌ Áö³­ ÈÄ, Damage ¾Ö´Ï¸ÞÀÌ¼Ç ÇÃ·¡±× ÃÊ±âÈ­
+        //	ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, Damage ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
         //StartCoroutine(ResetDamageAnim());
+
+        hpBarFill.fillAmount = curHp / maxHp;
+
+        UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
 
         if (curHp <= 0)
         {
-            //Death();
+            UIManager.Instance.uiController.deathUI.Show(true);
         }
     }
-
 
     private IEnumerator ResetDamageAnim()
     {
         yield return new WaitForSeconds(0.2f);
         animator.SetBool("IsDamage", false);
     }
+
+    private void SetDemandExp(float lev)
+    {
+        demandExp = 250 * (lev + 1);
+    }
+
+    public void AddExp(int amount)
+    {
+        playerValue.Exp += amount;
+        if (playerValue.Exp >= demandExp)
+        {
+            playerValue.Exp -= demandExp;
+            LevelUp();
+        }
+		UIManager.Instance.uiController.playerEXP.UpdateValue((float)playerValue.Exp, (float)demandExp);
+	}
+
+    public void HealTrigger(int healAmounteal)
+    {
+        if (healAmounteal + curHp > maxHp)
+        {
+            curHp = maxHp;
+        }
+        else
+        {
+            healAmounteal = (int)(healAmounteal + curHp);
+        }
+
+    }
 }
+
+

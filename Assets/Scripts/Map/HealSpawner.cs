@@ -1,16 +1,53 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HealSpawner : MonoBehaviour
 {
-    [Header("Heal Prefab")]
-    public GameObject healPrefab;
+    public static HealSpawner Instance { get; private set; }
 
-    [Header("Spawn Position")]
+    [Header("íˆì¼ í”„ë¦¬íŒ¹")]
+    public GameObject HealPrefab;
+
+    [Header("ìŠ¤í° ìœ„ì¹˜")]
     public Vector3 spawnPosition = new Vector3(0f, 5f, 0f);
 
-    void Start()
+    void Awake()
     {
-        // ¾À ½ÃÀÛ ½Ã ÇÑ ¹ø¸¸ »ı¼º
-        Instantiate(healPrefab, spawnPosition, Quaternion.identity);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (Instance == this)
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Event_HealScene")
+            SpawnHeal();
+    }
+
+    private void SpawnHeal()
+    {
+        if (HealPrefab == null)
+        {
+            Debug.LogError("HealSpawner: healPrefab ì´ í• ë‹¹ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤!");
+            return;
+        }
+        // í˜¹ì‹œ ë‚¨ì€ íì´ ìˆìœ¼ë©´ ì‚­ì œ
+        var old = GameObject.FindWithTag("Heal");
+        if (old != null) Destroy(old);
+
+        Instantiate(HealPrefab, spawnPosition, Quaternion.identity);
     }
 }

@@ -136,6 +136,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1165265429}
     - target: {fileID: 1018062645414764747, guid: 6523050c8de5f8e4b8ecf4c7f0dacc4a, type: 3}
+      propertyPath: hpBarFill
+      value: 
+      objectReference: {fileID: 92840360}
+    - target: {fileID: 1018062645414764747, guid: 6523050c8de5f8e4b8ecf4c7f0dacc4a, type: 3}
       propertyPath: skillSelectUI
       value: 
       objectReference: {fileID: 921663787}
@@ -217,6 +221,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7087801732574784773, guid: 6523050c8de5f8e4b8ecf4c7f0dacc4a, type: 3}
   m_PrefabInstance: {fileID: 92840358}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &92840360 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1957718555537671818, guid: 6523050c8de5f8e4b8ecf4c7f0dacc4a, type: 3}
+  m_PrefabInstance: {fileID: 92840358}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &108102677
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,6 +325,16 @@ MonoBehaviour:
   - {fileID: 1860486201}
   spawnDelay: 1
   waveSpawnEntries:
+  - wave: 1
+    dungeonLevel: 4
+    data:
+      enemyIndices: 00000000
+      baseEnemyCount: 1
+  - wave: 1
+    dungeonLevel: 3
+    data:
+      enemyIndices: 00000000
+      baseEnemyCount: 1
   - wave: 1
     dungeonLevel: 5
     data:
@@ -10321,6 +10346,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed092cfee3067284d85ee77e03fe6c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  expParent: {fileID: 0}
+  player: {fileID: 0}
+  warpZone: {fileID: 0}
   currentWave: 1
   maxWave: 1
   pools: {fileID: 2081940347}

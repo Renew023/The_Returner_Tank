@@ -1,12 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Monster : Character
 {
+	[SerializeField] private Transform expParent;
+	[SerializeField] private int exp;
+	[SerializeField] private GameObject expPrefab;
 	[SerializeField] private Player target;
 	[SerializeField] private WeaponController weaponController;
-	protected Animator animator;
+    [SerializeField] private Image hpBarFill;
+    [SerializeField] private Transform monsterTransform;
+    protected Animator animator;
+
+	private bool isDead = false;
 
 	void Awake()
 	{
@@ -51,17 +59,23 @@ public class Monster : Character
 
 	override protected void Rotate()
 	{
-		isLeft = target.transform.position.x < transform.position.x ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
+        //isLeft = target.transform.position.x < transform.position.x ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
 
-		transform.localScale = isLeft;
-	}
+        //transform.localScale = isLeft;
+        if (target == null) return;
+
+        bool flip = target.transform.position.x < transform.position.x;
+        Vector3 newScale = flip ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
+
+        monsterTransform.localScale = newScale;
+    }
 
 	public void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.gameObject.CompareTag("Arrow"))
 		{
 			Arrow arrow = collision.gameObject.GetComponent<Arrow>();
-			if (arrow.owner == this.gameObject)
+			if (arrow.owner.CompareTag("Monster"))
 				return;
 
 			//Hit(ref curHp, arrow.damage);
@@ -70,26 +84,39 @@ public class Monster : Character
 		}
 	}
 
-	public void TakeDamage(float damage)
-	{
-		curHp -= damage;
+    public void TakeDamage(float damage)
+    {
+        curHp -= damage;
 
-		animator.SetBool("IsDamage", true);
+        animator.SetBool("IsDamage", true);
 
-		//	ÀÏÁ¤ ½Ã°£ÀÌ Áö³­ ÈÄ, Damage ¾Ö´Ï¸ÞÀÌ¼Ç ÇÃ·¡±× ÃÊ±âÈ­
-		StartCoroutine(ResetDamageAnim());
-
-		if (curHp <= 0)
+        //	ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, Damage ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
+		if(this.gameObject.activeSelf)
 		{
-			Death();
-		}
-	}
+            StartCoroutine(ResetDamageAnim());
+        }
 
-	void Death()
+        hpBarFill.fillAmount = curHp / maxHp;
+
+        if (curHp <= 0)
+        {
+            Death();
+        }
+    }
+
+    void Death()
 	{
+		//	ì¤‘ë³µ í˜¸ì¶œì„ ë°©ì§€!
+		if(isDead)
+		{
+			return;
+		}
+
+		isDead = true;
+
 		gameObject.SetActive(false);
 
-		//	ÇØ´ç ¸ó½ºÅÍ°¡ ¼ÓÇØÀÖ´Â ¸ó½ºÅÍ ¼ö °¨¼Ò.
+		//	ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		DungeonManager.instance.OnEnemyDeath();
 	}
 
@@ -97,5 +124,68 @@ public class Monster : Character
 	{
 		yield return new WaitForSeconds(0.2f);
 		animator.SetBool("IsDamage", false);
+	}
+	
+	void OnEnable()
+	{
+		hpBarFill.fillAmount = curHp / maxHp;
+		expParent = GameObject.Find("ExpObjects")?.transform;
+	}
+	
+	void OnDisable()
+	{
+		DropExp();
+	}
+	
+	private void DropExp()
+	{
+		int remainingExp = exp;
+		int dropExp = 1;
+
+		while (remainingExp > 0)
+		{
+			int dropCount = remainingExp % 10;
+			for(int i = 0; i < dropCount; i++) SpawnExpObject(dropExp);
+			
+			remainingExp /= 10;
+			dropExp *= 10;
+		}
+	}
+	
+	private void SpawnExpObject(int amount)
+	{
+		Vector2 randomOffset = Random.insideUnitCircle * 0.5f;
+		Vector3 spawnPos = transform.position + (Vector3)randomOffset;
+
+		GameObject obj = Instantiate(expPrefab, spawnPos, Quaternion.identity, expParent);
+    
+		ExpObject expObj = obj.GetComponent<ExpObject>();
+		if (expObj != null)
+		{
+			expObj.expAmount = amount;
+		}
+	}
+
+	public void ResetEnemy()
+	{
+        curHp = maxHp;
+
+		//	ì´ˆê¸°í™”
+		isDead = false;
+
+        Debug.Log($"[ResetEnemy] {name}, curHp: {curHp}");
+
+		if(hpBarFill != null)
+		{
+			hpBarFill.fillAmount = 1f;
+		}
+
+		if(animator != null)
+		{
+			animator.SetBool("IsDamage", false);
+			animator.SetBool("IsMove", false);
+		}
+
+		gameObject.SetActive(true);
 	}
 }
