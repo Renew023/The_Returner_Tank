@@ -48,9 +48,11 @@ public class DataManager : MonoBehaviour
 		playerValue.playerSkill.Add(skill);
 		playerWeapon.Add(skill.weaponCon.weapon);
 
-		// 여기서 스킬슬롯 추가
+		// 스킬슬롯 추가
+		UIManager.Instance.uiController.pauseUI.skillSlots[UIManager.Instance.uiController.pauseUI.skillsCount].sprite = skill.weaponCon.weaponSprite.sprite;
+        UIManager.Instance.uiController.pauseUI.SetSkillImages(UIManager.Instance.uiController.pauseUI.skillsCount);
 
-		float value = skill.levelSkills[skill.level].value;
+        float value = skill.levelSkills[skill.level].value;
 
 
 		switch (skill.levelSkills[skill.level].upgradeType)

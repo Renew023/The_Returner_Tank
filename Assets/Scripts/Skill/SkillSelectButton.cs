@@ -23,17 +23,22 @@ public class SkillSelectButton : MonoBehaviour
         //ab = skill.weapon.weaponSprite;
         if (DataManager.instance.curPlayerSkillMax == DataManager.instance.maxPlayerSkill)
         {
-            title.text = "������";
+            title.text = "최대치";
             return;
         }
 
 
 		if (skill.weaponCon != null)
+        {
             image.sprite = skill.weaponCon.weaponSprite.sprite;
+        }
         else
-            image.sprite = null;
+        {
+            string skillIconName = skill.levelSkills[skill.level].upgradeType.ToString();
+            image.sprite = Resources.Load<Sprite>("SkillIcons/" + skillIconName);
+        }
 
-		title.text = skill.levelSkills[skill.level].skillName.ToString();
+        title.text = skill.levelSkills[skill.level].skillName;
     }
 
     void OnDisable()
@@ -56,6 +61,8 @@ public class SkillSelectButton : MonoBehaviour
             if (skill.weaponCon != null)
             {
                 player.playerValue.weapons.Add(Instantiate(skill.weaponCon, player.transform.position, Quaternion.identity, player.transform));
+                UIManager.Instance.uiController.pauseUI.skillSlots[UIManager.Instance.uiController.pauseUI.skillsCount].sprite = image.sprite;
+                UIManager.Instance.uiController.pauseUI.SetSkillImages(UIManager.Instance.uiController.pauseUI.skillsCount);
             }
         }
         float value = skill.levelSkills[skill.level].value;

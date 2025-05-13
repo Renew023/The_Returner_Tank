@@ -491,7 +491,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 815d5a31f6cd5984eb088e68cecb8361, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8dbdd142ea849ac429a32e79f389f6a2, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5495,15 +5495,15 @@ MonoBehaviour:
     levelSkills:
     - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uB370\uBBF8\uC9C0 \uC99D\uAC00"
       skillExplain: 
-      upgradeType: 3
+      upgradeType: 4
       value: 10
     - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uB370\uBBF8\uC9C0 \uC99D\uAC00"
       skillExplain: 
-      upgradeType: 3
+      upgradeType: 4
       value: 10
     - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uB370\uBBF8\uC9C0 \uC99D\uAC00"
       skillExplain: 
-      upgradeType: 3
+      upgradeType: 4
       value: 10
     level: 0
     weaponCon: {fileID: 0}
