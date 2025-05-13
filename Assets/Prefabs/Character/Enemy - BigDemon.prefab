@@ -148,6 +148,8 @@ MonoBehaviour:
   moveSpeed: 10
   lookDirection: {x: 0, y: 0}
   attackDelay: 0.1
+  exp: 3
+  expPrefab: {fileID: 6597864928945412204, guid: 9b8f7c13bf868b446ad397c4855321f2, type: 3}
   target: {fileID: 0}
   weaponController: {fileID: 0}
   hpBarFill: {fileID: 809700570773627994}
