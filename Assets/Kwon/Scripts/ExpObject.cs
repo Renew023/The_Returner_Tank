@@ -3,46 +3,46 @@ using UnityEngine;
 public class ExpObject : MonoBehaviour
 {
     private Transform target;
-    private Vector3 startPos;
-    
     private bool isAbsorbing = false;
-    private float absorbTimer = 0f;
-    private float absorbDuration = 2f; //흡수까지 걸리는 시간
-
-    private float turningPoint = 0.3f; //0점 도달시간
-    private float speedScale = 10f;
-    private Vector3 moveDir;
-
+    
     public int expAmount = 1;
+    
+    [Header("추적 속도 설정")]
+    [SerializeField] private float acceleration = 10f;
+    [SerializeField] private float maxSpeed = 50f;
+    private float currentSpeed = 0f;
+    
+    private Vector3 prevDirection = Vector3.zero;
+
 
     public void StartAbsorb(Transform player)
     {
         target = player;
         isAbsorbing = true;
-        startPos = transform.position;
-
-        moveDir = (target.position - transform.position).normalized;
-        absorbTimer = 0f;
+        currentSpeed = 0f;
+        prevDirection = (player.position - transform.position).normalized;
     }
 
     void Update()
     {
         if (!isAbsorbing || target == null) return;
 
-        absorbTimer += Time.deltaTime;
-        float t = absorbTimer;
-        
-        if (absorbTimer >= absorbDuration)
-        {
-            transform.position = target.position;
-            return;
-        }
-        
-        float velocity = t * t * (t - turningPoint);
-        if (t < turningPoint) velocity *= 20f;
-        
-        float adjustedSpeed = velocity * speedScale;
-        transform.position += moveDir * adjustedSpeed * Time.deltaTime;
+        // 현재 방향 계산
+        Vector3 currentDirection = (target.position - transform.position).normalized;
+
+        // 방향 변화량 측정
+        float angleChange = Vector3.Angle(prevDirection, currentDirection);
+        float slowdownFactor = Mathf.Clamp01(1f - (angleChange / 180f)); // 방향 꺾일수록 감속
+
+        // 가속도 적용 (감속 포함)
+        float effectiveAcceleration = acceleration * slowdownFactor;
+        currentSpeed = Mathf.Min(maxSpeed, currentSpeed + effectiveAcceleration * Time.deltaTime);
+
+        // 이동
+        transform.position += currentDirection * currentSpeed * Time.deltaTime;
+
+        // 다음 프레임 대비 방향 저장
+        prevDirection = currentDirection;
     }
     
     private void OnTriggerEnter2D(Collider2D other)
