@@ -87,6 +87,17 @@ public class DataManager : MonoBehaviour
 				}
 				//skill.weapon.DamageUp(value);
 				break;
+			case SkillType.ArrowDelayUp:
+				foreach (var weapon in player.playerValue.weapons)
+				{
+					if (skill.weaponCon.weapon.name == weapon.weapon.name)
+					{
+						weapon.DelayUp((int)value);
+						break;
+					}
+				}
+				//skill.weapon.DamageUp(value);
+				break;
 		}
 		skill.level += 1;
 	}
