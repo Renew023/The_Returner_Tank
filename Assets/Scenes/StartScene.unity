@@ -5486,7 +5486,7 @@ MonoBehaviour:
     level: 0
     weaponCon: {fileID: 0}
   skillValue: 0
-  maxPlayerSkill: 3
+  maxPlayerSkill: 4
   curPlayerSkillMax: 0
   savedPlayerHp: 0
   savedPlayerMaxHp: 0
