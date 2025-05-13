@@ -52,10 +52,10 @@ public class SkillSelectButton : MonoBehaviour
 
         if (skill.level == 0)
         {
-            player.playerSkill.Add(skill);
+            player.playerValue.playerSkill.Add(skill);
             if (skill.weaponCon != null)
             {
-                player.weapons.Add(Instantiate(skill.weaponCon, player.transform.position, Quaternion.identity, player.transform));
+                player.playerValue.weapons.Add(Instantiate(skill.weaponCon, player.transform.position, Quaternion.identity, player.transform));
             }
         }
         float value = skill.levelSkills[skill.level].value;
@@ -70,15 +70,15 @@ public class SkillSelectButton : MonoBehaviour
                 player.MoveSpeedUp();
 				break;
             case SkillType.PlayerArrowSpeedUp:
-                player.playerWeaponStat.arrowSpeed += value;
+                player.playerValue.playerWeaponStat.arrowSpeed += value;
                 break;
 
             case SkillType.PlayerArrowDamageUp:
-				player.playerWeaponStat.arrowDamage += value;
+				player.playerValue.playerWeaponStat.arrowDamage += value;
 				break;
 
             case SkillType.PlayerArrowValueUp:
-				player.playerWeaponStat.arrowValue += (int)value;
+				player.playerValue.playerWeaponStat.arrowValue += (int)value;
 				break;
 
 
@@ -87,7 +87,7 @@ public class SkillSelectButton : MonoBehaviour
 
             case SkillType.ArrowSpeedUp:
 
-                foreach (var weapon in player.weapons)
+                foreach (var weapon in player.playerValue.weapons)
                 {
                     if (skill.weaponCon.weapon.name == weapon.weapon.name)
                     {
@@ -98,7 +98,7 @@ public class SkillSelectButton : MonoBehaviour
 				//skill.weapon.SpeedUp(value);
                 break;
             case SkillType.ArrowValueUp:
-				foreach (var weapon in player.weapons)
+				foreach (var weapon in player.playerValue.weapons)
 				{
 					if (skill.weaponCon.weapon.name == weapon.weapon.name)
 					{
@@ -109,7 +109,7 @@ public class SkillSelectButton : MonoBehaviour
 				//skill.weapon.ValueUp((int)value);
 				break;
             case SkillType.ArrowDamageUp:
-				foreach (var weapon in player.weapons)
+				foreach (var weapon in player.playerValue.weapons)
 				{
 					if (skill.weaponCon.weapon.name == weapon.weapon.name)
 					{
