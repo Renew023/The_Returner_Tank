@@ -35,7 +35,6 @@ public class Player : Character
         rb.freezeRotation = true;
         animator = GetComponentInChildren<Animator>();
 
-        //LevelUp();
     }
 
     void OnEnable()
@@ -81,7 +80,7 @@ public class Player : Character
         }
     }
 
-    private void Start()
+    private new void Start()
     {
         base.Start();
 
@@ -90,9 +89,10 @@ public class Player : Character
             maxHp = DataManager.instance.savedPlayerMaxHp;
             curHp = DataManager.instance.savedPlayerHp;
             hpBarFill.fillAmount = curHp / maxHp;
+            UIManager.Instance.uiController.playerLevel.UpdateValue((int)playerValue.Level + 1);
             UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
+            UIManager.Instance.uiController.playerEXP.UpdateValue(playerValue.Exp, demandExp);
         }
-
     }
 
     void Update()
@@ -141,7 +141,7 @@ public class Player : Character
         float y = Input.GetAxisRaw("Vertical");
 
         Vector2 move = new Vector2(x, y).normalized;
-        rb.velocity = move * 10f;
+        rb.velocity = move * moveSpeed;
     }
 
     override protected void Rotate()
@@ -197,8 +197,8 @@ public class Player : Character
 
         hpBarFill.fillAmount = curHp / maxHp;
 
-        UIManager.Instance.uiController.playerLevel.UpdateValue((int)Level);
         UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
+        UIManager.Instance.uiController.playerLevel.UpdateValue((int)playerValue.Level + 1);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -254,6 +254,7 @@ public class Player : Character
             playerValue.Exp -= demandExp;
             LevelUp();
         }
+
     }
 
     public void HealTrigger(int healAmounteal)
@@ -269,4 +270,5 @@ public class Player : Character
 
     }
 }
+
 

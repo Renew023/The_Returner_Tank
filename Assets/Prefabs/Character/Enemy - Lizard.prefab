@@ -115,14 +115,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 221386114842138169}
-  - component: {fileID: 5561848270145785674}
   - component: {fileID: 2378373203423379200}
   - component: {fileID: 2482804285042924537}
   - component: {fileID: 8027058772704093930}
   - component: {fileID: -1930091359756790908}
   m_Layer: 9
   m_Name: Enemy - Lizard
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,26 +144,6 @@ Transform:
   - {fileID: 9221278699677961332}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5561848270145785674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7098139492246235967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fe54dc2472ae174bac29deb622536f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 2
-  attackableRange: 1.5
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 64
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!61 &2378373203423379200
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -249,14 +228,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef1d169b4aeb2a64593272a49a5171e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 70
-  curHp: 70
+  maxHp: 35
+  curHp: 35
   moveSpeed: 6
   lookDirection: {x: 0, y: 0}
   attackDelay: 0
   expParent: {fileID: 0}
   exp: 20
-  expPrefab: {fileID: 6597864928945412204, guid: 9b8f7c13bf868b446ad397c4855321f2, type: 3}
+  expPrefab: {fileID: 6094734783714178179, guid: 4d08e126787cea8438833a56eb765d4c, type: 3}
   target: {fileID: 0}
   weaponController: {fileID: 7471077980043079352}
   hpBarFill: {fileID: 5983526365471840684}

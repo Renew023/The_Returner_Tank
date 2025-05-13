@@ -9,14 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1554510631455394211}
-  - component: {fileID: 261443935845838489}
   - component: {fileID: 4451196080641098333}
   - component: {fileID: 8286296014628455464}
   - component: {fileID: -6055681174098925999}
   - component: {fileID: 4470708118024134508}
   m_Layer: 9
   m_Name: Enemy - BigDemon
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,26 +38,6 @@ Transform:
   - {fileID: 6928098978948111062}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &261443935845838489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 640466009090307805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fe54dc2472ae174bac29deb622536f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 2
-  attackableRange: 1.5
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 64
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!61 &4451196080641098333
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -143,14 +122,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef1d169b4aeb2a64593272a49a5171e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 190
-  curHp: 190
+  maxHp: 95
+  curHp: 95
   moveSpeed: 10
   lookDirection: {x: 0, y: 0}
   attackDelay: 0
   expParent: {fileID: 0}
   exp: 80
-  expPrefab: {fileID: 6597864928945412204, guid: 9b8f7c13bf868b446ad397c4855321f2, type: 3}
+  expPrefab: {fileID: 6094734783714178179, guid: 4d08e126787cea8438833a56eb765d4c, type: 3}
   target: {fileID: 0}
   weaponController: {fileID: 8679426697464477722}
   hpBarFill: {fileID: 809700570773627994}
@@ -167,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe54dc2472ae174bac29deb622536f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 10
   attackableRange: 5
   obstacleMask:
     serializedVersion: 2

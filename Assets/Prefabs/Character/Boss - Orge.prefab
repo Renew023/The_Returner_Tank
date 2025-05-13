@@ -143,8 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43630a0e84e44604b9fa842a9e823870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 1200
-  curHp: 1200
+  maxHp: 600
+  curHp: 600
   moveSpeed: 10
   lookDirection: {x: 0, y: 0}
   attackDelay: 1
@@ -155,9 +155,7 @@ MonoBehaviour:
   weaponController:
   - {fileID: 1326000793185703325}
   - {fileID: 1114730002719163480}
-  hpBarFill: {fileID: 0}
-  monsterTransform: {fileID: 0}
-  monsterPrefab: {fileID: 0}
+  monsterTransform: {fileID: 7848514828694074050}
 --- !u!1 &5844912027627054555
 GameObject:
   m_ObjectHideFlags: 0
