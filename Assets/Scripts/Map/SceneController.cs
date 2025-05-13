@@ -18,6 +18,7 @@ public static class SceneController
         _lastSceneName = SceneManager.GetActiveScene().name;
         GameManager.Instance.IncreaseDungeonLevel();
         SceneManager.LoadScene("Event_HealScene", LoadSceneMode.Single);
+
     }
 
     public static void ToBattle()
