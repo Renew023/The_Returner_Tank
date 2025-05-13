@@ -21,7 +21,7 @@ public class Monster : Character
 	protected override void Init()
 	{
 		base.Init();
-    }
+	}
 
 	protected override void Start()
 	{
@@ -79,24 +79,27 @@ public class Monster : Character
 		}
 	}
 
-	public void TakeDamage(float damage)
-	{
-		curHp -= damage;
+    public void TakeDamage(float damage)
+    {
+        curHp -= damage;
 
-		animator.SetBool("IsDamage", true);
+        animator.SetBool("IsDamage", true);
 
-		//	일정 시간이 지난 후, Damage 애니메이션 플래그 초기화
-		StartCoroutine(ResetDamageAnim());
+        //	일정 시간이 지난 후, Damage 애니메이션 플래그 초기화
+		if(this.gameObject.activeSelf)
+		{
+            StartCoroutine(ResetDamageAnim());
+        }
 
         hpBarFill.fillAmount = curHp / maxHp;
 
         if (curHp <= 0)
-		{
-			Death();
-		}
-	}
+        {
+            Death();
+        }
+    }
 
-	void Death()
+    void Death()
 	{
 		gameObject.SetActive(false);
 
