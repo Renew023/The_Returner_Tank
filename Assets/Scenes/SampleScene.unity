@@ -159,7 +159,7 @@ MonoBehaviour:
   moveSpeed: 5
   lookDirection: {x: 0, y: 0}
   attackDelay: 0.2
-  target: {fileID: 0}
+  target: {fileID: 192335880}
   weaponController: {fileID: 285731692}
 --- !u!61 &183147042
 BoxCollider2D:
@@ -268,6 +268,22 @@ Transform:
   - {fileID: 285731693}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &192335880 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1018062645414764747, guid: 6523050c8de5f8e4b8ecf4c7f0dacc4a, type: 3}
+  m_PrefabInstance: {fileID: 2230377754608838018}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5bef084f305d4f4fb3fdc338f6adaeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &192335884 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7087801732574784773, guid: 6523050c8de5f8e4b8ecf4c7f0dacc4a, type: 3}
+  m_PrefabInstance: {fileID: 2230377754608838018}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &285731691
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,7 +560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93fb2068c7868d040b26582bdc3373fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 192335884}
   camera: {fileID: 519420031}
   minCameraRange: {x: -13, y: -7}
   maxCameraRange: {x: 12, y: 22}
@@ -8979,7 +8995,7 @@ MonoBehaviour:
   moveSpeed: 5
   lookDirection: {x: 0, y: 0}
   attackDelay: 0.1
-  target: {fileID: 0}
+  target: {fileID: 192335880}
   weaponController: {fileID: 2110123310}
 --- !u!1 &2046504469
 GameObject:
@@ -9782,63 +9798,182 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8706481037669991645, guid: 7700fb7bfccad134a8b857c9b6c58936, type: 3}
   m_PrefabInstance: {fileID: 975344890}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1831195383822243501
-PrefabInstance:
+--- !u!4 &362048223453329212
+Transform:
   m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210593963255676191}
   serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2049127450481287569, guid: 60f4edcfc5a744e4daf9e135b7061d32, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2049127450481287569, guid: 60f4edcfc5a744e4daf9e135b7061d32, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2049127450481287569, guid: 60f4edcfc5a744e4daf9e135b7061d32, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2049127450481287569, guid: 60f4edcfc5a744e4daf9e135b7061d32, type: 3}
-      propertyPath: m_LocalRotation.w
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1802311579456909123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210593963255676191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c755e3be4dad3f4b9fe60b15cd7e29c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 192335880}
+  skillList:
+  - name: "\uD3ED\uD0C4"
+    player: {fileID: 0}
+    levelSkills:
+    - skillName: "[\uAC15\uD654] \uD3ED\uD0C4 1"
+      skillExplain: "\uD65C \uACF5\uACA9\uB825 \uC99D\uAC00"
+      upgradeType: 6
+      value: 5
+    - skillName: "[\uAC15\uD654] \uD3ED\uD0C4 2"
+      skillExplain: "\uD65C \uACF5\uC18D \uC99D\uAC00"
+      upgradeType: 5
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2049127450481287569, guid: 60f4edcfc5a744e4daf9e135b7061d32, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2049127450481287569, guid: 60f4edcfc5a744e4daf9e135b7061d32, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2049127450481287569, guid: 60f4edcfc5a744e4daf9e135b7061d32, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2049127450481287569, guid: 60f4edcfc5a744e4daf9e135b7061d32, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2049127450481287569, guid: 60f4edcfc5a744e4daf9e135b7061d32, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2049127450481287569, guid: 60f4edcfc5a744e4daf9e135b7061d32, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9041147218628799410, guid: 60f4edcfc5a744e4daf9e135b7061d32, type: 3}
-      propertyPath: m_Name
-      value: DataManager
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 60f4edcfc5a744e4daf9e135b7061d32, type: 3}
+    - skillName: "[\uAC15\uD654] \uD3ED\uD0C4 3"
+      skillExplain: "\uD65C \uD654\uC0B4 \uAC1C\uC218 \uC99D\uAC00"
+      upgradeType: 7
+      value: 3
+    level: 0
+    weaponCon: {fileID: 6955153868353512977, guid: 7700fb7bfccad134a8b857c9b6c58936, type: 3}
+  - name: "\uC544\uC774\uC2A4\uBCFC\uD2B8"
+    player: {fileID: 0}
+    levelSkills:
+    - skillName: "[\uAC15\uD654] \uC544\uC774\uC2A4\uBCFC\uD2B8 1"
+      skillExplain: "\uD65C \uACF5\uACA9\uB825 \uC99D\uAC00"
+      upgradeType: 6
+      value: 5
+    - skillName: "[\uAC15\uD654] \uC544\uC774\uC2A4\uBCFC\uD2B8 2"
+      skillExplain: "\uD65C \uACF5\uC18D \uC99D\uAC00"
+      upgradeType: 5
+      value: 1
+    - skillName: "[\uAC15\uD654] \uC544\uC774\uC2A4\uBCFC\uD2B8 3"
+      skillExplain: "\uD65C \uD654\uC0B4 \uAC1C\uC218 \uC99D\uAC00"
+      upgradeType: 7
+      value: 3
+    level: 0
+    weaponCon: {fileID: 6955153868353512977, guid: 48a790f4f65a06243822563d7d255c62, type: 3}
+  - name: "\uD30C\uC774\uC5B4\uBCFC\uD2B8"
+    player: {fileID: 0}
+    levelSkills:
+    - skillName: "[\uAC15\uD654] \uD30C\uC774\uC5B4\uBCFC\uD2B8 1"
+      skillExplain: "\uD65C \uACF5\uACA9\uB825 \uC99D\uAC00"
+      upgradeType: 3
+      value: 5
+    - skillName: "[\uAC15\uD654] \uD30C\uC774\uC5B4\uBCFC\uD2B8 2"
+      skillExplain: "\uD65C \uACF5\uC18D \uC99D\uAC00"
+      upgradeType: 0
+      value: 1
+    - skillName: "[\uAC15\uD654] \uD30C\uC774\uC5B4\uBCFC\uD2B8 3"
+      skillExplain: "\uD65C \uD654\uC0B4 \uAC1C\uC218 \uC99D\uAC00"
+      upgradeType: 4
+      value: 3
+    level: 0
+    weaponCon: {fileID: 6955153868353512977, guid: 8641956f68c0431459f3b3b21e82dd8d, type: 3}
+  - name: "\uD50C\uB808\uC774\uC5B4 \uCCB4\uB825 \uC99D\uAC00"
+    player: {fileID: 0}
+    levelSkills:
+    - skillName: "[\uAC15\uD654] \uD50C\uB808\uC774\uC5B4 \uCCB4\uB825 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 0
+      value: 5
+    - skillName: "[\uAC15\uD654] \uD50C\uB808\uC774\uC5B4 \uCCB4\uB825 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 0
+      value: 5
+    - skillName: "[\uAC15\uD654] \uD50C\uB808\uC774\uC5B4 \uCCB4\uB825 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 0
+      value: 5
+    level: 0
+    weaponCon: {fileID: 0}
+  - name: "\uD50C\uB808\uC774\uC5B4 \uC18D\uB3C4 \uC99D\uAC00"
+    player: {fileID: 0}
+    levelSkills:
+    - skillName: "[\uAC15\uD654] \uD50C\uB808\uC774\uC5B4 \uC18D\uB3C4 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 1
+      value: 10
+    - skillName: "[\uAC15\uD654] \uD50C\uB808\uC774\uC5B4 \uC18D\uB3C4 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 1
+      value: 10
+    - skillName: "[\uAC15\uD654] \uD50C\uB808\uC774\uC5B4 \uC18D\uB3C4 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 1
+      value: 10
+    level: 0
+    weaponCon: {fileID: 0}
+  - name: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uC18D\uB3C4 \uC99D\uAC00"
+    player: {fileID: 0}
+    levelSkills:
+    - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uC18D\uB3C4 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 2
+      value: 10
+    - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uC18D\uB3C4 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 2
+      value: 10
+    - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uC18D\uB3C4 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 2
+      value: 10
+    level: 0
+    weaponCon: {fileID: 0}
+  - name: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uAC1C\uC218 \uC99D\uAC00"
+    player: {fileID: 0}
+    levelSkills:
+    - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 3
+      value: 10
+    - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 3
+      value: 10
+    - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 3
+      value: 10
+    level: 0
+    weaponCon: {fileID: 0}
+  - name: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uB370\uBBF8\uC9C0 \uC99D\uAC00"
+    player: {fileID: 0}
+    levelSkills:
+    - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uB370\uBBF8\uC9C0 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 3
+      value: 10
+    - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uB370\uBBF8\uC9C0 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 3
+      value: 10
+    - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uB370\uBBF8\uC9C0 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 3
+      value: 10
+    level: 0
+    weaponCon: {fileID: 0}
+  skill:
+    name: 
+    player: {fileID: 0}
+    levelSkills: []
+    level: 0
+    weaponCon: {fileID: 0}
+  skillValue: 0
+  maxPlayerSkill: 3
+  curPlayerSkillMax: 0
+  savedPlayerHp: 0
+  savedPlayerMaxHp: 0
 --- !u!1001 &2230377754608838018
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9847,6 +9982,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1018062645414764747, guid: 6523050c8de5f8e4b8ecf4c7f0dacc4a, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 1018062645414764747, guid: 6523050c8de5f8e4b8ecf4c7f0dacc4a, type: 3}
+      propertyPath: skillSelectUI
+      value: 
+      objectReference: {fileID: 1487191658}
     - target: {fileID: 1069348182414491526, guid: 6523050c8de5f8e4b8ecf4c7f0dacc4a, type: 3}
       propertyPath: camera
       value: 
@@ -9923,15 +10066,15 @@ PrefabInstance:
     - target: {fileID: 2124991747961285855, guid: e580eeeb5ee82044c8b3f3f902c7dec5, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 192335880}
     - target: {fileID: 3554801336830331940, guid: e580eeeb5ee82044c8b3f3f902c7dec5, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 192335880}
     - target: {fileID: 4618163759277086272, guid: e580eeeb5ee82044c8b3f3f902c7dec5, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 192335880}
     - target: {fileID: 5701935330850213370, guid: e580eeeb5ee82044c8b3f3f902c7dec5, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -10019,7 +10162,7 @@ PrefabInstance:
     - target: {fileID: 8616470957666790972, guid: e580eeeb5ee82044c8b3f3f902c7dec5, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 192335880}
     - target: {fileID: 8616470957666790972, guid: e580eeeb5ee82044c8b3f3f902c7dec5, type: 3}
       propertyPath: skill.player
       value: 
@@ -10029,6 +10172,23 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e580eeeb5ee82044c8b3f3f902c7dec5, type: 3}
+--- !u!1 &7210593963255676191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 362048223453329212}
+  - component: {fileID: 1802311579456909123}
+  m_Layer: 0
+  m_Name: DataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -10039,5 +10199,5 @@ SceneRoots:
   - {fileID: 1847822711}
   - {fileID: 183147044}
   - {fileID: 2318567165959841264}
-  - {fileID: 1831195383822243501}
+  - {fileID: 362048223453329212}
   - {fileID: 970741145}

@@ -17,10 +17,4 @@ public class StartMainUI : MonoBehaviour
         settingButton.onClick.AddListener(() => startUI.ChangeState(StartUIState.Setting));
         selectWeaponButton.onClick.AddListener(()=>startUI.ChangeState(StartUIState.WeaponSelect));
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

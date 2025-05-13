@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
     public static DataManager instance;
 
-    public Player player;
+	public Player player;
+	public PlayerValue playerValue;
+	public List<Weapon> playerWeapon = new List<Weapon>(5);
+
 	public List<Skill> skillList = new List<Skill>(10);
+	public List<Skill> WeaponSkillList = new List<Skill>(5);
     public Skill skill;
 	public int skillValue = 0;
 	public int maxPlayerSkill = 3;
@@ -28,14 +33,20 @@ public class DataManager : MonoBehaviour
         {
 			Destroy(gameObject);
 		}
-		skill = skillList[1];
-    }
+		WeaponSkillList = skillList.Where(skill => skill.weaponCon != null).ToList();
+		skill = WeaponSkillList[0];
+	}
 
 	public void Pick()
 	{
-		player = GameObject.FindAnyObjectByType<Player>();
-		player.playerSkill.Add(skill);
-		player.weapons.Add(Instantiate(skill.weaponCon, player.transform.position, Quaternion.identity, player.transform));
+		if (playerValue.playerSkill.Count != 0)
+			return;
+		player = GameObject.Find("Player").GetComponent<Player>();
+		//if (playerValue != null)
+		//	player = playerValue;
+
+		playerValue.playerSkill.Add(skill);
+		playerWeapon.Add(skill.weaponCon.weapon);
 
 		float value = skill.levelSkills[skill.level].value;
 
@@ -44,7 +55,7 @@ public class DataManager : MonoBehaviour
 		{
 			case SkillType.ArrowSpeedUp:
 
-				foreach (var weapon in player.weapons)
+				foreach (var weapon in player.playerValue.weapons)
 				{
 					if (skill.weaponCon.weapon.name == weapon.weapon.name)
 					{
@@ -55,7 +66,7 @@ public class DataManager : MonoBehaviour
 				//skill.weapon.SpeedUp(value);
 				break;
 			case SkillType.ArrowValueUp:
-				foreach (var weapon in player.weapons)
+				foreach (var weapon in player.playerValue.weapons)
 				{
 					if (skill.weaponCon.weapon.name == weapon.weapon.name)
 					{
@@ -66,7 +77,7 @@ public class DataManager : MonoBehaviour
 				//skill.weapon.ValueUp((int)value);
 				break;
 			case SkillType.ArrowDamageUp:
-				foreach (var weapon in player.weapons)
+				foreach (var weapon in player.playerValue.weapons)
 				{
 					if (skill.weaponCon.weapon.name == weapon.weapon.name)
 					{
