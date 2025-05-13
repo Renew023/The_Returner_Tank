@@ -249,14 +249,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef1d169b4aeb2a64593272a49a5171e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 70
-  curHp: 70
+  maxHp: 35
+  curHp: 35
   moveSpeed: 6
   lookDirection: {x: 0, y: 0}
   attackDelay: 0
   expParent: {fileID: 0}
   exp: 20
-  expPrefab: {fileID: 6597864928945412204, guid: 9b8f7c13bf868b446ad397c4855321f2, type: 3}
+  expPrefab: {fileID: 6094734783714178179, guid: 4d08e126787cea8438833a56eb765d4c, type: 3}
   target: {fileID: 0}
   weaponController: {fileID: 7471077980043079352}
   hpBarFill: {fileID: 5983526365471840684}

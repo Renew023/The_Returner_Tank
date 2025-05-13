@@ -326,7 +326,7 @@ MonoBehaviour:
   spawnDelay: 1
   waveSpawnEntries:
   - wave: 1
-    dungeonLevel: 3
+    dungeonLevel: 4
     data:
       enemyIndices: 00000000
       baseEnemyCount: 1
