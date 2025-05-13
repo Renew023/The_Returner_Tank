@@ -4513,7 +4513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3db3944e72da8c46ad5edf3f43b864b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpBarFill: {fileID: 0}
+  hpBarFill: {fileID: 87637297}
 --- !u!114 &1794049426
 MonoBehaviour:
   m_ObjectHideFlags: 0
