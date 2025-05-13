@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : Character
 {
 	[SerializeField] protected Rigidbody2D rb;
-    public List<WeaponController> weapons = new List<WeaponController>(5); 
     [SerializeField] private AttackTarget attackTarget;
 
 	[SerializeField] private Camera camera;
@@ -16,39 +17,79 @@ public class Player : Character
 
     [SerializeField] private Transform bodyTransform;
     [SerializeField] private Transform headTransform;
-    
-	[SerializeField] private float arrowDelay;
-	[SerializeField] private float arrowDamage;
-	[SerializeField] private float Exp;
+
+    public PlayerValue playerValue;
 
     [SerializeField] private float Level;
+    [SerializeField] private Image hpBarFill;
 
-	//[SerializeField] public List<Skill> skillList = new List<Skill>(10);
-	[SerializeField] public List<Skill> playerSkill = new List<Skill>(5);
+    //[SerializeField] public List<Skill> skillList = new List<Skill>(10);
+    [SerializeField] public List<Skill> playerSkill = new List<Skill>(5);
     [SerializeField] public GameObject skillSelectUI;
-    public Weapon playerWeaponStat;
 
     protected Animator animator;
 
     void Awake()
     {
-        DataManager.instance.Pick();
-        Init();
         rb.freezeRotation = true;
         animator = GetComponentInChildren<Animator>();
         
         //LevelUp();
     }
 
+    void OnEnable()
+    {
+        DataManager.instance.Pick();
+
+		for (int i = 0; i < DataManager.instance.playerValue.playerSkill.Count; i++)
+        {
+            playerValue.playerSkill.Add(DataManager.instance.playerValue.playerSkill[i]);
+
+            if (playerValue.playerSkill[i].weaponCon != null)
+            {
+                playerValue.weapons.Add(Instantiate(DataManager.instance.playerValue.playerSkill[i].weaponCon, transform.position, Quaternion.identity, transform));
+            }
+        }
+
+        for (int j = 0; j < playerValue.weapons.Count; j++)
+        {
+            playerValue.weapons[j].weapon = DataManager.instance.playerWeapon[j];
+        }
+        playerValue.playerWeaponStat = DataManager.instance.playerValue.playerWeaponStat;
+        playerValue.Exp = DataManager.instance.playerValue.Exp;
+		playerValue.Level = DataManager.instance.playerValue.Level;
+
+		DataManager.instance.Pick();
+		//DataManager.instance.player = gameObject.transform.GetComponent<Player>();
+	}
+
+    void OnDisable()
+	{
+        DataManager.instance.playerValue = playerValue;
+
+        for (int i = 0; i < DataManager.instance.playerWeapon.Count; i++)
+        {
+            DataManager.instance.playerWeapon[i] = playerValue.weapons[i].weapon;
+        }
+
+        for (int j = DataManager.instance.playerWeapon.Count; j < playerValue.weapons.Count; j++)
+        {
+			DataManager.instance.playerWeapon.Add(playerValue.weapons[j].weapon);
+		}
+	}
+
     private void Start()
     {
-        if(DataManager.instance.savedPlayerMaxHp > 0)
+        base.Start();
+		
+		if (DataManager.instance.savedPlayerMaxHp > 0)
         {
             maxHp = DataManager.instance.savedPlayerMaxHp;
             curHp = DataManager.instance.savedPlayerHp;
+            hpBarFill.fillAmount = curHp / maxHp;
+            UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
         }
 
-        base.Start();
     }
 
     void Update()
@@ -58,12 +99,12 @@ public class Player : Character
         lookDirection = attackTarget.Searching(lookDirection, transform.position);
         RotateHead();
         
-        for (int i = 0; i < weapons.Count; i++)
+        for (int i = 0; i < playerValue.weapons.Count; i++)
         {
-            weapons[i].targetDirect = lookDirection;
-            weapons[i].playerWeaponStat = playerWeaponStat;
+            playerValue.weapons[i].targetDirect = lookDirection;
+            playerValue.weapons[i].playerWeaponStat = playerValue.playerWeaponStat;
         }
-		//lookDirection Àº °¡Àå °¡±î¿î ¸ó½ºÅÍ¸¦ Å¸°ÙÆÃ ÇØ¾ßÇÔ.
+		//lookDirection ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½ï¿½.
 		//lookDirection = (worldPos - (Vector2)transform.position);
 
 		/*if (Input.GetMouseButton(0) && (timer > attackDelay))
@@ -82,6 +123,10 @@ public class Player : Character
         if (Input.GetKeyDown(KeyCode.R))
         {
             LevelUp();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            UIManager.Instance.uiController.pauseUI.PauseMenuToggle(); //ESCï¿½Ô·Â½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
         }
     }
 
@@ -103,7 +148,7 @@ public class Player : Character
             bodyTransform.rotation = Quaternion.Euler(0, 0, angle + 90f); // ??? +90 ??
         }
     }
-    
+
     private void RotateHead()
     {
         if (lookDirection != Vector2.zero)
@@ -117,7 +162,9 @@ public class Player : Character
     {
 		maxHp += value;
 		curHp += value;
-	}
+        hpBarFill.fillAmount = curHp / maxHp;
+        UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
+    }
 
     public void MoveSpeedUp(float value = 1)
     {
@@ -128,10 +175,11 @@ public class Player : Character
 	private void LevelUp()
     {
         HpUp(50);
+        //++Level;
         Time.timeScale = 0.0f;
         skillSelectUI.gameObject.SetActive(true);
-        //¹èÆ²¸Å´ÏÀú¿¡¼­ °ÔÀÓ ¸ØÃè´ÂÁö °ü¸®
-        //·¹º§¾÷ ¼±ÅÃÃ¢ UI
+        //ï¿½ï¿½Æ²ï¿½Å´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã¢ UI
 
         if (curHp + maxHp * .1f < maxHp)
         {
@@ -141,6 +189,11 @@ public class Player : Character
         {
             curHp = maxHp;
         }
+
+        hpBarFill.fillAmount = curHp / maxHp;
+
+        UIManager.Instance.uiController.playerLevel.UpdateValue((int)Level);
+        UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
     }
 
 	public void OnTriggerEnter2D(Collider2D collision)
@@ -164,15 +217,18 @@ public class Player : Character
 
         //animator.SetBool("IsDamage", true);
 
-        //	ÀÏÁ¤ ½Ã°£ÀÌ Áö³­ ÈÄ, Damage ¾Ö´Ï¸ÞÀÌ¼Ç ÇÃ·¡±× ÃÊ±âÈ­
+        //	ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, Damage ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
         //StartCoroutine(ResetDamageAnim());
+
+        hpBarFill.fillAmount = curHp / maxHp;
+
+        UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
 
         if (curHp <= 0)
         {
             //Death();
         }
     }
-
 
     private IEnumerator ResetDamageAnim()
     {

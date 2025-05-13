@@ -491,7 +491,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8dbdd142ea849ac429a32e79f389f6a2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 815d5a31f6cd5984eb088e68cecb8361, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2247,114 +2247,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 794772926}
   m_CullTransparentMesh: 1
---- !u!1 &869953337
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 869953339}
-  - component: {fileID: 869953338}
-  m_Layer: 0
-  m_Name: DataManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &869953338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 869953337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c755e3be4dad3f4b9fe60b15cd7e29c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  skillList:
-  - name: 
-    player: {fileID: 0}
-    levelSkills:
-    - skillName: "[\uAC15\uD654] \uD3ED\uD0C4 1"
-      skillExplain: "\uD65C \uACF5\uACA9\uB825 \uC99D\uAC00"
-      upgradeType: 3
-      value: 5
-    - skillName: "[\uAC15\uD654] \uD3ED\uD0C4 2"
-      skillExplain: "\uD65C \uACF5\uC18D \uC99D\uAC00"
-      upgradeType: 0
-      value: 1
-    - skillName: "[\uAC15\uD654] \uD3ED\uD0C4 3"
-      skillExplain: "\uD65C \uD654\uC0B4 \uAC1C\uC218 \uC99D\uAC00"
-      upgradeType: 4
-      value: 3
-    level: 0
-    weaponCon: {fileID: 6955153868353512977, guid: 7700fb7bfccad134a8b857c9b6c58936, type: 3}
-  - name: 
-    player: {fileID: 0}
-    levelSkills:
-    - skillName: "[\uAC15\uD654] \uC544\uC774\uC2A4\uBCFC\uD2B8 1"
-      skillExplain: "\uD65C \uACF5\uACA9\uB825 \uC99D\uAC00"
-      upgradeType: 3
-      value: 5
-    - skillName: "[\uAC15\uD654] \uC544\uC774\uC2A4\uBCFC\uD2B8 2"
-      skillExplain: "\uD65C \uACF5\uC18D \uC99D\uAC00"
-      upgradeType: 0
-      value: 1
-    - skillName: "[\uAC15\uD654] \uC544\uC774\uC2A4\uBCFC\uD2B8 3"
-      skillExplain: "\uD65C \uD654\uC0B4 \uAC1C\uC218 \uC99D\uAC00"
-      upgradeType: 4
-      value: 3
-    level: 0
-    weaponCon: {fileID: 6955153868353512977, guid: 48a790f4f65a06243822563d7d255c62, type: 3}
-  - name: 
-    player: {fileID: 0}
-    levelSkills:
-    - skillName: "[\uAC15\uD654] \uD30C\uC774\uC5B4\uBCFC\uD2B8 1"
-      skillExplain: "\uD65C \uACF5\uACA9\uB825 \uC99D\uAC00"
-      upgradeType: 3
-      value: 5
-    - skillName: "[\uAC15\uD654] \uD30C\uC774\uC5B4\uBCFC\uD2B8 2"
-      skillExplain: "\uD65C \uACF5\uC18D \uC99D\uAC00"
-      upgradeType: 0
-      value: 1
-    - skillName: "[\uAC15\uD654] \uD30C\uC774\uC5B4\uBCFC\uD2B8 3"
-      skillExplain: "\uD65C \uD654\uC0B4 \uAC1C\uC218 \uC99D\uAC00"
-      upgradeType: 4
-      value: 3
-    level: 0
-    weaponCon: {fileID: 6955153868353512977, guid: 8641956f68c0431459f3b3b21e82dd8d, type: 3}
-  skill:
-    name: 
-    player: {fileID: 0}
-    levelSkills: []
-    level: 0
-    weaponCon: {fileID: 0}
-  skillValue: 0
-  maxPlayerSkill: 3
-  curPlayerSkillMax: 0
-  savedPlayerHp: 0
-  savedPlayerMaxHp: 0
---- !u!4 &869953339
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 869953337}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &879072781
 GameObject:
   m_ObjectHideFlags: 0
@@ -4553,7 +4445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3db3944e72da8c46ad5edf3f43b864b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpBarFill: {fileID: 0}
+  hpBarFill: {fileID: 87637297}
 --- !u!114 &1794049426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5452,6 +5344,181 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2115373855}
   m_CullTransparentMesh: 1
+--- !u!114 &30028396882499480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9041147219330139588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c755e3be4dad3f4b9fe60b15cd7e29c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1018062645414764747, guid: 6523050c8de5f8e4b8ecf4c7f0dacc4a, type: 3}
+  playerValue:
+    playerWeaponStat:
+      name: 
+      arrowValue: 0
+      arrowSpeed: 0
+      arrowDamage: 0
+      attackDelay: 0
+      timer: 0
+    playerSkill: []
+    weapons: []
+    Exp: 0
+    Level: 0
+  playerWeapon: []
+  skillList:
+  - name: "\uD3ED\uD0C4"
+    player: {fileID: 0}
+    levelSkills:
+    - skillName: "[\uAC15\uD654] \uD3ED\uD0C4 1"
+      skillExplain: "\uD65C \uACF5\uACA9\uB825 \uC99D\uAC00"
+      upgradeType: 6
+      value: 5
+    - skillName: "[\uAC15\uD654] \uD3ED\uD0C4 2"
+      skillExplain: "\uD65C \uACF5\uC18D \uC99D\uAC00"
+      upgradeType: 5
+      value: 1
+    - skillName: "[\uAC15\uD654] \uD3ED\uD0C4 3"
+      skillExplain: "\uD65C \uD654\uC0B4 \uAC1C\uC218 \uC99D\uAC00"
+      upgradeType: 7
+      value: 3
+    level: 0
+    weaponCon: {fileID: 6955153868353512977, guid: 7700fb7bfccad134a8b857c9b6c58936, type: 3}
+  - name: "\uC544\uC774\uC2A4\uBCFC\uD2B8"
+    player: {fileID: 0}
+    levelSkills:
+    - skillName: "[\uAC15\uD654] \uC544\uC774\uC2A4\uBCFC\uD2B8 1"
+      skillExplain: "\uD65C \uACF5\uACA9\uB825 \uC99D\uAC00"
+      upgradeType: 6
+      value: 5
+    - skillName: "[\uAC15\uD654] \uC544\uC774\uC2A4\uBCFC\uD2B8 2"
+      skillExplain: "\uD65C \uACF5\uC18D \uC99D\uAC00"
+      upgradeType: 5
+      value: 1
+    - skillName: "[\uAC15\uD654] \uC544\uC774\uC2A4\uBCFC\uD2B8 3"
+      skillExplain: "\uD65C \uD654\uC0B4 \uAC1C\uC218 \uC99D\uAC00"
+      upgradeType: 7
+      value: 3
+    level: 0
+    weaponCon: {fileID: 6955153868353512977, guid: 48a790f4f65a06243822563d7d255c62, type: 3}
+  - name: "\uD30C\uC774\uC5B4\uBCFC\uD2B8"
+    player: {fileID: 0}
+    levelSkills:
+    - skillName: "[\uAC15\uD654] \uD30C\uC774\uC5B4\uBCFC\uD2B8 1"
+      skillExplain: "\uD65C \uACF5\uACA9\uB825 \uC99D\uAC00"
+      upgradeType: 3
+      value: 5
+    - skillName: "[\uAC15\uD654] \uD30C\uC774\uC5B4\uBCFC\uD2B8 2"
+      skillExplain: "\uD65C \uACF5\uC18D \uC99D\uAC00"
+      upgradeType: 0
+      value: 1
+    - skillName: "[\uAC15\uD654] \uD30C\uC774\uC5B4\uBCFC\uD2B8 3"
+      skillExplain: "\uD65C \uD654\uC0B4 \uAC1C\uC218 \uC99D\uAC00"
+      upgradeType: 4
+      value: 3
+    level: 0
+    weaponCon: {fileID: 6955153868353512977, guid: 8641956f68c0431459f3b3b21e82dd8d, type: 3}
+  - name: "\uD50C\uB808\uC774\uC5B4 \uCCB4\uB825 \uC99D\uAC00"
+    player: {fileID: 0}
+    levelSkills:
+    - skillName: "[\uAC15\uD654] \uD50C\uB808\uC774\uC5B4 \uCCB4\uB825 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 0
+      value: 5
+    - skillName: "[\uAC15\uD654] \uD50C\uB808\uC774\uC5B4 \uCCB4\uB825 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 0
+      value: 5
+    - skillName: "[\uAC15\uD654] \uD50C\uB808\uC774\uC5B4 \uCCB4\uB825 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 0
+      value: 5
+    level: 0
+    weaponCon: {fileID: 0}
+  - name: "\uD50C\uB808\uC774\uC5B4 \uC18D\uB3C4 \uC99D\uAC00"
+    player: {fileID: 0}
+    levelSkills:
+    - skillName: "[\uAC15\uD654] \uD50C\uB808\uC774\uC5B4 \uC18D\uB3C4 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 1
+      value: 10
+    - skillName: "[\uAC15\uD654] \uD50C\uB808\uC774\uC5B4 \uC18D\uB3C4 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 1
+      value: 10
+    - skillName: "[\uAC15\uD654] \uD50C\uB808\uC774\uC5B4 \uC18D\uB3C4 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 1
+      value: 10
+    level: 0
+    weaponCon: {fileID: 0}
+  - name: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uC18D\uB3C4 \uC99D\uAC00"
+    player: {fileID: 0}
+    levelSkills:
+    - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uC18D\uB3C4 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 2
+      value: 10
+    - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uC18D\uB3C4 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 2
+      value: 10
+    - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uC18D\uB3C4 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 2
+      value: 10
+    level: 0
+    weaponCon: {fileID: 0}
+  - name: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uAC1C\uC218 \uC99D\uAC00"
+    player: {fileID: 0}
+    levelSkills:
+    - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 3
+      value: 10
+    - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 3
+      value: 10
+    - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 3
+      value: 10
+    level: 0
+    weaponCon: {fileID: 0}
+  - name: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uB370\uBBF8\uC9C0 \uC99D\uAC00"
+    player: {fileID: 0}
+    levelSkills:
+    - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uB370\uBBF8\uC9C0 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 3
+      value: 10
+    - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uB370\uBBF8\uC9C0 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 3
+      value: 10
+    - skillName: "\uD50C\uB808\uC774\uC5B4 \uD654\uC0B4 \uB370\uBBF8\uC9C0 \uC99D\uAC00"
+      skillExplain: 
+      upgradeType: 3
+      value: 10
+    level: 0
+    weaponCon: {fileID: 0}
+  WeaponSkillList: []
+  skill:
+    name: 
+    player: {fileID: 0}
+    levelSkills: []
+    level: 0
+    weaponCon: {fileID: 0}
+  skillValue: 0
+  maxPlayerSkill: 3
+  curPlayerSkillMax: 0
+  savedPlayerHp: 0
+  savedPlayerMaxHp: 0
 --- !u!1001 &1740940420463546597
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5512,16 +5579,48 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1431485164}
   m_SourcePrefab: {fileID: 100100000, guid: 1ce0c7f94cca9634c9c22179daee5531, type: 3}
+--- !u!4 &2049127449572020199
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9041147219330139588}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &9041147219330139588
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2049127449572020199}
+  - component: {fileID: 30028396882499480}
+  m_Layer: 0
+  m_Name: DataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 630704267}
   - {fileID: 879072785}
-  - {fileID: 869953339}
   - {fileID: 100220441}
   - {fileID: 658537805}
   - {fileID: 1740940420463546597}
   - {fileID: 524852061}
   - {fileID: 1828159391}
   - {fileID: 2017097511}
+  - {fileID: 2049127449572020199}

@@ -12,7 +12,7 @@ public class DeathUI : MonoBehaviour
 
     public void ReturnMain()
     {
-        //SceneManager.LoadScene("StartScene");
-        Debug.Log("씬을 추가 해주세요.");
+        UIManager.Instance.uiController.SetDungeonUI(false);
+        SceneManager.LoadScene("StartScene");
     }
 }

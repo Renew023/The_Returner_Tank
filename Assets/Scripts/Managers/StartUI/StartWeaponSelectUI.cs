@@ -36,16 +36,16 @@ public class StartWeaponSelectUI : MonoBehaviour
 		int skillValue = DataManager.instance.skillValue;
 
 		skillValue += value;
-		if (skillValue >= DataManager.instance.skillList.Count)
+		if (skillValue >= DataManager.instance.WeaponSkillList.Count)
 		{
 			skillValue = 0;
 		}
 		else if (skillValue < 0)
 		{
-			skillValue = DataManager.instance.skillList.Count -1;
+			skillValue = DataManager.instance.WeaponSkillList.Count - 1;
 		}
 		DataManager.instance.skillValue = skillValue;
-		DataManager.instance.skill = DataManager.instance.skillList[skillValue];
+		DataManager.instance.skill = DataManager.instance.WeaponSkillList[skillValue];
 		ShowReset();
 	}
 

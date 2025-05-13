@@ -1,35 +1,32 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Camera))]
 public class MapFollowCamera : MonoBehaviour
 {
-    public RectTransform playerIndicator;   // MapManager가 할당해 줍니다
-    public float followSpeed = 2f;          // 따라오는 속도
-    public float yOffset = 0f;              // 인디케이터 대비 Y 오프셋
-    public float minY = -3f, maxY = 3f;     // 이동 범위 클램프
+    [Header("추적 대상")]
+    [Tooltip("Hierarchy ▶ NodesCanvas ▶ StageContainer ▶ PlayerIndicator")]
+    public RectTransform target;
 
-    private Vector3 basePos;
+    [Header("카메라 오프셋")]
+    public Vector3 offset = new Vector3(0, 0, -10f);
 
-    void Start()
-    {
-        basePos = transform.position;       // 맵씬 카메라 초기 위치 저장
-    }
+    [Header("부드러운 추적 속도")]
+    [Range(0.01f, 1f)]
+    public float smoothSpeed = 0.125f;
 
     void LateUpdate()
     {
-        if (playerIndicator == null) return;
+        if (target == null) return;
 
-        // 목표 Y 계산 & 범위 제한
-        float targetY = Mathf.Clamp(
-            playerIndicator.anchoredPosition.y + yOffset,
-            minY, maxY
-        );
+        // 1) 인디케이터 월드 위치 구하기
+        Vector3 targetWorldPos = target.TransformPoint(Vector3.zero) + offset;
 
-        // X,Z 고정, Y만 보간
-        Vector3 desired = new Vector3(basePos.x, targetY, basePos.z);
-        transform.position = Vector3.Lerp(
-            transform.position,
-            desired,
-            followSpeed * Time.deltaTime
-        );
+        // 2) 원하는 포지션: X,Z는 고정
+        float fixedX = transform.position.x;
+        float fixedZ = transform.position.z;
+        Vector3 desiredPos = new Vector3(fixedX, targetWorldPos.y, fixedZ);
+
+        // 3) 부드럽게 보간
+        transform.position = Vector3.Lerp(transform.position, desiredPos, smoothSpeed);
     }
 }

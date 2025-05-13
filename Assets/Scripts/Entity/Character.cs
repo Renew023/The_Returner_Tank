@@ -8,10 +8,9 @@ public class Character : MonoBehaviour
      * 플레이어가 가지고 있어야되는 무기값 : 딜레이
      * 무기에 전달해야되는 값 : 발사체 개수, 발사할 위치, 발사 속도, 데미지
      * 발사체가 가지고 있어야하는 값 : 데미지, 
-     * 
      */
 
-	[SerializeField] protected float maxHp = 100;
+	[SerializeField] protected float maxHp;
 	[SerializeField] protected float curHp;
 	[SerializeField] protected float moveSpeed;
 	protected Vector2 isLeft;
@@ -37,9 +36,9 @@ public class Character : MonoBehaviour
 
 	protected virtual void Init() 
     {
-		maxHp = 100;
+		//maxHp = 100;
 		curHp = maxHp;
-		moveSpeed = 10;
+		//moveSpeed = 10;
 		isLeft = Vector3.zero;
 
 		lookDirection = Vector3.up;
@@ -56,5 +55,5 @@ public class Character : MonoBehaviour
 	protected virtual void Hit(ref float curHp, float damage) 
     {
         curHp -= damage;
-    }
+	}
 }
