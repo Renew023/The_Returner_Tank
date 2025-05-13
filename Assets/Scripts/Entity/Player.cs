@@ -20,6 +20,7 @@ public class Player : Character
 
     public PlayerValue playerValue;
 
+    private float demandExp;
     [SerializeField] private float Level;
     [SerializeField] private Image hpBarFill;
 
@@ -61,6 +62,8 @@ public class Player : Character
 
 		DataManager.instance.Pick();
 		//DataManager.instance.player = gameObject.transform.GetComponent<Player>();
+
+        SetDemandExp(playerValue.Level);
 	}
 
     void OnDisable()
@@ -120,6 +123,8 @@ public class Player : Character
 
         Move();
         Rotate();
+        
+        
         if (Input.GetKeyDown(KeyCode.R))
         {
             LevelUp();
@@ -175,6 +180,7 @@ public class Player : Character
 	private void LevelUp()
     {
         HpUp(50);
+        SetDemandExp(playerValue.Level);
         //++Level;
         Time.timeScale = 0.0f;
         skillSelectUI.gameObject.SetActive(true);
@@ -234,5 +240,21 @@ public class Player : Character
     {
         yield return new WaitForSeconds(0.2f);
         animator.SetBool("IsDamage", false);
+    }
+
+    private float SetDemandExp(float lev)
+    {
+        float demand = lev * lev * 1.5f + 5f;
+        return demand;
+    }
+
+    public void AddExp(int amount)
+    {
+        playerValue.Exp += amount;
+        if (playerValue.Exp >= demandExp)
+        {
+            playerValue.Exp -= demandExp;
+            LevelUp();
+        }
     }
 }
