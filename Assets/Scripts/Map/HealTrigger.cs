@@ -26,16 +26,11 @@ public class HealTrigger : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
 
-        var player = other.GetComponent<Player>();  // 기존 Player 스크립트 참고하여 작성
-        if (Player.curHp + healAmount > Player.maxHp)
-        {
-            Player.curHp = Player.maxHp;
-        }
-        else
-        {
-            Player.curHp += healAmount;
-        }
-        // 3) 한 번만 먹도록 트리거 제거 또는 비활성화
+        var player = other.GetComponent<Player>();
+        if (player == null) return;
+
+        player.HealTrigger(healAmount);
+
         Destroy(gameObject);
     }
 }
