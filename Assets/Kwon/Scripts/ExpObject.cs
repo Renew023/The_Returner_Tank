@@ -13,6 +13,8 @@ public class ExpObject : MonoBehaviour
     private float speedScale = 10f;
     private Vector3 moveDir;
 
+    public int expAmount = 1;
+
     public void StartAbsorb(Transform player)
     {
         target = player;
@@ -50,7 +52,7 @@ public class ExpObject : MonoBehaviour
             Player player = other.GetComponent<Player>();
             if (player != null)
             {
-                //플레이어 경험치 증가
+                player.AddExp(expAmount);
             }
             Destroy(gameObject);
         }
