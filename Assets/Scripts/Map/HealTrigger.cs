@@ -5,7 +5,7 @@ using UnityEngine;
 public class HealTrigger : MonoBehaviour
 {
     [Header("회복량 ")]
-    public int healAmount = 20;
+    public int healAmount = 50;
 
     void Awake()
     {
