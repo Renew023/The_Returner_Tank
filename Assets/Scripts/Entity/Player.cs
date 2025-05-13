@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Player : Character
 {
 	[SerializeField] protected Rigidbody2D rb;
-    public List<WeaponController> weapons = new List<WeaponController>(5); 
     [SerializeField] private AttackTarget attackTarget;
 
 	[SerializeField] private Camera camera;
@@ -16,39 +16,74 @@ public class Player : Character
 
     [SerializeField] private Transform bodyTransform;
     [SerializeField] private Transform headTransform;
-    
-	[SerializeField] private float arrowDelay;
-	[SerializeField] private float arrowDamage;
-	[SerializeField] private float Exp;
 
-    [SerializeField] private float Level;
+    public PlayerValue playerValue;
 
 	//[SerializeField] public List<Skill> skillList = new List<Skill>(10);
-	[SerializeField] public List<Skill> playerSkill = new List<Skill>(5);
+	
     [SerializeField] public GameObject skillSelectUI;
-    public Weapon playerWeaponStat;
 
     protected Animator animator;
 
     void Awake()
     {
-        DataManager.instance.Pick();
-        Init();
         rb.freezeRotation = true;
         animator = GetComponentInChildren<Animator>();
         
         //LevelUp();
     }
 
+    void OnEnable()
+    {
+        DataManager.instance.Pick();
+
+		for (int i = 0; i < DataManager.instance.playerValue.playerSkill.Count; i++)
+        {
+            playerValue.playerSkill.Add(DataManager.instance.playerValue.playerSkill[i]);
+
+            if (playerValue.playerSkill[i].weaponCon != null)
+            {
+                playerValue.weapons.Add(Instantiate(DataManager.instance.playerValue.playerSkill[i].weaponCon, transform.position, Quaternion.identity, transform));
+            }
+        }
+
+        for (int j = 0; j < playerValue.weapons.Count; j++)
+        {
+            playerValue.weapons[j].weapon = DataManager.instance.playerWeapon[j];
+        }
+        playerValue.playerWeaponStat = DataManager.instance.playerValue.playerWeaponStat;
+        playerValue.Exp = DataManager.instance.playerValue.Exp;
+		playerValue.Level = DataManager.instance.playerValue.Level;
+
+		DataManager.instance.Pick();
+		//DataManager.instance.player = gameObject.transform.GetComponent<Player>();
+	}
+
+    void OnDisable()
+	{
+        DataManager.instance.playerValue = playerValue;
+
+        for (int i = 0; i < DataManager.instance.playerWeapon.Count; i++)
+        {
+            DataManager.instance.playerWeapon[i] = playerValue.weapons[i].weapon;
+        }
+
+        for (int j = DataManager.instance.playerWeapon.Count; j < playerValue.weapons.Count; j++)
+        {
+			DataManager.instance.playerWeapon.Add(playerValue.weapons[j].weapon);
+		}
+	}
+
     private void Start()
     {
-        if(DataManager.instance.savedPlayerMaxHp > 0)
+        base.Start();
+		
+		if (DataManager.instance.savedPlayerMaxHp > 0)
         {
             maxHp = DataManager.instance.savedPlayerMaxHp;
             curHp = DataManager.instance.savedPlayerHp;
         }
 
-        base.Start();
     }
 
     void Update()
@@ -58,10 +93,10 @@ public class Player : Character
         lookDirection = attackTarget.Searching(lookDirection, transform.position);
         RotateHead();
         
-        for (int i = 0; i < weapons.Count; i++)
+        for (int i = 0; i < playerValue.weapons.Count; i++)
         {
-            weapons[i].targetDirect = lookDirection;
-            weapons[i].playerWeaponStat = playerWeaponStat;
+            playerValue.weapons[i].targetDirect = lookDirection;
+            playerValue.weapons[i].playerWeaponStat = playerValue.playerWeaponStat;
         }
 		//lookDirection 은 가장 가까운 몬스터를 타겟팅 해야함.
 		//lookDirection = (worldPos - (Vector2)transform.position);
