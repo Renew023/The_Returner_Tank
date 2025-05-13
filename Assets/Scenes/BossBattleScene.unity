@@ -330,6 +330,16 @@ MonoBehaviour:
     data:
       enemyIndices: 00000000
       baseEnemyCount: 1
+  - wave: 1
+    dungeonLevel: 3
+    data:
+      enemyIndices: 00000000
+      baseEnemyCount: 1
+  - wave: 1
+    dungeonLevel: 5
+    data:
+      enemyIndices: 00000000
+      baseEnemyCount: 1
   testWave: 1
   useTestWave: 0
 --- !u!4 &117317151
