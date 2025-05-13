@@ -253,6 +253,6 @@ public class Player : Character
             playerValue.Exp -= demandExp;
             LevelUp();
         }
-        UIManager.Instance.uiController.playerEXP.UpdateValue((float)playerValue.Exp, (float)demandExp);
-    }
+		UIManager.Instance.uiController.playerEXP.UpdateValue((float)playerValue.Exp, (float)demandExp);
+	}
 }

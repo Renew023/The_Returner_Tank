@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 3594260524677699088}
   m_Layer: 9
   m_Name: Enemy - OrcShaman
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -228,8 +228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef1d169b4aeb2a64593272a49a5171e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 140
-  curHp: 140
+  maxHp: 70
+  curHp: 70
   moveSpeed: 8
   lookDirection: {x: 0, y: 0}
   attackDelay: 0
