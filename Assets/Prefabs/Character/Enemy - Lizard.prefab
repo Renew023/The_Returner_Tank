@@ -253,11 +253,12 @@ MonoBehaviour:
   curHp: 70
   moveSpeed: 6
   lookDirection: {x: 0, y: 0}
-  attackDelay: 0.1
-  exp: 1
+  attackDelay: 0
+  expParent: {fileID: 0}
+  exp: 20
   expPrefab: {fileID: 6597864928945412204, guid: 9b8f7c13bf868b446ad397c4855321f2, type: 3}
   target: {fileID: 0}
-  weaponController: {fileID: 0}
+  weaponController: {fileID: 7471077980043079352}
   hpBarFill: {fileID: 5983526365471840684}
   monsterTransform: {fileID: 2665186734211542460}
 --- !u!114 &-1930091359756790908
@@ -337,6 +338,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4abf6c960279ad14baa2cbebd11bc7f8, type: 3}
+--- !u!114 &7471077980043079352 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6955153868353512977, guid: 4abf6c960279ad14baa2cbebd11bc7f8, type: 3}
+  m_PrefabInstance: {fileID: 516561837031999657}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 994f8c0fff656a64b825090d951353da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &9221278699677961332 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8706481037669991645, guid: 4abf6c960279ad14baa2cbebd11bc7f8, type: 3}

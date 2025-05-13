@@ -10,14 +10,14 @@ enum UpgradeAbility
 }
 
 [System.Serializable]
-public class Weapon
+public struct Weapon
 {
 	public string name;
 	public int arrowValue;
 	public float arrowSpeed;
 	public float arrowDamage;
-	public float attackDelay = 1.0f;
-	public float timer = 0.0f;
+	public float attackDelay;
+	public float timer;
 
 	//[SerializeField] protected Dictionary<int, (string, int)> levelEvent = new Dictionary<int, (string, int)>();
 
