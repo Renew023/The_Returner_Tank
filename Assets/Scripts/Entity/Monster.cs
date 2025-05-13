@@ -53,8 +53,6 @@ public class Monster : Character
 	override protected void Move()
 	{
 		animator.SetBool("IsMove", true);
-
-
 	}
 
 	override protected void Rotate()
@@ -157,5 +155,25 @@ public class Monster : Character
 		{
 			expObj.expAmount = amount;
 		}
+	}
+
+	public void ResetEnemy()
+	{
+        curHp = maxHp;
+
+        Debug.Log($"[ResetEnemy] {name}, curHp: {curHp}");
+
+		if(hpBarFill != null)
+		{
+			hpBarFill.fillAmount = 1f;
+		}
+
+		if(animator != null)
+		{
+			animator.SetBool("IsDamage", false);
+			animator.SetBool("IsMove", false);
+		}
+
+		gameObject.SetActive(true);
 	}
 }

@@ -10350,7 +10350,7 @@ MonoBehaviour:
   player: {fileID: 0}
   warpZone: {fileID: 0}
   currentWave: 1
-  maxWave: 2
+  maxWave: 1
   pools: {fileID: 2081940347}
 --- !u!4 &1909743401
 Transform:
