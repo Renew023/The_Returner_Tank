@@ -143,8 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43630a0e84e44604b9fa842a9e823870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 1200
-  curHp: 1200
+  maxHp: 600
+  curHp: 600
   moveSpeed: 10
   lookDirection: {x: 0, y: 0}
   attackDelay: 1

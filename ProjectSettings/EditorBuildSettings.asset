@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/DungeonScene4.unity
     guid: 4fae3811c8a8431458d1c241088fe863
   - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: 019bf09d533fd6b42818208981063f38
+  - enabled: 1
     path: Assets/Scenes/BossBattleScene.unity
     guid: 9ddaa058e7b64364c9516f634f4ebbaa
   m_configObjects: {}

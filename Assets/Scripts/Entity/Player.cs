@@ -34,8 +34,6 @@ public class Player : Character
     {
         rb.freezeRotation = true;
         animator = GetComponentInChildren<Animator>();
-        
-        //LevelUp();
     }
 
     void OnEnable()
@@ -81,7 +79,7 @@ public class Player : Character
 		}
 	}
 
-    private void Start()
+    private new void Start()
     {
         base.Start();
 		
@@ -90,9 +88,10 @@ public class Player : Character
             maxHp = DataManager.instance.savedPlayerMaxHp;
             curHp = DataManager.instance.savedPlayerHp;
             hpBarFill.fillAmount = curHp / maxHp;
+            UIManager.Instance.uiController.playerLevel.UpdateValue((int)playerValue.Level + 1);
             UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
+            UIManager.Instance.uiController.playerEXP.UpdateValue(playerValue.Exp, demandExp);
         }
-
     }
 
     void Update()
@@ -197,8 +196,8 @@ public class Player : Character
 
         hpBarFill.fillAmount = curHp / maxHp;
 
-        UIManager.Instance.uiController.playerLevel.UpdateValue((int)Level);
         UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
+        UIManager.Instance.uiController.playerLevel.UpdateValue((int)playerValue.Level + 1);
     }
 
 	public void OnTriggerEnter2D(Collider2D collision)
@@ -254,5 +253,6 @@ public class Player : Character
             playerValue.Exp -= demandExp;
             LevelUp();
         }
-    }
+		UIManager.Instance.uiController.playerEXP.UpdateValue((float)playerValue.Exp, (float)demandExp);
+	}
 }
