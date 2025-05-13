@@ -181,11 +181,8 @@ public class Player : Character
     {
         HpUp(50);
         SetDemandExp(playerValue.Level);
-        //++Level;
         Time.timeScale = 0.0f;
         skillSelectUI.gameObject.SetActive(true);
-        //��Ʋ�Ŵ������� ���� ������� ����
-        //������ ����â UI
 
         if (curHp + maxHp * .1f < maxHp)
         {
