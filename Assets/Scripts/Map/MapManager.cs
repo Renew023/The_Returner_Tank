@@ -110,7 +110,6 @@ public class MapManager : MonoBehaviour
         }
         // 마지막 줄은 보스 한 마리
         mapData.Add(new List<NodeType> { NodeType.Boss });
-        
     }
 
     void RenderMap()

@@ -7,6 +7,7 @@ public class UIController : MonoBehaviour
     public PlayerHP playerHP;
     public PlayerLevel playerLevel;
     public DeathUI deathUI;
+    public ClearUI clearUI;
     public PauseUI pauseUI;
 
     private void Start()
@@ -21,13 +22,18 @@ public class UIController : MonoBehaviour
 
     private void ShowPlayerStatus(bool show)
     {
-        // EXP, Levelµµ ∞∞¿∫ Object¿Ãπ«∑Œ «— ∞≥∏∏ ¿÷æÓµµ µ .
+        // EXP, LevelÎèÑ Í∞ôÏùÄ ObjectÏù¥ÎØÄÎ°ú Ìïú Í∞úÎßå ÏûàÏñ¥ÎèÑ Îê®.
         playerHP.gameObject.SetActive(show);
     }
 
-    private void ShowDeathUI(bool show)
+    private void ShowDeathUI(bool show) 
     {
         deathUI.gameObject.SetActive(show);
+    }
+
+    private void ShowClearUI(bool show)
+    {
+        clearUI.gameObject.SetActive(show);
     }
 
     private void ShowPauseUI(bool show)
@@ -40,6 +46,7 @@ public class UIController : MonoBehaviour
         ShowPlayerStatus(show);
         ShowDeathUI(show);
         ShowPauseUI(show);
+        ShowClearUI(show);
     }
 
     public void SetBossHP(bool show)

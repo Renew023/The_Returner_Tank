@@ -32,8 +32,9 @@ public class PauseUI : MonoBehaviour
 
     public void ReturnMain()
     {
-        Time.timeScale = 1f;
         UIManager.Instance.uiController.SetDungeonUI(false);
+        GameManager.Instance.SetStageInfo(0, 0, 1);
+        Time.timeScale = 1f;
         SceneManager.LoadScene("StartScene");
     }
 }
