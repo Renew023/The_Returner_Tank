@@ -133,9 +133,9 @@ MonoBehaviour:
   weapon:
     name: "\uC544\uC774\uC2A4\uBCFC\uD2B8"
     arrowValue: 1
-    arrowSpeed: 5
-    arrowDamage: 5
-    attackDelay: 1
+    arrowSpeed: 10
+    arrowDamage: 40
+    attackDelay: 2
     timer: 0
   objectPoolArrow: []
   objectPoolCount: 0

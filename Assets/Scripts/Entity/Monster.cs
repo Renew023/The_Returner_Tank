@@ -73,7 +73,7 @@ public class Monster : Character
 		if (collision.gameObject.CompareTag("Arrow"))
 		{
 			Arrow arrow = collision.gameObject.GetComponent<Arrow>();
-			if (arrow.owner == this.gameObject)
+			if (arrow.owner.CompareTag("Monster"))
 				return;
 
 			//Hit(ref curHp, arrow.damage);
@@ -119,6 +119,7 @@ public class Monster : Character
 	void OnEnable()
 	{
 		hpBarFill.fillAmount = curHp / maxHp;
+		expParent = GameObject.Find("ExpObjects")?.transform;
 	}
 	
 	void OnDisable()
@@ -145,8 +146,6 @@ public class Monster : Character
 	{
 		Vector2 randomOffset = Random.insideUnitCircle * 0.5f;
 		Vector3 spawnPos = transform.position + (Vector3)randomOffset;
-		
-		expParent = GameObject.Find("ExpObjects")?.transform;
 
 		GameObject obj = Instantiate(expPrefab, spawnPos, Quaternion.identity, expParent);
     
