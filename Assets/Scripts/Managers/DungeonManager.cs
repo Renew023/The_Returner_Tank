@@ -49,7 +49,7 @@ public class DungeonManager : MonoBehaviour
     //  ���� ���̺� ���� �� ���� �� ���� �޼���
     public void StartWave(int count)
     {
-        aliveEnemies = count;
+        aliveEnemies += count;
         isWaveInProgress = true;
         Debug.Log($"[���̺� {currentWave}] ���� {count} ���� ��ȯ!");
     }
