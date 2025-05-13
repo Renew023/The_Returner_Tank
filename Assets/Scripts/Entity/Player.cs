@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : Character
 {
@@ -19,8 +20,11 @@ public class Player : Character
 
     public PlayerValue playerValue;
 
-	//[SerializeField] public List<Skill> skillList = new List<Skill>(10);
-	
+    [SerializeField] private float Level;
+    [SerializeField] private Image hpBarFill;
+
+    //[SerializeField] public List<Skill> skillList = new List<Skill>(10);
+    [SerializeField] public List<Skill> playerSkill = new List<Skill>(5);
     [SerializeField] public GameObject skillSelectUI;
 
     protected Animator animator;
@@ -82,6 +86,8 @@ public class Player : Character
         {
             maxHp = DataManager.instance.savedPlayerMaxHp;
             curHp = DataManager.instance.savedPlayerHp;
+            hpBarFill.fillAmount = curHp / maxHp;
+            UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
         }
 
     }
@@ -98,7 +104,7 @@ public class Player : Character
             playerValue.weapons[i].targetDirect = lookDirection;
             playerValue.weapons[i].playerWeaponStat = playerValue.playerWeaponStat;
         }
-		//lookDirection Àº °¡Àå °¡±î¿î ¸ó½ºÅÍ¸¦ Å¸°ÙÆÃ ÇØ¾ßÇÔ.
+		//lookDirection ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½ï¿½.
 		//lookDirection = (worldPos - (Vector2)transform.position);
 
 		/*if (Input.GetMouseButton(0) && (timer > attackDelay))
@@ -116,6 +122,10 @@ public class Player : Character
         if (Input.GetKeyDown(KeyCode.R))
         {
             LevelUp();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            UIManager.Instance.uiController.pauseUI.PauseMenuToggle(); //ESCï¿½Ô·Â½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
         }
     }
 
@@ -151,7 +161,9 @@ public class Player : Character
     {
 		maxHp += value;
 		curHp += value;
-	}
+        hpBarFill.fillAmount = curHp / maxHp;
+        UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
+    }
 
     public void MoveSpeedUp(float value = 1)
     {
@@ -164,8 +176,8 @@ public class Player : Character
         HpUp(50);
         Time.timeScale = 0.0f;
         skillSelectUI.gameObject.SetActive(true);
-        //¹èÆ²¸Å´ÏÀú¿¡¼­ °ÔÀÓ ¸ØÃè´ÂÁö °ü¸®
-        //·¹º§¾÷ ¼±ÅÃÃ¢ UI
+        //ï¿½ï¿½Æ²ï¿½Å´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã¢ UI
 
         if (curHp + maxHp * .1f < maxHp)
         {
@@ -175,6 +187,10 @@ public class Player : Character
         {
             curHp = maxHp;
         }
+
+        hpBarFill.fillAmount = curHp / maxHp;
+
+        UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
     }
 
 	public void OnTriggerEnter2D(Collider2D collision)
@@ -198,15 +214,18 @@ public class Player : Character
 
         //animator.SetBool("IsDamage", true);
 
-        //	ÀÏÁ¤ ½Ã°£ÀÌ Áö³­ ÈÄ, Damage ¾Ö´Ï¸ÞÀÌ¼Ç ÇÃ·¡±× ÃÊ±âÈ­
+        //	ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, Damage ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
         //StartCoroutine(ResetDamageAnim());
+
+        hpBarFill.fillAmount = curHp / maxHp;
+
+        UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
 
         if (curHp <= 0)
         {
             //Death();
         }
     }
-
 
     private IEnumerator ResetDamageAnim()
     {

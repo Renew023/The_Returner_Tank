@@ -55,5 +55,5 @@ public class Character : MonoBehaviour
 	protected virtual void Hit(ref float curHp, float damage) 
     {
         curHp -= damage;
-    }
+	}
 }
