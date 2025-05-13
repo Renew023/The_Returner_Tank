@@ -76,8 +76,8 @@ public class Spawner : MonoBehaviour
             return;
         }
 
-        //int spawnCount = Mathf.Min(spawnPoint.Length, data.baseEnemyCount + dungeonLevel);
-        int spawnCount = Mathf.Min(spawnPoint.Length, data.baseEnemyCount);
+        int spawnCount = Mathf.Min(spawnPoint.Length, data.baseEnemyCount + dungeonLevel);
+        //int spawnCount = Mathf.Min(spawnPoint.Length, data.baseEnemyCount);
 
         //  실제로 성공적으로 생성되는 적의 수를 세기 위한 변수 추가
         int realSpawned = 0;
