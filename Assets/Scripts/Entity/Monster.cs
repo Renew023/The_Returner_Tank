@@ -14,6 +14,8 @@ public class Monster : Character
     [SerializeField] private Transform monsterTransform;
     protected Animator animator;
 
+	private bool isDead = false;
+
 	void Awake()
 	{
 		target = GameObject.FindObjectOfType<Player>();
@@ -104,6 +106,14 @@ public class Monster : Character
 
     void Death()
 	{
+		//	중복 호출을 방지!
+		if(isDead)
+		{
+			return;
+		}
+
+		isDead = true;
+
 		gameObject.SetActive(false);
 
 		//	�ش� ���Ͱ� �����ִ� ���� �� ����.
@@ -160,6 +170,9 @@ public class Monster : Character
 	public void ResetEnemy()
 	{
         curHp = maxHp;
+
+		//	초기화
+		isDead = false;
 
         Debug.Log($"[ResetEnemy] {name}, curHp: {curHp}");
 

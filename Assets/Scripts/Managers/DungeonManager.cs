@@ -53,6 +53,7 @@ public class DungeonManager : MonoBehaviour
         return aliveEnemies;
     }
 
+
     private void Start()
     {
         //  DungeonManager���� ���� ���̺긦 �����Ѵ�!!
@@ -64,7 +65,8 @@ public class DungeonManager : MonoBehaviour
     //  ���� ���̺� ���� �� ���� �� ���� �޼���
     public void StartWave(int count)
     {
-        aliveEnemies += count;
+        //aliveEnemies += count;
+        aliveEnemies = count;
         isWaveInProgress = true;
         Debug.Log($"[현재 웨이브: {currentWave}]의 몬스터 수: {count} 스폰!");
     }

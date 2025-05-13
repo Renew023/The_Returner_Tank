@@ -78,7 +78,9 @@ public class Spawner : MonoBehaviour
 
         //int spawnCount = Mathf.Min(spawnPoint.Length, data.baseEnemyCount + dungeonLevel);
         int spawnCount = Mathf.Min(spawnPoint.Length, data.baseEnemyCount);
-        DungeonManager.instance.StartWave(spawnCount);
+
+        //  실제로 성공적으로 생성되는 적의 수를 세기 위한 변수 추가
+        int realSpawned = 0;
 
         for (int i = 0; i < spawnCount; i++)
         {
@@ -89,8 +91,12 @@ public class Spawner : MonoBehaviour
             if (enemy != null)
             {
                 enemy.transform.position = spawnPoint[i].position;
+                realSpawned++;
             }
         }
+
+        //  성공적으로 생성되는 적들만 설정하여 소환
+        DungeonManager.instance.StartWave(realSpawned);
 
         if (useTestWave)
         {
