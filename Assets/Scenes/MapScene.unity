@@ -192,7 +192,9 @@ MonoBehaviour:
   enemyIcon: {fileID: -1377157045, guid: 12203856eed85b644ba073857c0a3843, type: 3}
   healIcon: {fileID: 1688997406, guid: 12203856eed85b644ba073857c0a3843, type: 3}
   bossIcon: {fileID: -525390460, guid: 12203856eed85b644ba073857c0a3843, type: 3}
+  startIcon: {fileID: 21300000, guid: b5238b54db7c39d45af7c812c2273243, type: 3}
   playerIndicatorPrefab: {fileID: 6748271703798662429, guid: d9579ae4a8957614383b59627b0ea105, type: 3}
+  startNodePrefab: {fileID: 1681385445875521961, guid: 6af68013cbfebcf46a0730b5a27fd5bc, type: 3}
   stageContainer: {fileID: 130093605}
   totalRows: 5
   choicesPerRow: 3
@@ -416,8 +418,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 10.4168}
-  m_SizeDelta: {x: 2.6389, y: 17.5165}
+  m_AnchoredPosition: {x: 0, y: 7.295803}
+  m_SizeDelta: {x: 2.6389, y: 21.3226}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &718754291
 MonoBehaviour:

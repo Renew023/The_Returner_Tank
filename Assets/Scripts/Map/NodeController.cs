@@ -2,16 +2,17 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-/// °¢ ³ëµå(UI Image + Button)¿¡ ºÙ¿©¼­ Å¬¸¯À» MapManager¿¡ Àü´Ş.
+/// ê° ë…¸ë“œ(UI Image + Button)ì— ë¶™ì—¬ì„œ í´ë¦­ì„ MapManagerì— ì „ë‹¬.
 
 [RequireComponent(typeof(Button))]
 
 public class NodeController : MonoBehaviour
 {
-    [Header("³ëµåº° Å©±â (Size Delta)")]
+    [Header("ë…¸ë“œë³„ í¬ê¸° (Size Delta)")]
     public Vector2 enemySize = new Vector2(64, 64);
     public Vector2 healSize = new Vector2(80, 80);
     public Vector2 bossSize = new Vector2(120, 120);
+    public Vector2 startSize = new Vector2(64, 64);
 
     private Vector3 originalScale;
 
@@ -25,7 +26,7 @@ public class NodeController : MonoBehaviour
 
 
 
-    /// ¸Ê¸Å´ÏÀú°¡ »ı¼º Á÷ÈÄ ÃÊ±âÈ­
+    /// ë§µë§¤ë‹ˆì €ê°€ ìƒì„± ì§í›„ ì´ˆê¸°í™”
 
     public void Init(int r, int c, NodeType t, MapManager mgr, Sprite icon, byte alpha)
     {
@@ -34,14 +35,14 @@ public class NodeController : MonoBehaviour
         type = t;
         mapMgr = mgr;
 
-        // ¾ÆÀÌÄÜ ±³Ã¼ & ±âº» Åõ¸íµµ ¼³Á¤
+        // ì•„ì´ì½˜ êµì²´ & ê¸°ë³¸ íˆ¬ëª…ë„ ì„¤ì •
         img = GetComponent<Image>();
         img.sprite = icon;
         var ccol = img.color;
         ccol.a = alpha / 255f;
         img.color = ccol;
 
-        // Å¬¸¯ Äİ¹é
+        // í´ë¦­ ì½œë°±
         GetComponent<Button>().onClick.AddListener(OnClick);
 
         var rt = GetComponent<RectTransform>();
@@ -56,6 +57,9 @@ public class NodeController : MonoBehaviour
             case NodeType.Boss:
                 rt.sizeDelta = bossSize;
                 break;
+            case NodeType.Start:
+                rt.sizeDelta = startSize;
+                break;
         }
 
         originalScale = rt.localScale;
@@ -66,7 +70,7 @@ public class NodeController : MonoBehaviour
         mapMgr.OnNodeClicked(row, col, type);
     }
 
-    /// ¿ÜºÎ¿¡¼­ Åõ¸íµµ¸¸ ¹Ù²Ü ¶§
+    /// ì™¸ë¶€ì—ì„œ íˆ¬ëª…ë„ë§Œ ë°”ê¿€ ë•Œ
     public void SetAlpha(byte alpha)
     {
         var c = img.color;
@@ -74,7 +78,7 @@ public class NodeController : MonoBehaviour
         img.color = c;
     }
 
-    /// ¿ÜºÎ¿¡¼­ ÇöÀç ¼±ÅÃ À§Ä¡ Ç¥½Ã¿ë
+    /// ì™¸ë¶€ì—ì„œ í˜„ì¬ ì„ íƒ ìœ„ì¹˜ í‘œì‹œìš©
     public void SetHighlight(bool on)
     {
         img.color = on
