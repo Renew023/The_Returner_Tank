@@ -15,10 +15,10 @@ public class DataManager : MonoBehaviour
 	public List<Skill> WeaponSkillList = new List<Skill>(5);
     public Skill skill;
 	public int skillValue = 0;
-	public int maxPlayerSkill = 3;
+	public int maxPlayerSkill = 4;
 	public int curPlayerSkillMax = 0;
 
-	[Header("«√∑π¿ÃæÓ ¡§∫∏")]
+	[Header("ÌîåÎ†àÏù¥Ïñ¥ Ï†ïÎ≥¥")]
     public float savedPlayerHp;
     public float savedPlayerMaxHp;
 
@@ -48,7 +48,11 @@ public class DataManager : MonoBehaviour
 		playerValue.playerSkill.Add(skill);
 		playerWeapon.Add(skill.weaponCon.weapon);
 
-		float value = skill.levelSkills[skill.level].value;
+		// Ω∫≈≥ΩΩ∑‘ √ﬂ∞°
+		UIManager.Instance.uiController.pauseUI.skillSlots[UIManager.Instance.uiController.pauseUI.skillsCount].sprite = skill.weaponCon.weaponSprite.sprite;
+        UIManager.Instance.uiController.pauseUI.SetSkillImages(UIManager.Instance.uiController.pauseUI.skillsCount);
+
+        float value = skill.levelSkills[skill.level].value;
 
 
 		switch (skill.levelSkills[skill.level].upgradeType)
@@ -82,6 +86,17 @@ public class DataManager : MonoBehaviour
 					if (skill.weaponCon.weapon.name == weapon.weapon.name)
 					{
 						weapon.DamageUp((int)value);
+						break;
+					}
+				}
+				//skill.weapon.DamageUp(value);
+				break;
+			case SkillType.ArrowDelayUp:
+				foreach (var weapon in player.playerValue.weapons)
+				{
+					if (skill.weaponCon.weapon.name == weapon.weapon.name)
+					{
+						weapon.DelayUp((int)value);
 						break;
 					}
 				}

@@ -67,13 +67,13 @@ public class Skill
     //            if (Level == 0)
     //                player.weapons.Add(Instantiate(weapon, player.gameObject.transform.position, Quaternion.identity, player.gameObject.transform.parent));
     //            //player.weaponController.SpeedUp();
-				//break;
+    //break;
     //        case SkillType.ArrowValueUp:
-				////player.weaponController.ValueUp();
-				//break;
+    ////player.weaponController.ValueUp();
+    //break;
     //        case SkillType.ArrowDamageUp:
     //            //player.weaponController.DamageUp();
-				//break;
+    //break;
 
     //    }
     //}

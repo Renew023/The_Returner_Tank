@@ -15,25 +15,30 @@ public class SkillSelectButton : MonoBehaviour
 
     void Awake()
     {
-		skillSelect.onClick.AddListener(Pick);
-	}
+        skillSelect.onClick.AddListener(Pick);
+    }
 
     void OnEnable()
     {
         //ab = skill.weapon.weaponSprite;
         if (DataManager.instance.curPlayerSkillMax == DataManager.instance.maxPlayerSkill)
         {
-            title.text = "������";
+            title.text = "최대치";
             return;
         }
 
 
-		if (skill.weaponCon != null)
+        if (skill.weaponCon != null)
+        {
             image.sprite = skill.weaponCon.weaponSprite.sprite;
+        }
         else
-            image.sprite = null;
+        {
+            string skillIconName = skill.levelSkills[skill.level].upgradeType.ToString();
+            image.sprite = Resources.Load<Sprite>("SkillIcons/" + skillIconName);
+        }
 
-		title.text = skill.levelSkills[skill.level].skillName.ToString();
+        title.text = skill.levelSkills[skill.level].skillName;
     }
 
     void OnDisable()
@@ -46,9 +51,9 @@ public class SkillSelectButton : MonoBehaviour
         if (DataManager.instance.curPlayerSkillMax == DataManager.instance.maxPlayerSkill)
         {
             Time.timeScale = 1.0f;
-			player.skillSelectUI.SetActive(false);
+            player.skillSelectUI.SetActive(false);
             return;
-		}
+        }
 
         if (skill.level == 0)
         {
@@ -58,35 +63,33 @@ public class SkillSelectButton : MonoBehaviour
                 player.playerValue.weapons.Add(Instantiate(skill.weaponCon, player.transform.position, Quaternion.identity, player.transform));
             }
         }
+
         float value = skill.levelSkills[skill.level].value;
 
-
-		switch (skill.levelSkills[skill.level].upgradeType)
+        switch (skill.levelSkills[skill.level].upgradeType)
         {
             case SkillType.PlayerHpUp:
                 player.HpUp(value);
                 break;
             case SkillType.PlayerSpeedUp:
                 player.MoveSpeedUp();
-				break;
+                break;
             case SkillType.PlayerArrowSpeedUp:
                 player.playerValue.playerWeaponStat.arrowSpeed += value;
                 break;
 
             case SkillType.PlayerArrowDamageUp:
-				player.playerValue.playerWeaponStat.arrowDamage += value;
-				break;
+                player.playerValue.playerWeaponStat.arrowDamage += value;
+                break;
 
             case SkillType.PlayerArrowValueUp:
-				player.playerValue.playerWeaponStat.arrowValue += (int)value;
-				break;
-
-
-
-
-
+                player.playerValue.playerWeaponStat.arrowValue += (int)value;
+                break;
+            case SkillType.PlayerDelayUp:
+                player.playerValue.playerWeaponStat.attackDelay += (int)value;
+                break;
+            //skill.weapon.DamageUp(value);
             case SkillType.ArrowSpeedUp:
-
                 foreach (var weapon in player.playerValue.weapons)
                 {
                     if (skill.weaponCon.weapon.name == weapon.weapon.name)
@@ -95,31 +98,48 @@ public class SkillSelectButton : MonoBehaviour
                         break;
                     }
                 }
-				//skill.weapon.SpeedUp(value);
+                //skill.weapon.SpeedUp(value);
                 break;
             case SkillType.ArrowValueUp:
-				foreach (var weapon in player.playerValue.weapons)
-				{
-					if (skill.weaponCon.weapon.name == weapon.weapon.name)
-					{
-						weapon.ValueUp((int)value);
-						break;
-					}
-				}
-				//skill.weapon.ValueUp((int)value);
-				break;
+                foreach (var weapon in player.playerValue.weapons)
+                {
+                    if (skill.weaponCon.weapon.name == weapon.weapon.name)
+                    {
+                        weapon.ValueUp((int)value);
+                        break;
+                    }
+                }
+                //skill.weapon.ValueUp((int)value);
+                break;
             case SkillType.ArrowDamageUp:
-				foreach (var weapon in player.playerValue.weapons)
-				{
-					if (skill.weaponCon.weapon.name == weapon.weapon.name)
-					{
-						weapon.DamageUp((int)value);
-						break;
-					}
-				}
-				//skill.weapon.DamageUp(value);
-				break;
+                foreach (var weapon in player.playerValue.weapons)
+                {
+                    if (skill.weaponCon.weapon.name == weapon.weapon.name)
+                    {
+                        weapon.DamageUp((int)value);
+                        break;
+                    }
+                }
+                //skill.weapon.DamageUp(value);
+                break;
+            case SkillType.ArrowDelayUp:
+                foreach (var weapon in player.playerValue.weapons)
+                {
+                    if (skill.weaponCon.weapon.name == weapon.weapon.name)
+                    {
+                        weapon.DelayUp((int)value);
+                        break;
+                    }
+                }
+                //skill.weapon.DamageUp(value);
+                break;
 
+        }
+
+        if (skill.level == 0)
+        {
+            UIManager.Instance.uiController.pauseUI.skillSlots[UIManager.Instance.uiController.pauseUI.skillsCount].sprite = image.sprite;
+            UIManager.Instance.uiController.pauseUI.SetSkillImages(UIManager.Instance.uiController.pauseUI.skillsCount);
         }
         Time.timeScale = 1.0f;
         skill.level += 1;

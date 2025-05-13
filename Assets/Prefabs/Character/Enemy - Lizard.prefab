@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe54dc2472ae174bac29deb622536f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 3
   attackableRange: 5
   obstacleMask:
     serializedVersion: 2
@@ -362,6 +362,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 221386114842138169}
     m_Modifications:
+    - target: {fileID: 502544193029027058, guid: c726ee444c5021449a0acb086a6cfa72, type: 3}
+      propertyPath: m_SortingOrder
+      value: 101
+      objectReference: {fileID: 0}
     - target: {fileID: 5697831237566957120, guid: c726ee444c5021449a0acb086a6cfa72, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
