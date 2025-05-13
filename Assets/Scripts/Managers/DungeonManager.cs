@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class DungeonManager : MonoBehaviour
 {
-
+    [SerializeField] private Transform expParent; // ExpObjects 오브젝트
+    [SerializeField] private Transform player;    // 플레이어 Transform
     [SerializeField] private GameObject warpZone;
     public static DungeonManager instance;
 
@@ -69,6 +70,7 @@ public class DungeonManager : MonoBehaviour
             if(currentWave >= maxWave)
             {
                 Debug.Log($"[DungeonManager] ��� ���̺� ����!");
+                AbsorbExp();
                 ClearDungeon();
             }
 
@@ -114,5 +116,25 @@ public class DungeonManager : MonoBehaviour
         
         //  �������� ���� ȭ������ ���Ϳ� ������ ����
         warpZone.SetActive(true);
+    }
+    
+    private void AbsorbExp()
+    {
+        if (expParent == null)
+            expParent = GameObject.Find("ExpObjects")?.transform;
+
+        if (player == null)
+            player = GameObject.Find("Player")?.transform;
+
+        if (expParent == null || player == null) return;
+
+        foreach (Transform exp in expParent)
+        {
+            ExpObject expObj = exp.GetComponent<ExpObject>();
+            if (expObj != null)
+            {
+                expObj.StartAbsorb(player);
+            }
+        }
     }
 }
