@@ -179,8 +179,10 @@ public class Player : Character
 
 	private void LevelUp()
     {
-        HpUp(50);
+        playerValue.Level += 1f;
         SetDemandExp(playerValue.Level);
+        
+        HpUp(50);
         Time.timeScale = 0.0f;
         skillSelectUI.gameObject.SetActive(true);
 
@@ -239,10 +241,9 @@ public class Player : Character
         animator.SetBool("IsDamage", false);
     }
 
-    private float SetDemandExp(float lev)
+    private void SetDemandExp(float lev)
     {
-        float demand = lev * lev * 1.5f + 5f;
-        return demand;
+        demandExp = lev * lev * 1.5f + 5f;
     }
 
     public void AddExp(int amount)
