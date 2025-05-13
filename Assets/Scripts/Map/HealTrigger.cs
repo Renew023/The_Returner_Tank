@@ -26,7 +26,7 @@ public class HealTrigger : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
 
-        var player = other.GetComponent<Player>();  // 기존 Player 스크립트
+        var player = other.GetComponent<Player>();  // 기존 Player 스크립트 참고하여 작성
         if (Player.curHp + healAmount > Player.maxHp)
         {
             Player.curHp = Player.maxHp;
