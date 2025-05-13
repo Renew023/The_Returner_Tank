@@ -8,6 +8,7 @@ public class DungeonManager : MonoBehaviour
     [SerializeField] private Transform expParent; // ExpObjects 오브젝트
     [SerializeField] private Transform player;    // 플레이어 Transform
     [SerializeField] private GameObject warpZone;
+    [SerializeField] private WaveMessageUI waveMessageUI;
     public static DungeonManager instance;
 
     //  ���� ���̺� ������
@@ -68,6 +69,10 @@ public class DungeonManager : MonoBehaviour
         //aliveEnemies += count;
         aliveEnemies = count;
         isWaveInProgress = true;
+
+        // 웨이브 시작 시 호출
+        waveMessageUI.ShowMessage($"Wave {currentWave}");
+
         Debug.Log($"[현재 웨이브: {currentWave}]의 몬스터 수: {count} 스폰!");
     }
 
@@ -123,6 +128,9 @@ public class DungeonManager : MonoBehaviour
         aliveEnemies = 0;
         isWaveInProgress = false;
 
+        // 마지막 웨이브 끝나면
+        waveMessageUI.ShowMessage("CLEAR");
+        
         //  warpZone이 null이 아니고 마지막 웨이브 클리어일 때만 활성화 (예외 처리 추가)
         if (warpZone != null)
         {
