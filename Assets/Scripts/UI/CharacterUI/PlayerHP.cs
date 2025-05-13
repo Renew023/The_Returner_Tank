@@ -7,8 +7,8 @@ public class PlayerHP : CharacterUI
 
     protected override void Start()
     {
-        // ÇÃ·¹ÀÌ¾îÀÇ ÇöÁ¦ Ã¼·ÂÀ» °¡Á®¿Í¼­ ¹İ¿µ
-        //UpdateValue(ÇöÀç Ã¼·Â, ÃÖ´ë Ã¼·Â);
+        // í”Œë ˆì´ì–´ì˜ í˜„ì œ ì²´ë ¥ì„ ê°€ì ¸ì™€ì„œ ë°˜ì˜
+        //UpdateValue(í˜„ì¬ ì²´ë ¥, ìµœëŒ€ ì²´ë ¥);
     }
 
     public override void UpdateValue(float current, float max)
