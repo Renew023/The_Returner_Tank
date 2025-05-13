@@ -11,7 +11,7 @@ public class Character : MonoBehaviour
      * 
      */
 
-	[SerializeField] protected float maxHp = 100;
+	[SerializeField] protected float maxHp;
 	[SerializeField] protected float curHp;
 	[SerializeField] protected float moveSpeed;
 	protected Vector2 isLeft;
@@ -37,9 +37,9 @@ public class Character : MonoBehaviour
 
 	protected virtual void Init() 
     {
-		maxHp = 100;
+		//maxHp = 100;
 		curHp = maxHp;
-		moveSpeed = 10;
+		//moveSpeed = 10;
 		isLeft = Vector3.zero;
 
 		lookDirection = Vector3.up;
