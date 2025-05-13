@@ -20,7 +20,7 @@ public class WeaponController : MonoBehaviour
 
 	void LateUpdate()
     {
-		if (weapon.timer > (weapon.attackDelay - playerWeaponStat.attackDelay))
+		if (weapon.timer > (weapon.attackDelay * (1 + playerWeaponStat.attackDelay)))
 		{
 			Attack(targetDirect);
 			weapon.timer = 0f;
@@ -84,7 +84,11 @@ public class WeaponController : MonoBehaviour
     {
 		weapon.arrowSpeed += value;
     }
-    public void DamageUp(float value = 1)
+	public void DelayUp(float value = 1)
+	{
+		weapon.attackDelay += (value*(1/weapon.attackDelay));
+	}
+	public void DamageUp(float value = 1)
     {
 		weapon.arrowDamage += value;
 	}
