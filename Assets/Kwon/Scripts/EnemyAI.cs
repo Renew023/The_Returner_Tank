@@ -65,7 +65,7 @@ public class EnemyAI : MonoBehaviour
 
     public void PerformAttack()
     {
-        Debug.Log("[EnemyAI] 공격!");
+        //Debug.Log("[EnemyAI] 공격!");
         // TODO: 공격 이펙트, 데미지 적용 등 추가
     }
 }

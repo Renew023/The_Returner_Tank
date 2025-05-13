@@ -4,55 +4,66 @@ using UnityEngine;
 
 public class Dungeon : MonoBehaviour
 {
-    //  TODO: ¿ÀºêÁ§Æ® Ç®¸µ ¹æ½ÄÀ» È°¿ëÇÏ¿© ½ºÆù Áö¿ª¿¡ ¸ó½ºÅÍµéÀ» ·£´ı ¼ÒÈ¯ÇÑ´Ù.
+    //  TODO: ì˜¤ë¸Œì íŠ¸ í’€ë§ ë°©ì‹ì„ í™œìš©í•˜ì—¬ ìŠ¤í° ì§€ì—­ì— ëª¬ìŠ¤í„°ë“¤ì„ ëœë¤ ì†Œí™˜í•œë‹¤.
 
     [Header ("Enemies")]
     public GameObject[] Enemies;
 
-    //  Ç®À» ´ã´çÇÏ´Â ¸®½ºÆ®µé
+    //  í’€ì„ ë‹´ë‹¹í•˜ëŠ” ë¦¬ìŠ¤íŠ¸ë“¤
     List<GameObject>[] pools;
 
     private void Awake()
     {
-        //  pool ¸®½ºÆ®¸¦ Enemies ¹è¿­ÀÇ Å©±â¸¸Å­ ÇÒ´çÇÑ´Ù.
+        //  pool ë¦¬ìŠ¤íŠ¸ë¥¼ Enemies ë°°ì—´ì˜ í¬ê¸°ë§Œí¼ í• ë‹¹í•œë‹¤.
         pools = new List<GameObject>[Enemies.Length];
 
-        //  pool ¸®½ºÆ® ³» µé¾îÀÖ´Â ÀûµéÀ» ÃÊ±âÈ­ÇØÁØ´Ù.
+        //  pool ë¦¬ìŠ¤íŠ¸ ë‚´ ë“¤ì–´ìˆëŠ” ì ë“¤ì„ ì´ˆê¸°í™”í•´ì¤€ë‹¤.
         for (int index = 0; index < pools.Length; index++)
         {
             pools[index] = new List<GameObject>();
         }
     }
 
-    //  ¿ÀºêÁ§Æ® Ç®¸µÀ» È°¿ëÇÑ ¸ó½ºÅÍ »ı¼º ¸Ş¼­µå
+    //  ì˜¤ë¸Œì íŠ¸ í’€ë§ì„ í™œìš©í•œ ëª¬ìŠ¤í„° ìƒì„± ë©”ì„œë“œ
     public GameObject CreateEnemies(int index)
     {
-        //  ¿¹¿Ü Ã³¸®
-        if(index < 0 || index >= Enemies.Length)
+        if (index < 0 || index >= Enemies.Length)
         {
-            Debug.LogError($"[CreateEnemies] Àß¸øµÈ ÀÎµ¦½º Á¢±Ù: {index}");
+            Debug.LogError($"[CreateEnemies] ì˜ëª»ëœ ì¸ë±ìŠ¤ ì ‘ê·¼: {index}");
             return null;
         }
 
         GameObject selectObject = null;
 
-        //  ¸¸¾à ¹ß°ßÇß´Ù¸é, select ¿ÀºêÁ§Æ®¿¡ ÇÒ´çÇÑ´Ù.
-        foreach(GameObject obj in pools[index])
+        foreach (GameObject obj in pools[index])
         {
-            //  ºñÈ°¼ºÈ­µÈ Àû ¿ÀºêÁ§Æ®°¡ ÀÖ´Ù¸é?
-            if(!obj.activeSelf)
+            if (!obj.activeSelf)
             {
                 selectObject = obj;
-                selectObject.SetActive(true);
                 break;
             }
         }
 
-        //  ¸¸¾à ³î°í ÀÖ´Â Àû ¿ÀºêÁ§Æ®°¡ ¾ø´Ù¸é, »õ·Ó°Ô »ı¼ºÇÑ ÈÄ¿¡ select ¿ÀºêÁ§Æ®¿¡ ÇÒ´çÇÑ´Ù.
-        if(!selectObject)
+        if (!selectObject)
         {
             selectObject = Instantiate(Enemies[index], transform);
             pools[index].Add(selectObject);
+            Debug.Log("[Dungeon CreateEnemies] ëª¬ìŠ¤í„° ìŠ¤í° ì„±ê³µ");
+        }
+
+        // ì´ˆê¸°í™”
+        Monster enemyComponent = selectObject.GetComponent<Monster>();
+
+        if (enemyComponent != null)
+        {
+            enemyComponent.ResetEnemy();
+        }
+
+        else
+        {
+            // ê¸°ë³¸ í™œì„±í™”ë§Œ ì²˜ë¦¬ (ì˜ˆì™¸ì ìœ¼ë¡œ)
+            Debug.Log($"[Dungeon CreateEnemies enemyComponentê°€ nullê°’ì¼ ë•Œ]");
+            selectObject.SetActive(true);
         }
 
         return selectObject;

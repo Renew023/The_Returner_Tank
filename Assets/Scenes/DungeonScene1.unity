@@ -644,7 +644,7 @@ MonoBehaviour:
   - {fileID: 966935886}
   - {fileID: 410377380}
   - {fileID: 1917999812}
-  spawnDelay: 1
+  spawnDelay: 3
   waveSpawnEntries:
   - wave: 1
     dungeonLevel: 1
