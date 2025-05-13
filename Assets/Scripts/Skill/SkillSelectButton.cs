@@ -80,12 +80,17 @@ public class SkillSelectButton : MonoBehaviour
             case SkillType.PlayerArrowValueUp:
 				player.playerValue.playerWeaponStat.arrowValue += (int)value;
 				break;
+			case SkillType.PlayerDelayUp:
+				player.playerValue.playerWeaponStat.attackDelay += (int)value;
+				break;
+				//skill.weapon.DamageUp(value);
+				break;
 
 
 
 
 
-            case SkillType.ArrowSpeedUp:
+			case SkillType.ArrowSpeedUp:
 
                 foreach (var weapon in player.playerValue.weapons)
                 {
@@ -119,11 +124,22 @@ public class SkillSelectButton : MonoBehaviour
 				}
 				//skill.weapon.DamageUp(value);
 				break;
+			case SkillType.ArrowDelayUp:
+				foreach (var weapon in player.playerValue.weapons)
+				{
+					if (skill.weaponCon.weapon.name == weapon.weapon.name)
+					{
+						weapon.DelayUp((int)value);
+						break;
+					}
+				}
+				//skill.weapon.DamageUp(value);
+				break;
 
-        }
+		}
         Time.timeScale = 1.0f;
         skill.level += 1;
-        if (skill.level == 3)
+        if (skill.level == 2)
         {
             DataManager.instance.curPlayerSkillMax += 1;
         }

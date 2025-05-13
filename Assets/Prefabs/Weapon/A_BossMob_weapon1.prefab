@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 105
-  m_Sprite: {fileID: 21300000, guid: f026e4a700ff7994aa84b9c874058a82, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f0afd568c2d90d040b15c6b76735274e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8706481037669991645}
   - component: {fileID: 6955153868353512977}
   m_Layer: 0
-  m_Name: A_Bomb_weapon
+  m_Name: A_BossMob_weapon1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,12 +131,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponSprite: {fileID: 671199913142728821}
   weapon:
-    name: "\uD3ED\uD0C4"
-    arrowValue: 1
-    arrowSpeed: 5
-    arrowDamage: 5
-    attackDelay: 1
-    timer: 0.6723556
+    name: "\uBCF4\uC2A4\uBAB9\uBB34\uAE30"
+    arrowValue: 5
+    arrowSpeed: 18
+    arrowDamage: 40
+    attackDelay: 0.5
+    timer: 0
   objectPoolArrow: []
   objectPoolCount: 0
   curCount: 0
@@ -148,4 +148,4 @@ MonoBehaviour:
     arrowDamage: 0
     attackDelay: 0
     timer: 0
-  arrow: {fileID: 5882816111724978116, guid: b8c04cbab875d7c4dab7e9e4980bd3fe, type: 3}
+  arrow: {fileID: 5882816111724978116, guid: 7e774850bb7e2164a9ddc78c7c7c6285, type: 3}
