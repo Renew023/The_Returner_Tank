@@ -147,7 +147,7 @@ public class Player : Character
             bodyTransform.rotation = Quaternion.Euler(0, 0, angle + 90f); // ??? +90 ??
         }
     }
-    
+
     private void RotateHead()
     {
         if (lookDirection != Vector2.zero)
@@ -174,6 +174,7 @@ public class Player : Character
 	private void LevelUp()
     {
         HpUp(50);
+        //++Level;
         Time.timeScale = 0.0f;
         skillSelectUI.gameObject.SetActive(true);
         //��Ʋ�Ŵ������� ���� ������� ����
@@ -190,6 +191,7 @@ public class Player : Character
 
         hpBarFill.fillAmount = curHp / maxHp;
 
+        UIManager.Instance.uiController.playerLevel.UpdateValue((int)Level);
         UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
     }
 

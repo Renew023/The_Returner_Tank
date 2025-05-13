@@ -151,6 +151,7 @@ MonoBehaviour:
   target: {fileID: 0}
   weaponController: {fileID: 2525482059879661623}
   hpBarFill: {fileID: 8661783176049324975}
+  monsterTransform: {fileID: 5460842466516700466}
 --- !u!114 &9157367519063541396
 MonoBehaviour:
   m_ObjectHideFlags: 0
