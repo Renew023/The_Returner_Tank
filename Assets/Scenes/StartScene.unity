@@ -491,7 +491,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8dbdd142ea849ac429a32e79f389f6a2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 815d5a31f6cd5984eb088e68cecb8361, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5363,7 +5363,7 @@ MonoBehaviour:
       arrowValue: 0
       arrowSpeed: 0
       arrowDamage: 0
-      attackDelay: 1
+      attackDelay: 0
       timer: 0
     playerSkill: []
     weapons: []
