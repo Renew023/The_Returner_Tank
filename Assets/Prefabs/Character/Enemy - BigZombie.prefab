@@ -150,7 +150,7 @@ MonoBehaviour:
   attackDelay: 0
   expParent: {fileID: 0}
   exp: 50
-  expPrefab: {fileID: 6597864928945412204, guid: 9b8f7c13bf868b446ad397c4855321f2, type: 3}
+  expPrefab: {fileID: 6094734783714178179, guid: 4d08e126787cea8438833a56eb765d4c, type: 3}
   target: {fileID: 0}
   weaponController: {fileID: 7884420302257113305}
   hpBarFill: {fileID: 8661783176049324975}
