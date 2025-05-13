@@ -273,7 +273,7 @@ public class MapManager : MonoBehaviour
         prevRow = r; prevCol = c;
     }
 
-    void RestoreMap()
+    public void RestoreMap()
     {
         if (mapNodes == null || playerIndicatorRt == null) return;
         UpdateAlphas();
