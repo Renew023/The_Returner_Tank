@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1781948225839936407}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.8, y: -1.1729746, z: 0}
+  m_LocalPosition: {x: 0.09999812, y: 7.0901995, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -112,8 +112,8 @@ MonoBehaviour:
   owner: {fileID: 0}
   countReturn: {fileID: 0}
   rb: {fileID: -2232580069837577341}
-  damage: 16
-  direction: {x: 7.602627, y: 4.816643}
+  damage: 22
+  direction: {x: -6.2404885, y: -6.4850826}
   time: 2
 --- !u!1 &3452571917277408812
 GameObject:
@@ -188,7 +188,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 200
-  m_Sprite: {fileID: 21300000, guid: f026e4a700ff7994aa84b9c874058a82, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f0afd568c2d90d040b15c6b76735274e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
