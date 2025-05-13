@@ -37,13 +37,22 @@ public class DungeonManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        UIManager.Instance.uiController.SetDungeonUI(true);
+    }
+
+    private void OnDisable()
+    {
+        UIManager.Instance.uiController.SetDungeonUI(false);
+    }
+
     private void Start()
     {
         //  DungeonManager���� ���� ���̺긦 �����Ѵ�!!
         currentWave = 1;
 
         Spawner.instance.SpawnFixedWave();
-        UIManager.Instance.uiController.SetDungeonUI(true);
     }
 
     //  ���� ���̺� ���� �� ���� �� ���� �޼���
@@ -110,8 +119,6 @@ public class DungeonManager : MonoBehaviour
         //  ���� ������ ���� �ʱ�ȭ
         currentWave = 1;
 
-        UIManager.Instance.uiController.SetDungeonUI(false);
-        
         //  �������� ���� ȭ������ ���Ϳ� ������ ����
         warpZone.SetActive(true);
     }

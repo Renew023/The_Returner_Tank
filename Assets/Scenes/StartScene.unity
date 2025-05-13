@@ -4445,7 +4445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3db3944e72da8c46ad5edf3f43b864b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpBarFill: {fileID: 0}
+  hpBarFill: {fileID: 87637297}
 --- !u!114 &1794049426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5356,7 +5356,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c755e3be4dad3f4b9fe60b15cd7e29c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  savePlayer:
+  player: {fileID: 1018062645414764747, guid: 6523050c8de5f8e4b8ecf4c7f0dacc4a, type: 3}
+  playerValue:
     playerWeaponStat:
       name: 
       arrowValue: 0
@@ -5368,7 +5369,7 @@ MonoBehaviour:
     weapons: []
     Exp: 0
     Level: 0
-  player: {fileID: 1018062645414764747, guid: 6523050c8de5f8e4b8ecf4c7f0dacc4a, type: 3}
+  playerWeapon: []
   skillList:
   - name: "\uD3ED\uD0C4"
     player: {fileID: 0}
@@ -5506,6 +5507,7 @@ MonoBehaviour:
       value: 10
     level: 0
     weaponCon: {fileID: 0}
+  WeaponSkillList: []
   skill:
     name: 
     player: {fileID: 0}
