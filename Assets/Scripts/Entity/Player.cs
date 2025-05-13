@@ -141,7 +141,7 @@ public class Player : Character
         float y = Input.GetAxisRaw("Vertical");
 
         Vector2 move = new Vector2(x, y).normalized;
-        rb.velocity = move * 10f;
+        rb.velocity = move * moveSpeed;
     }
 
     override protected void Rotate()

@@ -168,9 +168,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bef084f305d4f4fb3fdc338f6adaeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
+  maxHp: 300
   curHp: 0
-  moveSpeed: 0
+  moveSpeed: 5
   lookDirection: {x: 0, y: 0}
   attackDelay: 1
   rb: {fileID: 4782994576953696752}

@@ -133,7 +133,7 @@ MonoBehaviour:
   weapon:
     name: "\uBAB9\uBB34\uAE301"
     arrowValue: 2
-    arrowSpeed: 9
+    arrowSpeed: 6
     arrowDamage: 16
     attackDelay: 2
     timer: 0

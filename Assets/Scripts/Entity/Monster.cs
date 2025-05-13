@@ -53,6 +53,8 @@ public class Monster : Character
 	override protected void Move()
 	{
 		animator.SetBool("IsMove", true);
+
+
 	}
 
 	override protected void Rotate()
