@@ -8,7 +8,6 @@ public class Character : MonoBehaviour
      * 플레이어가 가지고 있어야되는 무기값 : 딜레이
      * 무기에 전달해야되는 값 : 발사체 개수, 발사할 위치, 발사 속도, 데미지
      * 발사체가 가지고 있어야하는 값 : 데미지, 
-     * 
      */
 
 	[SerializeField] protected float maxHp;

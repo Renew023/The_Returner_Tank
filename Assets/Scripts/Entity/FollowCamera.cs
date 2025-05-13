@@ -11,6 +11,15 @@ public class FollowCamera : MonoBehaviour
 	[SerializeField] private Vector2 minCameraRange;
 	[SerializeField] private Vector2 maxCameraRange;
 
+	void Awake()
+	{
+	}
+
+	void OnEnable()
+	{
+		target = GameObject.Find("Player").GetComponent<Transform>();
+	}
+
 	void Start()
 	{
 		minCameraRange.x += camera.orthographicSize * Screen.width / Screen.height;
