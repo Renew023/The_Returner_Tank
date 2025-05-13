@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 34742838832249949}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.13, y: 9.56, z: 0.033498462}
-  m_LocalScale: {x: 0.23, y: 0.23, z: 0.23}
+  m_LocalPosition: {x: -4.9748, y: 4.4552, z: 0.033498462}
+  m_LocalScale: {x: 0.030590001, y: 0.030590001, z: 0.030590001}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -98,8 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a98d56d84f8282243879bebba81bf59a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  warpPrefab: {fileID: 34742838832249949}
-  ShowWarpZoneOnMap: 0
 --- !u!58 &7238314670214373487
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -48,7 +48,7 @@ public class DataManager : MonoBehaviour
 		playerValue.playerSkill.Add(skill);
 		playerWeapon.Add(skill.weaponCon.weapon);
 
-		// ½ºÅ³½½·Ô Ãß°¡
+		// ìŠ¤í‚¬ìŠ¬ë¡¯ ì¶”ê°€
 		UIManager.Instance.uiController.pauseUI.skillSlots[UIManager.Instance.uiController.pauseUI.skillsCount].sprite = skill.weaponCon.weaponSprite.sprite;
         UIManager.Instance.uiController.pauseUI.SetSkillImages(UIManager.Instance.uiController.pauseUI.skillsCount);
 
