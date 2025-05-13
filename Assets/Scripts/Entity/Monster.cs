@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class Monster : Character
 {
+	[SerializeField] private Transform expParent;
+	[SerializeField] private int exp;
+	[SerializeField] private GameObject expPrefab;
 	[SerializeField] private Player target;
 	[SerializeField] private WeaponController weaponController;
     [SerializeField] private Image hpBarFill;
@@ -85,7 +88,7 @@ public class Monster : Character
 
         animator.SetBool("IsDamage", true);
 
-        //	ÀÏÁ¤ ½Ã°£ÀÌ Áö³­ ÈÄ, Damage ¾Ö´Ï¸ÞÀÌ¼Ç ÇÃ·¡±× ÃÊ±âÈ­
+        //	ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, Damage ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
 		if(this.gameObject.activeSelf)
 		{
             StartCoroutine(ResetDamageAnim());
@@ -103,7 +106,7 @@ public class Monster : Character
 	{
 		gameObject.SetActive(false);
 
-		//	ÇØ´ç ¸ó½ºÅÍ°¡ ¼ÓÇØÀÖ´Â ¸ó½ºÅÍ ¼ö °¨¼Ò.
+		//	ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		DungeonManager.instance.OnEnemyDeath();
 	}
 
@@ -111,5 +114,46 @@ public class Monster : Character
 	{
 		yield return new WaitForSeconds(0.2f);
 		animator.SetBool("IsDamage", false);
+	}
+	
+	void OnEnable()
+	{
+		hpBarFill.fillAmount = curHp / maxHp;
+	}
+	
+	void OnDisable()
+	{
+		DropExp();
+	}
+	
+	private void DropExp()
+	{
+		int remainingExp = exp;
+		int dropExp = 1;
+
+		while (remainingExp > 0)
+		{
+			int dropCount = remainingExp % 10;
+			for(int i = 0; i < dropCount; i++) SpawnExpObject(dropExp);
+			
+			remainingExp /= 10;
+			dropExp *= 10;
+		}
+	}
+	
+	private void SpawnExpObject(int amount)
+	{
+		Vector2 randomOffset = Random.insideUnitCircle * 0.5f;
+		Vector3 spawnPos = transform.position + (Vector3)randomOffset;
+		
+		expParent = GameObject.Find("ExpObjects")?.transform;
+
+		GameObject obj = Instantiate(expPrefab, spawnPos, Quaternion.identity, expParent);
+    
+		ExpObject expObj = obj.GetComponent<ExpObject>();
+		if (expObj != null)
+		{
+			expObj.expAmount = amount;
+		}
 	}
 }

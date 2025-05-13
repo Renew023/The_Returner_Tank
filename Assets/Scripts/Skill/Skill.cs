@@ -9,10 +9,12 @@ public enum SkillType
     PlayerArrowSpeedUp,
     PlayerArrowValueUp,
 	PlayerArrowDamageUp,
+    PlayerDelayUp,
 
     ArrowSpeedUp,
     ArrowDamageUp,
-    ArrowValueUp
+    ArrowValueUp,
+    ArrowDelayUp
 }
 
 [System.Serializable]
