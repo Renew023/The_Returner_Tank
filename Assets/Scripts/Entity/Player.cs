@@ -76,10 +76,6 @@ public class Player : Character
             timer += Time.deltaTime;
         }*/
         
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            GridScanner.Instance.ScanGrid();
-        }
 
         Move();
         Rotate();

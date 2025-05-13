@@ -15,37 +15,57 @@ public class GridScanner : MonoBehaviour
     {
         Instance = this;
         grid = FindObjectOfType<Grid>();
-        ScanGrid(); // bounds 안 넘겨도 됨
+
+        BoundsInt bounds = CalculateBoundsFromGridChildren();
+        ScanGrid(bounds);
     }
     
-    public void ScanGrid()
+    private BoundsInt CalculateBoundsFromGridChildren()
+    {
+        BoundsInt totalBounds = new BoundsInt();
+
+        Tilemap[] tilemaps = grid.GetComponentsInChildren<Tilemap>();
+        if (tilemaps.Length == 0)
+        {
+            Debug.LogWarning("No Tilemaps found under Grid.");
+            return new BoundsInt(-10, -10, 0, 20, 20, 1); // fallback
+        }
+
+        bool initialized = false;
+        foreach (var tilemap in tilemaps)
+        {
+            if (!initialized)
+            {
+                totalBounds = tilemap.cellBounds;
+                initialized = true;
+            }
+            else
+            {
+                totalBounds.xMin = Mathf.Min(totalBounds.xMin, tilemap.cellBounds.xMin);
+                totalBounds.yMin = Mathf.Min(totalBounds.yMin, tilemap.cellBounds.yMin);
+                totalBounds.xMax = Mathf.Max(totalBounds.xMax, tilemap.cellBounds.xMax);
+                totalBounds.yMax = Mathf.Max(totalBounds.yMax, tilemap.cellBounds.yMax);
+            }
+        }
+
+        return totalBounds;
+    }
+    
+    public void ScanGrid(BoundsInt bounds)
     {
         walkableMap.Clear();
 
-        Tilemap[] tilemaps = grid.GetComponentsInChildren<Tilemap>();
-        HashSet<Vector2Int> scanned = new HashSet<Vector2Int>();
-
-        foreach (var tilemap in tilemaps)
+        for (int x = bounds.xMin; x < bounds.xMax; x++)
         {
-            foreach (Vector3Int pos in tilemap.cellBounds.allPositionsWithin)
+            for (int y = bounds.yMin; y < bounds.yMax; y++)
             {
-                if (!tilemap.HasTile(pos)) continue; // 비어있는 셀은 스킵
-
-                Vector2Int cellPos = new(pos.x, pos.y);
-
-                // 이미 검사했으면 중복 검사 생략
-                if (scanned.Contains(cellPos)) continue;
-                scanned.Add(cellPos);
-
+                Vector2Int cellPos = new(x, y);
                 Vector3 worldPos = CellToWorld(cellPos);
                 bool isBlocked = Physics2D.OverlapPoint(worldPos, obstacleLayer);
                 walkableMap[cellPos] = !isBlocked;
             }
         }
-
-        Debug.Log($"Scanned {walkableMap.Count} cells from tilemaps directly.");
     }
-
     
     public bool IsWalkable(Vector2Int cellPos)
     {
