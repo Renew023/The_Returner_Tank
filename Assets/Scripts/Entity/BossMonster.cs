@@ -19,6 +19,8 @@ public class BossMonster : Character
         base.Start();
         target = FindObjectOfType<Player>();
         animator = GetComponentInChildren<Animator>();
+        UIManager.Instance.uiController.SetBossHP(true);
+        UIManager.Instance.uiController.bossHP.UpdateValue(curHp, maxHp);
     }
 
     private void Update()
@@ -140,6 +142,8 @@ public class BossMonster : Character
         //	일정 시간이 지난 후, Damage 애니메이션 플래그 초기화
         StartCoroutine(ResetDamageAnim());
 
+        UIManager.Instance.uiController.bossHP.UpdateValue(curHp, maxHp);
+
         if (curHp <= 0)
         {
             Death();
@@ -149,6 +153,7 @@ public class BossMonster : Character
     void Death()
     {
         gameObject.SetActive(false);
+        UIManager.Instance.uiController.SetBossHP(false);
 
         //	해당 몬스터가 속해있는 몬스터 수 감소.
         DungeonManager.instance.OnEnemyDeath();
