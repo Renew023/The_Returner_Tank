@@ -10,9 +10,7 @@ public class BossMonster : Character
 	[SerializeField] private GameObject expPrefab;
 	[SerializeField] private Player target;
 	[SerializeField] private List<WeaponController> weaponController;
-	[SerializeField] private Image hpBarFill;
 	[SerializeField] private Transform monsterTransform;
-    [SerializeField] private GameObject monsterPrefab;
 
 	protected Animator animator;
 

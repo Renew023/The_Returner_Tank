@@ -326,6 +326,16 @@ MonoBehaviour:
   spawnDelay: 1
   waveSpawnEntries:
   - wave: 1
+    dungeonLevel: 4
+    data:
+      enemyIndices: 00000000
+      baseEnemyCount: 1
+  - wave: 1
+    dungeonLevel: 3
+    data:
+      enemyIndices: 00000000
+      baseEnemyCount: 1
+  - wave: 1
     dungeonLevel: 5
     data:
       enemyIndices: 00000000
@@ -10336,6 +10346,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed092cfee3067284d85ee77e03fe6c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  expParent: {fileID: 0}
+  player: {fileID: 0}
+  warpZone: {fileID: 0}
   currentWave: 1
   maxWave: 1
   pools: {fileID: 2081940347}

@@ -12,7 +12,7 @@ public class DungeonManager : MonoBehaviour
 
     //  ���� ���̺� ������
     public int currentWave = 1;
-    public int maxWave = 3;
+    public int maxWave;
 
     //  ���̺� �� ���� ����ִ� ������ �� ������
     private int aliveEnemies = 0;
@@ -48,6 +48,12 @@ public class DungeonManager : MonoBehaviour
         UIManager.Instance.uiController.SetDungeonUI(false);
     }
 
+    public int GetAliveEnemies()
+    {
+        return aliveEnemies;
+    }
+
+
     private void Start()
     {
         //  DungeonManager���� ���� ���̺긦 �����Ѵ�!!
@@ -59,51 +65,45 @@ public class DungeonManager : MonoBehaviour
     //  ���� ���̺� ���� �� ���� �� ���� �޼���
     public void StartWave(int count)
     {
-        aliveEnemies += count;
+        //aliveEnemies += count;
+        aliveEnemies = count;
         isWaveInProgress = true;
-        Debug.Log($"[���̺� {currentWave}] ���� {count} ���� ��ȯ!");
+        Debug.Log($"[현재 웨이브: {currentWave}]의 몬스터 수: {count} 스폰!");
     }
 
-    //  ���Ͱ� �׾��� �� ȣ��Ǵ� �޼���
     public void OnEnemyDeath()
     {
-        //  ���� ���� �� ����
         aliveEnemies--;
+        Debug.Log($"[OnEnemyDeath] 몬스터 처치됨 - 남은 몬스터: {aliveEnemies}");
 
-        //  ���̺� �� ��� ���Ͱ� �׾��ٸ�, ���� ���̺� ���� �� ���� ���̺� ����
-        if(isWaveInProgress && aliveEnemies <= 0)
+        // 웨이브 진행 중이고, 살아있는 적이 없으면 웨이브 종료
+        if (isWaveInProgress && aliveEnemies <= 0)
         {
             isWaveInProgress = false;
-            Debug.Log($"���̺� {currentWave}] �Ϸ�!");
+            Debug.Log($"[웨이브 {currentWave}] 완료!");
 
-            if(currentWave >= maxWave)
+            if (currentWave >= maxWave)
             {
-                Debug.Log($"[DungeonManager] ��� ���̺� ����!");
+                Debug.Log($"[DungeonManager] 모든 웨이브 종료!");
                 AbsorbExp();
                 ClearDungeon();
             }
 
             else
             {
-                Debug.Log($"[DungeonManager] ���� ���̺� {currentWave}] ����!");
-                //NextWave();
-
-                //  ���̺� ����
-                currentWave++;
-
-                Debug.Log($"[DungeonManager] ���� ���̺�: {currentWave}");
-
+                // 다음 웨이브로 이동하기 전에 증가시킴
+                currentWave++; 
+                Debug.Log($"[DungeonManager] 다음 웨이브 {currentWave} 시작!");
                 Spawner.instance.SpawnFixedWave();
             }
-
         }
     }
 
     void ClearDungeon()
     {
-        Debug.Log($"[DungeonManager] ���� Ŭ����!");
+        Debug.Log($"[DungeonManager] 던전 클리어!");
 
-        //  ���� �÷��̾� HP ����
+        // 플레이어 HP 저장
         Player player = FindObjectOfType<Player>();
 
         if (player != null)
@@ -112,17 +112,22 @@ public class DungeonManager : MonoBehaviour
             DataManager.instance.savedPlayerMaxHp = player.MaxHp;
         }
 
-        //  ���� ���̵� ����
+        // 던전 레벨 증가
         GameManager.Instance.IncreaseDungeonLevel();
 
-        //  ���� �������� �ε��� ���� (���� �������� �����)
+        // 다음 스테이지 인덱스 증가
         GameManager.Instance.currentStageIndex++;
 
-        //  ���� ������ ���� �ʱ�ȭ
+        // 다음 던전 시작을 위한 상태 초기화
         currentWave = 1;
+        aliveEnemies = 0;
+        isWaveInProgress = false;
 
-        //  �������� ���� ȭ������ ���Ϳ� ������ ����
-        warpZone.SetActive(true);
+        //  warpZone이 null이 아니고 마지막 웨이브 클리어일 때만 활성화 (예외 처리 추가)
+        if (warpZone != null)
+        {
+            warpZone.SetActive(true);
+        }
     }
     
     private void AbsorbExp()
