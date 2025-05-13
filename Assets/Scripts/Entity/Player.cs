@@ -243,7 +243,7 @@ public class Player : Character
 
     private void SetDemandExp(float lev)
     {
-        demandExp = lev * lev * 1.5f + 5f;
+        demandExp = 250 * (lev + 1);
     }
 
     public void AddExp(int amount)
