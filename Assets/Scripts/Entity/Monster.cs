@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Monster : Character
 {
 	[SerializeField] private Player target;
 	[SerializeField] private WeaponController weaponController;
-	protected Animator animator;
+    [SerializeField] private Image hpBarFill;
+    [SerializeField] private Transform monsterTransform;
+    protected Animator animator;
 
 	void Awake()
 	{
@@ -51,10 +54,16 @@ public class Monster : Character
 
 	override protected void Rotate()
 	{
-		isLeft = target.transform.position.x < transform.position.x ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
+        //isLeft = target.transform.position.x < transform.position.x ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
 
-		transform.localScale = isLeft;
-	}
+        //transform.localScale = isLeft;
+        if (target == null) return;
+
+        bool flip = target.transform.position.x < transform.position.x;
+        Vector3 newScale = flip ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
+
+        monsterTransform.localScale = newScale;
+    }
 
 	public void OnTriggerEnter2D(Collider2D collision)
 	{
@@ -70,22 +79,27 @@ public class Monster : Character
 		}
 	}
 
-	public void TakeDamage(float damage)
-	{
-		curHp -= damage;
+    public void TakeDamage(float damage)
+    {
+        curHp -= damage;
 
-		animator.SetBool("IsDamage", true);
+        animator.SetBool("IsDamage", true);
 
-		//	일정 시간이 지난 후, Damage 애니메이션 플래그 초기화
-		StartCoroutine(ResetDamageAnim());
-
-		if (curHp <= 0)
+        //	일정 시간이 지난 후, Damage 애니메이션 플래그 초기화
+		if(this.gameObject.activeSelf)
 		{
-			Death();
-		}
-	}
+            StartCoroutine(ResetDamageAnim());
+        }
 
-	void Death()
+        hpBarFill.fillAmount = curHp / maxHp;
+
+        if (curHp <= 0)
+        {
+            Death();
+        }
+    }
+
+    void Death()
 	{
 		gameObject.SetActive(false);
 

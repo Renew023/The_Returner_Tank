@@ -136,6 +136,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1165265429}
     - target: {fileID: 1018062645414764747, guid: 6523050c8de5f8e4b8ecf4c7f0dacc4a, type: 3}
+      propertyPath: hpBarFill
+      value: 
+      objectReference: {fileID: 92840360}
+    - target: {fileID: 1018062645414764747, guid: 6523050c8de5f8e4b8ecf4c7f0dacc4a, type: 3}
       propertyPath: skillSelectUI
       value: 
       objectReference: {fileID: 921663787}
@@ -217,6 +221,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7087801732574784773, guid: 6523050c8de5f8e4b8ecf4c7f0dacc4a, type: 3}
   m_PrefabInstance: {fileID: 92840358}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &92840360 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1957718555537671818, guid: 6523050c8de5f8e4b8ecf4c7f0dacc4a, type: 3}
+  m_PrefabInstance: {fileID: 92840358}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &108102677
 GameObject:
   m_ObjectHideFlags: 0
