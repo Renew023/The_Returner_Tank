@@ -4,12 +4,12 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class HealTrigger : MonoBehaviour
 {
-    [Header("È¸º¹·® (³ªÁß Àû¿ë)")]
+    [Header("íšŒë³µëŸ‰ ")]
     public int healAmount = 20;
 
     void Awake()
     {
-        // Æ®¸®°Å¿ë ¼³Á¤ º¸Àå
+        // íŠ¸ë¦¬ê±°ìš© ì„¤ì • ë³´ì¥
         var col = GetComponent<Collider2D>();
         col.isTrigger = true;
 
@@ -26,15 +26,16 @@ public class HealTrigger : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
 
-        // HealEventManager¿¡°Ô Èú ¼öÁı ¾Ë¸®±â
-        if (HealEventManager.Instance != null)
+        var player = other.GetComponent<Player>();  // ê¸°ì¡´ Player ìŠ¤í¬ë¦½íŠ¸
+        if (Player.curHp + healAmount > Player.maxHp)
         {
-            HealEventManager.Instance.OnHealCollected(gameObject);
+            Player.curHp = Player.maxHp;
         }
         else
         {
-            Debug.LogWarning("HealTrigger: HealEventManager°¡ ¾À¿¡ ¾ø½À´Ï´Ù!");
-            Destroy(gameObject);
+            Player.curHp += healAmount;
         }
+        // 3) í•œ ë²ˆë§Œ ë¨¹ë„ë¡ íŠ¸ë¦¬ê±° ì œê±° ë˜ëŠ” ë¹„í™œì„±í™”
+        Destroy(gameObject);
     }
 }
