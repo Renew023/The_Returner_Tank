@@ -123,7 +123,7 @@ public class SkillSelectButton : MonoBehaviour
         }
         Time.timeScale = 1.0f;
         skill.level += 1;
-        if (skill.level == 3)
+        if (skill.level == 2)
         {
             DataManager.instance.curPlayerSkillMax += 1;
         }

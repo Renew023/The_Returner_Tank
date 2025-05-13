@@ -15,10 +15,10 @@ public class DataManager : MonoBehaviour
 	public List<Skill> WeaponSkillList = new List<Skill>(5);
     public Skill skill;
 	public int skillValue = 0;
-	public int maxPlayerSkill = 3;
+	public int maxPlayerSkill = 4;
 	public int curPlayerSkillMax = 0;
 
-	[Header("ÇÃ·¹ÀÌ¾î Á¤º¸")]
+	[Header("í”Œë ˆì´ì–´ ì •ë³´")]
     public float savedPlayerHp;
     public float savedPlayerMaxHp;
 
