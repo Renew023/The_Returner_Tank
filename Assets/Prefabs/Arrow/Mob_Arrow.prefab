@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -2232580069837577341}
   - component: {fileID: 5882816111724978116}
   m_Layer: 0
-  m_Name: Bomb
+  m_Name: Mob_Arrow
   m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
