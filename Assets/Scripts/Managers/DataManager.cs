@@ -65,14 +65,9 @@ public class DataManager : MonoBehaviour
 		playerValue.playerSkill.Add(skill);
 		playerWeapon.Add(skill.weaponCon.weapon);
 
-		// 스킬슬롯 추가
-		UIManager.Instance.uiController.pauseUI.skillSlots[UIManager.Instance.uiController.pauseUI.skillsCount].sprite = skill.weaponCon.weaponSprite.sprite;
-        UIManager.Instance.uiController.pauseUI.SetSkillImages(UIManager.Instance.uiController.pauseUI.skillsCount);
-
         float value = skill.levelSkills[skill.level].value;
 
-
-		switch (skill.levelSkills[skill.level].upgradeType)
+        switch (skill.levelSkills[skill.level].upgradeType)
 		{
 			case SkillType.ArrowSpeedUp:
 
@@ -120,6 +115,11 @@ public class DataManager : MonoBehaviour
 				//skill.weapon.DamageUp(value);
 				break;
 		}
-		skill.level += 1;
-	}
+
+        // 스킬슬롯 추가
+        UIManager.Instance.uiController.pauseUI.skillSlots[UIManager.Instance.uiController.pauseUI.skillsCount].sprite = skill.weaponCon.weaponSprite.sprite;
+        UIManager.Instance.uiController.pauseUI.SetSkillImages(UIManager.Instance.uiController.pauseUI.skillsCount);
+
+        skill.level += 1;
+    }
 }
