@@ -16,12 +16,17 @@
 - **따라다니는 HP UI**  
   플레이어 머리 위에 항상 표시되는 체력 바를 구현하여 직관적인 상태 확인이 가능합니다.
 
+  <img src="./images/PlayerStatus.png" alt="Player Status UI" width="400"/>
+  <img src="./images/PlayerHPBar.png" alt="Player HP Bar UI" width="400"/>
+
 ---
 
 ### 👾 2. 몬스터 UI
 
 - **따라다니는 HP UI**  
   모든 몬스터 개체 위에 실시간으로 체력을 보여주는 UI를 구현하여 전투 상황을 쉽게 파악할 수 있도록 하였습니다.
+
+  <img src="./images/MonsterHPBar.png" alt="Monster HP Bar UI" width="400"/>
 
 ---
 
@@ -38,6 +43,8 @@
 - **보유 스킬 확인**  
   현재 플레이어가 보유 중인 스킬 목록을 확인할 수 있는 UI 창을 표시합니다.
 
+  <img src="./images/PauseUI.png" alt="Pause UI" width="400"/>
+
 ---
 
 ### 💀 4. 사망 UI
@@ -46,6 +53,8 @@
 
 - **메인화면으로 돌아가기**  
   게임을 종료하고 메인 메뉴로 복귀합니다.
+
+  <img src="./images/DeathUI.png" alt="Death UI" width="400"/>
 
 ---
 
@@ -58,5 +67,10 @@
 
 - **CLEAR**  
   해당 웨이브를 클리어했을 때 시각적으로 알림을 제공합니다.
+
+  <img src="./images/Wave1.png" alt="Wave 1 UI" width="250"/>
+  <img src="./images/Wave2.png" alt="Wave 2 UI" width="250"/>
+  <img src="./images/Wave3.png" alt="Wave 3 UI" width="250"/>
+  <img src="./images/CLEAR.png" alt="Wave Clear UI" width="250"/>
 
 ---
