@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class SkillSelectUI : MonoBehaviour
 {
+    #region SkillSelectUI 객체 변수 선언
     public Player player;
 
     public List<int> value;
@@ -12,6 +13,9 @@ public class SkillSelectUI : MonoBehaviour
     public List<Skill> skills;
     public int ShowCard = 3;
 
+    #endregion
+
+    #region OnEnable 메서드
     void OnEnable()
     {
         if (DataManager.instance.maxPlayerSkill - DataManager.instance.curPlayerSkillMax < 3)
@@ -47,12 +51,14 @@ public class SkillSelectUI : MonoBehaviour
 
 					skills.Add(player.playerValue.playerSkill[rand]);
 				}
+
                 else
                 {
 					if (DataManager.instance.skillList[rand].level == 2)
 						continue;
 					skills.Add(DataManager.instance.skillList[rand]);
                 }
+
 				value.Add(rand);
 			}
             
@@ -68,6 +74,9 @@ public class SkillSelectUI : MonoBehaviour
         }
 	}
 
+    #endregion
+
+    #region OnDisable 메서드
     public void OnDisable()
     {
         skills.Clear();
@@ -80,4 +89,6 @@ public class SkillSelectUI : MonoBehaviour
 			skillSelectButton[i].gameObject.SetActive(false);
 		}
 	}
+
+    #endregion
 }

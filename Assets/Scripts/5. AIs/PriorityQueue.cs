@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class PriorityQueue<T> where T : System.IComparable<T>
 {
+    #region PriorityQueue 객체 변수 선언
     private List<T> heap = new List<T>();
 
     public int Count => heap.Count;
-    
+
+    #endregion
+
+    #region Enqueue, Dequeue 메서드 
     public void Enqueue(T item)
     {
         heap.Add(item);
@@ -45,8 +49,13 @@ public class PriorityQueue<T> where T : System.IComparable<T>
         return frontItem;
     }
 
+    #endregion
+
+    #region Contains 메서드
     public bool Contains(T item)
     {
         return heap.Contains(item);
     }
+
+    #endregion
 }

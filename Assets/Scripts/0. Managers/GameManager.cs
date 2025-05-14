@@ -60,7 +60,6 @@ public class GameManager : MonoBehaviour
     public void IncreaseDungeonLevel()
     {
         dungeonLevel++;
-        Debug.Log($"[GameManager] 던전 레벨이 {dungeonLevel}로 증가했습니다.");
     }
 
     #endregion

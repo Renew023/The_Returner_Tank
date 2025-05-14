@@ -5,11 +5,15 @@ public class AStarPathfinder : MonoBehaviour
 {
     public static AStarPathfinder Instance;
 
+    #region Awake 메서드
     private void Awake()
     {
         Instance = this;
     }
-    
+
+    #endregion
+
+    #region FindPath 메서드 → 맵 내 길들을 탐색하는 기능
     public List<Vector2Int> FindPath(Vector3 startWorldPos, Vector3 targetWorldPos)
     {
         Vector2Int start = GridScanner.Instance.WorldToCell(startWorldPos);
@@ -76,12 +80,19 @@ public class AStarPathfinder : MonoBehaviour
 
         return new List<Vector2Int>();
     }
-    
+
+    #endregion
+
+    #region GetManhattanDistance 메서드 
+
     public static int GetManhattanDistance(Vector2Int a, Vector2Int b)
     {
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
     }
-    
+
+    #endregion
+
+    #region ReconstructPath 메서드
     private List<Vector2Int> ReconstructPath(Node endNode)
     {
         List<Vector2Int> path = new List<Vector2Int>();
@@ -96,6 +107,6 @@ public class AStarPathfinder : MonoBehaviour
         path.Reverse();
         return path;
     }
-    
-    
+
+    #endregion
 }

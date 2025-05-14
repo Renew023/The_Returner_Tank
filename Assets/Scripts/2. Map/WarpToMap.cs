@@ -3,12 +3,11 @@ using UnityEngine;
 public class WarpToMap : MonoBehaviour
 {
 
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
 
-        // SceneController ¿¡ µî·ÏµÈ ToMap() È£Ãâ
+        // SceneController ì— ë“±ë¡ëœ ToMap() í˜¸ì¶œ
         SceneController.ToMap();
     }
 }

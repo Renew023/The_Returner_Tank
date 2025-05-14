@@ -3,15 +3,20 @@ using UnityEngine.SceneManagement;
 
 public static class SceneController
 {
+    #region SceneController 객체 변수 선언
     private static string _lastSceneName;
     private const float MapReturnYOffset = 2f;
     private static bool needResetMap = false;
+
+    #endregion
 
     static SceneController()
     {
         // 씬 로드 콜백 등록
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
+
+    #region ToHeal, ToBattle, ToBoss, ToMap, ToFirstMap, ToEvent 메서드 → MapScene에서 각 씬으로 전환하는 기능
 
     public static void ToHeal()
     {
@@ -57,7 +62,9 @@ public static class SceneController
 
     }
 
+    #endregion
 
+    #region OnSceneLoaded 메서드 → 씬이 로드되었을 때 호출되는 콜백 기능
     private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
 
@@ -91,4 +98,6 @@ public static class SceneController
 
         }
     }
+
+    #endregion
 }

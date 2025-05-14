@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//	무기 업그레이드 열거형 
 enum UpgradeAbility
 {
 	Value,
@@ -9,6 +10,7 @@ enum UpgradeAbility
 	Damage,
 }
 
+//	무기 구조체
 [System.Serializable]
 public struct Weapon
 {
@@ -18,9 +20,4 @@ public struct Weapon
 	public float arrowDamage;
 	public float attackDelay;
 	public float timer;
-
-	//[SerializeField] protected Dictionary<int, (string, int)> levelEvent = new Dictionary<int, (string, int)>();
-
-	//[SerializeField] protected float attackDelay = 1.0f;
-	//protected float timer = 0.0f;
 }

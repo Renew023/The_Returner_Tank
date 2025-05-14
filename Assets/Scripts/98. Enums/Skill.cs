@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#region SkillType →  // 플레이어와 무기 관련 다양한 능력치 업그레이드 종류
 public enum SkillType
 {
     PlayerHpUp,
@@ -17,6 +18,9 @@ public enum SkillType
     ArrowDelayUp
 }
 
+#endregion
+
+#region LevelSkill 구조체 → 스킬 구조체
 [System.Serializable]
 public struct LevelSkill
 {
@@ -26,6 +30,9 @@ public struct LevelSkill
     public float value;
 }
 
+#endregion
+
+#region Skill 클래스 → 플레이어가 사용할 스킬들 변수들
 [System.Serializable]
 public class Skill
 {
@@ -54,27 +61,5 @@ public class Skill
 
     }
 
-    //void PickSkill()
-    //{
-    //    switch (levelSkills[Level].upgradeType)
-    //    {
-    //        case SkillType.PlayerHpUp:
-    //            player.HpUp(value);
-    //            break;
-    //        case SkillType.PlayerSpeedUp:
-    //            break;
-    //        case SkillType.ArrowSpeedUp:
-    //            if (Level == 0)
-    //                player.weapons.Add(Instantiate(weapon, player.gameObject.transform.position, Quaternion.identity, player.gameObject.transform.parent));
-    //            //player.weaponController.SpeedUp();
-    //break;
-    //        case SkillType.ArrowValueUp:
-    ////player.weaponController.ValueUp();
-    //break;
-    //        case SkillType.ArrowDamageUp:
-    //            //player.weaponController.DamageUp();
-    //break;
-
-    //    }
-    //}
+    #endregion
 }

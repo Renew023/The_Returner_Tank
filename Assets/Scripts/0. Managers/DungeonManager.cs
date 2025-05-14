@@ -90,8 +90,6 @@ public class DungeonManager : MonoBehaviour
         {
             waveMessageUI.ShowMessage($"Wave {currentWave}");
         }
-
-        Debug.Log($"[현재 웨이브: {currentWave}]의 몬스터 수: {count} 스폰!");
     }
 
     #endregion
@@ -100,17 +98,14 @@ public class DungeonManager : MonoBehaviour
     public void OnEnemyDeath()
     {
         aliveEnemies--;
-        Debug.Log($"[OnEnemyDeath] 몬스터 처치됨 - 남은 몬스터: {aliveEnemies}");
 
         // 웨이브 진행 중이고, 살아있는 적이 없으면 웨이브 종료
         if (isWaveInProgress && aliveEnemies <= 0)
         {
             isWaveInProgress = false;
-            Debug.Log($"[웨이브 {currentWave}] 완료!");
 
             if (currentWave >= maxWave)
             {
-                Debug.Log($"[DungeonManager] 모든 웨이브 종료!");
                 AbsorbExp();
                 ClearDungeon();
             }
@@ -119,7 +114,6 @@ public class DungeonManager : MonoBehaviour
             {
                 // 다음 웨이브로 이동하기 전에 증가시킴
                 currentWave++; 
-                Debug.Log($"[DungeonManager] 다음 웨이브 {currentWave} 시작!");
                 Spawner.instance.SpawnFixedWave();
             }
         }
@@ -130,8 +124,6 @@ public class DungeonManager : MonoBehaviour
     #region ClearDungeon 메서드 → 각 던전 씬 내 모든 웨이브를 클리어할 때를 처리하는 기능
     void ClearDungeon()
     {
-        Debug.Log($"[DungeonManager] 던전 클리어!");
-
         // 플레이어 HP 저장
         Player player = FindObjectOfType<Player>();
 

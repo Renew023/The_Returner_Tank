@@ -6,35 +6,42 @@ using UnityEngine.UI;
 
 public class SkillSelectButton : MonoBehaviour
 {
+    #region SkillSelectButton 객체 변수 선언
     public Player player;
     public Skill skill;
     public Button skillSelect;
-    //public SpriteRenderer ab;
     public Image image;
     public TextMeshProUGUI title;
 
+    #endregion
+
+    #region Awake 메서드
     void Awake()
     {
         skillSelect.onClick.AddListener(Pick);
     }
 
+    #endregion
+
+    #region OnEnable, OnDisable 메서드
     void OnEnable()
     {
-        //ab = skill.weapon.weaponSprite;
         if (DataManager.instance.curPlayerSkillMax == DataManager.instance.maxPlayerSkill)
         {
             title.text = "최대치";
+
             return;
         }
-
 
         if (skill.weaponCon != null)
         {
             image.sprite = skill.weaponCon.weaponSprite.sprite;
         }
+
         else
         {
             string skillIconName = skill.levelSkills[skill.level].upgradeType.ToString();
+
             image.sprite = Resources.Load<Sprite>("SkillIcons/" + skillIconName);
         }
 
@@ -46,6 +53,9 @@ public class SkillSelectButton : MonoBehaviour
         skill = null;
     }
 
+    #endregion
+
+    #region Pick 메서드
     void Pick()
     {
         if (DataManager.instance.curPlayerSkillMax == DataManager.instance.maxPlayerSkill)
@@ -58,6 +68,7 @@ public class SkillSelectButton : MonoBehaviour
         if (skill.level == 0)
         {
             player.playerValue.playerSkill.Add(skill);
+
             if (skill.weaponCon != null)
             {
                 player.playerValue.weapons.Add(Instantiate(skill.weaponCon, player.transform.position, Quaternion.identity, player.transform));
@@ -66,6 +77,7 @@ public class SkillSelectButton : MonoBehaviour
 
         float value = skill.levelSkills[skill.level].value;
 
+        #region switch 문
         switch (skill.levelSkills[skill.level].upgradeType)
         {
             case SkillType.PlayerHpUp:
@@ -88,7 +100,7 @@ public class SkillSelectButton : MonoBehaviour
             case SkillType.PlayerDelayUp:
                 player.playerValue.playerWeaponStat.attackDelay += (int)value;
                 break;
-            //skill.weapon.DamageUp(value);
+
             case SkillType.ArrowSpeedUp:
                 foreach (var weapon in player.playerValue.weapons)
                 {
@@ -98,8 +110,8 @@ public class SkillSelectButton : MonoBehaviour
                         break;
                     }
                 }
-                //skill.weapon.SpeedUp(value);
                 break;
+
             case SkillType.ArrowValueUp:
                 foreach (var weapon in player.playerValue.weapons)
                 {
@@ -109,8 +121,8 @@ public class SkillSelectButton : MonoBehaviour
                         break;
                     }
                 }
-                //skill.weapon.ValueUp((int)value);
                 break;
+
             case SkillType.ArrowDamageUp:
                 foreach (var weapon in player.playerValue.weapons)
                 {
@@ -120,7 +132,7 @@ public class SkillSelectButton : MonoBehaviour
                         break;
                     }
                 }
-                //skill.weapon.DamageUp(value);
+
                 break;
             case SkillType.ArrowDelayUp:
                 foreach (var weapon in player.playerValue.weapons)
@@ -131,22 +143,28 @@ public class SkillSelectButton : MonoBehaviour
                         break;
                     }
                 }
-                //skill.weapon.DamageUp(value);
                 break;
-
         }
+
+        #endregion
 
         if (skill.level == 0)
         {
             UIManager.Instance.uiController.pauseUI.skillSlots[UIManager.Instance.uiController.pauseUI.skillsCount].sprite = image.sprite;
             UIManager.Instance.uiController.pauseUI.SetSkillImages(UIManager.Instance.uiController.pauseUI.skillsCount);
         }
+
         Time.timeScale = 1.0f;
+
         skill.level += 1;
+
         if (skill.level == 2)
         {
             DataManager.instance.curPlayerSkillMax += 1;
         }
+
         player.skillSelectUI.SetActive(false);
     }
+
+    #endregion
 }

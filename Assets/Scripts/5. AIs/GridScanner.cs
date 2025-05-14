@@ -4,6 +4,7 @@ using UnityEngine.Tilemaps;
 
 public class GridScanner : MonoBehaviour
 {
+    #region GridScanner 객체 변수 선언
     public static GridScanner Instance;
     
     [SerializeField] private LayerMask obstacleLayer;
@@ -11,6 +12,9 @@ public class GridScanner : MonoBehaviour
     private Grid grid;
     private Dictionary<Vector2Int, bool> walkableMap = new();
 
+    #endregion
+
+    #region Awake 메서드
     private void Awake()
     {
         Instance = this;
@@ -19,7 +23,10 @@ public class GridScanner : MonoBehaviour
         BoundsInt bounds = CalculateBoundsFromGridChildren();
         ScanGrid(bounds);
     }
-    
+
+    #endregion
+
+    #region CalculateBoundsFromGridChildren 메서드
     private BoundsInt CalculateBoundsFromGridChildren()
     {
         BoundsInt totalBounds = new BoundsInt();
@@ -39,6 +46,7 @@ public class GridScanner : MonoBehaviour
                 totalBounds = tilemap.cellBounds;
                 initialized = true;
             }
+
             else
             {
                 totalBounds.xMin = Mathf.Min(totalBounds.xMin, tilemap.cellBounds.xMin);
@@ -50,7 +58,10 @@ public class GridScanner : MonoBehaviour
 
         return totalBounds;
     }
-    
+
+    #endregion
+
+    #region ScanGrid 메서드
     public void ScanGrid(BoundsInt bounds)
     {
         walkableMap.Clear();
@@ -66,7 +77,10 @@ public class GridScanner : MonoBehaviour
             }
         }
     }
-    
+
+    #endregion
+
+    #region IsWalkable, WorldToCell, CellToWorld 메서드
     public bool IsWalkable(Vector2Int cellPos)
     {
         return walkableMap.TryGetValue(cellPos, out bool walkable) && walkable;
@@ -77,7 +91,10 @@ public class GridScanner : MonoBehaviour
 
     public Vector3 CellToWorld(Vector2Int cellPos) =>
         grid.CellToWorld((Vector3Int)cellPos) + new Vector3(0.5f, 0.5f);
-    
+
+    #endregion
+
+    #region GetNeighbours 메서드
     public List<Vector2Int> GetNeighbours(Vector2Int cell)
     {
         List<Vector2Int> neighbours = new();
@@ -91,4 +108,6 @@ public class GridScanner : MonoBehaviour
 
         return neighbours;
     }
+
+    #endregion
 }

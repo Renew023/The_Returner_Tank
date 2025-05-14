@@ -227,8 +227,6 @@ public class Monster : Character
 		//	초기화
 		isDead = false;
 
-        Debug.Log($"[ResetEnemy] {name}, curHp: {curHp}");
-
 		if(hpBarFill != null)
 		{
 			hpBarFill.fillAmount = 1f;

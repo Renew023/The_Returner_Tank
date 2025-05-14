@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class SelectSoundManager : MonoBehaviour
 {
+    #region SelectSoundManager 객체 변수 선언
     public static SelectSoundManager Instance { get; private set; }
 
     [Header("Select SFX")]
@@ -10,6 +11,9 @@ public class SelectSoundManager : MonoBehaviour
 
     AudioSource _src;
 
+    #endregion
+
+    #region Awake 메서드 
     void Awake()
     {
         // 싱글톤 패턴 (씬에 하나만 존재하도록)
@@ -26,9 +30,14 @@ public class SelectSoundManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
+    #endregion
+
+    #region PlaySelectSound 메서드 → 선택 효과음을 1회 재생하는 기능
     public void PlaySelectSound()
     {
         if (selectClip != null && _src != null)
             _src.PlayOneShot(selectClip, 1.0f);
     }
+
+    #endregion
 }

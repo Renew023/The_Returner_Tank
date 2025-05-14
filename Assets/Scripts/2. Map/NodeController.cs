@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class NodeController : MonoBehaviour
 {
+    #region NodeController 변수 선언
     [Header("노드별 크기 (Size Delta)")]
     public Vector2 enemySize = new Vector2(64, 64);
     public Vector2 healSize = new Vector2(80, 80);
@@ -22,13 +23,16 @@ public class NodeController : MonoBehaviour
     private MapManager mapMgr;
     private Image img;
 
+    #endregion
+
+    //  노드의 행, 열 정보
     public int Row => row;
     public int Col => col;
 
 
-
     /// 맵매니저가 생성 직후 초기화
 
+    #region Init 메서드 → 노드 초기화: 위치, 타입, 아이콘, 크기, 클릭 이벤트를 설정하는 기능
     public void Init(int r, int c, NodeType t, MapManager mgr, Sprite icon, byte alpha)
     {
         row = r;
@@ -69,11 +73,17 @@ public class NodeController : MonoBehaviour
         originalScale = rt.localScale;
     }
 
+    #endregion
+
+    #region OnClick 메서드 → 노드 클릭 시 MapManager에 클릭 이벤트를 전달하는 기능
     private void OnClick()
     {
         mapMgr.OnNodeClicked(row, col, type);
     }
 
+    #endregion
+
+    #region SetAlpha, SetHighlight 메서드 → 노드의 투명도(Alpha)를 설정하는 기능 / 노드 강조 여부에 따라 하이라이트를 설정하는 기능
     /// 외부에서 투명도만 바꿀 때
     public void SetAlpha(byte alpha)
     {
@@ -89,4 +99,6 @@ public class NodeController : MonoBehaviour
             ? new Color(img.color.r, img.color.g, img.color.b, 1f)
             : new Color(img.color.r, img.color.g, img.color.b, img.color.a);
     }
+
+    #endregion
 }

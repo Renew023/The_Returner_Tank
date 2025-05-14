@@ -4,11 +4,15 @@ using System.Collections;
 
 public class WaveMessageUI : MonoBehaviour
 {
+    #region WaveMessageUI 객체 변수 선언
     public CanvasGroup canvasGroup; // 페이드 효과용
     public Text messageText;        // "Wave1", "Wave2", "CLEAR" 같은 텍스트
     public float fadeDuration = 1f;
     public float showDuration = 2f;
 
+    #endregion
+
+    #region ShowMessage 메서드
     // 외부에서 호출해서 메시지를 표시하는 함수
     public void ShowMessage(string message)
     {
@@ -16,6 +20,10 @@ public class WaveMessageUI : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(FadeInOut());
     }
+
+    #endregion
+
+    #region FadeInOut, Fade 메서드
 
     private IEnumerator FadeInOut()
     {
@@ -36,4 +44,6 @@ public class WaveMessageUI : MonoBehaviour
         }
         canvasGroup.alpha = endAlpha;
     }
+
+    #endregion
 }

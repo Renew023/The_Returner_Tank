@@ -15,6 +15,7 @@ public class HealTrigger : MonoBehaviour
 
     }
 
+    #region OnTriggerEnter2D 메서드
     void OnTriggerEnter2D(Collider2D other)
     {
         if (hasTriggered) return;
@@ -29,4 +30,6 @@ public class HealTrigger : MonoBehaviour
         // 언로드 전에 Collider 차단
         SceneManager.UnloadSceneAsync("Event_HealScene");
     }
+
+    #endregion
 }

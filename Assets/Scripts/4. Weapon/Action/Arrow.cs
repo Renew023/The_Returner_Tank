@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
+    #region Arrow 객체 변수 선언
     public GameObject owner;
     public WeaponController countReturn;
     public Rigidbody2D rb;
@@ -12,6 +13,9 @@ public class Arrow : MonoBehaviour
     public Vector2 direction;
     public float time;
 
+    #endregion
+
+    #region OnEnable, OnDisable 메서드
     protected virtual void OnEnable()
     {
 	    rb.velocity = direction;
@@ -27,13 +31,18 @@ public class Arrow : MonoBehaviour
         StopAllCoroutines();
 		countReturn.pooling();
 	}
-	
-	// Update is called once per frame
-	public virtual void Update()
+
+    #endregion
+
+    #region Update 메서드
+    public virtual void Update()
     {
         Action();
 	}
 
+    #endregion
+
+    #region Action, Shoot 메서드 → 투사체 발사 시, 날아가는 속도 기능 / 발사 시 시간 관리 기능
     public virtual void Action()
     {
 		rb.velocity = direction;
@@ -45,6 +54,9 @@ public class Arrow : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    #endregion
+
+    #region 투사체와 "벽" 충돌 처리 메서드
     public void OnTriggerEnter2D(Collider2D collision)
     {
 	    if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
@@ -52,4 +64,6 @@ public class Arrow : MonoBehaviour
 		    gameObject.SetActive(false);
 	    }
     }
+
+    #endregion
 }

@@ -7,13 +7,17 @@ using static UnityEngine.GraphicsBuffer;
 
 public class AttackTarget : MonoBehaviour
 {
-	public float radius = 3.0f;
+    #region AttackTarget 객체 변수 선언
+    public float radius = 3.0f;
 	public LayerMask wallLayer;
 	public LayerMask enemyLayer;
 	public Collider2D[] colliders;
 	public Collider2D short_enemy;
 
-	public Vector2 Searching(Vector2 look, Vector2 user)
+    #endregion
+
+    #region Searching 메서드 → 탐지 반경 내에서 벽에 가리지 않은 가장 가까운 적을 찾아 그 방향 벡터를 반환하는 기능
+    public Vector2 Searching(Vector2 look, Vector2 user)
 	{
 		colliders = Physics2D.OverlapCircleAll(transform.position, radius, enemyLayer);
 
@@ -47,10 +51,15 @@ public class AttackTarget : MonoBehaviour
 
 		return look;
 	}
-	
-	private void OnDrawGizmos()
+
+    #endregion
+
+    #region OnDrawGizmos 메서드 → 에디터 상에서 탐지 범위를 그려내는 기능
+    private void OnDrawGizmos()
 	{
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireSphere(transform.position, radius);
 	}
+
+    #endregion
 }

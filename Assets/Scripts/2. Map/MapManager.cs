@@ -9,6 +9,7 @@ using UnityEditor.Experimental.GraphView;
 
 public class MapManager : MonoBehaviour
 {
+    #region MapManager 객체 변수 선언
     private HashSet<string> connections = new HashSet<string>();
     public static MapManager Instance { get; private set; }
 
@@ -41,6 +42,9 @@ public class MapManager : MonoBehaviour
     RectTransform playerIndicatorRt;
     RectTransform startNodeRt;  // Start 노드 위치 저장
 
+    #endregion
+
+    #region IsNodeReachable 메서드 → MapScene - 현재 위치에서 특정 노드가 도달 가능한지를 확인하는 메서드
     private bool IsNodeReachable(int r, int c)
     {
         if (r <= currentRow) return false;
@@ -48,6 +52,9 @@ public class MapManager : MonoBehaviour
         return connections.Contains(key);
     }
 
+    #endregion
+
+    #region Awake 메서드
     void Awake()
     {
         if (Instance == null)
@@ -63,12 +70,18 @@ public class MapManager : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Start 메서드
     void Start()
     {
         if (SceneManager.GetActiveScene().name == "MapScene")
             InitializeOrRestoreMap();
     }
 
+    #endregion
+
+    #region OnSceneLoaded 메서드 → MapScene 로드 시 맵 초기화 혹은 복원 기능
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "MapScene")
@@ -83,6 +96,9 @@ public class MapManager : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region InitializeOrRestoreMap 메서드 → MapScene - 맵이 처음 생성되었는지를 확인 후 생성하거나 기존 맵을 복원하는 기능
     void InitializeOrRestoreMap()
     {
         if (!initialized && GameManager.Instance.FirstMapEntry)
@@ -95,6 +111,9 @@ public class MapManager : MonoBehaviour
         RestoreMap();
     }
 
+    #endregion
+
+    #region GenerateMapData 메서드 → MapScene - 노드 타입에 따라 맵 데이터를 랜덤으로 생성하는 기능
     void GenerateMapData()
     {
         mapData = new List<List<NodeType>>();
@@ -122,6 +141,9 @@ public class MapManager : MonoBehaviour
         mapData.Add(new List<NodeType> { NodeType.Boss });
     }
 
+    #endregion
+
+    #region RenderMap 메서드 → 노드를 배치하고, 점선 및 연결 정보와 플레이어 인디케이터를 생성하는 기능
     void RenderMap()
     {
         // 기존 노드/점선 삭제
@@ -132,6 +154,7 @@ public class MapManager : MonoBehaviour
                     if (n != null && n.gameObject != null)
                         Destroy(n.gameObject);
         }
+
         if (dotLines != null)
         {
             foreach (var d in dotLines)
@@ -180,6 +203,7 @@ public class MapManager : MonoBehaviour
 
                 rowList.Add(nc);
             }
+
             mapNodes.Add(rowList);
         }
 
@@ -221,10 +245,14 @@ public class MapManager : MonoBehaviour
 
     }
 
+    #endregion
+
+    #region DrawDots 메서드 → 두 노드를 점선으로 시각적으로 연결하고 연결 정보를 저장하는 기능
     void DrawDots(NodeController a, NodeController b)
     {
         var pa = a.GetComponent<RectTransform>().anchoredPosition;
         var pb = b.GetComponent<RectTransform>().anchoredPosition;
+
         for (int i = 1; i < dotSegments; i++)
         {
             float t = i / (float)dotSegments;
@@ -233,19 +261,26 @@ public class MapManager : MonoBehaviour
             dot.rectTransform.anchoredPosition = pos;
             dotLines.Add(dot);
         }
+
         connections.Add($"{a.Row},{a.Col}-{b.Row},{b.Col}");
         connections.Add($"{b.Row},{b.Col}-{a.Row},{a.Col}");
     }
 
+    #endregion
 
+    #region UpdateAlphas 메서드 → 현재 선택된 행의 노드만 강조하는 기능
     void UpdateAlphas()
     {
         if (mapNodes == null) return;
+
         for (int r = 0; r < mapNodes.Count; r++)
             for (int c = 0; c < mapNodes[r].Count; c++)
                 mapNodes[r][c]?.SetAlpha((r == currentRow) ? activeAlpha : defaultAlpha);
     }
 
+    #endregion
+
+    #region OnNodeClicked 메서드 → 특정 노드 클릭 시 이동 처리 및 해당 타입에 따라 씬 전환하는 기능
     public void OnNodeClicked(int r, int c, NodeType t)
     {
         if (!IsNodeReachable(r, c)) { Debug.Log("이동 불가한 노드"); return; }
@@ -272,6 +307,9 @@ public class MapManager : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region RestoreMap 메서드 → 플레이어 인디케이터의 위치를 저장된 위치로 복원
     public void RestoreMap()
     {
         if (mapNodes == null || playerIndicatorRt == null) return;
@@ -280,12 +318,18 @@ public class MapManager : MonoBehaviour
             .GetComponent<RectTransform>().anchoredPosition;
     }
 
+    #endregion
+
+    #region OnDestroy 메서드 
     void OnDestroy()
     {
         if (Instance == this)
             SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    #endregion
+
+    #region ResetMap 메서드 → 맵 초기화: 노드, 점선, 인디케이터 제거 및 위치를 초기화하는 기능
     // MapScene 초기화
     public void ResetMap()
     {
@@ -318,5 +362,5 @@ public class MapManager : MonoBehaviour
         RestoreMap();
     }
 
-
+    #endregion
 }

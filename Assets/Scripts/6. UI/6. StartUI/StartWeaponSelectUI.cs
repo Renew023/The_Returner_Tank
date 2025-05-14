@@ -7,7 +7,8 @@ using UnityEngine.UI;
 
 public class StartWeaponSelectUI : MonoBehaviour
 {
-	[SerializeField] StartUI startUI;
+    #region StartWeaponSelectUI 객체 변수 선언
+    [SerializeField] StartUI startUI;
 
 	[SerializeField] private Image weaponImage;
     [SerializeField] private Image arrowImage;
@@ -17,11 +18,10 @@ public class StartWeaponSelectUI : MonoBehaviour
     [SerializeField] private Button nextButton;
     [SerializeField] private Button exitButton;
 
-	
+    #endregion
 
-
-	// Start is called before the first frame update
-	void Awake()
+    #region Awake 메서드
+    void Awake()
     {
         ItemName.text = DataManager.instance.skill.weaponCon.weapon.name.ToString();
         weaponImage.sprite = DataManager.instance.skill.weaponCon.weaponSprite.sprite;
@@ -31,7 +31,10 @@ public class StartWeaponSelectUI : MonoBehaviour
 		exitButton.onClick.AddListener(() => startUI.ChangeState(StartUIState.Main));
     }
 
-	public void Change(int value)
+    #endregion
+
+    #region Change 메서드
+    public void Change(int value)
 	{
 		int skillValue = DataManager.instance.skillValue;
 
@@ -49,17 +52,24 @@ public class StartWeaponSelectUI : MonoBehaviour
 		ShowReset();
 	}
 
-	void ShowReset()
+    #endregion
+
+    #region ShowReset 메서드
+    void ShowReset()
 	{
 		ItemName.text = DataManager.instance.skill.weaponCon.weapon.name.ToString();
 		weaponImage.sprite = DataManager.instance.skill.weaponCon.weaponSprite.sprite;
 		arrowImage.sprite = DataManager.instance.skill.weaponCon.arrow.GetComponentInChildren<SpriteRenderer>().sprite;
 	}
 
+    #endregion
 
-	// Update is called once per frame
-	void Update()
+    #region Update 메서드
+    // Update is called once per frame
+    void Update()
     {
         
     }
+
+    #endregion
 }

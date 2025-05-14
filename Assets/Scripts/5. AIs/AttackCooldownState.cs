@@ -7,13 +7,16 @@ public class AttackCooldownState : IEnemyState
     private float cooldownTimer = 0f;
     private bool hasMoved = false;
 
+    #region Enter 메서드
     public void Enter(EnemyAI ai)
     {
-        //Debug.Log("[FSM] Entered AttackCooldown State");
         cooldownTimer = 0f;
         hasMoved = false;
     }
 
+    #endregion
+
+    #region Update 메서드
     public void Update(EnemyAI ai)
     {
         cooldownTimer += Time.deltaTime;
@@ -33,6 +36,7 @@ public class AttackCooldownState : IEnemyState
                     ai.MoveTo(worldPos);
                 }
             }
+
             hasMoved = true;
         }
 
@@ -42,8 +46,13 @@ public class AttackCooldownState : IEnemyState
         }
     }
 
+    #endregion
+
+    #region Exit 메서드
     public void Exit(EnemyAI ai)
     {
         //Debug.Log("[FSM] Exit AttackCooldown State");
     }
+
+    #endregion
 }

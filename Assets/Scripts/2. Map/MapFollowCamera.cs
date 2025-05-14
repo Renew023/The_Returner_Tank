@@ -3,30 +3,36 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class MapFollowCamera : MonoBehaviour
 {
-    [Header("ÃßÀû ´ë»ó")]
-    [Tooltip("Hierarchy ¢º NodesCanvas ¢º StageContainer ¢º PlayerIndicator")]
+    #region MapFollowCamera ê°ì²´ ë³€ìˆ˜ ì„ ì–¸
+    [Header("ì¶”ì  ëŒ€ìƒ")]
+    [Tooltip("Hierarchy â–¶ NodesCanvas â–¶ StageContainer â–¶ PlayerIndicator")]
     public RectTransform target;
 
-    [Header("Ä«¸Ş¶ó ¿ÀÇÁ¼Â")]
+    [Header("ì¹´ë©”ë¼ ì˜¤í”„ì…‹")]
     public Vector3 offset = new Vector3(0, 0, -10f);
 
-    [Header("ºÎµå·¯¿î ÃßÀû ¼Óµµ")]
+    [Header("ë¶€ë“œëŸ¬ìš´ ì¶”ì  ì†ë„")]
     [Range(0.01f, 1f)]
     public float smoothSpeed = 0.125f;
 
+    #endregion
+
+    #region LateUpdate ë©”ì„œë“œ â†’ MapSceneì—ì„œ í”Œë ˆì´ì–´ ì˜¤ë¸Œì íŠ¸ë¥¼ ì¶”ì í•˜ëŠ” ê¸°ëŠ¥
     void LateUpdate()
     {
         if (target == null) return;
 
-        // 1) ÀÎµğÄÉÀÌÅÍ ¿ùµå À§Ä¡ ±¸ÇÏ±â
+        // 1) ì¸ë””ì¼€ì´í„° ì›”ë“œ ìœ„ì¹˜ êµ¬í•˜ê¸°
         Vector3 targetWorldPos = target.TransformPoint(Vector3.zero) + offset;
 
-        // 2) ¿øÇÏ´Â Æ÷Áö¼Ç: X,Z´Â °íÁ¤
+        // 2) ì›í•˜ëŠ” í¬ì§€ì…˜: X,ZëŠ” ê³ ì •
         float fixedX = transform.position.x;
         float fixedZ = transform.position.z;
         Vector3 desiredPos = new Vector3(fixedX, targetWorldPos.y, fixedZ);
 
-        // 3) ºÎµå·´°Ô º¸°£
+        // 3) ë¶€ë“œëŸ½ê²Œ ë³´ê°„
         transform.position = Vector3.Lerp(transform.position, desiredPos, smoothSpeed);
     }
+
+    #endregion
 }

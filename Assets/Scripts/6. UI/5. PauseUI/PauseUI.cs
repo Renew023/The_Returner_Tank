@@ -5,11 +5,15 @@ using UnityEngine.UI;
 
 public class PauseUI : MonoBehaviour
 {
+    #region PauseUI 객체 변수 선언
     [SerializeField] private GameObject PauseMenu;
     public Image[] skillSlots;
 
     public int skillsCount = 0;
 
+    #endregion
+
+    #region SetSkillImages, OffSkillImages 메서드
     public void SetSkillImages(int _skillsCount)
     {
         skillSlots[_skillsCount].color = new Color(255, 255, 255, 255);
@@ -27,6 +31,9 @@ public class PauseUI : MonoBehaviour
         skillsCount = 0;
     }
 
+    #endregion
+
+    #region PauseMenuToggle 메서드
     public void PauseMenuToggle()
     {
         if (PauseMenu.activeSelf)
@@ -41,6 +48,9 @@ public class PauseUI : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region ReturnMain 메서드
     public void ReturnMain()
     {
         UIManager.Instance.uiController.SetBossHP(false);
@@ -50,4 +60,6 @@ public class PauseUI : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("StartScene");
     }
+
+    #endregion
 }
