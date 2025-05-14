@@ -1,5 +1,6 @@
 // Assets/Scripts/Map/HealTrigger.cs
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Collider2D))]
 public class HealTrigger : MonoBehaviour
@@ -32,5 +33,6 @@ public class HealTrigger : MonoBehaviour
         player.HealTrigger(healAmount);
 
         Destroy(gameObject);
+        SceneManager.UnloadSceneAsync("Event_HealScene");
     }
 }
