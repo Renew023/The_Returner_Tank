@@ -144,8 +144,8 @@ public class BossMonster : Character
     public void TakeDamage(float damage)
     {
         //효과음
-        if (damageClip != null && audioSource != null)
-            audioSource.PlayOneShot(damageClip);
+        AudioManager.Instance.PlaySFX(damageClip, 1.0f);
+
 
         curHp -= damage;
 
@@ -164,6 +164,9 @@ public class BossMonster : Character
 
     void Death()
     {
+        //효과음
+        AudioManager.Instance.PlaySFX(DeathClip, 1.0f);
+
         gameObject.SetActive(false);
         UIManager.Instance.uiController.SetBossHP(false);
 
