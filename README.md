@@ -76,13 +76,13 @@ __탱크로 다시 태어난 나는 미궁을 방랑한다. 게임의 기술서_
 - Math.Clamp로 카메라 영역 제한
 <br>
 
-### 2. 플레이어 이동 ('Player.cs')
+### 2. 플레이어 이동 (`Player.cs`)
 Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다. 
 또한 ~~Mouse좌표~~ 쏠 공격 방향의 좌표와 플레이어의 좌표를 비교하여 플레이어의 방향이 바뀌도록 만들었습니다.
 - Input.GetAxisRaw로 좌표 이동
 <br>
 
-### 3. 플레이어 공격 ('WeaponController.cs')
+### 3. 플레이어 공격 (`WeaponController.cs`)
 플레이어가 주변 적을 탐지하고 그 중 가장 가까운 상대방을 공격하게 만들었습니다.
 - Physics2D.OverlapCircle로 주변 Collider(trigger) 탐지
 - 탐지한 Collider까지의 거리를 비교 후 가장 짧은 거리 탐지
@@ -90,7 +90,7 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다.
 - WeaponController에서 일정 시간마다 공격
 <br>
 
-### 4. 플레이어 피격 ('Player.cs')
+### 4. 플레이어 피격 (`Player.cs`)
 화살을 맞을 시 플레이어가 피가 닳는 판정을 만들었습니다.
 - WeaponController에서 발사할 화살에게 공격력과 좌표를 부여.
 - 피격받는 대상이 OnTriggerEnter2D로 화살에 맞았는지 판정.
@@ -102,7 +102,7 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다.
 ***
 ## 🎱 [스킬]
 
-### 1. 스킬 구조 ('Skill.cs')
+### 1. 스킬 구조 (`Skill.cs`)
 스킬에 내부 트리입니다.
 - Skill(부여할 스킬)
 - SkillType(증가시킬 능력치)
@@ -111,7 +111,7 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다.
 - Arrow(발사체)
 <br>
 
-### 2. 스킬 패턴 ('WeaponController.cs')
+### 2. 스킬 패턴 (`WeaponController.cs`)
 스킬은 Arrow만 날라가는 것이 아닌 랜덤한 위치에 번개를 치게 하는 등에 수정 작업이 가능했으나, 
 작업에 대한 시간관계상 WeaponController의 값을 다양하게 수정하는 것으로 스킬 패턴을 구현했습니다.
 - ArrowSpeed, ArrowDamage 등 화살에 부여할 능력치 변경.
@@ -121,12 +121,12 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다.
 ***
 ## 📺 [미니맵]
 
-### 1. 미니맵 추적 기능 ('FollowMiniMap.cs')
+### 1. 미니맵 추적 기능 (`FollowMiniMap.cs`)
 Mask와 SpriteRender로 미니맵을 구현하였고 맵과 비교하여 미니맵이 정상적으로 플레이어의 움직인만큼 움직이도록 만들었습니다. 
 - 실제 맵의 움직임을 감지하여 미니맵의 움직임도 반영
 - Math.Clamp를 활용하여 미니맵이 Mask 밖으로 나가는 거 방지
 
-### 2. 미니맵 엔티티 감지 ('TargetSearch.cs')
+### 2. 미니맵 엔티티 감지 (`TargetSearch.cs`)
 기존에 사용하던 맵의 사이즈를 줄이고 플레이어와 몬스터의 부분은 색칠된 점을 표시해주는 것으로 위치 파악을 쉽게 할 수 있도록 만들었습니다.
 - 실제 맵에서의 몬스터와 캐릭터를 추적
 - 추적한 위치를 기반으로 미니맵에 표시
@@ -138,7 +138,7 @@ Mask와 SpriteRender로 미니맵을 구현하였고 맵과 비교하여 미니�
  ***
 # 🏫 [스테이지 선택지]
 
-### 1. 맵 선택지 생성 (MapManager.cs)
+### 1. 맵 선택지 생성 (`MapManager.cs`)
 - MapScene에 진입하여 맵을 랜덤으로 생성하기 위해 노드·점선·플레이어 인디케이터를 생성·관리하는 핵심 클래스
 
 **맵 데이터 생성 (`GenerateMapData`)**
@@ -195,7 +195,7 @@ public void ResetMap()
 ```
 
 ***
-### 2. 씬 전환 (SceneController.cs)
+### 2. 씬 전환 (`SceneController.cs`)
  - 씬 전환 로직 관리, 일반 진입(ToMap) vs 특수 초기화 진입(FirstToMap) 분리
  ```cs
 public static void FirstToMap()
@@ -219,12 +219,12 @@ private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 }
 ```
 ***
-### 3. 소스 초기화 (NodeController.cs)
+### 3. 소스 초기화 (`NodeController.cs`)
  - 각 노드의 Image, Button 초기화
  - 클릭 시 MapManager.OnNodeClicked(r,c,type) 호출
 
 ***
-### 4. 이벤트 맵 (HealTrigger.cs/EventTrigger.cs)
+### 4. 이벤트 맵 (`HealTrigger.cs/EventTrigger.cs`)
  - EventScene인 Heal 이벤트와 Levelup 이벤트를 작동하게 하는 클래스
  - OnTriggerEnter2D에서 Player 충돌 감지 → Player.HealTrigger(), Player.LevelUpTrigger() 호출
 
@@ -313,14 +313,14 @@ private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 
 ## 몬스터 생성
 
-### 1. 몬스터 오브젝트 풀링 (PoolManager.cs)
+### 1. 몬스터 오브젝트 풀링 (`PoolManager.cs`)
 ![image](https://github.com/user-attachments/assets/ce3f5aab-f656-4cda-bed8-4c0c31ea269d)
 - Enemies라는 오브젝트 배열 안에 Prefab으로 제작한 몬스터 오브젝트들을 담아놓습니다.
 - 이후, 던전 씬에 입장할 시, 해당 Pool 안에 넣어둔 몬스터 오브젝트들을 스폰하도록 구현하였습니다.
 
 ---
 
-### 2. 스폰 포인트 / 웨이브 시스템 (Spawner.cs)
+### 2. 스폰 포인트 / 웨이브 시스템 (`Spawner.cs`)
 ![image](https://github.com/user-attachments/assets/4ee1f6ab-2134-4c8d-a3fb-a9017104f06a)
 
 ![bandicam 2025-05-14 14-24-16-357](https://github.com/user-attachments/assets/e43b89a3-d3da-41ee-a66b-da4b049d1329)
@@ -337,7 +337,7 @@ private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 
 ---
       
-### 3. 웨이브 설정, 몬스터 풀 기능 구현 (DungeonManager.cs)
+### 3. 웨이브 설정, 몬스터 풀 기능 구현 (`DungeonManager.cs`)
 ![image](https://github.com/user-attachments/assets/c207e74d-e21a-4112-b344-577be70e8359)
 
 - 각 던전 씬에 설정한 몬스터 스폰 시작 웨이브 ~ 끝 웨이브를 설정하여, 해당 던전 씬에 입장할 때 DungeonManager → 설정한 웨이브 수 데이터 값을 읽게 하도록 구현하였습니다.
