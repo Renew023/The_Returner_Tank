@@ -171,7 +171,12 @@ public class Player : Character
         maxHp += value;
         curHp += value;
         hpBarFill.fillAmount = curHp / maxHp;
-        UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
+        if (UIManager.Instance != null
+        && UIManager.Instance.uiController != null
+        && UIManager.Instance.uiController.playerHP != null)
+        {
+            UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
+        }
     }
 
     public void MoveSpeedUp(float value = 1)
