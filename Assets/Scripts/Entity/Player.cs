@@ -277,11 +277,8 @@ public class Player : Character
     public void LevelUpTrigger(int amount)
     {
         int Expamount = amount;
-        if (playerValue.Exp + Expamount >= demandExp)
-        {
-            Expamount = (int)(demandExp - playerValue.Exp);
-        }
-       
+        Expamount = (int)(demandExp - playerValue.Exp);
+
         AddExp(Expamount);
     }
 }
