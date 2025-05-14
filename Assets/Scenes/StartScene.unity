@@ -2800,7 +2800,7 @@ GameObject:
   - component: {fileID: 956203930}
   - component: {fileID: 956203929}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: StartVideo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4735,7 +4735,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 11500000, guid: a1348d7889dcff941ae2afd8e8ccd002, type: 3}
         m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-        m_MethodName: set_name
+        m_MethodName: 
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
