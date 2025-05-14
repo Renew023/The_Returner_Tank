@@ -5,34 +5,28 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Collider2D))]
 public class HealTrigger : MonoBehaviour
 {
+    bool hasTriggered = false;
+
     [Header("회복량 ")]
     public int healAmount = 50;
 
     void Awake()
     {
-        // 트리거용 설정 보장
-        var col = GetComponent<Collider2D>();
-        col.isTrigger = true;
 
-        var rb = GetComponent<Rigidbody2D>();
-        if (rb == null)
-        {
-            rb = gameObject.AddComponent<Rigidbody2D>();
-            rb.bodyType = RigidbodyType2D.Kinematic;
-            rb.simulated = true;
-        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (hasTriggered) return;
         if (!other.CompareTag("Player")) return;
+        hasTriggered = true;
+        GetComponent<Collider2D>().enabled = false;
 
         var player = other.GetComponent<Player>();
-        if (player == null) return;
+        player?.HealTrigger(healAmount);
+        Destroy(gameObject, 0.1f);
 
-        player.HealTrigger(healAmount);
-
-        Destroy(gameObject);
+        // 언로드 전에 Collider 차단
         SceneManager.UnloadSceneAsync("Event_HealScene");
     }
 }

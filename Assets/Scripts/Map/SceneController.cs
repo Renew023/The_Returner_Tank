@@ -15,9 +15,11 @@ public static class SceneController
 
     public static void ToHeal()
     {
+        // 진입 직전 씬 이름 저장
         _lastSceneName = SceneManager.GetActiveScene().name;
         GameManager.Instance.IncreaseDungeonLevel();
-        SceneManager.LoadScene("Event_HealScene", LoadSceneMode.Additive);
+        SceneManager.LoadScene("Event_HealScene", LoadSceneMode.Single);
+
     }
 
     public static void ToBattle()

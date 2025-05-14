@@ -267,19 +267,25 @@ public class Player : Character
         UIManager.Instance.uiController.playerEXP.UpdateValue((float)playerValue.Exp, (float)demandExp);
     }
 
-    public void HealTrigger(int healAmounteal)
+    public void HealTrigger(int healAmount)
     {
-        if (healAmounteal + curHp > maxHp)
+        if (healAmount + curHp > maxHp)
         {
             curHp = maxHp;
         }
         else
         {
-            healAmounteal = (int)(healAmounteal + curHp);
+            curHp = (int)(healAmount + curHp);
         }
-        UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
-
+        hpBarFill.fillAmount = curHp / maxHp;
+        if (UIManager.Instance != null
+        && UIManager.Instance.uiController != null
+        && UIManager.Instance.uiController.playerHP != null)
+        {
+            UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
+        }
     }
+
 
     public void LevelUpTrigger(int amount)
     {
@@ -288,6 +294,8 @@ public class Player : Character
 
         AddExp(Expamount);
     }
+
+
 }
 
 
