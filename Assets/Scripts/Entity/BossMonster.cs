@@ -158,6 +158,7 @@ public class BossMonster : Character
 
         if (curHp <= 0)
         {
+            UIManager.Instance.uiController.SetBossHP(false);
             Death();
         }
     }
@@ -168,7 +169,6 @@ public class BossMonster : Character
         AudioManager.Instance.PlaySFX(DeathClip, 1.0f);
 
         gameObject.SetActive(false);
-        UIManager.Instance.uiController.SetBossHP(false);
 
         //	해당 몬스터가 속해있는 몬스터 수 감소.
         DungeonManager.instance.OnEnemyDeath();
