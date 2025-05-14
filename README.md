@@ -25,24 +25,24 @@ __탱크로 다시 태어난 나는 미궁을 방랑한다. 게임의 기술서_
   
 > **🎉 기술 설명**
 > - 👨🏻 [플레이어](#-플레이어)
->     - [카메라 이동 및 제한('FollowCamera.cs')](#1-카메라-이동-및-제한-followcameracs)
->     - [플레이어 이동('Player.cs')](#2-플레이어-이동)
->     - [플레이어 공격('WeaponController.cs')](#3-플레이어-공격)
->     - [플레이어 피격('Player.cs')](#4-플레이어-피격)
+>     - [카메라 이동 및 제한 ('FollowCamera.cs')](#1-카메라-이동-및-제한-followcameracs)
+>     - [플레이어 이동 ('Player.cs')](#2-플레이어-이동)
+>     - [플레이어 공격 ('WeaponController.cs')](#3-플레이어-공격)
+>     - [플레이어 피격 ('Player.cs')](#4-플레이어-피격)
 >     <br><br>
 > - 🎱 [스킬](#-스킬)
->     - [스킬 구조('Skill.cs')](#1-스킬-구조)
->     - [스킬 패턴('WeaponController.cs')](#.-스킬-패턴)
+>     - [스킬 구조 ('Skill.cs')](#1-스킬-구조)
+>     - [스킬 패턴 ('WeaponController.cs')](#.-스킬-패턴)
 >       <br><br>
 > - 📺 [미니맵](#-미니맵)
->     - [미니맵 엔티티 감지('TargetSearch.cs')](#1-미니맵-구현)
->     - [미니맵 추적 기능('FollowMiniMap.cs')](#1-미니맵-구현)
+>     - [미니맵 엔티티 감지 ('TargetSearch.cs')](#1-미니맵-구현)
+>     - [미니맵 추적 기능 ('FollowMiniMap.cs')](#1-미니맵-구현)
 >       <br><br>
 > - 🏫 [스테이지 선택지](#-스테이지-선택지)
->     - [맵 선택지 생성(MapManager.cs)](#1-mapmanagercs)
->     - [씬 전환(SceneController.cs)](#2-scenecontroller)
+>     - [맵 선택지 생성 (MapManager.cs)](#1-mapmanagercs)
+>     - [씬 전환 (SceneController.cs)](#2-scenecontroller)
 >     - [소스 초기화 (NodeController.cs)](#3-nodecontroller)
->     - [이벤트 맵(HealTrigger.cs/EventTrigger.cs)](#4-healtrigger--eventtrigger)
+>     - [이벤트 맵 (HealTrigger.cs/EventTrigger.cs)](#4-healtrigger--eventtrigger)
 >       <br><br>
 > - 🧠 [Enemy AI & Pathfinding System](#-enemy-ai--pathfinding-system)
 >   - 👾 [EnemyAI](#-enmeyai)
@@ -76,13 +76,13 @@ __탱크로 다시 태어난 나는 미궁을 방랑한다. 게임의 기술서_
 - Math.Clamp로 카메라 영역 제한
 <br>
 
-### 2. 플레이어 이동
+### 2. 플레이어 이동 ('Player.cs')
 Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다. 
 또한 ~~Mouse좌표~~ 쏠 공격 방향의 좌표와 플레이어의 좌표를 비교하여 플레이어의 방향이 바뀌도록 만들었습니다.
 - Input.GetAxisRaw로 좌표 이동
 <br>
 
-### 3. 플레이어 공격
+### 3. 플레이어 공격 ('WeaponController.cs')
 플레이어가 주변 적을 탐지하고 그 중 가장 가까운 상대방을 공격하게 만들었습니다.
 - Physics2D.OverlapCircle로 주변 Collider(trigger) 탐지
 - 탐지한 Collider까지의 거리를 비교 후 가장 짧은 거리 탐지
@@ -90,7 +90,7 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다.
 - WeaponController에서 일정 시간마다 공격
 <br>
 
-### 4. 플레이어 피격
+### 4. 플레이어 피격 ('Player.cs')
 화살을 맞을 시 플레이어가 피가 닳는 판정을 만들었습니다.
 - WeaponController에서 발사할 화살에게 공격력과 좌표를 부여.
 - 피격받는 대상이 OnTriggerEnter2D로 화살에 맞았는지 판정.
