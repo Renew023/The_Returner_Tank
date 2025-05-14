@@ -8,7 +8,7 @@ public class ChaseState : IEnemyState
 
     public void Enter(EnemyAI ai)
     {
-        Debug.Log("[FSM] Entered Chase State");
+        //Debug.Log("[FSM] Entered Chase State");
         timeSinceLastRandomMove = 0f;
     }
 
@@ -55,7 +55,7 @@ public class ChaseState : IEnemyState
 
     public void Exit(EnemyAI ai)
     {
-        Debug.Log("[FSM] Exit Chase State");
+        //Debug.Log("[FSM] Exit Chase State");
     }
 
     private bool CanSeePlayer(EnemyAI ai)

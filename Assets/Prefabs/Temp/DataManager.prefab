@@ -83,7 +83,7 @@ MonoBehaviour:
       skillExplain: "\uC544\uC774\uC2A4\uBCFC\uD2B8 \uBC1C\uC0AC\uCCB4 \uB51C\uB808\uC774
         \uAC10\uC18C"
       upgradeType: 9
-      value: -1
+      value: -0.5
     level: 0
     weaponCon: {fileID: 6955153868353512977, guid: 48a790f4f65a06243822563d7d255c62, type: 3}
   - name: "\uD30C\uC774\uC5B4\uBCFC\uD2B8"

@@ -5,18 +5,21 @@ public static class SceneController
 {
     private static string _lastSceneName;
     private const float MapReturnYOffset = 2f;
+    private static bool needResetMap = false;
 
     static SceneController()
     {
-        // ¾À ·Îµå Äİ¹é µî·Ï
+        // ì”¬ ë¡œë“œ ì½œë°± ë“±ë¡
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     public static void ToHeal()
     {
-        // ÁøÀÔ Á÷Àü ¾À ÀÌ¸§ ÀúÀå
+        // ì§„ì… ì§ì „ ì”¬ ì´ë¦„ ì €ì¥
         _lastSceneName = SceneManager.GetActiveScene().name;
+        GameManager.Instance.IncreaseDungeonLevel();
         SceneManager.LoadScene("Event_HealScene", LoadSceneMode.Single);
+
     }
 
     public static void ToBattle()
@@ -40,42 +43,44 @@ public static class SceneController
         SceneManager.LoadScene("MapScene", LoadSceneMode.Single);
     }
 
+    public static void ToFirstMap()
+    {
+        needResetMap = true;
+        SceneManager.LoadScene("MapScene");
+
+    }
+
     private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // --- Heal Event Scene ÁøÀÔ ½ÃÈú ½ºÆù ---
-        if (scene.name == "Event_HealScene")
-        {
-            var HealPrefab = Resources.Load<GameObject>("HealPrefab");
-            if (HealPrefab != null)
-            {
-                // ¿ùµå ÁÂÇ¥ (0,5,0)¿¡ ½ºÆù
-                UnityEngine.Object.Instantiate(
-                    HealPrefab,
-                    new Vector3(0f, 5f, 0f),
-                    Quaternion.identity
-                );
-            }
-        }
 
-        // --- Map Scene º¹±Í Ã³¸® ---
+        // --- Map Scene ë³µê·€ ì²˜ë¦¬ ---
         if (scene.name == "MapScene")
         {
-            if (MapManager.Instance != null)
-                MapManager.Instance.RestoreMap();
-
-            // ´øÀü/Èú ¡æ ¸Ê º¹±Í ½Ã Y ¿ÀÇÁ¼Â Àû¿ë
-            if (_lastSceneName.StartsWith("DungeonScene")
-             || _lastSceneName == "BossBattleScene"
-             || _lastSceneName == "Event_HealScene")
+            if (needResetMap == true)
             {
-                var cam = Camera.main;
-                if (cam != null)
+                MapManager.Instance.ResetMap();
+                needResetMap = false;
+            }
+            else
+            {
+                if (MapManager.Instance != null)
+                    MapManager.Instance.RestoreMap();
+
+                // ë˜ì „/í â†’ ë§µ ë³µê·€ ì‹œ ì¹´ë©”ë¼ ì„¤ì •
+                if (_lastSceneName.StartsWith("DungeonScene")
+                 || _lastSceneName == "BossBattleScene"
+                 || _lastSceneName == "Event_HealScene")
                 {
-                    var pos = cam.transform.position;
-                    pos.y += MapReturnYOffset;
-                    cam.transform.position = pos;
+                    var cam = Camera.main;
+                    if (cam != null)
+                    {
+                        var pos = cam.transform.position;
+                        pos.y += MapReturnYOffset;
+                        cam.transform.position = pos;
+                    }
                 }
             }
+
         }
     }
 }

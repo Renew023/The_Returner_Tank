@@ -168,11 +168,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bef084f305d4f4fb3fdc338f6adaeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
-  curHp: 0
-  moveSpeed: 0
+  maxHp: 400
+  curHp: 400
+  moveSpeed: 6
   lookDirection: {x: 0, y: 0}
-  attackDelay: 1
+  attackDelay: 0
   rb: {fileID: 4782994576953696752}
   attackTarget: {fileID: 4993777062533526271}
   camera: {fileID: 0}
@@ -186,7 +186,7 @@ MonoBehaviour:
       arrowValue: 0
       arrowSpeed: 0
       arrowDamage: 0
-      attackDelay: 1
+      attackDelay: 0
       timer: 0
     playerSkill: []
     weapons: []
@@ -531,7 +531,7 @@ PrefabInstance:
     - target: {fileID: 4211963293299848619, guid: cd253d7d6f7ffc847b2c852952c454dc, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 815d5a31f6cd5984eb088e68cecb8361, type: 3}
+      objectReference: {fileID: 21300000, guid: 8dbdd142ea849ac429a32e79f389f6a2, type: 3}
     - target: {fileID: 5966664223877803045, guid: cd253d7d6f7ffc847b2c852952c454dc, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

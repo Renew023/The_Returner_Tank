@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 
 public class MapManager : MonoBehaviour
 {
@@ -13,8 +15,9 @@ public class MapManager : MonoBehaviour
     [Header("Prefabs & Icons")]
     public NodeController nodePrefab;
     public Image dotPrefab;
-    public Sprite enemyIcon, healIcon, bossIcon;
+    public Sprite enemyIcon, healIcon, bossIcon, startIcon;
     public GameObject playerIndicatorPrefab;
+    public GameObject startNodePrefab;  // Start ë…¸ë“œ í”„ë¦¬íŒ¹
 
     [Header("Layout")]
     public RectTransform stageContainer;
@@ -27,7 +30,8 @@ public class MapManager : MonoBehaviour
     public byte activeAlpha = 255;
     public int dotSegments = 8;
 
-    // ÀúÀåµÈ ¸Ê µ¥ÀÌÅÍ¿Í »óÅÂ
+
+    // ì €ì¥ëœ ë§µ ë°ì´í„°ì™€ ìƒíƒœ
     static bool initialized = false;
     static List<List<NodeType>> mapData;
     List<List<NodeController>> mapNodes;
@@ -35,23 +39,21 @@ public class MapManager : MonoBehaviour
     int currentRow = 0, currentCol = 0;
 
     RectTransform playerIndicatorRt;
+    RectTransform startNodeRt;  // Start ë…¸ë“œ ìœ„ì¹˜ ì €ì¥
 
     private bool IsNodeReachable(int r, int c)
     {
         if (r <= currentRow) return false;
-
         string key = $"{currentRow},{currentCol}-{r},{c}";
         return connections.Contains(key);
     }
+
     void Awake()
     {
-        // ½Ì±ÛÅæ & DDOL
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-
-            // ¾À ·Îµå Äİ¹é µî·Ï
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else if (Instance != this)
@@ -63,24 +65,20 @@ public class MapManager : MonoBehaviour
 
     void Start()
     {
-        // ¸¸¾à Start°¡ MapScene¿¡¼­ È£ÃâµÈ´Ù¸é ¹Ù·Î ·»´õ
         if (SceneManager.GetActiveScene().name == "MapScene")
             InitializeOrRestoreMap();
     }
 
-    // ¾ÀÀÌ ¿ÏÀüÈ÷ ·ÎµåµÈ Á÷ÈÄ È£ÃâµË´Ï´Ù.
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "MapScene")
         {
-            
             var go = GameObject.Find("Canvas/StageContainer");
             if (go != null)
                 stageContainer = go.GetComponent<RectTransform>();
             else
-                Debug.LogError("MapManager: 'Canvas/StageContainer'¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+                Debug.LogError("MapManager: 'Canvas/StageContainer'ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
 
-            
             InitializeOrRestoreMap();
         }
     }
@@ -97,12 +95,12 @@ public class MapManager : MonoBehaviour
         RestoreMap();
     }
 
-
     void GenerateMapData()
     {
         mapData = new List<List<NodeType>>();
         var rnd = new System.Random();
-
+        // ì²«ì¬ì­ ìŠ¤íƒ€íŠ¸ ë…¸ë“œ
+        mapData.Add(new List<NodeType> { NodeType.Start });
         for (int r = 0; r < totalRows - 1; r++)
         {
             var rowList = new List<NodeType>();
@@ -110,41 +108,33 @@ public class MapManager : MonoBehaviour
                 rowList.Add(rnd.Next(10) < 8 ? NodeType.Enemy : NodeType.Heal);
             mapData.Add(rowList);
         }
-        // ¸¶Áö¸· ÁÙÀº º¸½º ÇÑ ¸¶¸®
+        // ë§ˆì§€ë§‰ ì¤„ì€ ë³´ìŠ¤ í•œ ë§ˆë¦¬
         mapData.Add(new List<NodeType> { NodeType.Boss });
     }
 
-
     void RenderMap()
     {
-        connections.Clear();
-        // ±âÁ¸ ³ëµå/Á¡¼± »èÁ¦
+        // ê¸°ì¡´ ë…¸ë“œ/ì ì„  ì‚­ì œ
         if (mapNodes != null)
         {
             foreach (var row in mapNodes)
-            {
                 foreach (var n in row)
-                {
                     if (n != null && n.gameObject != null)
                         Destroy(n.gameObject);
-                }    
-            }    
         }
         if (dotLines != null)
         {
             foreach (var d in dotLines)
-            {
                 if (d != null && d.gameObject != null)
                     Destroy(d.gameObject);
-            }
         }
 
-
-
+        connections.Clear();
         mapNodes = new List<List<NodeController>>();
         dotLines = new List<Image>();
+        startNodeRt = null;
 
-        // ³ëµå ¹èÄ¡
+        // ë…¸ë“œ ë°°ì¹˜
         for (int r = 0; r < mapData.Count; r++)
         {
             var rowList = new List<NodeController>();
@@ -152,27 +142,38 @@ public class MapManager : MonoBehaviour
             for (int c = 0; c < count; c++)
             {
                 var nc = Instantiate(nodePrefab, stageContainer);
-                // ¾ÆÀÌÄÜ ¼±ÅÃ
+                // í¬ê¸° ì¡°ì •: Start ë…¸ë“œë§Œ ì‘ê²Œ í‘œì‹œ
+                if (mapData[r][c] == NodeType.Start)
+                {
+                    var rtStart = nc.GetComponent<RectTransform>();
+                    // ì›í•˜ëŠ” í¬ê¸°ë¡œ ì„¤ì • (ì˜ˆ: ê°€ë¡œ 50, ì„¸ë¡œ 50)
+                    rtStart.sizeDelta = new Vector2(1f, 1f);
+                    // ì¶”ê°€: ìŠ¤ì¼€ì¼ ì¡°ì • ì‹œ í•„ìš”í•  ê²½ìš°
+                    nc.transform.localScale = new Vector3(0.07f, 0.07f, 0.07f);
+                    startNodeRt = rtStart;
+                }
+                // ì•„ì´ì½˜ ì„ íƒ
                 Sprite icon = mapData[r][c] switch
                 {
                     NodeType.Enemy => enemyIcon,
                     NodeType.Heal => healIcon,
+                    NodeType.Start => startIcon,
                     _ => bossIcon
                 };
                 nc.Init(r, c, mapData[r][c], this, icon, defaultAlpha);
 
-                // À§Ä¡ °è»ê
+                // ìœ„ì¹˜ ê³„ì‚°
                 float y = r * ySpacing + baseYOffset;
                 float x = (c - (count - 1) / 2f) * xSpacing;
-                nc.GetComponent<RectTransform>()
-                  .anchoredPosition = new Vector2(x, y);
+                nc.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
 
                 rowList.Add(nc);
             }
             mapNodes.Add(rowList);
         }
 
-        // Á¡¼± ¿¬°á
+
+        // ì ì„  ì—°ê²° ë¡œì§ ìœ ì§€
         for (int r = 0; r < mapNodes.Count - 1; r++)
         {
             var curr = mapNodes[r];
@@ -180,54 +181,31 @@ public class MapManager : MonoBehaviour
             for (int i = 0; i < curr.Count && i < next.Count; i++)
                 DrawDots(curr[i], next[i]);
         }
-        // º¸½º¿Í Á÷Àü Çà ¿¬°á
+        // start ë…¸ë“œì™€ ê·¸ ì´í›„ ë…¸ë“œë“¤ ì—°ê²°
+        if (mapNodes.Count > 1)
+        {
+            var startCtrl = mapNodes[0][0];      // ë§¨ ìœ„ì˜ ìŠ¤íƒ€íŠ¸ ë…¸ë“œ
+            var nextRow = mapNodes[1];        // ê·¸ ì•„ë˜ í–‰
+            int[] branches = { 0, nextRow.Count / 2, nextRow.Count - 1 };
+            foreach (var idx in branches)
+                DrawDots(startCtrl, nextRow[idx]);
+        }
+        // boss ë…¸ë“œì™€ ê·¸ ì „ ë…¸ë“œë“¤ ì—°ê²°
         var bossCtrl = mapNodes[^1][0];
         foreach (var prev in mapNodes[^2])
             DrawDots(prev, bossCtrl);
 
-        // ´ë°¢¼± ¿¬°á
-        var rnd = new System.Random();
-        int maxStart = 0;
-        for (int rr = 0; rr < mapNodes.Count - 1; rr++)
-            maxStart += mapNodes[rr].Count;
-
-        int branchCount = Mathf.Min(rnd.Next(3, 7), maxStart);
-        var diagSet = new HashSet<string>();
-
-        while (diagSet.Count < branchCount)
-        {
-            int r = rnd.Next(0, mapNodes.Count - 1);
-            int cnt = mapNodes[r].Count;
-            int c = rnd.Next(0, cnt);
-
-            int nextCnt = mapNodes[r + 1].Count;
-            var candidates = new List<int>
-            {
-                Mathf.Clamp(c, 0, nextCnt - 1)
-            };
-            if (c > 0 && c - 1 < nextCnt) candidates.Add(c - 1);
-            if (c + 1 < nextCnt) candidates.Add(c + 1);
-
-            candidates = candidates.Distinct().ToList();
-            int destC = candidates[rnd.Next(candidates.Count)];
-
-            string key = $"{r},{c}-{r + 1},{destC}";
-            if (diagSet.Add(key))
-            {
-                DrawDots(mapNodes[r][c], mapNodes[r + 1][destC]);
-            }
-        }
-
-        // ÇÃ·¹ÀÌ¾î ÀÎµğÄÉÀÌÅÍ »ı¼º À§Ä¡ ¼³Á¤
+        // í”Œë ˆì´ì–´ ì¸ë””ì¼€ì´í„° ìƒì„± 
         var pi = Instantiate(playerIndicatorPrefab, stageContainer);
         playerIndicatorRt = pi.GetComponent<RectTransform>();
-        playerIndicatorRt.anchoredPosition =
-            mapNodes[currentRow][currentCol]
-                .GetComponent<RectTransform>().anchoredPosition;
 
-        // ¾ËÆÄ °ª ÃÊ±âÈ­
         UpdateAlphas();
-        FindObjectOfType<MapFollowCamera>().target = playerIndicatorRt;
+
+
+        var camFollow = FindObjectOfType<MapFollowCamera>();
+        if (camFollow != null)
+            camFollow.target = playerIndicatorRt;
+
     }
 
     void DrawDots(NodeController a, NodeController b)
@@ -242,83 +220,90 @@ public class MapManager : MonoBehaviour
             dot.rectTransform.anchoredPosition = pos;
             dotLines.Add(dot);
         }
-        string key1 = $"{a.Row},{a.Col}-{b.Row},{b.Col}";
-        string key2 = $"{b.Row},{b.Col}-{a.Row},{a.Col}";
-        connections.Add(key1);
-        connections.Add(key2);
+        connections.Add($"{a.Row},{a.Col}-{b.Row},{b.Col}");
+        connections.Add($"{b.Row},{b.Col}-{a.Row},{a.Col}");
     }
+
 
     void UpdateAlphas()
     {
         if (mapNodes == null) return;
         for (int r = 0; r < mapNodes.Count; r++)
-        {
-            var row = mapNodes[r];
-            if (row == null) continue;
-            for (int c = 0; c < row.Count; c++)
-                row[c]?.SetAlpha((r == currentRow) ? activeAlpha : defaultAlpha);
-        }
+            for (int c = 0; c < mapNodes[r].Count; c++)
+                mapNodes[r][c]?.SetAlpha((r == currentRow) ? activeAlpha : defaultAlpha);
     }
 
-    /// <summary>
-    /// ³ëµå Å¬¸¯ ½Ã Scene ÀüÈ¯ Àü È£ÃâµË´Ï´Ù.
-    /// </summary>
     public void OnNodeClicked(int r, int c, NodeType t)
     {
-        // ÀÌµ¿ °¡´É ¿©ºÎ ÆÄ¾Ç
-        if (!IsNodeReachable(r, c))
-        {
-            Debug.Log("ÀÌµ¿ ºÒ°¡ÇÑ ³ëµå");
-            return;
-        }
-        // 1) »óÅÂ ÀúÀå
-        currentRow = r;
-        currentCol = c;
-
-        // 2) ¾ËÆÄ ¾÷µ¥ÀÌÆ®
+        if (!IsNodeReachable(r, c)) { Debug.Log("ì´ë™ ë¶ˆê°€í•œ ë…¸ë“œ"); return; }
+        currentRow = r; currentCol = c;
         UpdateAlphas();
-
-        // 3) ÀÎµğÄÉÀÌÅÍ À§Ä¡ °»½Å
-        playerIndicatorRt.anchoredPosition =
-            mapNodes[r][c]
-                .GetComponent<RectTransform>().anchoredPosition;
-
-        // 4) ¾À ÀüÈ¯
-        if (t == NodeType.Enemy)
+        playerIndicatorRt.anchoredPosition = mapNodes[r][c]
+            .GetComponent<RectTransform>().anchoredPosition;
+        switch (t)
         {
-            //  ´øÀü Á¤º¸ ¼³Á¤
-            GameManager.Instance.SetStageInfo(r, StageType.NormalBattle, GameManager.Instance.dungeonLevel);
-            //  ÀüÅõ ¾ÀÀ¸·Î ÀÌµ¿
-            SceneController.ToBattle();
+            case NodeType.Enemy:
+                GameManager.Instance.SetStageInfo(r, StageType.NormalBattle, GameManager.Instance.dungeonLevel);
+                SceneController.ToBattle();
+                break;
+            case NodeType.Boss:
+                GameManager.Instance.SetStageInfo(r, StageType.BossBattle, GameManager.Instance.dungeonLevel);
+                SceneController.ToBoss();
+                break;
+            case NodeType.Heal:
+                SceneController.ToHeal();
+                break;
         }
-        else if (t == NodeType.Boss)
-        {
-            GameManager.Instance.SetStageInfo(r, StageType.NormalBattle, GameManager.Instance.dungeonLevel);
-            SceneController.ToBoss();
-        }
-        else
-            SceneController.ToHeal();
     }
 
     public void RestoreMap()
     {
-        if (mapNodes == null || playerIndicatorRt == null)
-            return;
+        if (mapNodes == null || playerIndicatorRt == null) return;
         UpdateAlphas();
-
-        var targetNode = mapNodes[currentRow][currentCol];
-        if (targetNode != null)
-        {
-            playerIndicatorRt.anchoredPosition =
-                targetNode.GetComponent<RectTransform>().anchoredPosition;
-        }
-
+        playerIndicatorRt.anchoredPosition = mapNodes[currentRow][currentCol]
+            .GetComponent<RectTransform>().anchoredPosition;
     }
 
     void OnDestroy()
     {
-        // Editor ¶Ç´Â ÇÃ·¹ÀÌ¾î Á¾·á ½Ã Äİ¹é ÇØÁ¦
         if (Instance == this)
             SceneManager.sceneLoaded -= OnSceneLoaded;
     }
+
+    // MapScene ì´ˆê¸°í™”
+    public void ResetMap()
+    {
+        // 0) ì´ˆê¸°í™” í”Œë˜ê·¸ë„ ë¦¬ì…‹
+        initialized = false;
+
+        // 1) ê¸°ì¡´ ë…¸ë“œ/ì ì„ /ì¸ë””ì¼€ì´í„° ëª¨ë‘ íŒŒê´´
+        if (mapNodes != null)
+        {
+            foreach (var row in mapNodes)
+                foreach (var nc in row)
+                    if (nc != null) Destroy(nc.gameObject);
+            mapNodes.Clear();
+        }
+        if (dotLines != null)
+        {
+            foreach (var d in dotLines)
+                if (d != null) Destroy(d.gameObject);
+            dotLines.Clear();
+        }
+        connections.Clear();
+        if (playerIndicatorRt != null)
+            Destroy(playerIndicatorRt.gameObject);
+        playerIndicatorRt = null;
+
+        // 2) ë§µ ë°ì´í„°ì™€ ë Œë”ë§ ì¬ì‹¤í–‰
+        GenerateMapData();
+        RenderMap();
+
+        // 3) í”Œë ˆì´ì–´ ì¸ë””ì¼€ì´í„° ìœ„ì¹˜ ì´ˆê¸°í™”
+        currentRow = 0;
+        currentCol = 0;
+        RestoreMap();
+    }
+
+
 }

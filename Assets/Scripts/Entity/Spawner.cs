@@ -9,12 +9,12 @@ public class Spawner : MonoBehaviour
 
     [Header ("Spawn Points")]
     public Transform[] spawnPoint;
-    public float spawnDelay = 1.0f;
+    public float spawnDelay;
 
-    [Header ("Wave ¼³Á¤")]
+    [Header ("Wave ì„¤ì •")]
     public List<WaveSpawnEntry> waveSpawnEntries;
 
-    //  µñ¼Å³Ê¸® ÀÚ·áÇüÀ» È°¿ëÇÑ ·¹º§¿¡ µû¸¥ WaveSpawnData ÁöÁ¤ º¯¼ö.
+    //  ë”•ì…”ë„ˆë¦¬ ìë£Œí˜•ì„ í™œìš©í•œ ë ˆë²¨ì— ë”°ë¥¸ WaveSpawnData ì§€ì • ë³€ìˆ˜.
     private Dictionary<(int wave, int dungeonLevel), WaveSpawnData> spawnDataDict;
 
     public int testWave = 1;
@@ -52,28 +52,35 @@ public class Spawner : MonoBehaviour
 
             else
             {
-                Debug.LogWarning($"[Spawner] Áßº¹µÈ Key : wave {key.wave}, level {key.dungeonLevel}");
+                Debug.LogWarning($"[Spawner] ì¤‘ë³µëœ Key : wave {key.wave}, level {key.dungeonLevel}");
             }
         }
     }
 
-    //  ÇöÀç ¿şÀÌºê¿¡ ¸Â´Â ¸ó½ºÅÍµéÀ» ¹«ÀÛÀ§·Î ½ºÆùÇÏ´Â ¸Ş¼­µå
+    //  í˜„ì¬ ì›¨ì´ë¸Œì— ë§ëŠ” ëª¬ìŠ¤í„°ë“¤ì„ ë¬´ì‘ìœ„ë¡œ ìŠ¤í°í•˜ëŠ” ë©”ì„œë“œ
     public void SpawnFixedWave()
     {
-        //  Å×½ºÆ®¿ëÀ¸·Î »ç¿ëÇÒ ¿şÀÌºê¸¦ »ç¿ëÇÒ°ÇÁö Ã¼Å©
-        int wave = useTestWave ? testWave : DungeonManager.instance.currentWave;
+        // ì›¨ì´ë¸Œ ì‹œì‘ ì „ì— 'aliveEnemies'ê°€ 0ì´ ì•„ë‹ˆë©´ ë” ì´ìƒ ìŠ¤í°í•˜ì§€ ì•ŠìŒ
+        if (DungeonManager.instance.GetAliveEnemies() > 0)
+        {
+            Debug.LogWarning("ì›¨ì´ë¸Œê°€ ëë‚˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤. ì ë“¤ì´ ëª¨ë‘ ì‚¬ë¼ì§ˆ ë•Œê¹Œì§€ ê¸°ë‹¤ë ¤ì£¼ì„¸ìš”.");
+            return;
+        }
 
-        //  ÇöÀç ¼³Á¤µÈ ´øÀü ·¹º§ °¡Á®¿À±â
+        int wave = useTestWave ? testWave : DungeonManager.instance.currentWave;
         int dungeonLevel = GameManager.Instance.dungeonLevel;
 
-        if(!spawnDataDict.TryGetValue((wave, dungeonLevel), out var data))
+        if (!spawnDataDict.TryGetValue((wave, dungeonLevel), out var data))
         {
-            Debug.LogWarning($"[Spawner] wave {wave}, level {dungeonLevel}¿¡ ¸Â´Â µ¥ÀÌÅÍ°¡ ¾ø½À´Ï´Ù");
+            Debug.LogWarning($"[Spawner] wave {wave}, level {dungeonLevel}ì— ë§ëŠ” ë°ì´í„°ê°€ ì—†ìŠµë‹ˆë‹¤");
             return;
         }
 
         int spawnCount = Mathf.Min(spawnPoint.Length, data.baseEnemyCount + dungeonLevel);
-        DungeonManager.instance.StartWave(spawnCount);
+        //int spawnCount = Mathf.Min(spawnPoint.Length, data.baseEnemyCount);
+
+        //  ì‹¤ì œë¡œ ì„±ê³µì ìœ¼ë¡œ ìƒì„±ë˜ëŠ” ì ì˜ ìˆ˜ë¥¼ ì„¸ê¸° ìœ„í•œ ë³€ìˆ˜ ì¶”ê°€
+        int realSpawned = 0;
 
         for (int i = 0; i < spawnCount; i++)
         {
@@ -81,17 +88,20 @@ public class Spawner : MonoBehaviour
 
             GameObject enemy = DungeonManager.instance.pools.CreateEnemies(index);
 
-            if(enemy != null)
+            if (enemy != null)
             {
-                enemy.transform.position = spawnPoint[i].position; 
+                enemy.transform.position = spawnPoint[i].position;
+                realSpawned++;
             }
         }
 
-        if(useTestWave)
+        //  ì„±ê³µì ìœ¼ë¡œ ìƒì„±ë˜ëŠ” ì ë“¤ë§Œ ì„¤ì •í•˜ì—¬ ì†Œí™˜
+        DungeonManager.instance.StartWave(realSpawned);
+
+        if (useTestWave)
         {
             DungeonManager.instance.currentWave = testWave;
         }
-
     }
 }
 

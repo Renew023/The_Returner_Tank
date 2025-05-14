@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Monster : Character
 {
+	
+
 	[SerializeField] private Transform expParent;
 	[SerializeField] private int exp;
 	[SerializeField] private GameObject expPrefab;
@@ -12,11 +14,23 @@ public class Monster : Character
 	[SerializeField] private WeaponController weaponController;
     [SerializeField] private Image hpBarFill;
     [SerializeField] private Transform monsterTransform;
+
+    [Header("Sound Effects")]
+    public AudioClip damageClip;           // 인스펙터에 할당할 피격 사운드
+    public AudioClip DeathClip;
+    private AudioSource audioSource;       // AudioSource 캐시
+
+
     protected Animator animator;
+
+	private bool isDead = false;
 
 	void Awake()
 	{
-		target = GameObject.FindObjectOfType<Player>();
+		//효과음 넣기
+        audioSource = GetComponent<AudioSource>();
+
+        target = GameObject.FindObjectOfType<Player>();
 
 		animator = GetComponentInChildren<Animator>();
 	}
@@ -73,7 +87,7 @@ public class Monster : Character
 		if (collision.gameObject.CompareTag("Arrow"))
 		{
 			Arrow arrow = collision.gameObject.GetComponent<Arrow>();
-			if (arrow.owner == this.gameObject)
+			if (arrow.owner.CompareTag("Monster"))
 				return;
 
 			//Hit(ref curHp, arrow.damage);
@@ -84,6 +98,14 @@ public class Monster : Character
 
     public void TakeDamage(float damage)
     {
+        //효과음
+        if (damageClip != null)
+		{
+            var listenerPos = Camera.main.transform.position;
+            AudioSource.PlayClipAtPoint(damageClip, transform.position,1.0f);
+        }
+            
+
         curHp -= damage;
 
         animator.SetBool("IsDamage", true);
@@ -104,6 +126,21 @@ public class Monster : Character
 
     void Death()
 	{
+        //효과음
+        if (DeathClip != null)
+		{
+            var listenerPos = Camera.main.transform.position;
+            AudioSource.PlayClipAtPoint(DeathClip, transform.position,1.0f);
+        }
+
+        //	중복 호출을 방지!
+        if (isDead)
+		{
+			return;
+		}
+
+		isDead = true;
+
 		gameObject.SetActive(false);
 
 		//	�ش� ���Ͱ� �����ִ� ���� �� ����.
@@ -119,6 +156,7 @@ public class Monster : Character
 	void OnEnable()
 	{
 		hpBarFill.fillAmount = curHp / maxHp;
+		expParent = GameObject.Find("ExpObjects")?.transform;
 	}
 	
 	void OnDisable()
@@ -145,8 +183,6 @@ public class Monster : Character
 	{
 		Vector2 randomOffset = Random.insideUnitCircle * 0.5f;
 		Vector3 spawnPos = transform.position + (Vector3)randomOffset;
-		
-		expParent = GameObject.Find("ExpObjects")?.transform;
 
 		GameObject obj = Instantiate(expPrefab, spawnPos, Quaternion.identity, expParent);
     
@@ -155,5 +191,28 @@ public class Monster : Character
 		{
 			expObj.expAmount = amount;
 		}
+	}
+
+	public void ResetEnemy()
+	{
+        curHp = maxHp;
+
+		//	초기화
+		isDead = false;
+
+        Debug.Log($"[ResetEnemy] {name}, curHp: {curHp}");
+
+		if(hpBarFill != null)
+		{
+			hpBarFill.fillAmount = 1f;
+		}
+
+		if(animator != null)
+		{
+			animator.SetBool("IsDamage", false);
+			animator.SetBool("IsMove", false);
+		}
+
+		gameObject.SetActive(true);
 	}
 }

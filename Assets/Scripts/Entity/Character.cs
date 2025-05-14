@@ -5,9 +5,9 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
 	/*
-     * ÇÃ·¹ÀÌ¾î°¡ °¡Áö°í ÀÖ¾î¾ßµÇ´Â ¹«±â°ª : µô·¹ÀÌ
-     * ¹«±â¿¡ Àü´ÞÇØ¾ßµÇ´Â °ª : ¹ß»çÃ¼ °³¼ö, ¹ß»çÇÒ À§Ä¡, ¹ß»ç ¼Óµµ, µ¥¹ÌÁö
-     * ¹ß»çÃ¼°¡ °¡Áö°í ÀÖ¾î¾ßÇÏ´Â °ª : µ¥¹ÌÁö, 
+     * í”Œë ˆì´ì–´ê°€ ê°€ì§€ê³  ìžˆì–´ì•¼ë˜ëŠ” ë¬´ê¸°ê°’ : ë”œë ˆì´
+     * ë¬´ê¸°ì— ì „ë‹¬í•´ì•¼ë˜ëŠ” ê°’ : ë°œì‚¬ì²´ ê°œìˆ˜, ë°œì‚¬í•  ìœ„ì¹˜, ë°œì‚¬ ì†ë„, ë°ë¯¸ì§€
+     * ë°œì‚¬ì²´ê°€ ê°€ì§€ê³  ìžˆì–´ì•¼í•˜ëŠ” ê°’ : ë°ë¯¸ì§€, 
      */
 
 	[SerializeField] protected float maxHp;
@@ -15,7 +15,7 @@ public class Character : MonoBehaviour
 	[SerializeField] protected float moveSpeed;
 	protected Vector2 isLeft;
 
-	//	¿ÜºÎ¿¡¼­ ÀÐ°í ¾²±â À§ÇÑ ÇÔ¼ö Ãß°¡
+	//	ì™¸ë¶€ì—ì„œ ì½ê³  ì“°ê¸° ìœ„í•œ í•¨ìˆ˜ ì¶”ê°€
 	public float CurHP
 	{
 		get => curHp;
@@ -38,7 +38,6 @@ public class Character : MonoBehaviour
     {
 		//maxHp = 100;
 		curHp = maxHp;
-		//moveSpeed = 10;
 		isLeft = Vector3.zero;
 
 		lookDirection = Vector3.up;

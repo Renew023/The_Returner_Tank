@@ -5,10 +5,10 @@ public class HealSpawner : MonoBehaviour
 {
     public static HealSpawner Instance { get; private set; }
 
-    [Header("È÷ÀÏ ÇÁ¸®ÆÕ")]
+    [Header("íˆì¼ í”„ë¦¬íŒ¹")]
     public GameObject HealPrefab;
 
-    [Header("½ºÆù À§Ä¡")]
+    [Header("ìŠ¤í° ìœ„ì¹˜")]
     public Vector3 spawnPosition = new Vector3(0f, 5f, 0f);
 
     void Awake()
@@ -22,6 +22,17 @@ public class HealSpawner : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+
+        var HealPrefab = Resources.Load<GameObject>("HealPrefab");
+        if (HealPrefab != null)
+        {
+            // ì›”ë“œ ì¢Œí‘œ (0,5,0)ì— ìŠ¤í°
+            UnityEngine.Object.Instantiate(
+                HealPrefab,
+                new Vector3(0f, 5f, 0f),
+                Quaternion.identity
+            );
         }
     }
 
@@ -41,10 +52,10 @@ public class HealSpawner : MonoBehaviour
     {
         if (HealPrefab == null)
         {
-            Debug.LogError("HealSpawner: healPrefab ÀÌ ÇÒ´çµÇÁö ¾Ê¾Ò½À´Ï´Ù!");
+            Debug.LogError("HealSpawner: healPrefab ì´ í• ë‹¹ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤!");
             return;
         }
-        // È¤½Ã ³²Àº ÈúÀÌ ÀÖÀ¸¸é »èÁ¦
+        // í˜¹ì‹œ ë‚¨ì€ íì´ ìˆìœ¼ë©´ ì‚­ì œ
         var old = GameObject.FindWithTag("Heal");
         if (old != null) Destroy(old);
 

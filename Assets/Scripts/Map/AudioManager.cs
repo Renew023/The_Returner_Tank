@@ -12,6 +12,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip bossBgm;
     public AudioClip healBgm;
 
+    [Header("SFX Source")]
+    public AudioSource sfxSource;
+
     AudioSource _src;
 
     void Awake()
@@ -25,6 +28,13 @@ public class AudioManager : MonoBehaviour
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else Destroy(gameObject);
+    }
+
+    public void PlaySFX(AudioClip clip, float volume = 1f)
+    {
+        if (clip == null || sfxSource == null) return;
+        sfxSource.spatialBlend = 0f;   // 2D
+        sfxSource.PlayOneShot(clip, volume);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)

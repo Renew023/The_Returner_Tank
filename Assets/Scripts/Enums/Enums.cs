@@ -4,8 +4,8 @@ using UnityEngine;
 
 public enum StageType
 {
-    NormalBattle,       //  ÀÏ¹İ ÀüÅõ ½ºÅ×ÀÌÁö
-    BossBattle,          //  º¸½º ÀüÅõ ½ºÅ×ÀÌÁö
+    NormalBattle,       //  ì¼ë°˜ ì „íˆ¬ ìŠ¤í…Œì´ì§€
+    BossBattle,          //  ë³´ìŠ¤ ì „íˆ¬ ìŠ¤í…Œì´ì§€
     Rest
 }
 
