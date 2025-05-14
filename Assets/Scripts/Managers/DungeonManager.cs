@@ -41,6 +41,11 @@ public class DungeonManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        UIManager.Instance.uiController.SetDungeonUI(true);
+    }
+
     private void OnDisable()
     {
         UIManager.Instance.uiController.SetDungeonUI(false);
@@ -57,40 +62,6 @@ public class DungeonManager : MonoBehaviour
         //  DungeonManager���� ���� ���̺긦 �����Ѵ�!!
         currentWave = 1;
         string sceneName = SceneManager.GetActiveScene().name;
-
-        if ((sceneName.StartsWith("DungeonScene")
-             || sceneName == "BossBattleScene")
-            && Spawner.instance != null)
-        {
-            Spawner.instance.SpawnFixedWave();
-        }
-        StartCoroutine(InitializeAfterUIReady());
-    }
-
-    private IEnumerator InitializeAfterUIReady()
-    {
-
-        yield return null; // 한 프레임 기다림 (UIController의 OnEnable()이 먼저 실행되도록)
-
-        if (UIManager.Instance.uiController != null)
-        {
-            UIManager.Instance.uiController.SetDungeonUI(true);
-            //uiController.SetDungeonUI(true);
-        }
-        else
-        {
-            Debug.LogWarning("UIController가 아직 초기화되지 않았습니다.");
-        }
-        // 이벤트씬일 경우 제외
-        string scene = SceneManager.GetActiveScene().name;
-        if (scene == "EventScene" || scene == "Event_HealScene")
-        {
-            yield break;
-        }
-        if (Spawner.instance != null)
-        {
-            Spawner.instance.SpawnFixedWave();
-        }
 
         Spawner.instance.SpawnFixedWave();
     }
