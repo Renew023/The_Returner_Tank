@@ -26,6 +26,7 @@
     - target을 지정하여 카메라가 추적
     - Math.Clamp로 카메라 영역 제한
 <details>
+    
 ![Movie_011](https://github.com/user-attachments/assets/45283051-18e3-4023-985c-c1a4aa06c7eb)
 </details>
 
