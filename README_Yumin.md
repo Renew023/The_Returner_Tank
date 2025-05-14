@@ -26,7 +26,7 @@
     - Math.Clamp로 카메라 영역 제한
 ![Movie_011](https://github.com/user-attachments/assets/45283051-18e3-4023-985c-c1a4aa06c7eb)
 
-
+***
 ### 플레이어 이동
 Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다. 
 또한 ~~Mouse좌표~~ 쏠 공격 방향의 좌표와 플레이어의 좌표를 비교하여 플레이어의 방향이 바뀌도록 만들었습니다.
@@ -36,7 +36,7 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다.
     - Input.GetAxisRaw로 좌표 이동
 ![Movie_005](https://github.com/user-attachments/assets/61e5e975-203e-413f-b014-088467dc1412)
 
-
+***
 ### 플레이어 공격
 플레이어가 주변 적을 탐지하고 그 중 가장 가까운 상대방을 공격하게 만들었습니다.
 
@@ -48,6 +48,7 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다.
     - WeaponController에서 일정 시간마다 공격 
 ![Movie_006](https://github.com/user-attachments/assets/7dcd25ca-bb57-4bb3-9f39-f0cb3df013dd)
 
+***
 ### 플레이어 피격
 화살을 맞을 시 플레이어가 피가 닳는 판정을 만들었습니다.
 
