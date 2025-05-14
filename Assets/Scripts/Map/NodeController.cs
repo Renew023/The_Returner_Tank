@@ -13,6 +13,7 @@ public class NodeController : MonoBehaviour
     public Vector2 healSize = new Vector2(80, 80);
     public Vector2 bossSize = new Vector2(120, 120);
     public Vector2 startSize = new Vector2(64, 64);
+    public Vector2 eventSize = new Vector2(64, 64);
 
     private Vector3 originalScale;
 
@@ -59,6 +60,9 @@ public class NodeController : MonoBehaviour
                 break;
             case NodeType.Start:
                 rt.sizeDelta = startSize;
+                break;
+            case NodeType.Event:
+                rt.sizeDelta = eventSize;
                 break;
         }
 
