@@ -4504,7 +4504,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 088119be9bf51b240b29021bafa11f00, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 053df3f3d7dc64d4f8b903497c1dcd5e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5762,18 +5762,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1018062645414764747, guid: 6523050c8de5f8e4b8ecf4c7f0dacc4a, type: 3}
-  InitPlayer:
-    playerWeaponStat:
-      name: 
-      arrowValue: 0
-      arrowSpeed: 0
-      arrowDamage: 0
-      attackDelay: 0
-      timer: 0
-    playerSkill: []
-    weapons: []
-    Exp: 0
-    Level: 0
   playerValue:
     playerWeaponStat:
       name: 
