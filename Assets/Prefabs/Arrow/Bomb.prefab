@@ -113,7 +113,7 @@ MonoBehaviour:
   countReturn: {fileID: 0}
   rb: {fileID: -2232580069837577341}
   damage: 20
-  direction: {x: 0.8715575, y: 9.961947}
+  direction: {x: -3.37852, y: 9.411992}
   time: 2
 --- !u!1 &3452571917277408812
 GameObject:
