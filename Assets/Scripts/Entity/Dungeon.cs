@@ -27,6 +27,7 @@ public class Dungeon : MonoBehaviour
     //  오브젝트 풀링을 활용한 몬스터 생성 메서드
     public GameObject CreateEnemies(int index)
     {
+        //  [예외 처리] 인덱스가 범위를 벗어날 경우, 에러 로그 출력 후 null 값 반환
         if (index < 0 || index >= Enemies.Length)
         {
             Debug.LogError($"[CreateEnemies] 잘못된 인덱스 접근: {index}");
@@ -35,6 +36,7 @@ public class Dungeon : MonoBehaviour
 
         GameObject selectObject = null;
 
+        //  오브젝트 풀에서 비활성화된 몬스터 오브젝트가 있는지 탐색
         foreach (GameObject obj in pools[index])
         {
             if (!obj.activeSelf)
@@ -44,6 +46,7 @@ public class Dungeon : MonoBehaviour
             }
         }
 
+        //  재사용 가능한 오브젝트가 없을 경우, 새로 인스턴스화하여 풀에 추가
         if (!selectObject)
         {
             selectObject = Instantiate(Enemies[index], transform);
@@ -51,17 +54,18 @@ public class Dungeon : MonoBehaviour
             Debug.Log("[Dungeon CreateEnemies] 몬스터 스폰 성공");
         }
 
-        // 초기화
+        // 몬스터 초기화 진행!
         Monster enemyComponent = selectObject.GetComponent<Monster>();
 
         if (enemyComponent != null)
         {
+            //  몬스터 상태 초기화 
             enemyComponent.ResetEnemy();
         }
 
         else
         {
-            // 기본 활성화만 처리 (예외적으로)
+            // 예외적으로 Monster 컴포넌트가 없을 경우, 기본적으로 활성화만 진행시킨다.
             Debug.Log($"[Dungeon CreateEnemies enemyComponent가 null값일 때]");
             selectObject.SetActive(true);
         }

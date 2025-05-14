@@ -12,17 +12,19 @@ public class DungeonManager : MonoBehaviour
     [SerializeField] private WaveMessageUI waveMessageUI;
     public static DungeonManager instance;
 
-    //  ���� ���̺� ������
+    //  현재 웨이브 번호
     public int currentWave = 1;
+    
+    //  최대 웨이브 수
     public int maxWave;
 
-    //  ���̺� �� ���� ����ִ� ������ �� ������
+    //  현재 웨이브에서 살아있는 적의 수
     private int aliveEnemies = 0;
 
-    //  ���̺갡 ���� ������ �����ϱ� ���� ����
+    //  현재 웨이브가 진행 중인지 여부 체크용 변수
     private bool isWaveInProgress = false;
 
-    public Dungeon pools;           //  ������Ʈ Ǯ�� �Ŵ���
+    public Dungeon pools;           
 
     private void Awake()
     {
@@ -53,9 +55,9 @@ public class DungeonManager : MonoBehaviour
 
     private void Start()
     {
-        //  DungeonManager���� ���� ���̺긦 �����Ѵ�!!
         currentWave = 1;
-
+        
+        //  던전 씬에서 첫번째 웨이브 스폰 
         Spawner.instance.SpawnFixedWave();
 
         StartCoroutine(InitializeAfterUIReady());
@@ -78,10 +80,9 @@ public class DungeonManager : MonoBehaviour
         Spawner.instance.SpawnFixedWave();
     }
 
-    //  ���� ���̺� ���� �� ���� �� ���� �޼���
+    //  웨이브 시작 시 호출, 살아있는 적의 수를 설정하는 메서드
     public void StartWave(int count)
     {
-        //aliveEnemies += count;
         aliveEnemies = count;
         isWaveInProgress = true;
 
@@ -94,12 +95,13 @@ public class DungeonManager : MonoBehaviour
         Debug.Log($"[현재 웨이브: {currentWave}]의 몬스터 수: {count} 스폰!");
     }
 
+    //  몬스터 사망 시 호출, 웨이브 종료 조건을 확인하는 메서드
     public void OnEnemyDeath()
     {
         aliveEnemies--;
         Debug.Log($"[OnEnemyDeath] 몬스터 처치됨 - 남은 몬스터: {aliveEnemies}");
 
-        // 웨이브 진행 중이고, 살아있는 적이 없으면 웨이브 종료
+        //  웨이브 내 모든 적이 처치될 경우, 다음 웨이브 혹은 던전 클리어 처리
         if (isWaveInProgress && aliveEnemies <= 0)
         {
             isWaveInProgress = false;
@@ -122,6 +124,7 @@ public class DungeonManager : MonoBehaviour
         }
     }
 
+    //  던전 클리어 처리 메서드 → 씬 내 플레이어가 직접적으로 먹지 않은 경험치들을 자동 흡수, 플레이어 상태 저장 및 다음 스테이지로 이동
     void ClearDungeon()
     {
         Debug.Log($"[DungeonManager] 던전 클리어!");

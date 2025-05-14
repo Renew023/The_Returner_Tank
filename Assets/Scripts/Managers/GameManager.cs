@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // ½Ì±ÛÅæ ÀÎ½ºÅÏ½º
+    // ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤
     public static GameManager Instance { get; private set; }
 
     [Header("Map Entry Flag")]
@@ -14,19 +14,19 @@ public class GameManager : MonoBehaviour
     public void DisableFirstMapEntry() => firstMapEntry = false;
 
     [Header("Stage Info")]
-    //  ½ºÅ×ÀÌÁö ÀÎµ¦½º Ãß°¡
+    //  ìŠ¤í…Œì´ì§€ ì¸ë±ìŠ¤ ì¶”ê°€
     public int stageIndex;
-    // ÇöÀç ÇÃ·¹ÀÌ¾î°¡ À§Ä¡ÇÑ ½ºÅ×ÀÌÁö ÀÎµ¦½º 
+    // í˜„ì¬ í”Œë ˆì´ì–´ê°€ ìœ„ì¹˜í•œ ìŠ¤í…Œì´ì§€ ì¸ë±ìŠ¤ 
     public int currentStageIndex;
-    // ÇöÀç ½ºÅ×ÀÌÁö Å¸ÀÔ (Enemy / Heal / Boss)
+    // í˜„ì¬ ìŠ¤í…Œì´ì§€ íƒ€ì… (Enemy / Heal / Boss)
     public StageType currentStageType;
-    //  ´øÀü ³­ÀÌµµ (½ºÅ×ÀÌÁö º° ¼³Á¤ °ª)
+    //  ë˜ì „ ë‚œì´ë„ (ìŠ¤í…Œì´ì§€ ë³„ ì„¤ì • ê°’)
     public int dungeonLevel = 1;
     
 
     private void Awake()
     {
-        // ÀÌ¹Ì ÀÎ½ºÅÏ½º°¡ ÀÖÀ¸¸é Áßº¹ ÆÄ±«
+        // ì´ë¯¸ ì¸ìŠ¤í„´ìŠ¤ê°€ ìˆìœ¼ë©´ ì¤‘ë³µ íŒŒê´´
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -37,20 +37,20 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    //  ½ºÅ×ÀÌÁö Á¤º¸ ÃÊ±âÈ­¿ë ¸Ş¼­µå ¡æ ½ºÅ×ÀÌÁö ¼±ÅÃ ½Ã »ç¿ëÇÑ´Ù.
+    //  ìŠ¤í…Œì´ì§€ ì •ë³´ ì´ˆê¸°í™”ìš© ë©”ì„œë“œ â†’ ìŠ¤í…Œì´ì§€ ì„ íƒì§€ì—ì„œ ë˜ì „ ìŠ¤í…Œì´ì§€ë¥¼ ì„ íƒ, ì”¬ ì…ì¥ê³¼ ë™ì‹œì— í•´ë‹¹ ë©”ì„œë“œì˜ ê°’ë“¤ë¡œ ìŠ¤í…Œì´ì§€ ì •ë³´ë¥¼ ìˆ˜ì •í•œë‹¤.
     public void SetStageInfo(int stageIndex, StageType stageType, int level)
     {
-        //  stageIndex ¼³Á¤
+        //  stageIndex ì„¤ì •
         this.stageIndex = stageIndex;
         currentStageIndex = stageIndex;
         currentStageType = stageType;
         dungeonLevel = level;
     }
 
-    //  ´øÀü Å¬¸®¾î ½Ã, ´øÀú³Ê ·¹º§À» Áõ°¡½ÃÄÑÁÖ´Â ¸Ş¼­µå
+    //  ë˜ì „ í´ë¦¬ì–´ ì‹œ, ë˜ì €ë„ˆ ë ˆë²¨ì„ ì¦ê°€ì‹œì¼œì£¼ëŠ” ë©”ì„œë“œ
     public void IncreaseDungeonLevel()
     {
         dungeonLevel++;
-        Debug.Log($"[GameManager] ´øÀü ·¹º§ÀÌ {dungeonLevel}·Î Áõ°¡Çß½À´Ï´Ù.");
+        Debug.Log($"[GameManager] ë˜ì „ ë ˆë²¨ì´ {dungeonLevel}ë¡œ ì¦ê°€í–ˆìŠµë‹ˆë‹¤.");
     }
 }
