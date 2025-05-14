@@ -21,7 +21,7 @@ public class PauseUI : MonoBehaviour
         for (int i = 0; i < _skillsCount; ++i)
         {
             skillSlots[i].color = new Color(255, 255, 255, 0);
-            skillSlots[i] = null;
+            skillSlots[i].sprite = null;
         }
 
         skillsCount = 0;
