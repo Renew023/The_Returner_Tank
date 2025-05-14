@@ -3,15 +3,21 @@ using UnityEngine.UI;
 
 public class StartButtonBinder : MonoBehaviour
 {
-    [Tooltip("Hierarchy ¢º Canvas ¢º StartButton")]
+    [Tooltip("Hierarchy â–¶ Canvas â–¶ StartButton")]
     [SerializeField] private Button startButton;
 
     void Awake()
     {
         if (startButton == null)
-            Debug.LogError("StartButtonBinder: Start ButtonÀ» ÀÎ½ºÆåÅÍ¿¡ ÇÒ´çÇÏ¼¼¿ä.");
+            Debug.LogError("StartButtonBinder: Start Buttonì„ ì¸ìŠ¤í™í„°ì— í• ë‹¹í•˜ì„¸ìš”.");
         else
-            // static SceneController.ToMap ¸Ş¼­µå¸¦ ¸®½º³Ê·Î Ãß°¡
+            // static SceneController.ToMap ë©”ì„œë“œë¥¼ ë¦¬ìŠ¤ë„ˆë¡œ ì¶”ê°€
             startButton.onClick.AddListener(SceneController.ToMap);
     }
+
+	void OnEnable()
+	{
+		if (DataManager.instance != null)
+			DataManager.instance.Init();
+	}
 }

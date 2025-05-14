@@ -21,7 +21,6 @@ public class Player : Character
     public PlayerValue playerValue;
 
     private float demandExp;
-    [SerializeField] private float Level;
     [SerializeField] private Image hpBarFill;
 
     //[SerializeField] public List<Skill> skillList = new List<Skill>(10);

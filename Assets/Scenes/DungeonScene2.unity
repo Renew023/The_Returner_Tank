@@ -23914,8 +23914,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1812786789}
   - component: {fileID: 1812786790}
-  - component: {fileID: 1812786792}
   - component: {fileID: 1812786791}
+  - component: {fileID: 1812786792}
   m_Layer: 0
   m_Name: MiniMapOrigin
   m_TagString: Untagged

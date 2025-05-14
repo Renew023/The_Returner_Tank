@@ -17,9 +17,4 @@ public class StartMainUI : MonoBehaviour
         settingButton.onClick.AddListener(() => startUI.ChangeState(StartUIState.Setting));
         selectWeaponButton.onClick.AddListener(()=>startUI.ChangeState(StartUIState.WeaponSelect));
     }
-
-    void OnEnable()
-    {
-        DataManager.instance.Init();
-    }
 }

@@ -33,6 +33,8 @@ public class DataManager : MonoBehaviour
 		}
 		playerValue = new PlayerValue();
 		playerWeapon.Clear();
+		WeaponSkillList = skillList.Where(skill => skill.weaponCon != null).ToList();
+		skill = WeaponSkillList[0];
 	}
 
     void Awake()
