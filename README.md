@@ -33,23 +33,30 @@ __탱크로 다시 태어난 나는 미궁을 방랑한다. 게임의 기술서_
 > - 🎱 [스킬](#-스킬)
 >     - [스킬 구조](#1-스킬-구조)
 >     - [스킬 패턴](#.-스킬-패턴)
+>       <br><br>
 > - 📺 [미니맵](#-미니맵)
 >     - [미니맵 구현](#1-미니맵-구현)
+>       <br><br>
 > - 🏫 [스테이지 선택지](#-스테이지-선택지)
 >     - [MapManager.cs](#1-mapmanagercs)
 >     - [SceneController](#2-scenecontroller)
 >     - [NodeController](#3-nodecontroller)
 >     - [HealTrigger/EventTrigger](#4-healtrigger--eventtrigger)
+>       <br><br>
 > - 🧠 [Enemy AI & Pathfinding System](#-enemy-ai--pathfinding-system)
 >   - 👾 [EnemyAI](#-enmeyai)
 >     - [1. 상태 기반 FSM 구조 (`IEnemyState.cs` 및 하위 클래스)](#1-상태-기반-fsm-구조-ienemystatecs-및-하위-클래스)
 >     - [EnemyAI 클래스 핵심 기능 (`EnemyAI.cs`)](#2-enemyai-클래스-핵심-기능-enemyaics)
+>       <br><br>
 >   - 🧭 [PathfindingSystem](#-pathfindingsystem)
 >     - 📌 [Grid 기반 탐색 시스템 (`GridScanner.cs`)](-grid-기반-탐색-시스템-gridscannercs)
 >     - 📌 [A* 경로 탐색 시스템 (AStarPathfinder.cs, Node.cs, PriorityQueue.cs)](#-a-경로-탐색-시스템-astarpathfindercs-nodecs-priorityqueuecs)
+>       <br><br>
 >   - 💫 [경험치 오브젝트 흡수 시스템 (ExpObject.cs)](#-경험치-오브젝트-흡수-시스템-expobjectcs)
 >     - [핵심 기능](#핵심-기능)
+>       <br><br>
 >     - 🗂 [주요 스크립트 요약](#-주요-스크립트-요약)
+>       <br><br>
 > - [Monster Spawn](#monster-spawn)
 >   - [1. 몬스터 스폰(1) - 오브젝트 풀링 시스템 사용 (DungeonScene1~4, BossBattleScene Hierarachy- PoolManager)](#1-몬스터-스폰1---오브젝트-풀링-시스템-사용-dungeonscene14-bossbattlescene-hierarachy--poolmanager)
 >   - [2. 몬스터 스폰(2) - 지정한 스폰 포인트에 몬스터 스폰 기능 / 웨이브 시스템 (DungeonScene1~4, BossBattleScene Hierarachy- Spawner)](#2-몬스터-스폰2---지정한-스폰-포인트에-몬스터-스폰-기능--웨이브-시스템-dungeonscene14-bossbattlescene-hierarachy--spawner)
