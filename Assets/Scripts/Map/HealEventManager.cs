@@ -7,18 +7,28 @@ public class HealEventManager : MonoBehaviour
 
     void Awake()
     {
-        // ½Ì±ÛÅæ ÆĞÅÏÀ¸·Î ÀÎ½ºÅÏ½º º¸°ü
+        // ì‹±ê¸€í†¤ íŒ¨í„´ìœ¼ë¡œ ì¸ìŠ¤í„´ìŠ¤ ë³´ê´€
         if (Instance == null) Instance = this;
         else if (Instance != this) Destroy(gameObject);
     }
 
-    /// ÇÃ·¹ÀÌ¾î°¡ Èú ¾ÆÀÌÅÛÀ» ¸Ô¾úÀ» ¶§ È£Ãâ
+    private void OnEnable()
+    {
+        UIManager.Instance.uiController.SetDungeonUI(true);
+    }
+
+    private void OnDisable()
+    {
+        UIManager.Instance.uiController.SetDungeonUI(false);
+    }
+
+    /// í”Œë ˆì´ì–´ê°€ í ì•„ì´í…œì„ ë¨¹ì—ˆì„ ë•Œ í˜¸ì¶œ
     public void OnHealCollected(GameObject healObject)
     {
-        // 1) Èú ¾ÆÀÌÅÛ »ç¶óÁö±â
+        // 1) í ì•„ì´í…œ ì‚¬ë¼ì§€ê¸°
         Destroy(healObject);
 
-        // 2) ·Î±×³ª ÀÌÆåÆ® Àç»ı (³ªÁß¿¡ HP È¸º¹ ·ÎÁ÷ Ãß°¡)
+        // 2) ë¡œê·¸ë‚˜ ì´í™íŠ¸ ì¬ìƒ (ë‚˜ì¤‘ì— HP íšŒë³µ ë¡œì§ ì¶”ê°€)
 
     }
 }

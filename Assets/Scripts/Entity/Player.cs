@@ -276,7 +276,6 @@ public class Player : Character
             healAmounteal = (int)(healAmounteal + curHp);
         }
         UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
-
     }
 
     public void LevelUpTrigger(int amount)

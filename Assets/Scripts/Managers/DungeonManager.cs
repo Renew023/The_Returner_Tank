@@ -40,6 +40,11 @@ public class DungeonManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        UIManager.Instance.uiController.SetDungeonUI(true);
+    }
+
     private void OnDisable()
     {
         UIManager.Instance.uiController.SetDungeonUI(false);
@@ -58,7 +63,7 @@ public class DungeonManager : MonoBehaviour
 
         Spawner.instance.SpawnFixedWave();
 
-        StartCoroutine(InitializeAfterUIReady());
+        //StartCoroutine(InitializeAfterUIReady());
     }
 
     private IEnumerator InitializeAfterUIReady()
