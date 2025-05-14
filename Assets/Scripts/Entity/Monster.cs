@@ -17,6 +17,7 @@ public class Monster : Character
 
     [Header("Sound Effects")]
     public AudioClip damageClip;           // 인스펙터에 할당할 피격 사운드
+    public AudioClip DeathClip;
     private AudioSource audioSource;       // AudioSource 캐시
 
 
@@ -97,6 +98,7 @@ public class Monster : Character
 
     public void TakeDamage(float damage)
     {
+		//효과음
         if (damageClip != null && audioSource != null)
             audioSource.PlayOneShot(damageClip);
 
@@ -120,8 +122,11 @@ public class Monster : Character
 
     void Death()
 	{
-		//	중복 호출을 방지!
-		if(isDead)
+        if (damageClip != null && audioSource != null)
+            audioSource.PlayOneShot(DeathClip);
+
+        //	중복 호출을 방지!
+        if (isDead)
 		{
 			return;
 		}
