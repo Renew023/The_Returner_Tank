@@ -31,18 +31,18 @@ __탱크로 다시 태어난 나는 미궁을 방랑한다. 게임의 기술서_
 >     - [플레이어 피격 ('Player.cs')](#4-플레이어-피격-playercs)
 >     <br><br>
 > - 🎱 [스킬](#-스킬)
->     - [스킬 구조 ('Skill.cs')](#1-스킬-구조-skillcs)
->     - [스킬 패턴 ('WeaponController.cs')](#2-스킬-패턴-weaponcontrollercs)
+>     - [스킬 구조 (`Skill.cs`)](#1-스킬-구조-skillcs)
+>     - [스킬 패턴 (`WeaponController.cs`)](#2-스킬-패턴-weaponcontrollercs)
 >       <br><br>
 > - 📺 [미니맵](#-미니맵)
->     - [미니맵 추적 기능 ('FollowMiniMap.cs')](#1-미니맵-추적-기능-followminimapcs)
->     - [미니맵 엔티티 감지 ('TargetSearch.cs')](#2-미니맵-엔티티-감지-targetsearchcs)
+>     - [미니맵 추적 기능 (`FollowMiniMap.cs`)](#1-미니맵-추적-기능-followminimapcs)
+>     - [미니맵 엔티티 감지 (`TargetSearch.cs`)](#2-미니맵-엔티티-감지-targetsearchcs)
 >       <br><br>
 > - 🏫 [스테이지 선택지](#-스테이지-선택지)
->     - [맵 선택지 생성 (MapManager.cs)](#1-맵-선택지-생성-mapmanagercs)
->     - [씬 전환 (SceneController.cs)](#2-씬-전환-scenecontrollercs)
->     - [소스 초기화 (NodeController.cs)](#3-소스-초기화-nodecontrollercs)
->     - [이벤트 맵 (HealTrigger.cs/EventTrigger.cs)](#4-이벤트-맵-healtriggercseventtriggercs)
+>     - [맵 선택지 생성 (`MapManager.cs`)](#1-맵-선택지-생성-mapmanagercs)
+>     - [씬 전환 (`SceneController.cs`)](#2-씬-전환-scenecontrollercs)
+>     - [소스 초기화 (`NodeController.cs`)](#3-소스-초기화-nodecontrollercs)
+>     - [이벤트 맵 (`HealTrigger.cs/EventTrigger.cs`)](#4-이벤트-맵-healtriggercseventtriggercs)
 >       <br><br>
 > - 🧠 [Enemy AI & Pathfinding System](#-enemy-ai--pathfinding-system)
 >   - 👾 [EnemyAI](#-enmeyai)
@@ -51,17 +51,17 @@ __탱크로 다시 태어난 나는 미궁을 방랑한다. 게임의 기술서_
 >       <br><br>
 >   - 🧭 [PathfindingSystem](#-pathfindingsystem)
 >     - 📌 [Grid 기반 탐색 시스템 (`GridScanner.cs`)](-grid-기반-탐색-시스템-gridscannercs)
->     - 📌 [A* 경로 탐색 시스템 (AStarPathfinder.cs, Node.cs, PriorityQueue.cs)](#-a-경로-탐색-시스템-astarpathfindercs-nodecs-priorityqueuecs)
+>     - 📌 [A* 경로 탐색 시스템 (`AStarPathfinder.cs, Node.cs, PriorityQueue.cs`)](#-a-경로-탐색-시스템-astarpathfindercs-nodecs-priorityqueuecs)
 >       <br><br>
->   - 💫 [경험치 오브젝트 흡수 시스템 (ExpObject.cs)](#-경험치-오브젝트-흡수-시스템-expobjectcs)
+>   - 💫 [경험치 오브젝트 흡수 시스템 (`ExpObject.cs`)](#-경험치-오브젝트-흡수-시스템-expobjectcs)
 >     - [핵심 기능](#핵심-기능)
 >       <br><br>
 >   - 🗂 [주요 스크립트 요약](#-주요-스크립트-요약)
 >       <br><br>
 > - 🎃 [몬스터 생성](#-몬스터-생성)
->   - [몬스터 오브젝트 풀링 (PoolManager.cs)](#1-몬스터-오브젝트-풀링-poolmanagercs)
->   - [스폰 포인트 / 웨이브 시스템 (Spawner.cs)](#2-스폰-포인트--웨이브-시스템-spawnercs)
->   - [웨이브 설정, 몬스터 풀 기능 구현 (DungeonManager.cs)](#3-웨이브-설정-몬스터-풀-기능-구현-dungeonmanagercs)
+>   - [몬스터 오브젝트 풀링 (`PoolManager.cs`)](#1-몬스터-오브젝트-풀링-poolmanagercs)
+>   - [스폰 포인트 / 웨이브 시스템 (`Spawner.cs`)](#2-스폰-포인트--웨이브-시스템-spawnercs)
+>   - [웨이브 설정, 몬스터 풀 기능 구현 (`DungeonManager.cs`)](#3-웨이브-설정-몬스터-풀-기능-구현-dungeonmanagercs)
 >   - [작업한 스크립트 / 메서드 요약](#작업한-스크립트--메서드-요약)
 
 </div> 
