@@ -3,7 +3,7 @@
 - 이 문서는 **MapManager** 브랜치에서 작업한 스크립트들의 기능, 주요 트러블슈팅 이력, 기술 하이라이트, 그리고 사용 기술 스택을 정리한 README
 
 <br>
----
+
 ## 1. 스크립트별 기능 설명
 
 ### 1.1 `MapManager.cs`
@@ -31,7 +31,8 @@
       }
       // Boss 고정
       mapData.Add(new List<NodeType>{ NodeType.Boss });
-  }```
+  }
+```
 
 **맵 렌더링 (RenderMap)**
 
@@ -58,7 +59,8 @@ public void ResetMap()
     initialized = false;
     GenerateMapData();
     RenderMap();
-}```
+}
+```
 
 
 ### 1.2 'SceneController'
@@ -82,7 +84,8 @@ private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         MapManager.Instance.RestoreMap();
         // 카메라 리셋 등…
     }
-}```
+}
+```
 
 ### 1.3 'NodeController'
  - 각 노드의 Image, Button 초기화
@@ -104,7 +107,8 @@ public void ResetMap()
     GenerateMapData();
     RenderMap();
     // currentRow/currentCol 초기화 누락
-}```
+}
+```
 
 **해결방법**
 - ResetMap() 내에 시작점으로 상태 초기화 추가
@@ -120,7 +124,8 @@ public void ResetMap()
     currentRow = 0;
     currentCol = 0;
     RestoreMap();   
-}```
+}
+```
 
 **결과**
 - 매번 “첫 진입”처럼 인디케이터가 스타트 노드로 리셋되어 정상 동작
@@ -145,7 +150,8 @@ void InitializeOrRestoreMap()
     }
     RenderMap();
     RestoreMap();
-}```
+}
+```
 
 ** 해결 방법 **
  - ResetMap() 호출 시 플래그를 리셋하거나, InitializeOrRestoreMap() 로직을 항상 새로운 맵 데이터를 생성하도록 변경
@@ -175,8 +181,9 @@ void InitializeOrRestoreMap()
     }
     RenderMap();
     RestoreMap();
-}```
+}
+```
 
-** 결과 
+** 결과 **
 - ResetMap()을 거쳐 다시 맵씬에 들어올 때마다 initialized가 false로 바뀌어
 GenerateMapData()가 반드시 실행됨 >> 항상 새로운 맵이 랜덤 생성되어 정상 작동
