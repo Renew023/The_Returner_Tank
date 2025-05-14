@@ -195,6 +195,7 @@ public class MapManager : MonoBehaviour
         foreach (var prev in mapNodes[^2])
             DrawDots(prev, bossCtrl);
 
+        // 플레이어 인디케이터 생성 
         var pi = Instantiate(playerIndicatorPrefab, stageContainer);
         playerIndicatorRt = pi.GetComponent<RectTransform>();
 
@@ -267,6 +268,41 @@ public class MapManager : MonoBehaviour
     {
         if (Instance == this)
             SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // MapScene 초기화
+    public void ResetMap()
+    {
+        // 0) 초기화 플래그도 리셋
+        initialized = false;
+
+        // 1) 기존 노드/점선/인디케이터 모두 파괴
+        if (mapNodes != null)
+        {
+            foreach (var row in mapNodes)
+                foreach (var nc in row)
+                    if (nc != null) Destroy(nc.gameObject);
+            mapNodes.Clear();
+        }
+        if (dotLines != null)
+        {
+            foreach (var d in dotLines)
+                if (d != null) Destroy(d.gameObject);
+            dotLines.Clear();
+        }
+        connections.Clear();
+        if (playerIndicatorRt != null)
+            Destroy(playerIndicatorRt.gameObject);
+        playerIndicatorRt = null;
+
+        // 2) 맵 데이터와 렌더링 재실행
+        GenerateMapData();
+        RenderMap();
+
+        // 3) 플레이어 인디케이터 위치 초기화
+        currentRow = 0;
+        currentCol = 0;
+        RestoreMap();
     }
 
 

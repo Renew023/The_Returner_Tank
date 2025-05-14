@@ -5,6 +5,7 @@ public static class SceneController
 {
     private static string _lastSceneName;
     private const float MapReturnYOffset = 2f;
+    private static bool needResetMap = false;
 
     static SceneController()
     {
@@ -42,42 +43,44 @@ public static class SceneController
         SceneManager.LoadScene("MapScene", LoadSceneMode.Single);
     }
 
+    public static void ToFirstMap()
+    {
+        needResetMap = true;
+        SceneManager.LoadScene("MapScene");
+
+    }
+
     private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // --- Heal Event Scene 진입 시힐 스폰 ---
-        if (scene.name == "Event_HealScene")
-        {
-            var HealPrefab = Resources.Load<GameObject>("HealPrefab");
-            if (HealPrefab != null)
-            {
-                // 월드 좌표 (0,5,0)에 스폰
-                UnityEngine.Object.Instantiate(
-                    HealPrefab,
-                    new Vector3(0f, 5f, 0f),
-                    Quaternion.identity
-                );
-            }
-        }
 
         // --- Map Scene 복귀 처리 ---
         if (scene.name == "MapScene")
         {
-            if (MapManager.Instance != null)
-                MapManager.Instance.RestoreMap();
-
-            // 던전/힐 → 맵 복귀 시 Y 오프셋 적용
-            if (_lastSceneName.StartsWith("DungeonScene")
-             || _lastSceneName == "BossBattleScene"
-             || _lastSceneName == "Event_HealScene")
+            if (needResetMap == true)
             {
-                var cam = Camera.main;
-                if (cam != null)
+                MapManager.Instance.ResetMap();
+                needResetMap = false;
+            }
+            else
+            {
+                if (MapManager.Instance != null)
+                    MapManager.Instance.RestoreMap();
+
+                // 던전/힐 → 맵 복귀 시 카메라 설정
+                if (_lastSceneName.StartsWith("DungeonScene")
+                 || _lastSceneName == "BossBattleScene"
+                 || _lastSceneName == "Event_HealScene")
                 {
-                    var pos = cam.transform.position;
-                    pos.y += MapReturnYOffset;
-                    cam.transform.position = pos;
+                    var cam = Camera.main;
+                    if (cam != null)
+                    {
+                        var pos = cam.transform.position;
+                        pos.y += MapReturnYOffset;
+                        cam.transform.position = pos;
+                    }
                 }
             }
+
         }
     }
 }
