@@ -25,7 +25,9 @@
 - 핵심기술
     - target을 지정하여 카메라가 추적
     - Math.Clamp로 카메라 영역 제한
+<details>
 ![Movie_011](https://github.com/user-attachments/assets/45283051-18e3-4023-985c-c1a4aa06c7eb)
+</details>
 
 ***
 ### 2. 플레이어 이동
@@ -36,7 +38,10 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다.
 
 - 핵심기술
     - Input.GetAxisRaw로 좌표 이동
+
+<details>
 ![Movie_005](https://github.com/user-attachments/assets/61e5e975-203e-413f-b014-088467dc1412)
+</details>
 
 ***
 ### 3. 플레이어 공격
@@ -47,8 +52,10 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다.
     - Physics2D.OverlapCircle로 주변 Collider(trigger) 탐지
     - 탐지한 Collider까지의 거리를 비교 후 가장 짧은 거리 탐지
         - 예외처리로 Raycast로 그 좌표까지 이동하는 도중에 벽이 있을 경우 거리계산하지 않음.
-    - WeaponController에서 일정 시간마다 공격 
+    - WeaponController에서 일정 시간마다 공격
+<details>
 ![Movie_006](https://github.com/user-attachments/assets/7dcd25ca-bb57-4bb3-9f39-f0cb3df013dd)
+</details>
 
 ***
 ### 4. 플레이어 피격
@@ -61,7 +68,9 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다.
     - ~~owner를 지정하여 본인이 피격받지 않게함~~
     - Tag를 활용하여 발사한 대상과 같은 Tag일 경우 피해를 입히지 않게함.
         - TakeDamage로 맞은 대상의 체력을 감소.
+<details>
 ![Movie_013](https://github.com/user-attachments/assets/f0a81d29-8ca7-4154-a95b-10f086768aed)
+</details>
 
 ***
 ## 🎱 [스킬]
@@ -77,7 +86,9 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다.
             - Weapon(무기에 대한 정보 중 값형)
             - Arrow(발사체)
 
+<details>
 ![image](https://github.com/user-attachments/assets/039936c0-2e40-4d44-8393-2d95ee7986dd)
+</details>
 
 ***
 ### 2. 스킬 패턴
@@ -89,8 +100,10 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다.
     - ArrowSpeed, ArrowDamage 등 화살에 부여할 능력치 변경.
     - 각도를 계산하여 화살을 여러개 쏠 때 단조로움 제거.
 
+<details>
 ![Movie_020](https://github.com/user-attachments/assets/6f7f5c4d-4283-4480-a2c3-643bbece9d52)
 ![Movie_016](https://github.com/user-attachments/assets/3779a25b-a53a-4b8c-ae2a-fb1b1cf9b263)
+</details>
 
 ***
 ## 📺 [미니맵]
@@ -105,7 +118,10 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다.
         - 추적한 위치를 기반으로 미니맵에 표시
             - 몬스터의 존재 여부에 따라 List를 추가하거나 SetActive(false)로 관리
     - Mask 기능을 활용하여 기존 맵 구조 중 일부를 화면에 표기되지 않도록 설정
+  
+<details>
 ![Movie_021](https://github.com/user-attachments/assets/8865a3f1-d433-40cc-a333-70842492afd1)
+</details>
 
 
 
