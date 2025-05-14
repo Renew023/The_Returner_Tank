@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Spawner : MonoBehaviour
 {
@@ -60,6 +61,12 @@ public class Spawner : MonoBehaviour
     //  현재 웨이브에 맞는 몬스터들을 무작위로 스폰하는 메서드
     public void SpawnFixedWave()
     {
+        //이벤트 씬일 경우 건너뜀
+        string scene = SceneManager.GetActiveScene().name;
+        if (scene == "EventScene" || scene == "Event_HealScene")
+        {
+            return;
+        }
         // 웨이브 시작 전에 'aliveEnemies'가 0이 아니면 더 이상 스폰하지 않음
         if (DungeonManager.instance.GetAliveEnemies() > 0)
         {
