@@ -193,6 +193,7 @@ MonoBehaviour:
   healIcon: {fileID: 1688997406, guid: 12203856eed85b644ba073857c0a3843, type: 3}
   bossIcon: {fileID: -525390460, guid: 12203856eed85b644ba073857c0a3843, type: 3}
   startIcon: {fileID: 21300000, guid: b5238b54db7c39d45af7c812c2273243, type: 3}
+  eventicon: {fileID: 21300000, guid: 324740e5b8e4ef042b4fc60a4c2bd218, type: 3}
   playerIndicatorPrefab: {fileID: 6748271703798662429, guid: d9579ae4a8957614383b59627b0ea105, type: 3}
   startNodePrefab: {fileID: 1681385445875521961, guid: 6af68013cbfebcf46a0730b5a27fd5bc, type: 3}
   stageContainer: {fileID: 130093605}

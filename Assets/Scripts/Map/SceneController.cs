@@ -50,6 +50,14 @@ public static class SceneController
 
     }
 
+    public static void ToEvent()
+    {
+        _lastSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene("EventScene", LoadSceneMode.Single);
+
+    }
+
+
     private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
 
