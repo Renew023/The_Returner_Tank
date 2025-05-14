@@ -129,11 +129,11 @@ public class DungeonManager : MonoBehaviour
         // 플레이어 HP 저장
         Player player = FindObjectOfType<Player>();
 
-        if (player != null)
-        {
-            DataManager.instance.savedPlayerHp = player.CurHP;
-            DataManager.instance.savedPlayerMaxHp = player.MaxHp;
-        }
+        //if (player != null)
+        //{
+        //    DataManager.instance.savedPlayerHp = player.CurHP;
+        //    DataManager.instance.savedPlayerMaxHp = player.MaxHp;
+        //}
 
         // 던전 레벨 증가
         GameManager.Instance.IncreaseDungeonLevel();
