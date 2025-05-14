@@ -6,25 +6,49 @@ using UnityEngine.SceneManagement;
 
 public class DungeonManager : MonoBehaviour
 {
-    [SerializeField] private Transform expParent; // ExpObjects 오브젝트
-    [SerializeField] private Transform player;    // 플레이어 Transform
-    [SerializeField] private GameObject warpZone;
-    //[SerializeField] private UIController uiController;
-    [SerializeField] private WaveMessageUI waveMessageUI;
+    #region DungeonManager 변수 선언
+
     public static DungeonManager instance;
 
-    //  ���� ���̺� ������
+    [SerializeField] private Transform expParent; // ExpObjects 오브젝트
+    [SerializeField] private Transform player;    // 플레이어 Transform
+
+    [SerializeField] private GameObject warpZone;
+    [SerializeField] private WaveMessageUI waveMessageUI;
+
     public int currentWave = 1;
     public int maxWave;
 
-    //  ���̺� �� ���� ����ִ� ������ �� ������
     private int aliveEnemies = 0;
 
-    //  ���̺갡 ���� ������ �����ϱ� ���� ����
     private bool isWaveInProgress = false;
 
-    public Dungeon pools;           //  ������Ʈ Ǯ�� �Ŵ���
+    public Dungeon pools;
 
+    #endregion
+
+    #region OnEnable, OnDisable 메서드
+    private void OnEnable()
+    {
+        UIManager.Instance.uiController.SetDungeonUI(true);
+    }
+
+    private void OnDisable()
+    {
+        UIManager.Instance.uiController.SetDungeonUI(false);
+    }
+
+    #endregion
+
+    #region GetAliveEnemies 메서드 → aliveEnemies 변수를 외부에서 가져오게 하기 위함
+    public int GetAliveEnemies()
+    {
+        return aliveEnemies;
+    }
+
+    #endregion
+
+    #region Awake 메서드
     private void Awake()
     {
         if (warpZone != null)
@@ -41,22 +65,9 @@ public class DungeonManager : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        UIManager.Instance.uiController.SetDungeonUI(true);
-    }
+    #endregion
 
-    private void OnDisable()
-    {
-        UIManager.Instance.uiController.SetDungeonUI(false);
-    }
-
-    public int GetAliveEnemies()
-    {
-        return aliveEnemies;
-    }
-
-
+    #region Start 메서드
     private void Start()
     {
         //  DungeonManager���� ���� ���̺긦 �����Ѵ�!!
@@ -66,10 +77,11 @@ public class DungeonManager : MonoBehaviour
         Spawner.instance.SpawnFixedWave();
     }
 
-    //  ���� ���̺� ���� �� ���� �� ���� �޼���
+    #endregion
+
+    #region StartWave 메서드 → 매 웨이브를 시작하는 기능
     public void StartWave(int count)
     {
-        //aliveEnemies += count;
         aliveEnemies = count;
         isWaveInProgress = true;
 
@@ -82,6 +94,9 @@ public class DungeonManager : MonoBehaviour
         Debug.Log($"[현재 웨이브: {currentWave}]의 몬스터 수: {count} 스폰!");
     }
 
+    #endregion
+
+    #region OnEnemyDeath 메서드 → 웨이브 내 몬스터들이 죽었을 때를 처리하는 기능
     public void OnEnemyDeath()
     {
         aliveEnemies--;
@@ -110,18 +125,15 @@ public class DungeonManager : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region ClearDungeon 메서드 → 각 던전 씬 내 모든 웨이브를 클리어할 때를 처리하는 기능
     void ClearDungeon()
     {
         Debug.Log($"[DungeonManager] 던전 클리어!");
 
         // 플레이어 HP 저장
         Player player = FindObjectOfType<Player>();
-
-        //if (player != null)
-        //{
-        //    DataManager.instance.savedPlayerHp = player.CurHP;
-        //    DataManager.instance.savedPlayerMaxHp = player.MaxHp;
-        //}
 
         // 던전 레벨 증가
         GameManager.Instance.IncreaseDungeonLevel();
@@ -150,7 +162,10 @@ public class DungeonManager : MonoBehaviour
             warpZone.SetActive(true);
         }
     }
-    
+
+    #endregion
+
+    #region AbsorbExp 메서드 → 몬스터가 죽었을 때 드랍되는 경험치를 관리하는 기능
     private void AbsorbExp()
     {
         if (expParent == null)
@@ -170,4 +185,6 @@ public class DungeonManager : MonoBehaviour
             }
         }
     }
+
+    #endregion
 }
