@@ -3803,6 +3803,7 @@ MonoBehaviour:
   battleBgm: {fileID: 8300000, guid: 8759964a86dd34940aa1b85a3f0d76db, type: 3}
   bossBgm: {fileID: 8300000, guid: aae7beed9467a654d9f908a7e87344d8, type: 3}
   healBgm: {fileID: 8300000, guid: 8b782b724b13d594aa022b8ed0a5869a, type: 3}
+  sfxSource: {fileID: 0}
 --- !u!1 &1441871995
 GameObject:
   m_ObjectHideFlags: 0
@@ -5902,6 +5903,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2242405355155637982, guid: 1ce0c7f94cca9634c9c22179daee5531, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3527284752707964488, guid: 1ce0c7f94cca9634c9c22179daee5531, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.026428

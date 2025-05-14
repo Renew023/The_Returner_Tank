@@ -23,6 +23,17 @@ public class HealSpawner : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        var HealPrefab = Resources.Load<GameObject>("HealPrefab");
+        if (HealPrefab != null)
+        {
+            // 월드 좌표 (0,5,0)에 스폰
+            UnityEngine.Object.Instantiate(
+                HealPrefab,
+                new Vector3(0f, 5f, 0f),
+                Quaternion.identity
+            );
+        }
     }
 
     void OnDestroy()
