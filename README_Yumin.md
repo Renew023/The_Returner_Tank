@@ -63,9 +63,9 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다.
         - TakeDamage로 맞은 대상의 체력을 감소.
 ![Movie_013](https://github.com/user-attachments/assets/f0a81d29-8ca7-4154-a95b-10f086768aed)
 
+***
 ## [스킬]
 
-***
 ### 1. 스킬 구조
 스킬에 내부 트리입니다.
 
@@ -92,9 +92,9 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다.
 ![Movie_020](https://github.com/user-attachments/assets/6f7f5c4d-4283-4480-a2c3-643bbece9d52)
 ![Movie_016](https://github.com/user-attachments/assets/3779a25b-a53a-4b8c-ae2a-fb1b1cf9b263)
 
+***
 ## [미니맵]
 
-***
 ### 1. 미니맵 구현
 기존에 사용하던 맵의 사이즈를 줄이고 플레이어와 몬스터의 부분은 색칠된 점을 표시해주는 것으로 위치 파악을 쉽게 할 수 있도록 만들었습니다.
 
