@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1781948225839936407}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.24835764, y: 4.429209, z: 0}
+  m_LocalPosition: {x: 6.2, y: -8.0204315, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -112,8 +112,8 @@ MonoBehaviour:
   owner: {fileID: 0}
   countReturn: {fileID: 0}
   rb: {fileID: -2232580069837577341}
-  damage: 64
-  direction: {x: 5.2200828, y: 2.9581642}
+  damage: 16
+  direction: {x: 4.788459, y: -3.615337}
   time: 2
 --- !u!1 &3452571917277408812
 GameObject:
