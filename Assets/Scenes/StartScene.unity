@@ -1574,7 +1574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiCanvas: {fileID: 1828159387}
-  uiController: {fileID: 0}
+  uiController: {fileID: 622889235}
 --- !u!4 &524852061
 Transform:
   m_ObjectHideFlags: 0

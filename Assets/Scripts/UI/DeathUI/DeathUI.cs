@@ -13,7 +13,8 @@ public class DeathUI : MonoBehaviour
 
     public void ReturnMain()
     {
-        UIManager.Instance.uiController.SetDungeonUI(false);
+        DeathMenu.SetActive(false);
+        UIManager.Instance.uiController.pauseUI.OffSkillImages(UIManager.Instance.uiController.pauseUI.skillsCount);
         GameManager.Instance.SetStageInfo(0, 0, 1);
         Time.timeScale = 1f;
         SceneManager.LoadScene("StartScene");

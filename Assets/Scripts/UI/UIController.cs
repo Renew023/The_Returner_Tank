@@ -10,11 +10,6 @@ public class UIController : MonoBehaviour
     public ClearUI clearUI;
     public PauseUI pauseUI;
 
-    private void Start()
-    {
-        UIManager.Instance.uiController = this;
-    }
-
     private void ShowBossHP(bool show)
     {
         bossHP.gameObject.SetActive(show);
