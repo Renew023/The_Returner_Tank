@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DungeonManager : MonoBehaviour
 {
@@ -60,25 +61,7 @@ public class DungeonManager : MonoBehaviour
     {
         //  DungeonManager���� ���� ���̺긦 �����Ѵ�!!
         currentWave = 1;
-
-        Spawner.instance.SpawnFixedWave();
-
-        //StartCoroutine(InitializeAfterUIReady());
-    }
-
-    private IEnumerator InitializeAfterUIReady()
-    {
-        yield return null; // 한 프레임 기다림 (UIController의 OnEnable()이 먼저 실행되도록)
-
-        if (UIManager.Instance.uiController != null)
-        {
-            UIManager.Instance.uiController.SetDungeonUI(true);
-            //uiController.SetDungeonUI(true);
-        }
-        else
-        {
-            Debug.LogWarning("UIController가 아직 초기화되지 않았습니다.");
-        }
+        string sceneName = SceneManager.GetActiveScene().name;
 
         Spawner.instance.SpawnFixedWave();
     }
@@ -134,11 +117,11 @@ public class DungeonManager : MonoBehaviour
         // 플레이어 HP 저장
         Player player = FindObjectOfType<Player>();
 
-        if (player != null)
-        {
-            DataManager.instance.savedPlayerHp = player.CurHP;
-            DataManager.instance.savedPlayerMaxHp = player.MaxHp;
-        }
+        //if (player != null)
+        //{
+        //    DataManager.instance.savedPlayerHp = player.CurHP;
+        //    DataManager.instance.savedPlayerMaxHp = player.MaxHp;
+        //}
 
         // 던전 레벨 증가
         GameManager.Instance.IncreaseDungeonLevel();
