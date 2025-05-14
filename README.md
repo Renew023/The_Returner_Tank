@@ -16,7 +16,7 @@ __탱크로 다시 태어난 나는 미궁을 방랑한다. 게임의 기술서_
 [**이수명**](https://github.com/Renew023/The_Returner_Tank/blob/develop2/README_Leesoo.md) |
 [**권우성**](https://github.com/Renew023/The_Returner_Tank/blob/develop2/README_Wooseong.md) |
 [**손유민**](https://github.com/Renew023/The_Returner_Tank/blob/develop2/README_Yumin.md) |
-[**박진우ReadMePlease**](https://github.com/ryul1206/multilingual-markdown/blob/main/README.ko.md) |
+[**박진우**](https://github.com/Renew023/The_Returner_Tank/blob/develop2/README_Jinwoo.md) |
 [**박준식ReadMePlease**](https://github.com/ryul1206/multilingual-markdown/blob/main/README.ja.md)
 </div>
 <br>
