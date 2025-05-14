@@ -59,8 +59,10 @@ public class DungeonManager : MonoBehaviour
     {
         //  DungeonManager���� ���� ���̺긦 �����Ѵ�!!
         currentWave = 1;
-
-        Spawner.instance.SpawnFixedWave();
+        if (Spawner.instance != null)
+        {
+            Spawner.instance.SpawnFixedWave();
+        }
     }
 
     //  ���� ���̺� ���� �� ���� �� ���� �޼���

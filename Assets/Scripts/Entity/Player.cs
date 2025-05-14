@@ -257,8 +257,8 @@ public class Player : Character
             playerValue.Exp -= demandExp;
             LevelUp();
         }
-		UIManager.Instance.uiController.playerEXP.UpdateValue((float)playerValue.Exp, (float)demandExp);
-	}
+        UIManager.Instance.uiController.playerEXP.UpdateValue((float)playerValue.Exp, (float)demandExp);
+    }
 
     public void HealTrigger(int healAmounteal)
     {
@@ -272,6 +272,17 @@ public class Player : Character
         }
         UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
 
+    }
+
+    public void LevelUpTrigger(int amount)
+    {
+        int Expamount = amount;
+        if (playerValue.Exp + Expamount >= demandExp)
+        {
+            Expamount = (int)(demandExp - playerValue.Exp);
+        }
+       
+        AddExp(Expamount);
     }
 }
 
