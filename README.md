@@ -21,6 +21,12 @@ __탱크로 다시 태어난 나는 미궁을 방랑한다. 게임의 기술서_
 </div>
 <br>
 
+<div align="left";>
+> **게임 안내**
+
+</div>
+
+
 <div align="left"; style="border: 1px solid #ccc; border-radius: 8px; padding: 16px; background-color: #f9f9f9;">
   
 > **🎉 기술 설명**
