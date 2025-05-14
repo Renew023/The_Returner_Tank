@@ -182,6 +182,12 @@ public class Monster : Character
 
 		if(animator != null)
 		{
+			//	색상 값 초기화
+
+			SpriteRenderer spriteRenderer = this.gameObject.GetComponentInChildren<SpriteRenderer>();
+
+			spriteRenderer.color = Color.white;
+
 			animator.SetBool("IsDamage", false);
 			animator.SetBool("IsMove", false);
 		}
