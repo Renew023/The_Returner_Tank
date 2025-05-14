@@ -14,4 +14,10 @@ public class StartButtonBinder : MonoBehaviour
             // static SceneController.ToFirstMap 메서드를 리스너로 추가
             startButton.onClick.AddListener(SceneController.ToFirstMap);
     }
+
+    void OnEnable()
+    {
+        if(DataManager.instance != null)
+        DataManager.instance.Init();
+    }
 }

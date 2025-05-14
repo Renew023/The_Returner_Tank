@@ -27,21 +27,16 @@ public class ExpObject : MonoBehaviour
     {
         if (!isAbsorbing || target == null) return;
 
-        // 현재 방향 계산
         Vector3 currentDirection = (target.position - transform.position).normalized;
 
-        // 방향 변화량 측정
         float angleChange = Vector3.Angle(prevDirection, currentDirection);
-        float slowdownFactor = Mathf.Clamp01(1f - (angleChange / 180f)); // 방향 꺾일수록 감속
+        float slowdownFactor = Mathf.Clamp01(1f - (angleChange / 180f));
+        float targetSpeed = maxSpeed * slowdownFactor;
 
-        // 가속도 적용 (감속 포함)
-        float effectiveAcceleration = acceleration * slowdownFactor;
-        currentSpeed = Mathf.Min(maxSpeed, currentSpeed + effectiveAcceleration * Time.deltaTime);
+        currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, acceleration * Time.deltaTime);
 
-        // 이동
         transform.position += currentDirection * currentSpeed * Time.deltaTime;
 
-        // 다음 프레임 대비 방향 저장
         prevDirection = currentDirection;
     }
     
