@@ -25,27 +25,28 @@ __탱크로 다시 태어난 나는 미궁을 방랑한다. 게임의 기술서_
   
 > **🎉 Table of Contents**
 > - 👨🏻 [플레이어](#-플레이어)
->     - [카메라 이동 및 제한](#1-카메라-이동-및-제한-followcameracs)
->     - [플레이어 이동](#2-플레이어-이동)
->     - [플레이어 공격](#3-플레이어-공격)
->     - [플레이어 피격](#4-플레이어-피격)
+>     - [카메라 이동 및 제한('FollowCamera.cs'](#1-카메라-이동-및-제한-followcameracs)
+>     - [플레이어 이동('Player.cs'](#2-플레이어-이동)
+>     - [플레이어 공격('WeaponController.cs'](#3-플레이어-공격)
+>     - [플레이어 피격('Player.cs')](#4-플레이어-피격)
 >     <br><br>
 > - 🎱 [스킬](#-스킬)
->     - [스킬 구조](#1-스킬-구조)
->     - [스킬 패턴](#.-스킬-패턴)
+>     - [스킬 구조('Skill.cs')](#1-스킬-구조)
+>     - [스킬 패턴('WeaponController.cs')](#.-스킬-패턴)
 >       <br><br>
 > - 📺 [미니맵](#-미니맵)
->     - [미니맵 구현](#1-미니맵-구현)
+>     - [미니맵 엔티티 감지('TargetSearch.cs')](#1-미니맵-구현)
+>     - [미니맵 추적 기능('FollowMiniMap.cs')](#1-미니맵-구현)
 >       <br><br>
 > - 🏫 [스테이지 선택지](#-스테이지-선택지)
->     - [MapManager.cs](#1-mapmanagercs)
->     - [SceneController](#2-scenecontroller)
->     - [NodeController](#3-nodecontroller)
->     - [HealTrigger/EventTrigger](#4-healtrigger--eventtrigger)
+>     - [맵 선택지 생성(MapManager.cs)](#1-mapmanagercs)
+>     - [씬 전환(SceneController.cs)](#2-scenecontroller)
+>     - [소스 초기화 (NodeController.cs)](#3-nodecontroller)
+>     - [이벤트 맵(HealTrigger.cs/EventTrigger.cs)](#4-healtrigger--eventtrigger)
 >       <br><br>
 > - 🧠 [Enemy AI & Pathfinding System](#-enemy-ai--pathfinding-system)
 >   - 👾 [EnemyAI](#-enmeyai)
->     - [1. 상태 기반 FSM 구조 (`IEnemyState.cs` 및 하위 클래스)](#1-상태-기반-fsm-구조-ienemystatecs-및-하위-클래스)
+>     - [상태 기반 FSM 구조 (`IEnemyState.cs` 및 하위 클래스)](#1-상태-기반-fsm-구조-ienemystatecs-및-하위-클래스)
 >     - [EnemyAI 클래스 핵심 기능 (`EnemyAI.cs`)](#2-enemyai-클래스-핵심-기능-enemyaics)
 >       <br><br>
 >   - 🧭 [PathfindingSystem](#-pathfindingsystem)
@@ -57,10 +58,10 @@ __탱크로 다시 태어난 나는 미궁을 방랑한다. 게임의 기술서_
 >       <br><br>
 >   - 🗂 [주요 스크립트 요약](#-주요-스크립트-요약)
 >       <br><br>
-> - [Monster Spawn](#monster-spawn)
->   - [1. 몬스터 스폰(1) - 오브젝트 풀링 시스템 사용 (DungeonScene1~4, BossBattleScene Hierarachy- PoolManager)](#1-몬스터-스폰1---오브젝트-풀링-시스템-사용-dungeonscene14-bossbattlescene-hierarachy--poolmanager)
->   - [2. 몬스터 스폰(2) - 지정한 스폰 포인트에 몬스터 스폰 기능 / 웨이브 시스템 (DungeonScene1~4, BossBattleScene Hierarachy- Spawner)](#2-몬스터-스폰2---지정한-스폰-포인트에-몬스터-스폰-기능--웨이브-시스템-dungeonscene14-bossbattlescene-hierarachy--spawner)
->   - [3. 던전 매니저 중 웨이브 설정, 몬스터 풀 기능 구현 (DungeonScene1~4, BossBattleScene Hierarachy- DungeonManager)](#3-던전-매니저-중-웨이브-설정-몬스터-풀-기능-구현-dungeonscene14-bossbattlescene-hierarachy--dungeonmanager)
+> - 🎃 [몬스터 생성](#monster-spawn)
+>   - [몬스터 오브젝트 풀링 (PoolManager.cs)](#1-몬스터-스폰1---오브젝트-풀링-시스템-사용-dungeonscene14-bossbattlescene-hierarachy--poolmanager)
+>   - [스폰 포인트 / 웨이브 시스템 (Spawner.cs)](#2-몬스터-스폰2---지정한-스폰-포인트에-몬스터-스폰-기능--웨이브-시스템-dungeonscene14-bossbattlescene-hierarachy--spawner)
+>   - [웨이브 설정, 몬스터 풀 기능 구현 (DungeonManager.cs)](#3-던전-매니저-중-웨이브-설정-몬스터-풀-기능-구현-dungeonscene14-bossbattlescene-hierarachy--dungeonmanager)
 >   - [작업한 스크립트 / 메서드 요약](#작업한-스크립트--메서드-요약)
 
 </div> 
