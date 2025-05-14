@@ -134,6 +134,7 @@ MonoBehaviour:
   weaponController: {fileID: 8679426697464477722}
   hpBarFill: {fileID: 809700570773627994}
   monsterTransform: {fileID: 6191788147004390145}
+  damageClip: {fileID: 8300000, guid: f865b8b4dca3d3149bd7e6f839fee7ec, type: 3}
 --- !u!114 &4470708118024134508
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Monster : Character
 {
+	
+
 	[SerializeField] private Transform expParent;
 	[SerializeField] private int exp;
 	[SerializeField] private GameObject expPrefab;
@@ -12,13 +14,22 @@ public class Monster : Character
 	[SerializeField] private WeaponController weaponController;
     [SerializeField] private Image hpBarFill;
     [SerializeField] private Transform monsterTransform;
+
+    [Header("Sound Effects")]
+    public AudioClip damageClip;           // 인스펙터에 할당할 피격 사운드
+    private AudioSource audioSource;       // AudioSource 캐시
+
+
     protected Animator animator;
 
 	private bool isDead = false;
 
 	void Awake()
 	{
-		target = GameObject.FindObjectOfType<Player>();
+		//효과음 넣기
+        audioSource = GetComponent<AudioSource>();
+
+        target = GameObject.FindObjectOfType<Player>();
 
 		animator = GetComponentInChildren<Animator>();
 	}
@@ -86,6 +97,9 @@ public class Monster : Character
 
     public void TakeDamage(float damage)
     {
+        if (damageClip != null && audioSource != null)
+            audioSource.PlayOneShot(damageClip);
+
         curHp -= damage;
 
         animator.SetBool("IsDamage", true);
