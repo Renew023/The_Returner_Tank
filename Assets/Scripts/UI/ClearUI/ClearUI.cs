@@ -16,6 +16,6 @@ public class ClearUI : MonoBehaviour
         UIManager.Instance.uiController.SetDungeonUI(false);
         GameManager.Instance.SetStageInfo(0, 0, 1);
         Time.timeScale = 1f;
-        SceneManager.LoadScene("StartScene");
+		SceneManager.LoadScene("StartScene");
     }
 }

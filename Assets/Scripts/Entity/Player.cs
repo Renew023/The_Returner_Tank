@@ -34,10 +34,11 @@ public class Player : Character
     {
         rb.freezeRotation = true;
         animator = GetComponentInChildren<Animator>();
-    }
+	}
 
     void OnEnable()
     {
+
         DataManager.instance.Pick();
 
         for (int i = 0; i < DataManager.instance.playerValue.playerSkill.Count; i++)
