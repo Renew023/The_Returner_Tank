@@ -8420,6 +8420,71 @@ MonoBehaviour:
   camera: {fileID: 1165265429}
   minCameraRange: {x: -10, y: -18}
   maxCameraRange: {x: 9, y: 18.2}
+--- !u!1001 &1503974181
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2242405355155637982, guid: 1ce0c7f94cca9634c9c22179daee5531, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3527284752707964488, guid: 1ce0c7f94cca9634c9c22179daee5531, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.026428
+      objectReference: {fileID: 0}
+    - target: {fileID: 3527284752707964488, guid: 1ce0c7f94cca9634c9c22179daee5531, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.9900063
+      objectReference: {fileID: 0}
+    - target: {fileID: 3527284752707964488, guid: 1ce0c7f94cca9634c9c22179daee5531, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.4972835
+      objectReference: {fileID: 0}
+    - target: {fileID: 3527284752707964488, guid: 1ce0c7f94cca9634c9c22179daee5531, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3527284752707964488, guid: 1ce0c7f94cca9634c9c22179daee5531, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3527284752707964488, guid: 1ce0c7f94cca9634c9c22179daee5531, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3527284752707964488, guid: 1ce0c7f94cca9634c9c22179daee5531, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3527284752707964488, guid: 1ce0c7f94cca9634c9c22179daee5531, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3527284752707964488, guid: 1ce0c7f94cca9634c9c22179daee5531, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3527284752707964488, guid: 1ce0c7f94cca9634c9c22179daee5531, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757517600887156791, guid: 1ce0c7f94cca9634c9c22179daee5531, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: df397e36679e68f499e03ef75cb92598, type: 3}
+    - target: {fileID: 5233367057072548732, guid: 1ce0c7f94cca9634c9c22179daee5531, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1ce0c7f94cca9634c9c22179daee5531, type: 3}
 --- !u!1 &1564112904
 GameObject:
   m_ObjectHideFlags: 0
@@ -10349,6 +10414,7 @@ MonoBehaviour:
   expParent: {fileID: 0}
   player: {fileID: 0}
   warpZone: {fileID: 0}
+  waveMessageUI: {fileID: 0}
   currentWave: 1
   maxWave: 1
   pools: {fileID: 2081940347}
@@ -10433,6 +10499,7 @@ SceneRoots:
   - {fileID: 1909743401}
   - {fileID: 2081940348}
   - {fileID: 598110998}
+  - {fileID: 1503974181}
   - {fileID: 384846119}
   - {fileID: 1841581937}
   - {fileID: 1764647337}

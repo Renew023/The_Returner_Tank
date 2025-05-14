@@ -98,9 +98,13 @@ public class Monster : Character
 
     public void TakeDamage(float damage)
     {
-		//효과음
-        if (damageClip != null && audioSource != null)
-            audioSource.PlayOneShot(damageClip);
+        //효과음
+        if (damageClip != null)
+		{
+            var listenerPos = Camera.main.transform.position;
+            AudioSource.PlayClipAtPoint(damageClip, transform.position,1.0f);
+        }
+            
 
         curHp -= damage;
 
@@ -122,8 +126,12 @@ public class Monster : Character
 
     void Death()
 	{
-        if (damageClip != null && audioSource != null)
-            audioSource.PlayOneShot(DeathClip);
+        //효과음
+        if (DeathClip != null)
+		{
+            var listenerPos = Camera.main.transform.position;
+            AudioSource.PlayClipAtPoint(DeathClip, transform.position,1.0f);
+        }
 
         //	중복 호출을 방지!
         if (isDead)
