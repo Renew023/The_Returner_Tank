@@ -21,16 +21,12 @@ __탱크로 다시 태어난 나는 미궁을 방랑한다. 게임의 기술서_
 </div>
 <br>
 
-<div align="left";>
-> **게임 안내**
+
+> 게임 안내
 > - 플레이어
 > - 플레잉
 
-</div>
 
-
-<div align="left"; style="border: 1px solid #ccc; border-radius: 8px; padding: 16px; background-color: #f9f9f9;">
-  
 > **🎉 기술 설명**
 > - 👨🏻 [플레이어](#-플레이어)
 >     - [카메라 이동 및 제한 (`FollowCamera.cs`)](#1-카메라-이동-및-제한-followcameracs)
@@ -72,7 +68,6 @@ __탱크로 다시 태어난 나는 미궁을 방랑한다. 게임의 기술서_
 >   - [웨이브 설정, 몬스터 풀 기능 구현 (`DungeonManager.cs`)](#3-웨이브-설정-몬스터-풀-기능-구현-dungeonmanagercs)
 >   - [작업한 스크립트 / 메서드 요약](#작업한-스크립트--메서드-요약)
 
-</div> 
 <br>
 
 *** 
