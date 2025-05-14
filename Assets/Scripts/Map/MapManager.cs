@@ -196,6 +196,8 @@ public class MapManager : MonoBehaviour
             DrawDots(prev, bossCtrl);
 
         // 플레이어 인디케이터 생성 
+        if (playerIndicatorRt != null)
+            Destroy(playerIndicatorRt.gameObject); // 기존 인디케이터 삭제
         var pi = Instantiate(playerIndicatorPrefab, stageContainer);
         playerIndicatorRt = pi.GetComponent<RectTransform>();
 
@@ -295,11 +297,8 @@ public class MapManager : MonoBehaviour
             Destroy(playerIndicatorRt.gameObject);
         playerIndicatorRt = null;
 
-        // 2) 맵 데이터와 렌더링 재실행
-        GenerateMapData();
-        RenderMap();
 
-        // 3) 플레이어 인디케이터 위치 초기화
+        // 2) 플레이어 인디케이터 위치 초기화
         currentRow = 0;
         currentCol = 0;
         RestoreMap();
