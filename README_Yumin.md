@@ -53,7 +53,7 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다.
 - 핵심기술
     - Physics2D.OverlapCircle로 주변 Collider(trigger) 탐지
     - 탐지한 Collider까지의 거리를 비교 후 가장 짧은 거리 탐지
-        - 예외처리로 Raycast로 그 좌표까지 이동하는 도중에 벽이 있을 경우 거리계산하지 않음.
+    - 예외처리로 Raycast로 그 좌표까지 이동하는 도중에 벽이 있을 경우 거리계산하지 않음.
     - WeaponController에서 일정 시간마다 공격
 <details>
     
@@ -70,7 +70,7 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다.
     - 피격받는 대상이 OnTriggerEnter2D로 화살에 맞았는지 판정.
     - ~~owner를 지정하여 본인이 피격받지 않게함~~
     - Tag를 활용하여 발사한 대상과 같은 Tag일 경우 피해를 입히지 않게함.
-        - TakeDamage로 맞은 대상의 체력을 감소.
+    - TakeDamage로 맞은 대상의 체력을 감소.
 <details>
     
 ![Movie_013](https://github.com/user-attachments/assets/f0a81d29-8ca7-4154-a95b-10f086768aed)
@@ -85,10 +85,10 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다.
 
 - 핵심기술
     - Skill(부여할 스킬)
-        - SkillType(증가시킬 능력치)
-        - WeaponController(무기에 대한 정보 중 참조형)
-            - Weapon(무기에 대한 정보 중 값형)
-            - Arrow(발사체)
+    - SkillType(증가시킬 능력치)
+    - WeaponController(무기에 대한 정보 중 참조형)
+    - Weapon(무기에 대한 정보 중 값형)
+    - Arrow(발사체)
 
 <details>
     
@@ -120,9 +120,9 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다.
 
 - 핵심기술
     - 실제 맵에서의 몬스터와 캐릭터를 추적
-        - Math.Clamp를 활용하여 미니맵 밖으로 나가는 거 방지
-        - 추적한 위치를 기반으로 미니맵에 표시
-            - 몬스터의 존재 여부에 따라 List를 추가하거나 SetActive(false)로 관리
+    - Math.Clamp를 활용하여 미니맵 밖으로 나가는 거 방지
+    - 추적한 위치를 기반으로 미니맵에 표시
+    - 몬스터의 존재 여부에 따라 List를 추가하거나 SetActive(false)로 관리
     - Mask 기능을 활용하여 기존 맵 구조 중 일부를 화면에 표기되지 않도록 설정
   
 <details>
