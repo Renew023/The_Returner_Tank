@@ -35,14 +35,10 @@ __탱크로 다시 태어난 나는 미궁을 방랑한다. 게임의 기술서_
 > - 📺 [미니맵](#-미니맵)
 >     - [미니맵 구현](#1-미니맵-구현)
 > - 🏫 [스테이지 선택지](#-스테이지-선택지)
->     - [스크립트별 기능 설명](#1-스크립트별-기능-설명)
->       - [MapManager.cs](#11-mapmanagercs)
->       - [SceneController](#12-scenecontroller)
->       - [NodeController](#13-nodecontroller)
->       - [HealTrigger/EventTrigger](#14-healtrigger--eventtrigger)
->     - [트러블 슈팅](#2-트러블-슈팅)
->       - [플레이어 인디케이터 위치 초기화 누락](#21-플레이어-인디케이터-위치-초기화-누락)
->       - [맵 데이터 재생성 누락](#22-맵-데이터-재생성-누락)
+>       - [MapManager.cs](#1-mapmanagercs)
+>       - [SceneController](#2-scenecontroller)
+>       - [NodeController](#3-nodecontroller)
+>       - [HealTrigger/EventTrigger](#4-healtrigger--eventtrigger)
 > - 🧠 [Enemy AI & Pathfinding System](#-enemy-ai--pathfinding-system)
 >   - 👾 [EnemyAI](#-enmeyai)
 >     - [1. 상태 기반 FSM 구조 (`IEnemyState.cs` 및 하위 클래스)](#1-상태-기반-fsm-구조-ienemystatecs-및-하위-클래스)
@@ -125,12 +121,12 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다.
 - Mask 기능을 활용하여 기존 맵 구조 중 일부를 화면에 표기되지 않도록 설정
 <br>  
 
+
  <!--이수명님-->
+ ***
 # 🏫 [스테이지 선택지]
 
-## 1. 스크립트별 기능 설명
-
-### 1.1 `MapManager.cs`
+### 1. `MapManager.cs`
 - MapScene에 진입하여 맵을 랜덤으로 생성하기 위해 노드·점선·플레이어 인디케이터를 생성·관리하는 핵심 클래스
 
 **맵 데이터 생성 (`GenerateMapData`)**
@@ -186,8 +182,8 @@ public void ResetMap()
 }
 ```
 
-
-### 1.2 'SceneController'
+***
+### 2. 'SceneController'
  - 씬 전환 로직 관리, 일반 진입(ToMap) vs 특수 초기화 진입(FirstToMap) 분리
  ```cs
 public static void FirstToMap()
@@ -210,107 +206,16 @@ private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     }
 }
 ```
-
-### 1.3 'NodeController'
+***
+### 3. 'NodeController'
  - 각 노드의 Image, Button 초기화
  - 클릭 시 MapManager.OnNodeClicked(r,c,type) 호출
 
-### 1.4 'HealTrigger / EventTrigger'
+***
+### 4. 'HealTrigger / EventTrigger'
  - EventScene인 Heal 이벤트와 Levelup 이벤트를 작동하게 하는 클래스
  - OnTriggerEnter2D에서 Player 충돌 감지 → Player.HealTrigger(), Player.LevelUpTrigger() 호출
 
-
-## 2. 트러블 슈팅
-### 2.1 '플레이어 인디케이터 위치 초기화 누락'
- - 문제: ResetMap() 후 currentRow/currentCol 값이 이전 상태로 남아 있어 인디케이터가 항상 마지막 위치에 렌더링됨
-
-** 발생 코드 (수정 전)**
- ```cs
-public void ResetMap()
-{
-    GenerateMapData();
-    RenderMap();
-    // currentRow/currentCol 초기화 누락
-}
-```
-
-**해결방법**
-- ResetMap() 내에 시작점으로 상태 초기화 추가
-
- ```cs
-public void ResetMap()
-{
-    // 1) 삭제 로직 …
-    // 2) 데이터 재생성
-    GenerateMapData();
-    RenderMap();
-    // 3) 위치 초기화
-    currentRow = 0;
-    currentCol = 0;
-    RestoreMap();   
-}
-```
-
-**결과**
-- 매번 “첫 진입”처럼 인디케이터가 스타트 노드로 리셋되어 정상 동작
-
-### 2.2 '맵 데이터 재생성 누락'
- ** 증상 **
- - 첫 맵 진입 시에는 새로운 맵이 잘 생성되지만, FirstToMap() 등으로 다시 맵씬에 들어와도 같은 맵이 반복 표시됨.
-
- ** 원인 코드 **
-- MapManager 내의 initialized 플래그가 true로 설정되면,
-InitializeOrRestoreMap()에서 더 이상 GenerateMapData()를 실행하지 않음.
- ```cs
-static bool initialized = false;
-
-void InitializeOrRestoreMap()
-{
-    if (!initialized && GameManager.Instance.FirstMapEntry)
-    {
-        GenerateMapData();          // 첫 진입에서만 실행
-        initialized = true;
-        GameManager.Instance.DisableFirstMapEntry();
-    }
-    RenderMap();
-    RestoreMap();
-}
-```
-
-** 해결 방법 **
- - ResetMap() 호출 시 플래그를 리셋하거나, InitializeOrRestoreMap() 로직을 항상 새로운 맵 데이터를 생성하도록 변경
-
- ```cs
-// MapManager.cs
-public void ResetMap()
-{
-    // 맵 삭제 로직…
-
-+   // 초기화 플래그 리셋
-+   initialized = false;
-
-    // 맵 재생성
-    GenerateMapData();
-    RenderMap();
-}
-
-void InitializeOrRestoreMap()
-{
-+   // ResetMap()으로 리셋된 경우에도 GenerateMapData 호출 보장
-    if (!initialized && GameManager.Instance.FirstMapEntry)
-    {
-        GenerateMapData();
-        initialized = true;
-        GameManager.Instance.DisableFirstMapEntry();
-    }
-    RenderMap();
-    RestoreMap();
-}
-```
-
-** 결과 **
-- ResetMap()을 거쳐 다시 맵씬에 들어올 때마다 initialized가 false로 바뀌어
-GenerateMapData()가 반드시 실행됨 >> 항상 새로운 맵이 랜덤 생성되어 정상 작동
 
  <!--권우성님-->
 ***
@@ -392,7 +297,7 @@ GenerateMapData()가 반드시 실행됨 >> 항상 새로운 맵이 랜덤 생�
 
 
  <!--박진우님-->
---- 
+ ***
 
 ## Monster Spawn
 
