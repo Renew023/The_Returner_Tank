@@ -104,7 +104,7 @@ __탱크로 다시 태어난 나는 미궁을 방랑한다. 게임의 기술서_
 >   - [몬스터 UI (`Monster.cs`)](#-2-몬스터-ui)
 >   - [일시정지 UI (`PauseUI.cs`)](#%EF%B8%8F-3-일시정지-ui)
 >   - [사망 UI (`DeathUI.cs`)](#-4-사망-ui)
->   - [웨이브 UI (`WaveMessageUI`)](#-5-웨이브-ui)
+>   - [웨이브 UI (`WaveMessageUI.cs`)](#-5-웨이브-ui)
 
 <br>
 
