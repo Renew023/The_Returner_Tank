@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DungeonManager : MonoBehaviour
 {
@@ -55,14 +56,20 @@ public class DungeonManager : MonoBehaviour
     {
         //  DungeonManager���� ���� ���̺긦 �����Ѵ�!!
         currentWave = 1;
+        string sceneName = SceneManager.GetActiveScene().name;
 
-        Spawner.instance.SpawnFixedWave();
-
+        if ((sceneName.StartsWith("DungeonScene")
+             || sceneName == "BossBattleScene")
+            && Spawner.instance != null)
+        {
+            Spawner.instance.SpawnFixedWave();
+        }
         StartCoroutine(InitializeAfterUIReady());
     }
 
     private IEnumerator InitializeAfterUIReady()
     {
+
         yield return null; // 한 프레임 기다림 (UIController의 OnEnable()이 먼저 실행되도록)
 
         if (UIManager.Instance.uiController != null)
@@ -73,6 +80,16 @@ public class DungeonManager : MonoBehaviour
         else
         {
             Debug.LogWarning("UIController가 아직 초기화되지 않았습니다.");
+        }
+        // 이벤트씬일 경우 제외
+        string scene = SceneManager.GetActiveScene().name;
+        if (scene == "EventScene" || scene == "Event_HealScene")
+        {
+            yield break;
+        }
+        if (Spawner.instance != null)
+        {
+            Spawner.instance.SpawnFixedWave();
         }
 
         Spawner.instance.SpawnFixedWave();
@@ -129,11 +146,11 @@ public class DungeonManager : MonoBehaviour
         // 플레이어 HP 저장
         Player player = FindObjectOfType<Player>();
 
-        if (player != null)
-        {
-            DataManager.instance.savedPlayerHp = player.CurHP;
-            DataManager.instance.savedPlayerMaxHp = player.MaxHp;
-        }
+        //if (player != null)
+        //{
+        //    DataManager.instance.savedPlayerHp = player.CurHP;
+        //    DataManager.instance.savedPlayerMaxHp = player.MaxHp;
+        //}
 
         // 던전 레벨 증가
         GameManager.Instance.IncreaseDungeonLevel();
