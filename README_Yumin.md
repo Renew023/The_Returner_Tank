@@ -89,7 +89,8 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다.
 - 핵심기술
     - 실제 맵에서의 몬스터와 캐릭터를 추적
         - Math.Clamp를 활용하여 미니맵 밖으로 나가는 거 방지
-    - 몬스터의 존재 여부에 따라 List를 추가하거나 SetActive(false)로 관리
+        - 추적한 위치를 기반으로 미니맵에 표시
+            - 몬스터의 존재 여부에 따라 List를 추가하거나 SetActive(false)로 관리
     - Mask 기능을 활용하여 기존 맵 구조 중 일부를 화면에 표기되지 않도록 설정
 ![Movie_021](https://github.com/user-attachments/assets/8865a3f1-d433-40cc-a333-70842492afd1)
 
