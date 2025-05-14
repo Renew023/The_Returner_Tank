@@ -21,7 +21,6 @@ public class Player : Character
     public PlayerValue playerValue;
 
     private float demandExp;
-    [SerializeField] private float Level;
     [SerializeField] private Image hpBarFill;
 
     //[SerializeField] public List<Skill> skillList = new List<Skill>(10);
@@ -34,10 +33,11 @@ public class Player : Character
     {
         rb.freezeRotation = true;
         animator = GetComponentInChildren<Animator>();
-    }
+	}
 
     void OnEnable()
     {
+
         DataManager.instance.Pick();
 
         for (int i = 0; i < DataManager.instance.playerValue.playerSkill.Count; i++)
