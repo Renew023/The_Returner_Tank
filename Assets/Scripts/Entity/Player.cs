@@ -77,7 +77,9 @@ public class Player : Character
         {
             DataManager.instance.playerWeapon.Add(playerValue.weapons[j].weapon);
         }
-    }
+		DataManager.instance.savedPlayerHp = CurHP;
+		DataManager.instance.savedPlayerMaxHp = MaxHp;
+	}
 
     private new void Start()
     {

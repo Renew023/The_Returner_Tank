@@ -36,6 +36,8 @@ public class DataManager : MonoBehaviour
 		WeaponSkillList = skillList.Where(skill => skill.weaponCon != null).ToList();
 		skill = WeaponSkillList[0];
 		curPlayerSkillMax = 0;
+		savedPlayerHp = 400;
+		savedPlayerMaxHp = 400;
 	}
 
     void Awake()
