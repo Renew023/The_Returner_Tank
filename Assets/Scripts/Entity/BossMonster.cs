@@ -12,13 +12,23 @@ public class BossMonster : Character
 	[SerializeField] private List<WeaponController> weaponController;
 	[SerializeField] private Transform monsterTransform;
 
-	protected Animator animator;
+    [Header("Sound Effects")]
+    public AudioClip damageClip;           // 인스펙터에 할당할 피격 사운드
+    public AudioClip DeathClip;          // 인스펙터에 할당할 피격 사운드
+    private AudioSource audioSource;       // AudioSource 캐시
+
+    protected Animator animator;
 
     protected override void Start()
     {
+        //효과음 넣기
+        audioSource = GetComponent<AudioSource>();
+
         base.Start();
         target = FindObjectOfType<Player>();
         animator = GetComponentInChildren<Animator>();
+        UIManager.Instance.uiController.SetBossHP(true);
+        UIManager.Instance.uiController.bossHP.UpdateValue(curHp, maxHp);
     }
 
     private void Update()
@@ -133,12 +143,18 @@ public class BossMonster : Character
 
     public void TakeDamage(float damage)
     {
+        //효과음
+        AudioManager.Instance.PlaySFX(damageClip, 1.0f);
+
+
         curHp -= damage;
 
         animator.SetBool("IsDamage", true);
 
         //	일정 시간이 지난 후, Damage 애니메이션 플래그 초기화
         StartCoroutine(ResetDamageAnim());
+
+        UIManager.Instance.uiController.bossHP.UpdateValue(curHp, maxHp);
 
         if (curHp <= 0)
         {
@@ -148,7 +164,11 @@ public class BossMonster : Character
 
     void Death()
     {
+        //효과음
+        AudioManager.Instance.PlaySFX(DeathClip, 1.0f);
+
         gameObject.SetActive(false);
+        UIManager.Instance.uiController.SetBossHP(false);
 
         //	해당 몬스터가 속해있는 몬스터 수 감소.
         DungeonManager.instance.OnEnemyDeath();

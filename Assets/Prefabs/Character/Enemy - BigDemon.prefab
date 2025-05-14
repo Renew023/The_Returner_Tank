@@ -134,6 +134,8 @@ MonoBehaviour:
   weaponController: {fileID: 8679426697464477722}
   hpBarFill: {fileID: 809700570773627994}
   monsterTransform: {fileID: 6191788147004390145}
+  damageClip: {fileID: 8300000, guid: 60973ce981eb3cb4b9af546d4eb39c46, type: 3}
+  DeathClip: {fileID: 8300000, guid: df397e36679e68f499e03ef75cb92598, type: 3}
 --- !u!114 &4470708118024134508
 MonoBehaviour:
   m_ObjectHideFlags: 0

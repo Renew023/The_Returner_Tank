@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DeathUI : MonoBehaviour
+public class ClearUI : MonoBehaviour
 {
-    [SerializeField] private GameObject DeathMenu;
+    [SerializeField] private GameObject ClearMenu;
 
     public void Show(bool show)
     {
-        DeathMenu.SetActive(show);
+        ClearMenu.SetActive(show);
         Time.timeScale = 0f;
     }
 

@@ -34,7 +34,6 @@ public class Player : Character
     {
         rb.freezeRotation = true;
         animator = GetComponentInChildren<Animator>();
-
     }
 
     void OnEnable()
@@ -132,6 +131,10 @@ public class Player : Character
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             UIManager.Instance.uiController.pauseUI.PauseMenuToggle(); //ESC�Է½� ���� ����.
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            UIManager.Instance.uiController.clearUI.Show(true);
         }
     }
 
@@ -231,7 +234,7 @@ public class Player : Character
 
         if (curHp <= 0)
         {
-            //Death();
+            UIManager.Instance.uiController.deathUI.Show(true);
         }
     }
 
