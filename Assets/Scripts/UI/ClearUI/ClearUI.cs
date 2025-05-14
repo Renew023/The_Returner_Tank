@@ -17,6 +17,6 @@ public class ClearUI : MonoBehaviour
         UIManager.Instance.uiController.pauseUI.OffSkillImages(UIManager.Instance.uiController.pauseUI.skillsCount);
         GameManager.Instance.SetStageInfo(0, 0, 1);
         Time.timeScale = 1f;
-        SceneManager.LoadScene("StartScene");
+		SceneManager.LoadScene("StartScene");
     }
 }
