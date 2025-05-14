@@ -43,6 +43,7 @@ public class PauseUI : MonoBehaviour
 
     public void ReturnMain()
     {
+        UIManager.Instance.uiController.SetBossHP(false);
         PauseMenu.SetActive(false);
         OffSkillImages(skillsCount);
         GameManager.Instance.SetStageInfo(0, 0, 1);
