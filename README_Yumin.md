@@ -2,13 +2,13 @@
 [내배캠] 궁수의 전설 모작 팀프로젝트
 
 **Table of Contents**
-1. [구현1](#구현1)
+1. [플레이어](#[플레이어])
     1. [카메라 이동 및 제한](#카메라-이동-및-제한)
     1. [플레이어 이동](#플레이어-이동)
     1. [플레이어 공격](#플레이어-공격)
     1. [플레이어 피격](#플레이어-피격)
 
-## 구현1
+## [플레이어]
 
 ### 카메라 이동 및 제한
 카메라는 플레이어를 타겟팅하기 위해서 만들었습니다. Lerp를 활용하여 카메라는 플레이어를 바로 붙는 것이 아닌 부드럽게 따라오며, Camera.orthographic으로 카메라의 크기를 확인하고 Math.Clamp로 전체 맵과 카메라만큼의 너비를 제한함으로써 카메라가 범위 밖으로 벗어나지 않도록 조정했습니다.
@@ -36,3 +36,25 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다. 또한 
 피격 시에는 공격한 상대방의 공격력만큼 체력이 감소하고 발사체는 비활성화됩니다. 
 
 ![Movie_013](https://github.com/user-attachments/assets/f0a81d29-8ca7-4154-a95b-10f086768aed)
+
+## [스킬]
+
+### 스킬 구조
+각 발사체를 날리는 무기에 대한 정보를 담을 수 있는 Arrow클래스와 그 무기에 값을 전달하고 무기를 다룰 수 있는 Weapon, WeaponController와 그 무기에 대한 정보 및 플레이어의 능력치를 바꿔주는 Skill클래스로 나누어 스킬을 제작했습니다. WeaponController를 수정하여 Arrow에 줄 수 있는 값을 수정할 수 있고 이를 이용하여 다양한 능력치를 가진 무기를 만들 수 있었습니다.
+
+![image](https://github.com/user-attachments/assets/039936c0-2e40-4d44-8393-2d95ee7986dd)
+
+### 스킬 패턴
+스킬은 Arrow에서 날라가는 것이 아닌 그 위치에 번개를 친다던지 수정을 할 수 있었으나, 작업에 대한 시간관계상 WeaponController의 값을 다양하게 수정하는 것으로 스킬 패턴을 구현했습니다.
+
+![Movie_020](https://github.com/user-attachments/assets/6f7f5c4d-4283-4480-a2c3-643bbece9d52)
+![Movie_016](https://github.com/user-attachments/assets/3779a25b-a53a-4b8c-ae2a-fb1b1cf9b263)
+
+## [미니맵]
+
+### 미니맵 구조
+기존에 사용하던 맵의 사이즈를 줄이고 플레이어와 몬스터의 부분은 색칠된 점을 표시해주는 것으로 위치 파악을 쉽게 할 수 있도록 만들었습니다.
+![Movie_021](https://github.com/user-attachments/assets/8865a3f1-d433-40cc-a333-70842492afd1)
+
+
+
