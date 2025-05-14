@@ -2,9 +2,9 @@
 <div align="center" markdown>
   
   # 탱크로 다시 태어난 나는 미궁을 방랑한다.
+<img src="https://github.com/user-attachments/assets/b1a1e2a4-d13a-4e30-b495-d17b885ee701" width="300" />
 </div>
 
-<img src="https://github.com/user-attachments/assets/b1a1e2a4-d13a-4e30-b495-d17b885ee701" width="300" />
 
 <div align="center" markdown>
 [내배캠] 궁수의 전설 모작 팀프로젝트
