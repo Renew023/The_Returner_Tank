@@ -36,7 +36,8 @@ __탱크로 다시 태어난 나는 미궁을 방랑한다. 게임의 기술서_
 
 ***
 ## 🖼 [플레이화면]
-|![Movie_004](https://github.com/user-attachments/assets/ffddb92b-d597-405e-81d3-dc13f2d9819b)|![Movie_003](https://github.com/user-attachments/assets/cf5c3878-1938-4499-bef5-51a1cd197afa)| 
+|![Movie_004](https://github.com/user-attachments/assets/ffddb92b-d597-405e-81d3-dc13f2d9819b) | ![Movie_003](https://github.com/user-attachments/assets/cf5c3878-1938-4499-bef5-51a1cd197afa)|
+|----------------------------------------------------------------------------------------------| ---------------------------------------------------------------------------------------------|
 |DungeonManager.cs|OnEnemyDeath| 
 |DungeonManager.cs|ClearDungeon| 
 <br>
