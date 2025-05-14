@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class Dungeon : MonoBehaviour
 {
-    //  TODO: 오브젝트 풀링 방식을 활용하여 스폰 지역에 몬스터들을 랜덤 소환한다.
-
+    #region Dungeon 객체 변수 선언
     [Header ("Enemies")]
     public GameObject[] Enemies;
 
     //  풀을 담당하는 리스트들
     List<GameObject>[] pools;
 
+    #endregion
+
+    #region Awake 메서드
     private void Awake()
     {
         //  pool 리스트를 Enemies 배열의 크기만큼 할당한다.
@@ -24,6 +26,9 @@ public class Dungeon : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region CreateEnemies 메서드 → 몬스터 생성 메서드
     //  오브젝트 풀링을 활용한 몬스터 생성 메서드
     public GameObject CreateEnemies(int index)
     {
@@ -48,7 +53,6 @@ public class Dungeon : MonoBehaviour
         {
             selectObject = Instantiate(Enemies[index], transform);
             pools[index].Add(selectObject);
-            Debug.Log("[Dungeon CreateEnemies] 몬스터 스폰 성공");
         }
 
         // 초기화
@@ -62,10 +66,11 @@ public class Dungeon : MonoBehaviour
         else
         {
             // 기본 활성화만 처리 (예외적으로)
-            Debug.Log($"[Dungeon CreateEnemies enemyComponent가 null값일 때]");
             selectObject.SetActive(true);
         }
 
         return selectObject;
     }
+
+    #endregion
 }

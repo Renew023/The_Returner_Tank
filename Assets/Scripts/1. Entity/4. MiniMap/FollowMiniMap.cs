@@ -4,28 +4,36 @@ using UnityEngine;
 
 public class FollowMiniMap : MonoBehaviour
 {
-	[SerializeField] private Transform target;
+    #region FollowMiniMap 변수 선언
+    [SerializeField] private Transform target;
 	[SerializeField] private GameObject targetShow;
-	//[SerializeField] private Camera camera;
+
 	private float offsetX;
 	private float offsetY;
+
 	[SerializeField] private Vector2 minMiniMapRange;
 	[SerializeField] private Vector2 maxMiniMapRange;
+
 	private float scaleValue = 0.2f;
 
-	void Awake()
+    #endregion
+
+    #region Awake, OnEnable 메서드
+
+    void Awake()
 	{
 	}
 
 	void OnEnable()
 	{
-		//target = GameObject.Find("Player").GetComponent<Transform>();
 	}
 
-	void Start()
+    #endregion
+
+    #region Start 메서드
+    void Start()
 	{
-		//minCameraRange.x += camera.orthographicSize * Screen.width / Screen.height;
-		//maxCameraRange.x += -(camera.orthographicSize * Screen.width / Screen.height) + 1;
+	
 		minMiniMapRange *= scaleValue;
 		maxMiniMapRange *= scaleValue;
 
@@ -35,19 +43,16 @@ public class FollowMiniMap : MonoBehaviour
 		maxMiniMapRange.x += -7f * scaleValue + scaleValue;
 		maxMiniMapRange.y += -7f * scaleValue;
 
-
-		//minCameraRange.y += camera.orthographicSize;
-		//maxCameraRange.y += -(camera.orthographicSize);
-
 		offsetX = transform.localPosition.x - (target.localPosition.x * scaleValue);//0 - 3
 		offsetY = transform.localPosition.y - (target.localPosition.y * scaleValue);//0 - 3
 	}
 
+    #endregion
 
-	void LateUpdate()
+    #region LateUpdate 메서드 
+    void LateUpdate()
 	{
 		Vector3 pos = transform.localPosition; // 0 0 0
-
 
 		pos.x = -1 *((target.localPosition.x * scaleValue) + offsetX);
 		pos.y = -1 *((target.localPosition.y * scaleValue) + offsetY);
@@ -58,5 +63,6 @@ public class FollowMiniMap : MonoBehaviour
 
 		transform.localPosition = Vector3.Lerp(transform.localPosition, pos, 1 / 5f / 5f);
 	}
-}
 
+    #endregion
+}

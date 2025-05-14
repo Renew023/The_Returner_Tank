@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Spawner : MonoBehaviour
 {
+    #region Spawner 객체 변수 선언
     public static Spawner instance;
 
     [Header ("Spawn Points")]
@@ -21,6 +22,9 @@ public class Spawner : MonoBehaviour
     public int testWave = 1;
     public bool useTestWave = false;
 
+    #endregion
+
+    #region Awake 메서드
     private void Awake()
     {
         if(instance == null)
@@ -38,6 +42,9 @@ public class Spawner : MonoBehaviour
         BuildSpawnDataDictionary();
     }
 
+    #endregion
+
+    #region BuildSpawnDataDictionary 메서드 → spawnDataDict를 설정하는 기능
     private void BuildSpawnDataDictionary()
     {
         spawnDataDict = new Dictionary<(int wave, int dungeonLevel), WaveSpawnData>();
@@ -58,7 +65,9 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    //  현재 웨이브에 맞는 몬스터들을 무작위로 스폰하는 메서드
+    #endregion
+
+    #region SpawnFixedWave 메서드 →  현재 웨이브에 맞는 몬스터들을 무작위로 스폰하는 메서드
     public void SpawnFixedWave()
     {
         //이벤트 씬일 경우 건너뜀
@@ -84,7 +93,6 @@ public class Spawner : MonoBehaviour
         }
 
         int spawnCount = Mathf.Min(spawnPoint.Length, data.baseEnemyCount + dungeonLevel);
-        //int spawnCount = Mathf.Min(spawnPoint.Length, data.baseEnemyCount);
 
         //  실제로 성공적으로 생성되는 적의 수를 세기 위한 변수 추가
         int realSpawned = 0;
@@ -110,8 +118,11 @@ public class Spawner : MonoBehaviour
             DungeonManager.instance.currentWave = testWave;
         }
     }
+
+    #endregion
 }
 
+#region WaveSpawnData, WaveSpawnEntry 자료형 선언
 [System.Serializable]
 public class WaveSpawnData
 {
@@ -126,3 +137,5 @@ public class WaveSpawnEntry
     public int dungeonLevel;
     public WaveSpawnData data;
 }
+
+#endregion

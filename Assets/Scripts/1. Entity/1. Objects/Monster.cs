@@ -5,9 +5,8 @@ using UnityEngine.UI;
 
 public class Monster : Character
 {
-	
-
-	[SerializeField] private Transform expParent;
+    #region Monster 객체 변수 선언
+    [SerializeField] private Transform expParent;
 	[SerializeField] private int exp;
 	[SerializeField] private GameObject expPrefab;
 	[SerializeField] private Player target;
@@ -25,7 +24,10 @@ public class Monster : Character
 
 	private bool isDead = false;
 
-	void Awake()
+    #endregion
+
+    #region Awake, Init, Start 메서드
+    void Awake()
 	{
 		//효과음 넣기
         audioSource = GetComponent<AudioSource>();
@@ -45,72 +47,78 @@ public class Monster : Character
 		base.Start();
 	}
 
+    #endregion
 
-	void Update()
+    #region Update 메서드
+    void Update()
 	{
 		Move();
+
 		Rotate();
+
 		lookDirection = (target.transform.position - transform.position);
+
 		weaponController.targetDirect = lookDirection;
-		//if ((timer > attackDelay))
-		//{
-		//	weaponController.Attack(lookDirection);
-		//	timer = 0f;
-		//}
-		//else
-		//{
-		//	timer += Time.deltaTime;
-		//}
-		Move();
 	}
 
-	override protected void Move()
+    #endregion
+
+    #region Move, Rotate 메서드
+    override protected void Move()
 	{
 		animator.SetBool("IsMove", true);
 	}
 
 	override protected void Rotate()
 	{
-        //isLeft = target.transform.position.x < transform.position.x ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
-
-        //transform.localScale = isLeft;
-        if (target == null) return;
+		if (target == null)
+		{
+			return;
+		}
 
         bool flip = target.transform.position.x < transform.position.x;
+
         Vector3 newScale = flip ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
 
         monsterTransform.localScale = newScale;
     }
 
-	public void OnTriggerEnter2D(Collider2D collision)
+    #endregion
+
+    #region 투사체와 충돌 시를 처리하는 메서드
+    public void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.gameObject.CompareTag("Arrow"))
 		{
 			Arrow arrow = collision.gameObject.GetComponent<Arrow>();
 			if (arrow.owner.CompareTag("Monster"))
-				return;
+			{
+                return;
+            }
 
-			//Hit(ref curHp, arrow.damage);
-			TakeDamage(arrow.damage);
+            TakeDamage(arrow.damage);
+
 			collision.gameObject.SetActive(false);
 		}
 	}
 
+    #endregion
+
+    #region TakeDamage 메서드 → 데미지 처리 기능
     public void TakeDamage(float damage)
     {
         //효과음
         if (damageClip != null)
 		{
             var listenerPos = Camera.main.transform.position;
+
             AudioSource.PlayClipAtPoint(damageClip, transform.position,1.0f);
         }
-            
 
         curHp -= damage;
 
         animator.SetBool("IsDamage", true);
 
-        //	���� �ð��� ���� ��, Damage �ִϸ��̼� �÷��� �ʱ�ȭ
 		if(this.gameObject.activeSelf)
 		{
             StartCoroutine(ResetDamageAnim());
@@ -124,6 +132,9 @@ public class Monster : Character
         }
     }
 
+    #endregion
+
+    #region Death 메서드 → 몬스터 사망 처리 기능
     void Death()
 	{
         //효과음
@@ -143,17 +154,22 @@ public class Monster : Character
 
 		gameObject.SetActive(false);
 
-		//	�ش� ���Ͱ� �����ִ� ���� �� ����.
 		DungeonManager.instance.OnEnemyDeath();
 	}
 
-	private IEnumerator ResetDamageAnim()
+    #endregion
+
+    #region ResetDamageAnim 메서드 → 피격 애니메이션 실행 후, 지정한 텀이 지난 후 피격 애니메이션을 종료하는 기능
+    private IEnumerator ResetDamageAnim()
 	{
 		yield return new WaitForSeconds(0.2f);
 		animator.SetBool("IsDamage", false);
 	}
-	
-	void OnEnable()
+
+    #endregion
+
+    #region OnEnable, OnDisable 메서드
+    void OnEnable()
 	{
 		hpBarFill.fillAmount = curHp / maxHp;
 		expParent = GameObject.Find("ExpObjects")?.transform;
@@ -163,8 +179,11 @@ public class Monster : Character
 	{
 		DropExp();
 	}
-	
-	private void DropExp()
+
+    #endregion
+
+    #region DropExp 메서드
+    private void DropExp()
 	{
 		int remainingExp = exp;
 		int dropExp = 1;
@@ -178,22 +197,30 @@ public class Monster : Character
 			dropExp *= 10;
 		}
 	}
-	
-	private void SpawnExpObject(int amount)
+
+    #endregion
+
+    #region SpawnExpObject 메서드
+    private void SpawnExpObject(int amount)
 	{
 		Vector2 randomOffset = Random.insideUnitCircle * 0.5f;
+
 		Vector3 spawnPos = transform.position + (Vector3)randomOffset;
 
 		GameObject obj = Instantiate(expPrefab, spawnPos, Quaternion.identity, expParent);
     
 		ExpObject expObj = obj.GetComponent<ExpObject>();
+
 		if (expObj != null)
 		{
 			expObj.expAmount = amount;
 		}
 	}
 
-	public void ResetEnemy()
+    #endregion
+
+    #region ResetEnemy 메서드 → 몬스터 재스폰 시, 초기화할 데이터를 관리하는 기능
+    public void ResetEnemy()
 	{
         curHp = maxHp;
 
@@ -221,4 +248,6 @@ public class Monster : Character
 
 		gameObject.SetActive(true);
 	}
+
+    #endregion
 }

@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class BossMonster : Character
 {
-	[SerializeField] private Transform expParent;
+    #region BossMonster 변수 선언
+    [SerializeField] private Transform expParent;
 	[SerializeField] private int exp;
 	[SerializeField] private GameObject expPrefab;
 	[SerializeField] private Player target;
@@ -19,133 +20,97 @@ public class BossMonster : Character
 
     protected Animator animator;
 
+    #endregion
+
+    #region Start 메서드
     protected override void Start()
     {
         //효과음 넣기
         audioSource = GetComponent<AudioSource>();
 
         base.Start();
+
         target = FindObjectOfType<Player>();
         animator = GetComponentInChildren<Animator>();
         UIManager.Instance.uiController.SetBossHP(true);
         UIManager.Instance.uiController.bossHP.UpdateValue(curHp, maxHp);
     }
 
+    #endregion
+
+    #region Update 메서드
     private void Update()
     {
 		Move();
+
 		Rotate();
+
 		lookDirection = (target.transform.position - transform.position);
+
         for (int i = 0; i < weaponController.Count; i++)
         {
             weaponController[i].targetDirect = lookDirection;
         }
-		//attackerTimer += Time.deltaTime;
-
-		//if(attackerTimer >= attackInterval)
-		//{
-		//    attackerTimer = 0.0f;
-
-		//    int attackPattern = Random.Range(0, 3);
-
-		//    switch(attackPattern)
-		//    {
-		//        case 0: 
-		//            BasicAttack();
-		//            break;
-		//        case 1: ConeAttack();
-		//            break;
-		//        case 2:
-		//            GroundSlam();
-		//            break;
-		//    }
-		//}
 	}
 
-    //void BasicAttack()
-    //{
-    //    Vector2 dir = (target.transform.position - transform.position).normalized;
-    //    GameObject proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-    //    proj.GetComponent<Rigidbody2D>().velocity = dir * 10f; // 예시 속도
-    //}
+    #endregion
 
-    //void ConeAttack()
-    //{
-    //    int bulletCount = 5;
-    //    float angleStep = 15f;
-    //    float angleStart = -((bulletCount - 1) * angleStep) / 2;
-
-    //    for (int i = 0; i < bulletCount; i++)
-    //    {
-    //        float angle = angleStart + angleStep * i;
-    //        Vector2 dir = Quaternion.Euler(0, 0, angle) * (target.transform.position - transform.position).normalized;
-
-    //        GameObject proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-    //        proj.GetComponent<Rigidbody2D>().velocity = dir * 8f;
-    //    }
-    //}
-
-    void GroundSlam()
-    {
-        // 여기선 단순히 범위 안에 있는 플레이어에게 피해를 주는 것으로 처리
-        float slamRadius = 3.0f;
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, slamRadius);
-
-        foreach (var hit in hits)
-        {
-            if (hit.CompareTag("Player"))
-            {
-                hit.GetComponent<Player>().TakeDamage(20); // 예시 데미지
-            }
-        }
-
-        // 애니메이션이나 이펙트도 여기에서 실행 가능
-        Debug.Log("Boss 사용 - 지면 강타!");
-    }
-
-	override protected void Move()
+    #region Move, Rotate 메서드
+    override protected void Move()
 	{
 		animator.SetBool("IsMove", true);
 	}
 
-	override protected void Rotate()
+    override protected void Rotate()
 	{
-		//isLeft = target.transform.position.x < transform.position.x ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
-
-		//transform.localScale = isLeft;
-		if (target == null) return;
+        if (target == null)
+        {
+            return;
+        }
 
 		bool flip = target.transform.position.x < transform.position.x;
+
 		Vector3 newScale = flip ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
 
 		monsterTransform.localScale = newScale;
 	}
 
-	public void OnTriggerEnter2D(Collider2D collision)
+    #endregion
+
+    #region 투사체와 충돌할 때의 처리 메서드
+    public void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.gameObject.CompareTag("Arrow"))
 		{
 			Arrow arrow = collision.gameObject.GetComponent<Arrow>();
-			if (arrow.owner == this.gameObject)
-				return;
 
-			//Hit(ref curHp, arrow.damage);
-			TakeDamage(arrow.damage);
+			if (arrow.owner == this.gameObject)
+            {
+                return;
+            }
+
+            TakeDamage(arrow.damage);
+
 			collision.gameObject.SetActive(false);
 		}
 	}
 
-	private void OnDrawGizmosSelected()
+    #endregion
+
+    #region OnDrawGizmosSelected 메서드
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, 3f);
     }
 
+    #endregion
+
+    #region TakeDamage 메서드 → 데미지 처리 메서드
     public void TakeDamage(float damage)
     {
         //효과음
         AudioManager.Instance.PlaySFX(damageClip, 1.0f);
-
 
         curHp -= damage;
 
@@ -163,6 +128,9 @@ public class BossMonster : Character
         }
     }
 
+    #endregion
+
+    #region Death 메서드 → 사망 처리 메서드
     void Death()
     {
         //효과음
@@ -174,9 +142,14 @@ public class BossMonster : Character
         DungeonManager.instance.OnEnemyDeath();
     }
 
+    #endregion
+
+    #region ResetDamageAnim 메서드 → 피격 애니메이션 실행 후, 지정한 텀이 지난 후 피격 애니메이션을 종료하는 기능
     private IEnumerator ResetDamageAnim()
     {
         yield return new WaitForSeconds(0.2f);
         animator.SetBool("IsDamage", false);
     }
+
+    #endregion
 }

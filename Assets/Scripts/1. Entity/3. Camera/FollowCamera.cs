@@ -4,23 +4,35 @@ using UnityEngine;
 
 public class FollowCamera : MonoBehaviour
 {
-	[SerializeField] private Transform target;
+    #region FollowCamera 변수 선언
+    [SerializeField] private Transform target;
 	[SerializeField] private Camera camera;
+
 	private float offsetX;
 	private float offsetY;
+
 	[SerializeField] private Vector2 minCameraRange;
 	[SerializeField] private Vector2 maxCameraRange;
 
-	void Awake()
+    #endregion
+
+    #region Awake 메서드
+    void Awake()
 	{
 	}
 
-	void OnEnable()
+    #endregion
+
+    #region OnEnable 메서드
+    void OnEnable()
 	{
 		target = GameObject.Find("Player").GetComponent<Transform>();
 	}
 
-	void Start()
+    #endregion
+
+    #region Start 메서드
+    void Start()
 	{
 		minCameraRange.x += camera.orthographicSize * Screen.width / Screen.height;
 		maxCameraRange.x += -(camera.orthographicSize * Screen.width / Screen.height) + 1;
@@ -33,8 +45,10 @@ public class FollowCamera : MonoBehaviour
 		offsetY = transform.position.y - target.position.y;
 	}
 
+    #endregion
 
-	void LateUpdate()
+    #region LateUpdate 메서드 → 플레이어를 추적하는 기능이 들어있습니다.
+    void LateUpdate()
 	{
 		float frame;
 		Vector3 pos = transform.position;
@@ -47,5 +61,6 @@ public class FollowCamera : MonoBehaviour
 
 		transform.position = Vector3.Lerp(transform.position, pos, 1/5f/5f);
 	}
-}
 
+    #endregion
+}
