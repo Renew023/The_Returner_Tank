@@ -23,11 +23,11 @@ __탱크로 다시 태어난 나는 미궁을 방랑한다. 게임의 기술서_
 
 <div align="left"; style="border: 1px solid #ccc; border-radius: 8px; padding: 16px; background-color: #f9f9f9;">
   
-> **🎉 Table of Contents**
+> **🎉 기술 설명**
 > - 👨🏻 [플레이어](#-플레이어)
->     - [카메라 이동 및 제한('FollowCamera.cs'](#1-카메라-이동-및-제한-followcameracs)
->     - [플레이어 이동('Player.cs'](#2-플레이어-이동)
->     - [플레이어 공격('WeaponController.cs'](#3-플레이어-공격)
+>     - [카메라 이동 및 제한('FollowCamera.cs')](#1-카메라-이동-및-제한-followcameracs)
+>     - [플레이어 이동('Player.cs')](#2-플레이어-이동)
+>     - [플레이어 공격('WeaponController.cs')](#3-플레이어-공격)
 >     - [플레이어 피격('Player.cs')](#4-플레이어-피격)
 >     <br><br>
 > - 🎱 [스킬](#-스킬)
