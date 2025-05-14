@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Monster : Character
 {
+	
+
 	[SerializeField] private Transform expParent;
 	[SerializeField] private int exp;
 	[SerializeField] private GameObject expPrefab;
@@ -12,13 +14,23 @@ public class Monster : Character
 	[SerializeField] private WeaponController weaponController;
     [SerializeField] private Image hpBarFill;
     [SerializeField] private Transform monsterTransform;
+
+    [Header("Sound Effects")]
+    public AudioClip damageClip;           // 인스펙터에 할당할 피격 사운드
+    public AudioClip DeathClip;
+    private AudioSource audioSource;       // AudioSource 캐시
+
+
     protected Animator animator;
 
 	private bool isDead = false;
 
 	void Awake()
 	{
-		target = GameObject.FindObjectOfType<Player>();
+		//효과음 넣기
+        audioSource = GetComponent<AudioSource>();
+
+        target = GameObject.FindObjectOfType<Player>();
 
 		animator = GetComponentInChildren<Animator>();
 	}
@@ -86,6 +98,14 @@ public class Monster : Character
 
     public void TakeDamage(float damage)
     {
+        //효과음
+        if (damageClip != null)
+		{
+            var listenerPos = Camera.main.transform.position;
+            AudioSource.PlayClipAtPoint(damageClip, transform.position,1.0f);
+        }
+            
+
         curHp -= damage;
 
         animator.SetBool("IsDamage", true);
@@ -106,8 +126,15 @@ public class Monster : Character
 
     void Death()
 	{
-		//	중복 호출을 방지!
-		if(isDead)
+        //효과음
+        if (DeathClip != null)
+		{
+            var listenerPos = Camera.main.transform.position;
+            AudioSource.PlayClipAtPoint(DeathClip, transform.position,1.0f);
+        }
+
+        //	중복 호출을 방지!
+        if (isDead)
 		{
 			return;
 		}
@@ -182,6 +209,12 @@ public class Monster : Character
 
 		if(animator != null)
 		{
+			//	색상 값 초기화
+
+			SpriteRenderer spriteRenderer = this.gameObject.GetComponentInChildren<SpriteRenderer>();
+
+			spriteRenderer.color = Color.white;
+
 			animator.SetBool("IsDamage", false);
 			animator.SetBool("IsMove", false);
 		}

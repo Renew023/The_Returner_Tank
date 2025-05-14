@@ -156,6 +156,8 @@ MonoBehaviour:
   - {fileID: 1326000793185703325}
   - {fileID: 1114730002719163480}
   monsterTransform: {fileID: 7848514828694074050}
+  damageClip: {fileID: 8300000, guid: 60973ce981eb3cb4b9af546d4eb39c46, type: 3}
+  DeathClip: {fileID: 8300000, guid: df397e36679e68f499e03ef75cb92598, type: 3}
 --- !u!1 &5844912027627054555
 GameObject:
   m_ObjectHideFlags: 0

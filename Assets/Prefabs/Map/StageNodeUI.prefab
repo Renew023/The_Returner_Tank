@@ -137,3 +137,4 @@ MonoBehaviour:
   healSize: {x: 2, y: 2}
   bossSize: {x: 4, y: 4}
   startSize: {x: 64, y: 64}
+  eventSize: {x: 4, y: 4}

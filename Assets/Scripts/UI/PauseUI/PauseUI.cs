@@ -16,6 +16,17 @@ public class PauseUI : MonoBehaviour
         skillsCount++;
     }
 
+    public void OffSkillImages(int _skillsCount)
+    {
+        for (int i = 0; i < _skillsCount; ++i)
+        {
+            skillSlots[i].color = new Color(255, 255, 255, 0);
+            skillSlots[i].sprite = null;
+        }
+
+        skillsCount = 0;
+    }
+
     public void PauseMenuToggle()
     {
         if (PauseMenu.activeSelf)
@@ -32,7 +43,8 @@ public class PauseUI : MonoBehaviour
 
     public void ReturnMain()
     {
-        UIManager.Instance.uiController.SetDungeonUI(false);
+        PauseMenu.SetActive(false);
+        OffSkillImages(skillsCount);
         GameManager.Instance.SetStageInfo(0, 0, 1);
         Time.timeScale = 1f;
         SceneManager.LoadScene("StartScene");

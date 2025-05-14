@@ -8,10 +8,12 @@ public class DataManager : MonoBehaviour
     public static DataManager instance;
 
 	public Player player;
+
 	public PlayerValue playerValue;
 	public List<Weapon> playerWeapon = new List<Weapon>(5);
 
 	public List<Skill> skillList = new List<Skill>(10);
+	public List<Skill> InitSkillList = new List<Skill>(10);
 	public List<Skill> WeaponSkillList = new List<Skill>(5);
     public Skill skill;
 	public int skillValue = 0;
@@ -21,6 +23,20 @@ public class DataManager : MonoBehaviour
 	[Header("플레이어 정보")]
     public float savedPlayerHp;
     public float savedPlayerMaxHp;
+
+	public void Init()
+	{
+		Debug.Log("초기화되었습니다");
+		foreach (Skill skill in skillList)
+		{
+			skill.level = 0;
+		}
+		playerValue = new PlayerValue();
+		playerWeapon.Clear();
+		WeaponSkillList = skillList.Where(skill => skill.weaponCon != null).ToList();
+		skill = WeaponSkillList[0];
+		curPlayerSkillMax = 0;
+	}
 
     void Awake()
     {
@@ -35,6 +51,7 @@ public class DataManager : MonoBehaviour
 		}
 		WeaponSkillList = skillList.Where(skill => skill.weaponCon != null).ToList();
 		skill = WeaponSkillList[0];
+		InitSkillList = skillList;
 	}
 
 	public void Pick()
@@ -48,14 +65,9 @@ public class DataManager : MonoBehaviour
 		playerValue.playerSkill.Add(skill);
 		playerWeapon.Add(skill.weaponCon.weapon);
 
-		// 스킬슬롯 추가
-		UIManager.Instance.uiController.pauseUI.skillSlots[UIManager.Instance.uiController.pauseUI.skillsCount].sprite = skill.weaponCon.weaponSprite.sprite;
-        UIManager.Instance.uiController.pauseUI.SetSkillImages(UIManager.Instance.uiController.pauseUI.skillsCount);
-
         float value = skill.levelSkills[skill.level].value;
 
-
-		switch (skill.levelSkills[skill.level].upgradeType)
+        switch (skill.levelSkills[skill.level].upgradeType)
 		{
 			case SkillType.ArrowSpeedUp:
 
@@ -103,17 +115,11 @@ public class DataManager : MonoBehaviour
 				//skill.weapon.DamageUp(value);
 				break;
 		}
-		skill.level += 1;
-	}
 
-	void Start()
-    {
-        
-    }
+        // 스킬슬롯 추가
+        UIManager.Instance.uiController.pauseUI.skillSlots[UIManager.Instance.uiController.pauseUI.skillsCount].sprite = skill.weaponCon.weaponSprite.sprite;
+        UIManager.Instance.uiController.pauseUI.SetSkillImages(UIManager.Instance.uiController.pauseUI.skillsCount);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        skill.level += 1;
     }
 }

@@ -15,7 +15,7 @@ public class MapManager : MonoBehaviour
     [Header("Prefabs & Icons")]
     public NodeController nodePrefab;
     public Image dotPrefab;
-    public Sprite enemyIcon, healIcon, bossIcon, startIcon;
+    public Sprite enemyIcon, healIcon, bossIcon, startIcon, eventicon;
     public GameObject playerIndicatorPrefab;
     public GameObject startNodePrefab;  // Start 노드 프리팹
 
@@ -99,16 +99,26 @@ public class MapManager : MonoBehaviour
     {
         mapData = new List<List<NodeType>>();
         var rnd = new System.Random();
-        // 첫재쭐 스타트 노드
+        // 첫 번째 줄: Start 노드
         mapData.Add(new List<NodeType> { NodeType.Start });
+
         for (int r = 0; r < totalRows - 1; r++)
         {
             var rowList = new List<NodeType>();
             for (int i = 0; i < choicesPerRow; i++)
-                rowList.Add(rnd.Next(10) < 8 ? NodeType.Enemy : NodeType.Heal);
+            {
+                int roll = rnd.Next(10); // 0~9
+                if (roll < 6)             // 6/10 확률
+                    rowList.Add(NodeType.Enemy);
+                else if (roll < 8)        // 2/10 확률
+                    rowList.Add(NodeType.Heal);
+                else                      // 2/10 확률
+                    rowList.Add(NodeType.Event);
+            }
             mapData.Add(rowList);
         }
-        // 마지막 줄은 보스 한 마리
+
+        // 마지막 줄: Boss 노드
         mapData.Add(new List<NodeType> { NodeType.Boss });
     }
 
@@ -158,6 +168,7 @@ public class MapManager : MonoBehaviour
                     NodeType.Enemy => enemyIcon,
                     NodeType.Heal => healIcon,
                     NodeType.Start => startIcon,
+                    NodeType.Event => eventicon,
                     _ => bossIcon
                 };
                 nc.Init(r, c, mapData[r][c], this, icon, defaultAlpha);
@@ -196,6 +207,8 @@ public class MapManager : MonoBehaviour
             DrawDots(prev, bossCtrl);
 
         // 플레이어 인디케이터 생성 
+        if (playerIndicatorRt != null)
+            Destroy(playerIndicatorRt.gameObject); // 기존 인디케이터 삭제
         var pi = Instantiate(playerIndicatorPrefab, stageContainer);
         playerIndicatorRt = pi.GetComponent<RectTransform>();
 
@@ -253,6 +266,9 @@ public class MapManager : MonoBehaviour
             case NodeType.Heal:
                 SceneController.ToHeal();
                 break;
+            case NodeType.Event:
+                SceneController.ToEvent();
+                break;
         }
     }
 
@@ -295,11 +311,8 @@ public class MapManager : MonoBehaviour
             Destroy(playerIndicatorRt.gameObject);
         playerIndicatorRt = null;
 
-        // 2) 맵 데이터와 렌더링 재실행
-        GenerateMapData();
-        RenderMap();
 
-        // 3) 플레이어 인디케이터 위치 초기화
+        // 2) 플레이어 인디케이터 위치 초기화
         currentRow = 0;
         currentCol = 0;
         RestoreMap();

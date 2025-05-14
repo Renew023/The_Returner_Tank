@@ -21,7 +21,6 @@ public class Player : Character
     public PlayerValue playerValue;
 
     private float demandExp;
-    [SerializeField] private float Level;
     [SerializeField] private Image hpBarFill;
 
     //[SerializeField] public List<Skill> skillList = new List<Skill>(10);
@@ -34,10 +33,11 @@ public class Player : Character
     {
         rb.freezeRotation = true;
         animator = GetComponentInChildren<Animator>();
-    }
+	}
 
     void OnEnable()
     {
+
         DataManager.instance.Pick();
 
         for (int i = 0; i < DataManager.instance.playerValue.playerSkill.Count; i++)
@@ -171,7 +171,12 @@ public class Player : Character
         maxHp += value;
         curHp += value;
         hpBarFill.fillAmount = curHp / maxHp;
-        UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
+        if (UIManager.Instance != null
+        && UIManager.Instance.uiController != null
+        && UIManager.Instance.uiController.playerHP != null)
+        {
+            UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
+        }
     }
 
     public void MoveSpeedUp(float value = 1)
@@ -257,8 +262,8 @@ public class Player : Character
             playerValue.Exp -= demandExp;
             LevelUp();
         }
-		UIManager.Instance.uiController.playerEXP.UpdateValue((float)playerValue.Exp, (float)demandExp);
-	}
+        UIManager.Instance.uiController.playerEXP.UpdateValue((float)playerValue.Exp, (float)demandExp);
+    }
 
     public void HealTrigger(int healAmounteal)
     {
@@ -270,7 +275,16 @@ public class Player : Character
         {
             healAmounteal = (int)(healAmounteal + curHp);
         }
+        UIManager.Instance.uiController.playerHP.UpdateValue(curHp, maxHp);
 
+    }
+
+    public void LevelUpTrigger(int amount)
+    {
+        int Expamount = amount;
+        Expamount = (int)(demandExp - playerValue.Exp);
+
+        AddExp(Expamount);
     }
 }
 

@@ -8,6 +8,7 @@ public class DungeonManager : MonoBehaviour
     [SerializeField] private Transform expParent; // ExpObjects 오브젝트
     [SerializeField] private Transform player;    // 플레이어 Transform
     [SerializeField] private GameObject warpZone;
+    //[SerializeField] private UIController uiController;
     [SerializeField] private WaveMessageUI waveMessageUI;
     public static DungeonManager instance;
 
@@ -39,11 +40,6 @@ public class DungeonManager : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        UIManager.Instance.uiController.SetDungeonUI(true);
-    }
-
     private void OnDisable()
     {
         UIManager.Instance.uiController.SetDungeonUI(false);
@@ -59,6 +55,25 @@ public class DungeonManager : MonoBehaviour
     {
         //  DungeonManager���� ���� ���̺긦 �����Ѵ�!!
         currentWave = 1;
+
+        Spawner.instance.SpawnFixedWave();
+
+        StartCoroutine(InitializeAfterUIReady());
+    }
+
+    private IEnumerator InitializeAfterUIReady()
+    {
+        yield return null; // 한 프레임 기다림 (UIController의 OnEnable()이 먼저 실행되도록)
+
+        if (UIManager.Instance.uiController != null)
+        {
+            UIManager.Instance.uiController.SetDungeonUI(true);
+            //uiController.SetDungeonUI(true);
+        }
+        else
+        {
+            Debug.LogWarning("UIController가 아직 초기화되지 않았습니다.");
+        }
 
         Spawner.instance.SpawnFixedWave();
     }
