@@ -68,7 +68,7 @@ __탱크로 다시 태어난 나는 미궁을 방랑한다. 게임의 기술서_
 > - 🎱 [스킬](#-스킬)
 >     - [스킬 구조 (`Skill.cs`)](#1-스킬-구조-skillcs)
 >     - [스킬 패턴 (`WeaponController.cs`)](#2-스킬-패턴-weaponcontrollercs)
->     - [스킬 선택창 (`SkillSelectUI.cs, SkillSelectButton.cs`)](#2-스킬-패턴-weaponcontrollercs)
+>     - [스킬 선택창 (`SkillSelectUI.cs, SkillSelectButton.cs`)](#3-스킬-선택창--skillselectuics-skillselectbuttoncs)
 >       <br><br>
 > - 📺 [미니맵](#-미니맵)
 >     - [미니맵 추적 기능 (`FollowMiniMap.cs`)](#1-미니맵-추적-기능-followminimapcs)
@@ -162,7 +162,8 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다.
 
 ### 3. 스킬 선택창  (`SkillSelectUI.cs, SkillSelectButton.cs`)
 스킬을 순차적으로 얻는 것이 아닌 3개의 선택지 중 골라서 스킬을 고를 수 있도록 만들었습니다. 
-- Random.Range를 통해 랜덤한 선택지를 검증 및 같은 선택지는 IF문으로 예외처리
+- 레벨업 시 스킬 선택창 표시 및 R키를 누를 시 테스트 가능하도록 설정.
+- Random.Range를 통해 랜덤한 선택지를 각 버튼에 할당.
 - 선택지마다 이해를 돕기 위한 텍스트와 스프라이트 표시
 <br>
 
