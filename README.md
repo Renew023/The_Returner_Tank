@@ -420,7 +420,7 @@ private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 
 ![PlayerStatus](https://github.com/user-attachments/assets/ee3190a3-0d3f-4ff1-9956-f2c420ec13b7)
 ![PlayerHPBar](https://github.com/user-attachments/assets/7d4b0910-f794-41e3-ba92-4a91a11d7ed2)
-<img src="https://github.com/user-attachments/assets/7d4b0910-f794-41e3-ba92-4a91a11d7ed2" width="500">
+<img src="https://github.com/user-attachments/assets/7d4b0910-f794-41e3-ba92-4a91a11d7ed2" width="400">
 
 ---
 
@@ -430,7 +430,7 @@ private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
   모든 몬스터 개체 위에 실시간으로 체력을 보여주는 UI를 구현하여 전투 상황을 쉽게 파악할 수 있도록 하였습니다.
 
 ![MonsterHPBar](https://github.com/user-attachments/assets/9ece9f6d-8388-4285-99f7-93746e1065d8)
-<img src="https://github.com/user-attachments/assets/9ece9f6d-8388-4285-99f7-93746e1065d8" width="500">
+<img src="https://github.com/user-attachments/assets/9ece9f6d-8388-4285-99f7-93746e1065d8" width="400">
 
 ---
 
