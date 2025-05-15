@@ -14,8 +14,7 @@
 카메라는 플레이어를 타겟팅하기 위해서 만들었습니다. Lerp를 활용하여 카메라는 플레이어를 바로 붙는 것이 아닌 부드럽게 따라오며, Camera.orthographic으로 카메라의 크기를 확인하고 Math.Clamp로 전체 맵과 카메라만큼의 너비를 제한함으로써 카메라가 범위 밖으로 벗어나지 않도록 조정했습니다.
 - 플레이어가 현재 위, 아래로 빠져나가는 것은 벽이 따로 없이 카메라만 제한되어 있기 때문입니다.
 
-![Movie_011](https://github.com/user-attachments/assets/45283051-18e3-4023-985c-c1a4aa06c7eb){width =300px}
-
+<img src="https://github.com/user-attachments/assets/45283051-18e3-4023-985c-c1a4aa06c7eb" width="300">
 
 ### 플레이어 이동
 Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다. 또한 Mouse의 X좌표와 플레이어의 X좌표를 비교하여 플레이어의 방향이 바뀌도록 만들었습니다.
