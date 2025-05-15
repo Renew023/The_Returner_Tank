@@ -404,7 +404,7 @@ private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 
 ---
 
-### 🎮 1. 플레이어 UI
+### 🎮 1. 플레이어 UI ('Player.cs, PlayerHP.cs, PlayerEXP.cs, PlayerLevel.cs')
 
 - **체력 (HP)**  
   플레이어의 현재 체력을 실시간으로 표시합니다.
@@ -423,7 +423,7 @@ private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 
 ---
 
-### 👾 2. 몬스터 UI
+### 👾 2. 몬스터 UI (`Monster.cs`)
 
 - **Monster HP Bar UI**  
   모든 몬스터 개체 위에 실시간으로 체력을 보여주는 UI를 구현하여 전투 상황을 쉽게 파악할 수 있도록 하였습니다.
@@ -432,7 +432,7 @@ private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 
 ---
 
-### ⚙️ 3. 일시정지 UI
+### ⚙️ 3. 일시정지 UI (`PauseUI.cs`)
 
 게임 중 일시정지 시 활성화되며, 다음과 같은 기능을 제공합니다:
 
@@ -449,7 +449,7 @@ private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 
 ---
 
-### 💀 4. 사망 UI
+### 💀 4. 사망 UI (`DeathUI.cs`)
 
 플레이어 사망 시 등장하는 UI로, 다음 기능을 제공합니다:
 
@@ -460,7 +460,7 @@ private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 
 ---
 
-### 🌊 5. 웨이브 UI
+### 🌊 5. 웨이브 UI (`WaveMessageUI.cs`)
 
 웨이브 시스템과 연동하여 현재 게임 진행 상태를 시각적으로 표현합니다:
 
