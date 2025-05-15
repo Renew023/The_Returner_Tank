@@ -54,6 +54,7 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다. 또한 
 
 ### 미니맵 구조
 기존에 사용하던 맵의 사이즈를 줄이고 플레이어와 몬스터의 부분은 색칠된 점을 표시해주는 것으로 위치 파악을 쉽게 할 수 있도록 만들었습니다.
+
 <img src="https://github.com/user-attachments/assets/8865a3f1-d433-40cc-a333-70842492afd1" width="500">
 
 
