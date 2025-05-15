@@ -21,7 +21,6 @@ Input.GetAxisRaw를 활용하여 쉽게 이동을 구현하였습니다. 또한 
 
 <img src="https://github.com/user-attachments/assets/61e5e975-203e-413f-b014-088467dc1412" width="500">
 
-
 ### 플레이어 공격
 플레이어 이동에서 다루고 있는 마우스의 위치를 받아와서 그 방향으로 공격을 날립니다. normalized 를 활용하여 방향만을 감지하고 거리는 전부 일정한 거리만큼 이동합니다. 
 또한 생성되는 발사체의 경우, OnEnable과 OnDisable을 통해 발사체의 활성화 시에는 일정 시간 이후 SetActive(false)를 해주도록 코루틴을 실행하고, 
