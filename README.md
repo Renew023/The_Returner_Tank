@@ -1,7 +1,7 @@
 
 <div align="center" markdown>
   
-  # 탱크로 다시 태어난 나는 미궁을 방랑한다.
+  # 탱크로 다시 태어난 나는 미궁을 방랑한다
 <img src="https://github.com/user-attachments/assets/b1a1e2a4-d13a-4e30-b495-d17b885ee701" width="600" />
 </div>
 
@@ -9,7 +9,7 @@
 <div align="center" markdown>
 [내일배움캠프] 궁수의 전설 모작 팀프로젝트<br>
   
-__탱크로 다시 태어난 나는 미궁을 방랑한다. 게임의 기술서__
+__탱크로 다시 태어난 나는 미궁을 방랑한다__  __게임의 기술서__
 
 ♂️
 작업자별 기술서 주소 |
