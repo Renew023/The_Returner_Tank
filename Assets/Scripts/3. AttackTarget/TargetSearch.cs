@@ -21,6 +21,7 @@ public class TargetSearch : MonoBehaviour
     void LateUpdate()
 	{
 		colliders = Physics2D.OverlapCircleAll(target.transform.position, 100.0f ,enemyLayer);
+		
 		for (int i = monsterShow.Count - 1; i >= colliders.Length; i--)
 		{
 			monsterShow[i].SetActive(false);
